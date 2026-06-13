@@ -1,0 +1,59 @@
+name: drchrono FinOps
+description: Financial operations guidance for teams integrating with the drchrono API. drchrono's EHR platform is priced on a quote-based subscription model tied to practice size and tier. API usage itself does not carry a separate per-call cost, but overage charges apply to communication features (text, phone, fax). Teams should monitor API rate limits and plan for potential rate limit increase negotiations when scaling integrations.
+url: https://www.drchrono.com/plans-and-pricing/
+costDrivers:
+  - name: Subscription Tier
+    description: The primary cost driver is the practice's EHR subscription tier (Essentials through Elite). Higher tiers unlock ePrescribing, billing, and RCM services. Pricing is quote-based and varies by practice size and provider count.
+    type: subscription
+    visibility: opaque
+    notes:
+      - Pricing is not publicly disclosed; requires sales engagement.
+      - Per-provider or per-seat pricing model implied but not confirmed.
+  - name: Communication Overages
+    description: Text messages, fax pages, and phone reminders beyond the plan's monthly allowance are billed at per-unit overage rates.
+    type: overage
+    rates:
+      - item: Text message
+        rate: 0.05
+        currency: USD
+        unit: per text
+      - item: Fax page
+        rate: 0.07
+        currency: USD
+        unit: per page
+      - item: Phone call reminder
+        rate: 0.10
+        currency: USD
+        unit: per call
+  - name: API Rate Limit Increase
+    description: The default API rate limit is 500 requests/hour per application. Exceeding this may require a negotiated increase. Cost implications of higher limits are not publicly documented; contact api@drchrono.com.
+    type: negotiated
+    contact: api@drchrono.com
+  - name: Marketplace Integration
+    description: Third-party apps listed on the drchrono Marketplace may be subject to additional partnership terms. Revenue sharing or listing fees are not publicly disclosed.
+    type: partnership
+    visibility: opaque
+optimization:
+  - name: Cache Patient and Reference Data
+    description: Cache read-heavy reference data (doctors, offices, insurance payers, appointment profiles) locally to reduce API calls and stay within the 500 requests/hour limit.
+  - name: Use Paginated Responses Efficiently
+    description: All list endpoints return paginated results. Fetch only necessary pages and use filtering parameters (name, DOB, date range) to reduce total request counts.
+  - name: Batch Within Rate Limits
+    description: Stay below 10 calls/second to avoid burst throttling. Implement exponential backoff on 429 responses and schedule bulk operations to spread across hourly windows.
+  - name: Monitor Communication Usage
+    description: Track text, fax, and phone reminder usage monthly against plan allowances to avoid overage fees. Use the drchrono API comm_logs endpoint to audit communication volume.
+  - name: Refresh Tokens Before Expiry
+    description: OAuth 2.0 access tokens expire after 48 hours. Implement proactive token refresh logic to avoid failed API calls that waste rate limit quota on re-authentication retries.
+  - name: Select Minimal OAuth Scopes
+    description: Request only the OAuth scopes required for each integration per the HIPAA least-use policy. This limits risk and aligns with drchrono's compliance requirements.
+visibility:
+  - name: Status Page
+    description: Monitor drchrono platform uptime and incidents at status.drchrono.com. The platform reports 99.96% uptime over 90-day windows.
+    url: https://status.drchrono.com/
+  - name: API Error Handling
+    description: Handle HTTP 429 (rate limit) and other API errors per drchrono's error handling guide.
+    url: https://support.drchrono.com/home/how-to-handle-api-errors
+notes:
+  - No public API-specific pricing exists; API access is bundled with the practice EHR subscription.
+  - FHIR endpoint access may require separate enrollment via the FHIR Developer Form on the partners page.
+  - All financial terms for marketplace and partner integrations require direct engagement with drchrono's partnership team.

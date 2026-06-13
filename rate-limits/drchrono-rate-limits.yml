@@ -1,0 +1,32 @@
+name: drchrono API Rate Limits
+description: drchrono enforces rate limits at the API application level to protect platform stability. Limits are applied per registered API application regardless of the practice subscription tier. Rate limit increases can be requested by emailing api@drchrono.com.
+url: https://app.drchrono.com/api-docs/tutorial/
+limits:
+  - name: Default Hourly Limit
+    description: Each API application is limited to 500 requests per hour by default. The limit resets at the top of every hour (not on a rolling basis).
+    requests: 500
+    window: 1 hour
+    reset: top of the hour
+    scope: per API application
+  - name: Burst Limit
+    description: The system throttles a client that makes 10 or more API calls within a 1-second window. This burst rule is not configurable.
+    requests: 10
+    window: 1 second
+    scope: per client
+    configurable: false
+errors:
+  - status: 429
+    name: Too Many Requests
+    description: Returned when an API application exceeds the hourly rate limit. Clients should back off and retry after the top of the next hour.
+    retryAfter: top of next hour
+headers:
+  - name: X-DRC-API-Version
+    description: Optional request header to specify the API version instead of configuring it per application. Accepts values such as v4.
+increase:
+  - description: Rate limit increases are available on request. Email api@drchrono.com with details about your application, integration use case, and expected request volume. Approvals are at drchrono's discretion.
+    contact: api@drchrono.com
+notes:
+  - Rate limits are enforced per registered API application, not per end-user or practice.
+  - The hourly window resets at the top of the hour, not on a rolling 60-minute basis.
+  - The 10 calls/second burst throttle applies in addition to the hourly limit and is not configurable.
+  - Access tokens expire after 48 hours and must be refreshed using the OAuth 2.0 refresh token flow.

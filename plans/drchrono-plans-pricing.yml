@@ -1,0 +1,101 @@
+name: drchrono Plans and Pricing
+description: drchrono offers five EHR and practice management subscription tiers for medical practices. Pricing is quote-based and not publicly disclosed; prospects must contact drchrono for exact costs. All plans include the REST API, OAuth 2.0 access, and integration capabilities. API rate limits apply uniformly at the application level regardless of plan tier.
+url: https://www.drchrono.com/plans-and-pricing/
+plans:
+  - name: Essentials
+    description: Core EHR and Practice Management plan for small practices needing charting, scheduling, task management, reporting, and lab integration.
+    url: https://www.drchrono.com/plans-and-pricing/
+    pricing:
+      model: quote-based
+      currency: USD
+      contact: true
+    features:
+      - Patient charting
+      - Appointment scheduling
+      - Task management
+      - Reporting and analytics
+      - Lab integration
+      - Patient check-in
+      - Patient portal (OnPatient)
+      - Telehealth
+      - Email reminders (unlimited)
+      - Text reminders (250/month)
+      - Phone reminders (100/month)
+      - No-show predictor
+  - name: Essentials Plus
+    description: EHR, ePrescribe, and Practice Management plan adding medication management and medical speech-to-text on top of Essentials.
+    url: https://www.drchrono.com/plans-and-pricing/
+    pricing:
+      model: quote-based
+      currency: USD
+      contact: true
+    features:
+      - All Essentials features
+      - ePrescribing (eRx)
+      - Medication management
+      - Medical speech-to-text
+      - Text reminders (500/month)
+      - Phone reminders (250/month)
+  - name: Advanced
+    description: EHR, Practice Management, and Billing plan adding claims processing and unlimited insurance eligibility checks.
+    url: https://www.drchrono.com/plans-and-pricing/
+    pricing:
+      model: quote-based
+      currency: USD
+      contact: true
+    features:
+      - All Essentials features
+      - Claims processing
+      - Unlimited insurance eligibility checks
+      - Billing profiles (CPT/HCPCS)
+      - Fee schedules
+      - Patient payments
+      - Text reminders (500/month)
+      - Phone reminders (250/month)
+  - name: Advanced Plus
+    description: EHR, ePrescribe, Practice Management, and Billing plan combining Advanced and Essentials Plus capabilities.
+    url: https://www.drchrono.com/plans-and-pricing/
+    pricing:
+      model: quote-based
+      currency: USD
+      contact: true
+    features:
+      - All Essentials Plus features
+      - All Advanced features
+      - Text reminders (750/month)
+      - Phone reminders (500/month)
+  - name: Elite
+    description: Highest tier plan including all features plus full Revenue Cycle Management (RCM) services handled by drchrono's billing team.
+    url: https://www.drchrono.com/plans-and-pricing/
+    pricing:
+      model: quote-based
+      currency: USD
+      contact: true
+    features:
+      - All Advanced Plus features
+      - Revenue Cycle Management (RCM) services
+      - Text reminders (1000/month)
+      - Phone reminders (750/month)
+overages:
+  - type: Text Message
+    rate: 0.05
+    unit: per text
+    currency: USD
+  - type: Fax Page
+    rate: 0.07
+    unit: per page faxed
+    currency: USD
+  - type: Phone Call
+    rate: 0.10
+    unit: per phone call
+    currency: USD
+notes:
+  - Exact per-seat or per-provider pricing is not publicly disclosed; all plans require a sales quote.
+  - API access is available on all plans but requires creating an API application through drchrono account settings.
+  - Marketplace listing available for third-party integrations meeting drchrono's partner requirements.
+  - FHIR endpoints available for healthcare app developers via a separate FHIR Developer Form.
+contact:
+  - type: sales
+    phone: '8445698628'
+  - type: api-support
+    email: api@drchrono.com

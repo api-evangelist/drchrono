@@ -1,0 +1,80 @@
+name: drchrono
+description: drchrono is an EHR platform with a REST API for managing patient records, clinical encounters, appointments, prescriptions, billing, and HIPAA-compliant medical data exchange. It provides OAuth 2.0-secured endpoints covering patient management, clinical documentation, lab integration, scheduling, billing, and practice administration, enabling healthcare app developers to build integrations with the drchrono EHR ecosystem.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/drchrono/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - EHR
+  - Electronic Health Records
+  - Healthcare
+  - Medical Records
+  - Practice Management
+  - HIPAA
+  - Appointments
+  - Billing
+  - Prescriptions
+  - Lab Integration
+  - FHIR
+aid: drchrono
+type: Index
+apis:
+  - name: drchrono REST API
+    description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://app.drchrono.com/api-docs/tutorial/
+    baseURL: https://app.drchrono.com/api
+    tags:
+      - EHR
+      - Healthcare
+      - Patient Records
+      - Appointments
+      - Billing
+      - Lab Integration
+    properties:
+      - type: Documentation
+        url: https://app.drchrono.com/api-docs/tutorial/
+      - type: OpenAPI
+        url: https://app.drchrono.com/api-docs/
+      - type: Postman
+        url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
+      - type: Authentication
+        url: https://app.drchrono.com/o/authorize/
+      - type: Webhooks
+        url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+    contact:
+      - FN: drchrono API Support
+        email: api@drchrono.com
+common:
+  - type: Website
+    url: https://www.drchrono.com
+  - type: Documentation
+    url: https://app.drchrono.com/api-docs/tutorial/
+  - type: GitHubOrg
+    url: https://github.com/drchrono
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/drchrono
+  - type: Blog
+    url: https://blog.drchrono.com/
+  - type: Pricing
+    url: https://www.drchrono.com/plans-and-pricing/
+  - type: StatusPage
+    url: https://status.drchrono.com/
+  - type: X
+    url: https://twitter.com/drchrono
+  - type: Plans
+    url: plans/drchrono-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/drchrono-rate-limits.yml
+  - type: FinOps
+    url: finops/drchrono-finops.yml
+  - type: Partners
+    url: https://www.drchrono.com/partners/
+  - type: TermsOfService
+    url: https://www.drchrono.com/api-development-terms-conditions/
+  - type: SupportPortal
+    url: https://support.drchrono.com/home/api
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
