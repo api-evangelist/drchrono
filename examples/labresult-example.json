@@ -1,0 +1,16 @@
+{
+  "title": "LabResult Example",
+  "description": "Example LabResult resource for drchrono REST API",
+  "resource": "LabResult",
+  "path": "/api/lab_results/{id}",
+  "example": {
+    "status": "example-status",
+    "group_code": "example-group_code",
+    "observation_description": "example-observation_description",
+    "is_abnormal": "example-is_abnormal",
+    "observation_code": "example-observation_code",
+    "specimen_received": "example-specimen_received",
+    "comments": "example-comments",
+    "normal_range": "example-normal_range"
+  }
+}

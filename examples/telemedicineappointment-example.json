@@ -1,0 +1,15 @@
+{
+  "title": "TelemedicineAppointment Example",
+  "description": "Example TelemedicineAppointment resource for drchrono REST API",
+  "resource": "TelemedicineAppointment",
+  "path": "/api/telehealth_appointments/{id}",
+  "example": {
+    "sent_patient_email": "example-sent_patient_email",
+    "appointment": 1,
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "overlapping_duration": "example-overlapping_duration",
+    "duration": 1,
+    "telehealth_url": "example-telehealth_url"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "title": "PatientMessage Example",
+  "description": "Example PatientMessage resource for drchrono REST API",
+  "resource": "PatientMessage",
+  "path": "/api/patient_messages/{id}",
+  "example": {
+    "body": "example-body",
+    "patient": 1,
+    "attachments": [],
+    "doctor": 1,
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "message": "example-message",
+    "id": 1
+  }
+}

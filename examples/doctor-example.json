@@ -1,0 +1,16 @@
+{
+  "title": "Doctor Example",
+  "description": "Example Doctor resource for drchrono REST API",
+  "resource": "Doctor",
+  "path": "/api/doctors/{id}",
+  "example": {
+    "website": "example-website",
+    "doctor_work_schedule": "example-doctor_work_schedule",
+    "first_name": "example-first_name",
+    "last_name": "example-last_name",
+    "suffix": "example-suffix",
+    "profile_picture": "example-profile_picture",
+    "country": "example-country",
+    "practice_group_name": "example-practice_group_name"
+  }
+}

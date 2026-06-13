@@ -1,0 +1,279 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/billingprofile.json",
+  "title": "BillingProfile",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "cpt_codes": {
+      "items": {
+        "title": "",
+        "type": "object",
+        "description": "CPT Code object",
+        "properties": {
+          "diagnosis_pointers_icd9": {
+            "items": {
+              "type": "string",
+              "description": "",
+              "title": ""
+            },
+            "type": "array",
+            "description": "ICD9 codes represented in strings",
+            "title": "Diagnosis pointers icd9"
+          },
+          "code": {
+            "type": "string",
+            "description": "",
+            "title": "Code"
+          },
+          "price": {
+            "type": "string",
+            "description": "This field is represented in string format",
+            "title": "Price"
+          },
+          "ndc_code": {
+            "items": {
+              "title": "",
+              "type": "object",
+              "description": "NDC code object",
+              "properties": {
+                "ndc_package_code": {
+                  "type": "string",
+                  "description": "",
+                  "title": "Ndc package code"
+                },
+                "units": {
+                  "enum": [
+                    "F2",
+                    "GR",
+                    "ME",
+                    "ML",
+                    "UN"
+                  ],
+                  "type": "string",
+                  "description": "Can be one of `F2`(International Unit), `GR`(Gram), `ME`(Milligram), `ML`(Millimeter) or `UN`(Unit)",
+                  "title": "Units"
+                },
+                "quantity": {
+                  "type": "string",
+                  "description": "",
+                  "title": "Quantity"
+                }
+              }
+            },
+            "type": "array",
+            "description": "Array of NDC Code objects",
+            "title": "Ndc code"
+          },
+          "diagnosis_pointers_icd10": {
+            "items": {
+              "type": "string",
+              "description": "",
+              "title": ""
+            },
+            "type": "array",
+            "description": "ICD10 codes represented in strings",
+            "title": "Diagnosis pointers icd10"
+          },
+          "modifiers": {
+            "items": {
+              "type": "string",
+              "description": "",
+              "title": ""
+            },
+            "type": "array",
+            "description": "Modifiers represented in strings",
+            "title": "Modifiers"
+          },
+          "quantity": {
+            "type": "string",
+            "description": "This field is represented in string format",
+            "title": "Quantity"
+          }
+        }
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "Array of CPT Code objects",
+      "title": "Cpt codes"
+    },
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "",
+      "title": "Archived"
+    },
+    "icd9_codes": {
+      "items": {
+        "type": "string",
+        "description": "ICD9 Code in string format",
+        "title": ""
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "ICD9 Codes represented in string format",
+      "title": "Icd9 codes"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "hcpcs_codes": {
+      "items": {
+        "title": "",
+        "type": "object",
+        "description": "HCPCS code object",
+        "properties": {
+          "diagnosis_pointers_icd9": {
+            "items": {
+              "type": "string",
+              "description": "ICD9 Code in string format",
+              "title": ""
+            },
+            "type": "array",
+            "description": "ICD9 codes represented in array of strings",
+            "title": "Diagnosis pointers icd9"
+          },
+          "code": {
+            "type": "string",
+            "description": "",
+            "title": "Code"
+          },
+          "price": {
+            "type": "string",
+            "description": "This field is represented in string format",
+            "title": "Price"
+          },
+          "ndc_code": {
+            "items": {
+              "title": "",
+              "type": "object",
+              "description": "NDC code object",
+              "properties": {
+                "ndc_package_code": {
+                  "type": "string",
+                  "description": "",
+                  "title": "Ndc package code"
+                },
+                "units": {
+                  "enum": [
+                    "F2",
+                    "GR",
+                    "ME",
+                    "ML",
+                    "UN"
+                  ],
+                  "type": "string",
+                  "description": "Can be one of `F2`(International Unit), `GR`(Gram), `ME`(Milligram), `ML`(Millimeter) or `UN`(Unit)",
+                  "title": "Units"
+                },
+                "quantity": {
+                  "type": "string",
+                  "description": "",
+                  "title": "Quantity"
+                }
+              }
+            },
+            "type": "array",
+            "description": "Array of NDC Code objects",
+            "title": "Ndc code"
+          },
+          "diagnosis_pointers_icd10": {
+            "items": {
+              "type": "string",
+              "description": "ICD Code in string format",
+              "title": ""
+            },
+            "type": "array",
+            "description": "ICD10 codes represented in array of strings",
+            "title": "Diagnosis pointers icd10"
+          },
+          "modifiers": {
+            "items": {
+              "type": "string",
+              "description": "Modifier in string format",
+              "title": ""
+            },
+            "type": "array",
+            "description": "Modifiers represented in array of strings",
+            "title": "Modifiers"
+          },
+          "quantity": {
+            "type": "string",
+            "description": "This field is represented in string format",
+            "title": "Quantity"
+          }
+        }
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "Array of HCPCS Code objects",
+      "title": "Hcpcs codes"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Doctor"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "custom_procedure_codes": {
+      "items": {
+        "title": "",
+        "type": "object",
+        "description": "Custom procedure code object",
+        "properties": {
+          "price": {
+            "type": "string",
+            "description": "This field is represented in string format",
+            "title": "Price"
+          },
+          "code": {
+            "type": "string",
+            "description": "",
+            "title": "Code"
+          },
+          "quantity": {
+            "type": "string",
+            "description": "This field is represented in string format",
+            "title": "Quantity"
+          }
+        }
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "Array of custom procedure code objects",
+      "title": "Custom procedure codes"
+    },
+    "icd10_codes": {
+      "items": {
+        "type": "string",
+        "description": "ICD10 Code in string format",
+        "title": ""
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "ICD10 Codes represented in string format",
+      "title": "Icd10 codes"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

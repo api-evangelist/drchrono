@@ -1,0 +1,16 @@
+{
+  "title": "PatientProblem Example",
+  "description": "Example PatientProblem resource for drchrono REST API",
+  "resource": "PatientProblem",
+  "path": "/api/problems/{id}",
+  "example": {
+    "category": "example-category",
+    "icd_code": "example-icd_code",
+    "icd_version": "example-icd_version",
+    "appointment": 1,
+    "description": "example-description",
+    "info_url": "example-info_url",
+    "doctor": 1,
+    "notes": "example-notes"
+  }
+}

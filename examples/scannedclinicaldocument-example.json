@@ -1,0 +1,16 @@
+{
+  "title": "ScannedClinicalDocument Example",
+  "description": "Example ScannedClinicalDocument resource for drchrono REST API",
+  "resource": "ScannedClinicalDocument",
+  "path": "/api/documents/{id}",
+  "example": {
+    "archived": false,
+    "patient": 1,
+    "description": "example-description",
+    "doctor": 1,
+    "metatags": "example-metatags",
+    "updated_at": "example-updated_at",
+    "date": "example-date",
+    "document": "example-document"
+  }
+}

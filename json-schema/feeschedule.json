@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/feeschedule.json",
+  "title": "FeeSchedule",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "ineffective_date": {
+      "type": "string",
+      "description": "End date that this schedule is valid. If null, then it is applied until an end date is set",
+      "title": "Ineffective date"
+    },
+    "assignees": {
+      "type": "array",
+      "description": "Schedule specific to these assignees, if null, then applies as default to all assignees without a more specific fee schedule.",
+      "title": "Assignees"
+    },
+    "items": {
+      "type": "array",
+      "description": "Items that belong to this fee schedule (this field is only available for single requests)",
+      "title": "Items"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "payer_id": {
+      "type": "string",
+      "description": "Fee Schedule pricing specific to this payer, if null, then applies as default to all payers without a more specific fee schedule.",
+      "title": "Payer id"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "assignee_type": {
+      "enum": [
+        "Individual",
+        "Speciality"
+      ],
+      "type": "string",
+      "description": "Type of assignee",
+      "title": "Assignee Type"
+    },
+    "specialities": {
+      "type": "array",
+      "description": "Schedule specific to these specialities, if null, then applies as default to all specialities without a more specific fee schedule.",
+      "title": "Specialities"
+    },
+    "effective_date": {
+      "type": "string",
+      "description": "Start date that this schedule is valid. If null, then since the beginning of time",
+      "title": "Effective date"
+    },
+    "plan_name": {
+      "type": "string",
+      "description": "Name of insurance plan.",
+      "title": "Plan name"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

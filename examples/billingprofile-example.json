@@ -1,0 +1,16 @@
+{
+  "title": "BillingProfile Example",
+  "description": "Example BillingProfile resource for drchrono REST API",
+  "resource": "BillingProfile",
+  "path": "/api/billing_profiles/{id}",
+  "example": {
+    "cpt_codes": [],
+    "archived": false,
+    "icd9_codes": [],
+    "name": "example-name",
+    "hcpcs_codes": [],
+    "created_at": "example-created_at",
+    "doctor": "example-doctor",
+    "updated_at": "example-updated_at"
+  }
+}

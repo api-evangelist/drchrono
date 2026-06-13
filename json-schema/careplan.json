@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/careplan.json",
+  "title": "CarePlan",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "code": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Code"
+    },
+    "appointment": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Appointment"
+    },
+    "description": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Description"
+    },
+    "title": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Title"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "plan_type": {
+      "readOnly": true,
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "type": "string",
+      "description": "Can be one of the following: `1`(Goal), `2`(Patient education), `3`(Patient decision aid), `4`(Patient clinical instruction), `5`(Referral to other doctor), `6`(Health concerns)",
+      "title": "Plan type"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "scheduled_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Scheduled date"
+    },
+    "patient": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Patient"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "code_system": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Code system"
+    },
+    "instructions": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Instructions"
+    }
+  },
+  "x-verbose-required": []
+}

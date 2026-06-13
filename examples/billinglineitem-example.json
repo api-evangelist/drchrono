@@ -1,0 +1,16 @@
+{
+  "title": "BillingLineItem Example",
+  "description": "Example BillingLineItem resource for drchrono REST API",
+  "resource": "BillingLineItem",
+  "path": "/api/line_items/{id}",
+  "example": {
+    "code": "example-code",
+    "ins3_paid": 0.0,
+    "updated_at": "example-updated_at",
+    "posted_date": "example-posted_date",
+    "billing_status": "example-billing_status",
+    "pt_paid": 0.0,
+    "allowed": 0.0,
+    "patient": "example-patient"
+  }
+}

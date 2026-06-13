@@ -1,0 +1,235 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientvaccinerecord.json",
+  "title": "PatientVaccineRecord",
+  "required": [
+    "patient",
+    "cvx_code",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "lot_number": {
+      "type": "string",
+      "description": "Lot/batch number of the vaccine dose"
+    },
+    "site": {
+      "type": "string",
+      "description": "",
+      "title": "Site"
+    },
+    "ordering_doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Ordering doctor"
+    },
+    "doses": {
+      "items": {
+        "title": "VaccineDose",
+        "type": "object",
+        "description": "Vaccine dose ID",
+        "properties": {
+          "min_age_months": {
+            "type": "integer",
+            "description": "",
+            "title": "Min age months"
+          },
+          "id": {
+            "readOnly": true,
+            "type": "integer",
+            "description": "",
+            "title": "ID"
+          },
+          "max_age_months": {
+            "type": "integer",
+            "description": "",
+            "title": "Max age months"
+          },
+          "title": {
+            "type": "string",
+            "description": "",
+            "title": "Title"
+          }
+        }
+      },
+      "type": "array",
+      "description": "Vaccine dose IDs received in consent form signed hook",
+      "title": "Doses"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "next_dose_date": {
+      "type": "string",
+      "description": "Date for next dose of vaccine",
+      "title": "Date for next dose"
+    },
+    "cpt_code": {
+      "type": "string",
+      "description": "Vaccine cpt code",
+      "title": "Cpt code"
+    },
+    "completion_status": {
+      "enum": [
+        "CP",
+        "RE",
+        "NA",
+        "PA"
+      ],
+      "type": "string",
+      "description": "Vaccination status, can be `CP`(Complete), `RE`(Refused), `NA`(Not administered), `PA`(Partially administered)",
+      "title": "Vaccination Status"
+    },
+    "administered_at": {
+      "type": "integer",
+      "description": "ID of `/api/offices` where the administration happened",
+      "title": "Administered at"
+    },
+    "comments": {
+      "type": "string",
+      "description": "",
+      "title": "Comments"
+    },
+    "funding_eligibility": {
+      "enum": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V05",
+        "V07"
+      ],
+      "type": "string",
+      "description": "The funding program that should pay for a given immunization",
+      "title": "Funding Eligibility"
+    },
+    "units": {
+      "type": "string",
+      "description": "",
+      "title": "Units"
+    },
+    "entered_by": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of user who created the record",
+      "title": "Entered by"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "administration_start": {
+      "type": "string",
+      "description": "Datetime when the administration starts",
+      "title": "Administration start"
+    },
+    "record_source": {
+      "enum": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "type": "string",
+      "description": "",
+      "title": "Record Type"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "consent_form": {
+      "type": "integer",
+      "description": "Consent form related with vaccine record",
+      "title": "Consent form"
+    },
+    "manufacturer": {
+      "type": "string",
+      "description": "Manufacturer of the vaccine"
+    },
+    "administered_by": {
+      "type": "string",
+      "description": "ID of `/api/users` who performs the administration",
+      "title": "Administered by"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "vis": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Related vaccine information statement",
+      "title": "Vis"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "observed_immunity": {
+      "enum": [
+        "398102009",
+        "409498004",
+        "397428000",
+        "18624000",
+        "91428005",
+        "271511000",
+        "240532009",
+        "6142004",
+        "52947006",
+        "14189004",
+        "23511006",
+        "36989005",
+        "27836007",
+        "16814004",
+        "14168008",
+        "36653000",
+        "76902006",
+        "66071002",
+        "4834000",
+        "111852003",
+        "38907003",
+        "40468003",
+        "16541001"
+      ],
+      "type": "string",
+      "description": "",
+      "title": "Observed Immunity"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Amount of vaccine administered",
+      "title": "Amount"
+    },
+    "vaccine_inventory": {
+      "type": "integer",
+      "description": "ID of `/api/vaccine_inventories` the vaccine is from",
+      "title": "Vaccine inventory"
+    },
+    "route": {
+      "type": "string",
+      "description": "",
+      "title": "Route"
+    },
+    "cvx_code": {
+      "type": "string",
+      "description": "Vaccine cvx code",
+      "title": "Cvx code"
+    }
+  },
+  "x-verbose-required": []
+}

@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientauthorization.json",
+  "title": "PatientAuthorization",
+  "required": [
+    "doctor",
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Status",
+      "title": "Status"
+    },
+    "patient": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Patient"
+    },
+    "end_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "End Date"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Doctor"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "number_of_visits": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "Number of visits"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "specialty": {
+      "type": "string",
+      "description": "Specialty",
+      "title": "Specialty"
+    },
+    "auth_number": {
+      "type": "string",
+      "description": "Authorization Number",
+      "title": "Authorization Number"
+    },
+    "start_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Start Date"
+    },
+    "patient_id": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient Id"
+    },
+    "visits_remaining": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "Visits remainings"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes",
+      "title": "Notes"
+    },
+    "doctor_id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "Doctor Id"
+    },
+    "procedure_codes": {
+      "items": {
+        "title": "",
+        "type": "object",
+        "description": "Procedure code object",
+        "properties": {
+          "price": {
+            "type": "string",
+            "description": "This field is represented in string format",
+            "title": "Price"
+          },
+          "code": {
+            "type": "string",
+            "description": "",
+            "title": "Code"
+          },
+          "quantity": {
+            "type": "string",
+            "description": "This field is represented in string format",
+            "title": "Quantity"
+          }
+        }
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "Array of procedure code objects",
+      "title": "Procedure codes"
+    },
+    "expired": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "",
+      "title": "Expired authorization"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

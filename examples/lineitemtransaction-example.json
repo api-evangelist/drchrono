@@ -1,0 +1,16 @@
+{
+  "title": "LineItemTransaction Example",
+  "description": "Example LineItemTransaction resource for drchrono REST API",
+  "resource": "LineItemTransaction",
+  "path": "/api/transactions/{id}",
+  "example": {
+    "insurance": {},
+    "ins_paid": 0.0,
+    "posted_date": "example-posted_date",
+    "appointment": 1,
+    "ins_name": 1,
+    "doctor": 1,
+    "adjustment_group_code": "example-adjustment_group_code",
+    "updated_at": "example-updated_at"
+  }
+}

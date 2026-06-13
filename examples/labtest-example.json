@@ -1,0 +1,16 @@
+{
+  "title": "LabTest Example",
+  "description": "Example LabTest resource for drchrono REST API",
+  "resource": "LabTest",
+  "path": "/api/lab_tests/{id}",
+  "example": {
+    "report_notes": "example-report_notes",
+    "status": "example-status",
+    "code": "example-code",
+    "description": "example-description",
+    "specimen_condition": "example-specimen_condition",
+    "collection_date": "example-collection_date",
+    "internal_notes": "example-internal_notes",
+    "specimen_total_volume": 0.0
+  }
+}

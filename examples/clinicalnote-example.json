@@ -1,0 +1,13 @@
+{
+  "title": "ClinicalNote Example",
+  "description": "Example ClinicalNote resource for drchrono REST API",
+  "resource": "ClinicalNote",
+  "path": "/api/clinical_notes/{id}",
+  "example": {
+    "patient": "example-patient",
+    "archived": false,
+    "clinical_note_sections": [],
+    "appointment": "example-appointment",
+    "signee": {}
+  }
+}

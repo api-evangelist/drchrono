@@ -1,0 +1,11 @@
+{
+  "title": "YellowNotepad Example",
+  "description": "Example YellowNotepad resource for drchrono REST API",
+  "resource": "YellowNotepad",
+  "path": "/api/yellow_notepad",
+  "example": {
+    "content": "example-content",
+    "template_id": 1,
+    "appointment_id": 1
+  }
+}

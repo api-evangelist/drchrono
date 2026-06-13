@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/workschedule.json",
+  "title": "WorkSchedule",
+  "type": "object",
+  "properties": {
+    "work_days": {
+      "items": {
+        "$ref": "#/components/schemas/WorkDay"
+      },
+      "type": "array",
+      "description": "work days of the work schedule",
+      "title": "Work days"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "unique ID for the work schedule",
+      "title": "ID"
+    },
+    "office": {
+      "type": "integer",
+      "description": "ID of office for work schedule",
+      "title": "Office"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "ID of doctor for work schedule",
+      "title": "Office"
+    }
+  }
+}

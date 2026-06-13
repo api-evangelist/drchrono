@@ -1,0 +1,654 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/appointment.json",
+  "title": "Appointment",
+  "required": [
+    "doctor",
+    "exam_room",
+    "office",
+    "patient",
+    "scheduled_time"
+  ],
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [
+        "",
+        "Arrived",
+        "Checked In",
+        "Checked In Online",
+        "In Room",
+        "In Session",
+        "Complete",
+        "Confirmed",
+        "Not Confirmed",
+        "Rescheduled",
+        "Cancelled",
+        "No Show"
+      ],
+      "type": "string",
+      "description": "One of ``, `Arrived`, `Checked In`, `In Room`, `Cancelled`, `Complete`, `Confirmed`, `In Session`, `No Show`, `Not Confirmed`, or `Rescheduled`. Or one of the custom statuses.",
+      "title": "Status"
+    },
+    "icd9_codes": {
+      "items": {
+        "type": "string",
+        "description": "",
+        "title": ""
+      },
+      "type": "array",
+      "description": "",
+      "title": "ICD9 Codes"
+    },
+    "office": {
+      "type": "integer",
+      "description": "Office ID",
+      "title": "Office"
+    },
+    "base_recurring_appointment": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of base appointment of a recurring series",
+      "title": "Base recurring appointment"
+    },
+    "color": {
+      "type": "string",
+      "description": "",
+      "title": "Color"
+    },
+    "vitals": {
+      "title": "SystemVitals",
+      "type": "object",
+      "description": "Clinical vitals associated with the appointment",
+      "properties": {
+        "height_units": {
+          "type": "string",
+          "description": "",
+          "title": "Height units"
+        },
+        "weight_units": {
+          "type": "string",
+          "description": "",
+          "title": "Weight units"
+        },
+        "pain": {
+          "type": "string",
+          "description": "0-10 pain scale.",
+          "title": "Pain"
+        },
+        "temperature": {
+          "type": "number",
+          "description": "",
+          "title": "Temperature"
+        },
+        "weight": {
+          "type": "number",
+          "description": "",
+          "title": "Weight"
+        },
+        "smoking_status": {
+          "enum": [
+            "blank",
+            "449868002",
+            "428041000124106",
+            "8517006",
+            "266919005",
+            "77176002",
+            "266927001",
+            "428071000124103",
+            "428061000124105"
+          ],
+          "type": "string",
+          "description": "",
+          "title": "Smoking status"
+        },
+        "head_circumference": {
+          "type": "number",
+          "description": "",
+          "title": "Head circumference"
+        },
+        "bmi": {
+          "readOnly": true,
+          "type": "string",
+          "description": "",
+          "title": "Bmi"
+        },
+        "head_circumference_units": {
+          "type": "string",
+          "description": "",
+          "title": "Head circumference units"
+        },
+        "blood_pressure_2": {
+          "type": "integer",
+          "description": "",
+          "title": "Blood pressure 2"
+        },
+        "blood_pressure_1": {
+          "type": "integer",
+          "description": "",
+          "title": "Blood pressure 1"
+        },
+        "height": {
+          "type": "number",
+          "description": "",
+          "title": "Height"
+        },
+        "pulse": {
+          "type": "integer",
+          "description": "Beats per minute.",
+          "title": "Pulse"
+        },
+        "oxygen_saturation": {
+          "type": "number",
+          "description": "",
+          "title": "Oxygen saturation"
+        },
+        "respiratory_rate": {
+          "type": "integer",
+          "description": "Breathes per minute.",
+          "title": "Respiratory rate"
+        },
+        "temperature_units": {
+          "type": "string",
+          "description": "",
+          "title": "Temperature units"
+        }
+      }
+    },
+    "first_billed_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "First billed date"
+    },
+    "last_billed_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Last billed date"
+    },
+    "billing_status": {
+      "type": "string",
+      "description": "Should be one of `Auto Accident Claim`, `Balance Due`, `Bill Insurance`, `Bill Secondary Insurance`, `Durable Medical Equipment Claim`, `Internal Review`, `Paid In Full`, `Settled`, `Worker's Comp Claim` or one of the custom billing status",
+      "title": "Billing status"
+    },
+    "primary_insurer_payer_id": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Primary insurer payer id"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Length of the appointment in minutes. Optional if `profile` is provided.",
+      "title": "Duration"
+    },
+    "appt_is_break": {
+      "type": "boolean",
+      "description": "",
+      "title": "Appt is break"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Unique identifier. Usually numeric, but not always",
+      "title": "Id"
+    },
+    "custom_fields": {
+      "items": {
+        "title": "CustomAppointmentFieldValue",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "field_type": {
+            "type": "integer",
+            "description": "",
+            "title": "Field type"
+          },
+          "created_at": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Created at"
+          },
+          "updated_at": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Updated at"
+          },
+          "field_value": {
+            "type": "string",
+            "description": "",
+            "title": "Field value"
+          }
+        }
+      },
+      "type": "array",
+      "description": "Custom appointment fields",
+      "title": "Custom fields"
+    },
+    "scheduled_time": {
+      "type": "string",
+      "description": "The starting time of the appointment",
+      "title": "Scheduled time"
+    },
+    "secondary_insurer_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Secondary insurer name"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "Doctor ID",
+      "title": "Doctor"
+    },
+    "recur_start_date": {
+      "type": "string",
+      "description": "For recurring appointments, the start date of the recurring series",
+      "title": "Recur start date"
+    },
+    "primary_insurance_id_number": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Primary insurance id number"
+    },
+    "created_by": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created by"
+    },
+    "ins2_status": {
+      "readOnly": true,
+      "enum": [
+        "",
+        "Incomplete Information",
+        "In Process Emdeon",
+        "Rejected Emdeon",
+        "Rejected EPS",
+        "Rejected Jopari",
+        "In Process Payor",
+        "Rejected Waystar Professional",
+        "Rejected Waystar Institutional",
+        "In Process Payer",
+        "Payer Acknowledged",
+        "Rejected Payor",
+        "Rejected Payer",
+        "Paid in Full",
+        "Partially Paid",
+        "Coordination of Benefits",
+        "ERA Received",
+        "ERA Denied",
+        "HCFA Form Faxed"
+      ],
+      "type": "string",
+      "description": "Billing status of secondary insurer",
+      "title": "Ins2 status"
+    },
+    "first_edi_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "First edi date"
+    },
+    "billing_notes": {
+      "items": {
+        "title": "ClaimBillingNotes",
+        "type": "object",
+        "description": "Structure of a billing note",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Content of the note",
+            "title": "Text"
+          },
+          "created_at": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Created at"
+          },
+          "appointment": {
+            "type": "integer",
+            "description": "",
+            "title": "Appointment"
+          },
+          "id": {
+            "readOnly": true,
+            "type": "integer",
+            "description": "ID of the billing note",
+            "title": "ID"
+          },
+          "created_by": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Created by"
+          }
+        }
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "Billing notes of the appointment. For writing, check `/api/claim_billing_notes`",
+      "title": "Billing notes"
+    },
+    "is_walk_in": {
+      "type": "boolean",
+      "description": "Whether the appointment is a walk-in appointment",
+      "title": "Is walk in"
+    },
+    "billing_provider": {
+      "type": "string",
+      "description": "",
+      "title": "Billing provider"
+    },
+    "reminder_profile": {
+      "type": "string",
+      "description": "Write-only. ID of an `/api/reminder_profiles` instance. Set this to apply a reminder profile to the appointment. Cannot be applied to an appointment with reminders.",
+      "title": "Reminder profile"
+    },
+    "primary_insurer_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Primary insurer name"
+    },
+    "profile": {
+      "type": "integer",
+      "description": "ID of an `/api/appointment_profiles` instance. The profile sets default values for `color`, `duration`, and `reason` on creation, which can be overriden by setting these values explicitly.",
+      "title": "Profile"
+    },
+    "resubmit_claim_original_id": {
+      "type": "integer",
+      "description": "ID of this claim id.",
+      "title": "resubmit_claim_original_id"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "ID of this appointment's patient. Breaks have a null patient field.",
+      "title": "Patient"
+    },
+    "recurrence_instance_key": {
+      "readOnly": true,
+      "nullable": true,
+      "type": "string",
+      "description": "A stable identifier for a recurring appointment instance, in the format `{rootSeriesId}_{YYYYMMDD}` where `YYYYMMDD` is the original occurrence date, not the current scheduled date. This value remains consistent across materialization, series splits, and rescheduling, so it should be treated as an opaque identifier rather than a source for display dates. Returns null for non-recurring appointments. Only present when the `consistent_recurrence_id` feature flag is enabled.",
+      "title": "Recurrence instance key"
+    },
+    "cloned_from": {
+      "type": "integer",
+      "description": "ID of the original appointment which this appointment cloned from. Will be null if the appointment is not cloned.",
+      "title": "Cloned From"
+    },
+    "extended_updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The most recent update time among appointment itself, its vitals and its custom vitals",
+      "title": "Extended updated at"
+    },
+    "exam_room": {
+      "type": "integer",
+      "description": "Index of the exam room that this appointment occurs in. See `/api/offices`",
+      "title": "Exam room"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Default to `\"\"`",
+      "title": "Reason"
+    },
+    "last_edi_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Last edi date"
+    },
+    "secondary_insurer_payer_id": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Secondary insurer payer id"
+    },
+    "allow_overlapping": {
+      "type": "boolean",
+      "description": "Bypass overlap check.",
+      "title": "Allow overlapping"
+    },
+    "payment_profile": {
+      "type": "string",
+      "description": "Appointment Payment Profile",
+      "title": "Payment profile"
+    },
+    "secondary_insurance_id_number": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Secondary insurance id number"
+    },
+    "clinical_note": {
+      "title": "ClinicalNote",
+      "type": "object",
+      "description": "Associated clinical note object",
+      "properties": {
+        "pdf": {
+          "readOnly": true,
+          "type": "string",
+          "description": "",
+          "title": "Pdf"
+        },
+        "locked": {
+          "type": "boolean",
+          "description": "",
+          "title": "Locked"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "",
+          "title": "Updated at"
+        }
+      }
+    },
+    "custom_vitals": {
+      "items": {
+        "title": "CustomVitalValue",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "",
+            "title": "Value"
+          },
+          "vital_type": {
+            "type": "integer",
+            "description": "",
+            "title": "Vital type"
+          }
+        }
+      },
+      "type": "array",
+      "description": "Custom vitals associated with this appointment.",
+      "title": "Custom vitals"
+    },
+    "is_virtual_base": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "",
+      "title": "Is virtual base"
+    },
+    "recurring_appointment": {
+      "type": "boolean",
+      "description": "Whether the appointment is a recurring appointment or not",
+      "title": "Recurring appointment"
+    },
+    "supervising_provider": {
+      "type": "string",
+      "description": "Supervising provider of appointment if set.",
+      "title": "Supervising provider"
+    },
+    "recurring_days": {
+      "type": "array",
+      "description": "For recurring appointments, the days of the week on which the appointment recurs. Can include Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday",
+      "title": "Recurring days"
+    },
+    "status_transitions": {
+      "items": {
+        "title": "AppointmentStatusTransition",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "appointment": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Appointment"
+          },
+          "to_status": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "To status"
+          },
+          "from_status": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "From status"
+          },
+          "datetime": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Datetime"
+          }
+        }
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "",
+      "title": "Status transitions"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "reminders": {
+      "items": {
+        "title": "SimpleReminder",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "scheduled_time": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Scheduled time"
+          },
+          "type": {
+            "enum": [
+              "email",
+              "sms",
+              "phone",
+              "auto_call"
+            ],
+            "type": "string",
+            "description": "",
+            "title": "Type"
+          },
+          "id": {
+            "readOnly": true,
+            "type": "integer",
+            "description": "",
+            "title": "ID"
+          }
+        }
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "Scheduled reminders of the appointment",
+      "title": "Reminders"
+    },
+    "ins1_status": {
+      "readOnly": true,
+      "enum": [
+        "",
+        "Incomplete Information",
+        "In Process Emdeon",
+        "Rejected Emdeon",
+        "Rejected EPS",
+        "Rejected Jopari",
+        "In Process Payor",
+        "Rejected Waystar Professional",
+        "Rejected Waystar Institutional",
+        "In Process Payer",
+        "Payer Acknowledged",
+        "Rejected Payor",
+        "Rejected Payer",
+        "Paid in Full",
+        "Partially Paid",
+        "Coordination of Benefits",
+        "ERA Received",
+        "ERA Denied",
+        "HCFA Form Faxed"
+      ],
+      "type": "string",
+      "description": "Billing status of primary insurer",
+      "title": "Ins1 status"
+    },
+    "custom_status": {
+      "type": "string",
+      "description": "AppointmentStatus Name",
+      "title": "AppointmentStatus"
+    },
+    "recur_end_date": {
+      "type": "string",
+      "description": "For recurring appointments, the end date of the recurring series",
+      "title": "Recur end date"
+    },
+    "icd10_codes": {
+      "items": {
+        "type": "string",
+        "description": "",
+        "title": ""
+      },
+      "type": "array",
+      "description": "",
+      "title": "Icd10 codes"
+    },
+    "deleted_flag": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "Whether the appointment is deleted.",
+      "title": "Deleted flag"
+    },
+    "notes": {
+      "type": "string",
+      "description": "",
+      "title": "Notes"
+    },
+    "recurs_every": {
+      "type": "integer",
+      "description": "For recurring appointments, the number of weeks between recurrences. For example, if this is 2, the appointment recurs every other week.",
+      "title": "Recurs every"
+    }
+  },
+  "x-verbose-required": [
+    "reminders",
+    "vitals",
+    "custom_fields",
+    "custom_vitals",
+    "clinical_note",
+    "extended_updated_at",
+    "status_transitions"
+  ]
+}

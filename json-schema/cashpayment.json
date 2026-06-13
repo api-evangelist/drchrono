@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/cashpayment.json",
+  "title": "CashPayment",
+  "required": [
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "line_item": {
+      "type": "integer",
+      "description": "",
+      "title": "Line item"
+    },
+    "posted_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Posted date"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "If this is absent, the apponitment will be inferred from line item",
+      "title": "Appointment"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "payment_method": {
+      "enum": [
+        "DRCP",
+        "CASH",
+        "CHCK",
+        "DBIT",
+        "CRDT",
+        "AMEX",
+        "VISA",
+        "MSTR",
+        "DISC",
+        "SQR1",
+        "SQRE",
+        "PTPA",
+        "ONPT",
+        "OTHR"
+      ],
+      "type": "string",
+      "description": "`\"CASH\", \"CHCK\" for Check, \"DBIT\" for Debit, \"CRDT\" for Credit Card, \"AMEX\" for American Express, \"VISA\", \"MSTR\" for Mastercard, \"DISC\" for Discover, \"SQR1\" for Square (legacy), \"SQRE\" for Square, \"PTPA\" for Patient Payments, \"ONPT\" for onpatient, \"OTHR\" for Other`",
+      "title": "Payment method"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "payment_transaction_type": {
+      "enum": [
+        "",
+        "REF",
+        "COR",
+        "COPAY",
+        "COINSR",
+        "OTHR"
+      ],
+      "type": "string",
+      "description": "`\"\" for Credit, \"REF\" for Refund, \"COR\" for Correction, \"COPAY\" for Copay, \"COINSR\" for Coinsurance, \"OTHR\" for Other`",
+      "title": "Payment transaction type"
+    },
+    "created_by": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created by"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Amount of cash for this payment, cannot be zero",
+      "title": "Amount"
+    },
+    "notes": {
+      "type": "string",
+      "description": "",
+      "title": "Notes"
+    },
+    "trace_number": {
+      "type": "string",
+      "description": "",
+      "title": "Trace number"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "received_date": {
+      "type": "string",
+      "description": "",
+      "title": "Received date"
+    }
+  },
+  "x-verbose-required": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "ClaimBillingNotes Example",
+  "description": "Example ClaimBillingNotes resource for drchrono REST API",
+  "resource": "ClaimBillingNotes",
+  "path": "/api/claim_billing_notes/{id}",
+  "example": {
+    "text": "example-text",
+    "created_at": "example-created_at",
+    "appointment": 1,
+    "id": 1,
+    "created_by": "example-created_by"
+  }
+}

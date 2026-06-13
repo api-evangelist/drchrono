@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/cashpaymentlog.json",
+  "title": "CashPaymentLog",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "appointment": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of appointment associated with the payment",
+      "title": "Appointment"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Doctor"
+    },
+    "payment_method": {
+      "enum": [
+        "DRCP",
+        "CASH",
+        "CHCK",
+        "DBIT",
+        "CRDT",
+        "AMEX",
+        "VISA",
+        "MSTR",
+        "DISC",
+        "SQR1",
+        "SQRE",
+        "PTPA",
+        "ONPT",
+        "OTHR"
+      ],
+      "type": "string",
+      "description": "`\"CASH\", \"CHCK\" for Check, \"DBIT\" for Debit, \"CRDT\" for Credit Card, \"AMEX\" for American Express, \"VISA\", \"MSTR\" for Mastercard, \"DISC\" for Discover, \"SQR1\" for Square (legacy), \"SQRE\" for Square, \"PTPA\" for Patient Payments, \"ONPT\" for onpatient, \"OTHR\" for Other`",
+      "title": "Payment method"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "created_by": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of user who created the payment",
+      "title": "Created by"
+    },
+    "source": {
+      "type": "string",
+      "description": "",
+      "title": "Source"
+    },
+    "amount": {
+      "type": "number",
+      "description": "",
+      "title": "Amount"
+    },
+    "action": {
+      "enum": [
+        "C",
+        "U",
+        "D",
+        "F",
+        "A"
+      ],
+      "type": "string",
+      "description": "`C`(Create), `U`(Update), `D`(Delete), `F`(Fill), `A`(Autofill)",
+      "title": "Action"
+    },
+    "patient": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Patient"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

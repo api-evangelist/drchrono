@@ -1,0 +1,16 @@
+{
+  "title": "CashPayment Example",
+  "description": "Example CashPayment resource for drchrono REST API",
+  "resource": "CashPayment",
+  "path": "/api/patient_payments/{id}",
+  "example": {
+    "line_item": 1,
+    "posted_date": "example-posted_date",
+    "appointment": 1,
+    "doctor": 1,
+    "payment_method": "example-payment_method",
+    "created_at": "example-created_at",
+    "payment_transaction_type": "example-payment_transaction_type",
+    "created_by": "example-created_by"
+  }
+}

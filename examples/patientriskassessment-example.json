@@ -1,0 +1,16 @@
+{
+  "title": "PatientRiskAssessment Example",
+  "description": "Example PatientRiskAssessment resource for drchrono REST API",
+  "resource": "PatientRiskAssessment",
+  "path": "/api/patient_risk_assessments/{id}",
+  "example": {
+    "value_name": "example-value_name",
+    "value_code_system": "example-value_code_system",
+    "code": "example-code",
+    "appointment": "example-appointment",
+    "name": "example-name",
+    "doctor": 1,
+    "created_at": "example-created_at",
+    "effective_time": "example-effective_time"
+  }
+}

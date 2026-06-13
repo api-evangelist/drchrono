@@ -1,0 +1,16 @@
+{
+  "title": "SoapNoteCustomReport Example",
+  "description": "Example SoapNoteCustomReport resource for drchrono REST API",
+  "resource": "SoapNoteCustomReport",
+  "path": "/api/clinical_note_templates/{id}",
+  "example": {
+    "archived": false,
+    "workflow_key": "example-workflow_key",
+    "name": "example-name",
+    "doctor": "example-doctor",
+    "updated_at": "example-updated_at",
+    "is_persistent": false,
+    "clinical_note_fields": [],
+    "is_onpatient": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/yellownotepad.json",
+  "title": "YellowNotepad",
+  "required": [
+    "appointment_id",
+    "template_id",
+    "content"
+  ],
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "string",
+      "description": "The yellow notepad text content",
+      "title": "Content"
+    },
+    "template_id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "ID of the associated clinical note template",
+      "title": "Template ID"
+    },
+    "appointment_id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "ID of the associated appointment",
+      "title": "Appointment ID"
+    }
+  }
+}

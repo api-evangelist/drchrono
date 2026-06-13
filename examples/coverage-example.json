@@ -1,0 +1,16 @@
+{
+  "title": "Coverage Example",
+  "description": "Example Coverage resource for drchrono REST API",
+  "resource": "Coverage",
+  "path": "/api/eligibility_checks/{id}",
+  "example": {
+    "coverage_subscriber": "example-coverage_subscriber",
+    "appointment": "example-appointment",
+    "eligibility": "example-eligibility",
+    "payer_name": "example-payer_name",
+    "coverage_details": "example-coverage_details",
+    "updated_at": "example-updated_at",
+    "query_date": "example-query_date",
+    "service_type_description": "example-service_type_description"
+  }
+}

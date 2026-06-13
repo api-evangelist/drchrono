@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/labresult.json",
+  "title": "LabResult",
+  "required": [
+    "document",
+    "lab_test",
+    "test_performed",
+    "status",
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [
+        "P",
+        "I",
+        "C",
+        "F",
+        "X"
+      ],
+      "type": "string",
+      "description": "\nValue | Notes\n----- | -----\n`'P'` | `'preliminary'`\n`'I'` | `'pending'`\n`'C'` | `'correction'`\n`'F'` | `'final'`\n`'X'` | `'canceled'`\n",
+      "title": "Status"
+    },
+    "group_code": {
+      "type": "string",
+      "description": "This is the code used for grouping result data.",
+      "title": "Group code"
+    },
+    "observation_description": {
+      "type": "string",
+      "description": "For example, ``\"Blood Urea Nitrogen (BUN)\"``",
+      "title": "Observation description"
+    },
+    "is_abnormal": {
+      "type": "string",
+      "description": "If true, the result will be flagged for the doctor's attention",
+      "title": "Is abnormal"
+    },
+    "observation_code": {
+      "type": "string",
+      "description": "",
+      "title": "Observation code"
+    },
+    "specimen_received": {
+      "type": "string",
+      "description": "",
+      "title": "Specimen received"
+    },
+    "comments": {
+      "type": "string",
+      "description": "",
+      "title": "Comments"
+    },
+    "normal_range": {
+      "type": "string",
+      "description": "When ``value_is_numeric`` is True, this parameter must be a string of the form ``\"<lower> <upper>\", where both lower and upper are numerical``",
+      "title": "Normal range"
+    },
+    "test_performed": {
+      "type": "string",
+      "description": "",
+      "title": "Test performed"
+    },
+    "value": {
+      "type": "string",
+      "description": "",
+      "title": "Value"
+    },
+    "abnormal_status": {
+      "enum": [
+        "L",
+        "LL",
+        "H",
+        "HH",
+        "<",
+        ">",
+        "A",
+        "AA",
+        "S",
+        "R",
+        "I",
+        "NEG",
+        "POS",
+        "N",
+        ""
+      ],
+      "type": "string",
+      "description": "\nValue | Notes\n----- | -----\n`'L'` | `'low'`\n`'LL'` | `'alert low'`\n`'H'` | `'high'`\n`'HH'` | `'alert high'`\n`'<'` | `'panic low'`\n`'>'` | `'panic high'`\n`'A'` | `'abnormal'`\n`'AA'` | `'very abnormal'`\n`'S'` | `'susceptible'`\n`'R'` | `'resistant'`\n`'I'` | `'intermediate'`\n`'NEG'` | `'negative'`\n`'POS'` | `'positive'`\n`'N'` | `'normal'`\n`''` | `'no comment'`\n",
+      "title": "Abnormal status"
+    },
+    "lab_order": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of `/lab_orders` object the result belongs to",
+      "title": "Lab order"
+    },
+    "value_is_numeric": {
+      "type": "boolean",
+      "description": "Default to `False`",
+      "title": "Value is numeric"
+    },
+    "document": {
+      "type": "integer",
+      "description": "ID of `/lab_documents` object for the result",
+      "title": "Document"
+    },
+    "lab_test": {
+      "type": "integer",
+      "description": "ID of `/lab_tests` object for the result",
+      "title": "Lab test"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit used for the value",
+      "title": "Unit"
+    }
+  },
+  "x-verbose-required": []
+}

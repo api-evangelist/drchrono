@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientdrug.json",
+  "title": "PatientDrug",
+  "required": [
+    "doctor",
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "dispense_quantity": {
+      "type": "number",
+      "description": "",
+      "title": "Dispense quantity"
+    },
+    "prn": {
+      "type": "boolean",
+      "description": "If `True`, the medication should be taken when necessary",
+      "title": "Prn"
+    },
+    "pharmacy_note": {
+      "type": "string",
+      "description": "",
+      "title": "Pharmacy note"
+    },
+    "number_refills": {
+      "type": "integer",
+      "description": "",
+      "title": "Number refills"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "dosage_quantity": {
+      "type": "string",
+      "description": "Please note, this used to be an decimal field, you can still pass decimal value to it. Or you can pass in some formatted string if needed.",
+      "title": "Dosage quantity"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "Prescribing doctor ID",
+      "title": "Doctor"
+    },
+    "date_started_taking": {
+      "type": "string",
+      "description": "",
+      "title": "Date started taking"
+    },
+    "dosage_units": {
+      "type": "string",
+      "description": "",
+      "title": "Dosage units"
+    },
+    "date_stopped_taking": {
+      "type": "string",
+      "description": "",
+      "title": "Date stopped taking"
+    },
+    "order_status": {
+      "enum": [
+        "",
+        "Administered during visit",
+        "Discontinued",
+        "Electronic eRx Sent",
+        "Faxed to Pharmacy",
+        "Ordered",
+        "Over the Counter",
+        "Paper Rx",
+        "Phoned into Pharmacy",
+        "Prescribed by other Dr",
+        "Prescription Printed"
+      ],
+      "type": "string",
+      "description": "One of `\"\"`, `\"Ordered\"`, `\"Administered during visit\"`, `\"Electronic eRx Sent\"`, `\"Phoned into Pharmacy\"`, `\"Faxed to Pharmacy\"`, `\"Paper Rx\"`, `\"Prescription Printed\"`, `\"Discontinued\"`, `\"Prescribed by other Dr\"` or `\"Over the Counter\"`. If omitted in writing, default to `\"\"`",
+      "title": "Order status"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "type": "string",
+      "description": "If present, one of `\"active\"` or `\"inactive\"`. If omitted in writing, default to `\"active\"`",
+      "title": "Status"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "Appointment ID corresponding to the initial prescription",
+      "title": "Appointment"
+    },
+    "daw": {
+      "type": "boolean",
+      "description": "If true, the prescription should be dispensed as written and not substituted",
+      "title": "Daw"
+    },
+    "rxnorm": {
+      "type": "string",
+      "description": "RxNorm code for the medication",
+      "title": "Rxnorm"
+    },
+    "date_prescribed": {
+      "type": "string",
+      "description": "",
+      "title": "Date prescribed"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "ndc": {
+      "type": "string",
+      "description": "",
+      "title": "Ndc"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Any additional notes from the provider",
+      "title": "Notes"
+    },
+    "frequency": {
+      "type": "string",
+      "description": "Frequency pf administration",
+      "title": "Frequency"
+    },
+    "indication": {
+      "type": "string",
+      "description": "",
+      "title": "Indication"
+    },
+    "signature_note": {
+      "type": "string",
+      "description": "",
+      "title": "Signature note"
+    },
+    "route": {
+      "type": "string",
+      "description": "Route of administration",
+      "title": "Route"
+    }
+  },
+  "x-verbose-required": []
+}

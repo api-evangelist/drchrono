@@ -1,0 +1,16 @@
+{
+  "title": "DoctorMessage Example",
+  "description": "Example DoctorMessage resource for drchrono REST API",
+  "resource": "DoctorMessage",
+  "path": "/api/messages/{id}",
+  "example": {
+    "type_description": "example-type_description",
+    "patient_middle_name": "example-patient_middle_name",
+    "updated_at": "example-updated_at",
+    "owner": "example-owner",
+    "responsible_user_first_name": "example-responsible_user_first_name",
+    "received_at": "example-received_at",
+    "id": 1,
+    "doctor_last_name": "example-doctor_last_name"
+  }
+}

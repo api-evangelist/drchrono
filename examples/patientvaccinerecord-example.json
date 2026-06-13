@@ -1,0 +1,16 @@
+{
+  "title": "PatientVaccineRecord Example",
+  "description": "Example PatientVaccineRecord resource for drchrono REST API",
+  "resource": "PatientVaccineRecord",
+  "path": "/api/patient_vaccine_records/{id}",
+  "example": {
+    "lot_number": "example-lot_number",
+    "site": "example-site",
+    "ordering_doctor": 1,
+    "doses": [],
+    "id": 1,
+    "next_dose_date": "example-next_dose_date",
+    "cpt_code": "example-cpt_code",
+    "completion_status": "example-completion_status"
+  }
+}

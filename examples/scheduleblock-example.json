@@ -1,0 +1,16 @@
+{
+  "title": "ScheduleBlock Example",
+  "description": "Example ScheduleBlock resource for drchrono REST API",
+  "resource": "ScheduleBlock",
+  "path": "/api/schedule_blocks/{id}",
+  "example": {
+    "description": "example-description",
+    "office": 1,
+    "color": "example-color",
+    "practice_group": 1,
+    "start_time": "example-start_time",
+    "exam_room": 1,
+    "series": 1,
+    "end_time": "example-end_time"
+  }
+}

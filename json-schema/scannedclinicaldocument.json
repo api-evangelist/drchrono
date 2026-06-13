@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/scannedclinicaldocument.json",
+  "title": "ScannedClinicalDocument",
+  "required": [
+    "doctor",
+    "description",
+    "date",
+    "document",
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "`DELETE` operation will set this field to `true`",
+      "title": "Archived"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "ID of the patient the document concerns",
+      "title": "Patient"
+    },
+    "description": {
+      "type": "string",
+      "description": "",
+      "title": "Description"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "ID of the doctor who owns the document",
+      "title": "Doctor"
+    },
+    "metatags": {
+      "type": "string",
+      "description": "Array of tags represented as string. This should be quoted--e.g. `'[\"a\", \"b\"]'`--since this endpoint requires `multipart/form-data` encoding",
+      "title": "Metatags"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "date": {
+      "type": "string",
+      "description": "",
+      "title": "Date"
+    },
+    "document": {
+      "type": "string",
+      "description": "When creating, if you receive response as 201, but this field is `null`, please send a `GET` request with the created object's ID to retrieve the updated file URL",
+      "title": "Document"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

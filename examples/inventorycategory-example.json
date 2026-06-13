@@ -1,0 +1,15 @@
+{
+  "title": "InventoryCategory Example",
+  "description": "Example InventoryCategory resource for drchrono REST API",
+  "resource": "InventoryCategory",
+  "path": "/api/inventory_categories/{id}",
+  "example": {
+    "archived": false,
+    "name": "example-name",
+    "doctor": "example-doctor",
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "category_type": "example-category_type",
+    "id": 1
+  }
+}

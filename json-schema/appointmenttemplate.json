@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/appointmenttemplate.json",
+  "title": "AppointmentTemplate",
+  "x-verbose-required": [
+    "open_slots"
+  ],
+  "required": [
+    "office",
+    "exam_room",
+    "scheduled_time",
+    "profile"
+  ],
+  "type": "object",
+  "description": "Appointment templates are blocks of time during which a doctor usually sees appointments with the same profile. These may have a longer duration then the corresponding profile, in which case they may allow multiple appointments to be booked during that period.",
+  "properties": {
+    "profile": {
+      "type": "integer",
+      "description": "ID of the appointment profile to default to",
+      "title": "Profile"
+    },
+    "scheduled_time": {
+      "type": "string",
+      "description": "",
+      "title": "Scheduled time"
+    },
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "Indicats that the object has been soft-deleted and should not be used",
+      "title": "Archived"
+    },
+    "week_days": {
+      "items": {
+        "type": "integer",
+        "description": "",
+        "title": ""
+      },
+      "type": "array",
+      "description": "Array of integers that indicate week days (`0` = Monday, ..., `6` = Sunday)",
+      "title": "Week days"
+    },
+    "office": {
+      "type": "integer",
+      "description": "",
+      "title": "Office"
+    },
+    "open_slots": {
+      "items": {
+        "title": "Open Slot",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "start": {
+            "type": "string",
+            "description": "",
+            "title": "Start"
+          },
+          "end": {
+            "type": "string",
+            "description": "",
+            "title": "End"
+          }
+        }
+      },
+      "type": "array",
+      "description": "Array of time intervals during which the template is available. Only computed if the available and verbose query parameters are passed. Note that only slots long enough to fit an appointment with the corresponding profile are included.",
+      "title": "Open Slots"
+    },
+    "date_end": {
+      "type": "string",
+      "description": "",
+      "title": "Date end"
+    },
+    "date_start": {
+      "type": "string",
+      "description": "",
+      "title": "Date start"
+    },
+    "exam_room": {
+      "type": "integer",
+      "description": "**1-based** index for the exam room",
+      "title": "Exam room"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Length of an appointment in minutes",
+      "title": "Duration"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  }
+}

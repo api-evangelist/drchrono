@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/billinglineitemdeletion.json",
+  "title": "BillingLineItemDeletion",
+  "type": "object",
+  "properties": {
+    "billing_line_item_id": {
+      "readOnly": true,
+      "type": "number",
+      "description": "The ID of the original billing line item",
+      "title": "Billing Line Item ID"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Date when the billing line item was deleted",
+      "title": "Created At"
+    },
+    "appointment_id": {
+      "readOnly": true,
+      "type": "number",
+      "description": "Appointment ID of the original billing line item",
+      "title": "Appointment ID"
+    }
+  }
+}

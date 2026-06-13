@@ -1,0 +1,15 @@
+{
+  "title": "TaskNote Example",
+  "description": "Example TaskNote resource for drchrono REST API",
+  "resource": "TaskNote",
+  "path": "/api/task_notes/{id}",
+  "example": {
+    "archived": false,
+    "task": 1,
+    "text": "example-text",
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "created_by": "example-created_by",
+    "id": 1
+  }
+}

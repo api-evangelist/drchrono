@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/phonecalllog.json",
+  "title": "PhoneCallLog",
+  "required": [
+    "patient",
+    "doctor"
+  ],
+  "type": "object",
+  "properties": {
+    "scheduled_time": {
+      "type": "string",
+      "description": "Date of phone call, if `appointment` is set, this field will be set as the `scheduled_time` of that appointment",
+      "title": "Scheduled time"
+    },
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "If this phone call log is archived or not",
+      "title": "Archived"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "Appointment related with the phone call log",
+      "title": "Appointment"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of this log",
+      "title": "Title"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "author": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Author of post.",
+      "title": "Author"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "cash_charged": {
+      "type": "number",
+      "description": "Amount of cash needs to be charged",
+      "title": "Cash charged"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the phone call",
+      "title": "Duration"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "message": {
+      "type": "string",
+      "description": "Additional message for the phone call",
+      "title": "Message"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of phone call log",
+      "title": "Type"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

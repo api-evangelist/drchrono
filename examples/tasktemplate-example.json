@@ -1,0 +1,16 @@
+{
+  "title": "TaskTemplate Example",
+  "description": "Example TaskTemplate resource for drchrono REST API",
+  "resource": "TaskTemplate",
+  "path": "/api/task_templates/{id}",
+  "example": {
+    "archived": false,
+    "name": "example-name",
+    "practice_group": "example-practice_group",
+    "default_category": 1,
+    "updated_at": "example-updated_at",
+    "default_title": "example-default_title",
+    "default_note": "example-default_note",
+    "default_status": 1
+  }
+}

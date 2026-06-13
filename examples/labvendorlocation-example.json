@@ -1,0 +1,12 @@
+{
+  "title": "LabVendorLocation Example",
+  "description": "Example LabVendorLocation resource for drchrono REST API",
+  "resource": "LabVendorLocation",
+  "path": "/api/sublabs/{id}",
+  "example": {
+    "vendor_name": "example-vendor_name",
+    "facility_code": "example-facility_code",
+    "id": 1,
+    "name": "example-name"
+  }
+}

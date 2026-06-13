@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/staff.json",
+  "title": "Staff",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "username": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Username"
+    },
+    "first_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "First name"
+    },
+    "last_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Last name"
+    },
+    "user_id": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "User id"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Doctor"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "home_phone": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Home phone"
+    },
+    "active": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Active"
+    },
+    "cell_phone": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Cell phone"
+    },
+    "email": {
+      "readOnly": true,
+      "type": "string",
+      "description": "An account registration email will be sent to this address.",
+      "title": "Email"
+    }
+  },
+  "x-verbose-required": []
+}

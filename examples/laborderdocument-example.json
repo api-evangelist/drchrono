@@ -1,0 +1,14 @@
+{
+  "title": "LabOrderDocument Example",
+  "description": "Example LabOrderDocument resource for drchrono REST API",
+  "resource": "LabOrderDocument",
+  "path": "/api/lab_documents/{id}",
+  "example": {
+    "hl7": "example-hl7",
+    "timestamp": "example-timestamp",
+    "lab_order": 1,
+    "document": "example-document",
+    "type": "example-type",
+    "id": 1
+  }
+}

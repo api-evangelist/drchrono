@@ -1,0 +1,16 @@
+{
+  "title": "AppointmentProfile Example",
+  "description": "Example AppointmentProfile resource for drchrono REST API",
+  "resource": "AppointmentProfile",
+  "path": "/api/appointment_profiles/{id}",
+  "example": {
+    "archived": false,
+    "name": "example-name",
+    "doctor": 1,
+    "color": "example-color",
+    "reason": "example-reason",
+    "sort_order": 1,
+    "duration": 1,
+    "id": 1
+  }
+}

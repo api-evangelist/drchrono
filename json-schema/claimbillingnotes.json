@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/claimbillingnotes.json",
+  "title": "ClaimBillingNotes",
+  "required": [
+    "appointment"
+  ],
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "",
+      "title": "Text"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "",
+      "title": "Appointment"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "created_by": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of `/users` when created the note",
+      "title": "Created by"
+    }
+  },
+  "x-verbose-required": []
+}

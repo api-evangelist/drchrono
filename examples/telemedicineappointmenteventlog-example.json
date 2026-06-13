@@ -1,0 +1,11 @@
+{
+  "title": "TelemedicineAppointmentEventLog Example",
+  "description": "Example TelemedicineAppointmentEventLog resource for drchrono REST API",
+  "resource": "TelemedicineAppointmentEventLog",
+  "path": "/api/telehealth_appointment_history/{id}",
+  "example": {
+    "timestamp": "example-timestamp",
+    "description": "example-description",
+    "event_type": "example-event_type"
+  }
+}

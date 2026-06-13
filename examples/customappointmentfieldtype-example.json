@@ -1,0 +1,16 @@
+{
+  "title": "CustomAppointmentFieldType Example",
+  "description": "Example CustomAppointmentFieldType resource for drchrono REST API",
+  "resource": "CustomAppointmentFieldType",
+  "path": "/api/custom_appointment_fields/{id}",
+  "example": {
+    "archived": false,
+    "doctor": "example-doctor",
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "order": 1,
+    "field_desc": "example-field_desc",
+    "field_name": "example-field_name",
+    "id": 1
+  }
+}

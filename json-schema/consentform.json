@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/consentform.json",
+  "title": "ConsentForm",
+  "required": [
+    "assign_by_default",
+    "doctor",
+    "is_mandatory",
+    "title",
+    "uri"
+  ],
+  "type": "object",
+  "properties": {
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "",
+      "title": "Archived"
+    },
+    "is_mandatory": {
+      "type": "boolean",
+      "description": "If true, consent form must be signed prior to appointment check in",
+      "title": "Is mandatory"
+    },
+    "uri": {
+      "type": "string",
+      "description": "Files are passed using `multipart/form-data` encoding, but returned as URLs.",
+      "title": "Uri"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "title": {
+      "type": "string",
+      "description": "",
+      "title": "Title"
+    },
+    "assign_by_default": {
+      "type": "boolean",
+      "description": "If true, consent form will always be automatically assigned to appointments",
+      "title": "Assign by default"
+    },
+    "order": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "The order of consent forms that will show in management screen",
+      "title": "Order"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

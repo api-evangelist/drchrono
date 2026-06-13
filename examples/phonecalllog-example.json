@@ -1,0 +1,16 @@
+{
+  "title": "PhoneCallLog Example",
+  "description": "Example PhoneCallLog resource for drchrono REST API",
+  "resource": "PhoneCallLog",
+  "path": "/api/comm_logs/{id}",
+  "example": {
+    "scheduled_time": "example-scheduled_time",
+    "archived": false,
+    "appointment": 1,
+    "doctor": 1,
+    "title": "example-title",
+    "created_at": "example-created_at",
+    "author": "example-author",
+    "updated_at": "example-updated_at"
+  }
+}

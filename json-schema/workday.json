@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/workday.json",
+  "title": "WorkDay",
+  "type": "object",
+  "properties": {
+    "iso_weekday": {
+      "type": "string",
+      "description": "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",
+      "title": "ISO weekday"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "whether the work day is enabled",
+      "title": "Enabled"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "unique ID of the work day",
+      "title": "ID"
+    },
+    "work_hours": {
+      "items": {
+        "$ref": "#/components/schemas/WorkHours"
+      },
+      "type": "array",
+      "description": "work hours of the work day",
+      "title": "Work hours"
+    }
+  }
+}

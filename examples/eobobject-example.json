@@ -1,0 +1,16 @@
+{
+  "title": "EOBObject Example",
+  "description": "Example EOBObject resource for drchrono REST API",
+  "resource": "EOBObject",
+  "path": "/api/eobs/{id}",
+  "example": {
+    "posted_date": "example-posted_date",
+    "insurance_payer_name": "example-insurance_payer_name",
+    "doctor": 1,
+    "payment_method": "example-payment_method",
+    "deposit_date": "example-deposit_date",
+    "updated_at": "example-updated_at",
+    "insurance_payer_id": "example-insurance_payer_id",
+    "scanned_eob": "example-scanned_eob"
+  }
+}

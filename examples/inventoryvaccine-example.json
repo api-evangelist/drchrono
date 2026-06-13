@@ -1,0 +1,16 @@
+{
+  "title": "InventoryVaccine Example",
+  "description": "Example InventoryVaccine resource for drchrono REST API",
+  "resource": "InventoryVaccine",
+  "path": "/api/inventory_vaccines/{id}",
+  "example": {
+    "category": 1,
+    "lot_number": "example-lot_number",
+    "manufacturer_code": "example-manufacturer_code",
+    "name": "example-name",
+    "original_quantity": 1,
+    "doctor": 1,
+    "created_at": "example-created_at",
+    "status": "example-status"
+  }
+}

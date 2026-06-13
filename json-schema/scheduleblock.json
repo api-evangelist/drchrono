@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/scheduleblock.json",
+  "title": "ScheduleBlock",
+  "example": {
+    "description": "Lunch Break",
+    "office": 200,
+    "color": "#FF5733",
+    "practice_group": 1,
+    "start_time": "2024-03-15T12:00:00",
+    "exam_room": 1,
+    "series": null,
+    "end_time": "2024-03-15T13:00:00",
+    "provider": 100,
+    "id": 12345,
+    "appointment_break": null
+  },
+  "required": [
+    "provider",
+    "office",
+    "start_time",
+    "end_time"
+  ],
+  "type": "object",
+  "description": "Schedule blocks are used to block off time on a provider's calendar, preventing appointments from being scheduled during those times. They can be associated with a specific provider, office, and exam room. Common use cases include blocking time for lunch breaks, meetings, administrative tasks, PTO, or other non-appointment activities.",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Description or reason for the schedule block (e.g., \"Lunch Break\", \"Staff Meeting\", \"PTO\")",
+      "title": "Description"
+    },
+    "office": {
+      "type": "integer",
+      "description": "ID of the office where the schedule block is applied",
+      "title": "Office"
+    },
+    "color": {
+      "type": "string",
+      "description": "Custom color associated with the schedule block for calendar display",
+      "title": "Color"
+    },
+    "practice_group": {
+      "type": "integer",
+      "description": "ID of the practice group for the associated provider (doctor)",
+      "title": "Practice group"
+    },
+    "start_time": {
+      "format": "date-time",
+      "type": "string",
+      "description": "Start time of the schedule block in ISO 8601 format",
+      "title": "Start time"
+    },
+    "exam_room": {
+      "type": "integer",
+      "description": "ID of the exam room where the schedule block is applied",
+      "title": "Exam room"
+    },
+    "series": {
+      "type": "integer",
+      "description": "Series ID if the schedule block is part of a recurring series",
+      "title": "Series"
+    },
+    "end_time": {
+      "format": "date-time",
+      "type": "string",
+      "description": "End time of the schedule block in ISO 8601 format",
+      "title": "End time"
+    },
+    "provider": {
+      "type": "integer",
+      "description": "ID of the provider or doctor who owns this schedule block",
+      "title": "Provider"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "Unique identifier for the schedule block",
+      "title": "ID"
+    },
+    "appointment_break": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "ID of an associated appointment break, if applicable",
+      "title": "Appointment break"
+    }
+  }
+}

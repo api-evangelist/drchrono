@@ -1,0 +1,16 @@
+{
+  "title": "AppointmentTemplate Example",
+  "description": "Example AppointmentTemplate resource for drchrono REST API",
+  "resource": "AppointmentTemplate",
+  "path": "/api/appointment_templates/{id}",
+  "example": {
+    "profile": 1,
+    "scheduled_time": "example-scheduled_time",
+    "archived": false,
+    "week_days": [],
+    "office": 1,
+    "open_slots": [],
+    "date_end": "example-date_end",
+    "date_start": "example-date_start"
+  }
+}

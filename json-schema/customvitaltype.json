@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/customvitaltype.json",
+  "title": "CustomVitalType",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "archived": {
+      "type": "boolean",
+      "description": "Indicates that the object has been soft-deleted and should not be used",
+      "title": "Archived"
+    },
+    "description": {
+      "type": "string",
+      "description": "",
+      "title": "Description"
+    },
+    "data_type": {
+      "enum": [
+        "text",
+        "number",
+        "single_sel"
+      ],
+      "type": "string",
+      "description": "One of `text`, `number`, or `single_sel`",
+      "title": "Data type"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of the doctor who created the custom vital",
+      "title": "Doctor"
+    },
+    "is_fraction_field": {
+      "type": "boolean",
+      "description": "",
+      "title": "Is fraction field"
+    },
+    "fraction_delimiter": {
+      "type": "string",
+      "description": "If `is_fraction_field` is true, this is the character separating the numerator and denominator",
+      "title": "Fraction delimiter"
+    },
+    "allowed_values": {
+      "items": {
+        "type": "string",
+        "description": "",
+        "title": ""
+      },
+      "type": "array",
+      "description": "If `data_type` is `single_sel`, this is the array of values in the select's dropdown.",
+      "title": "Allowed values"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "unit": {
+      "type": "string",
+      "description": "",
+      "title": "Unit"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    }
+  },
+  "x-verbose-required": []
+}

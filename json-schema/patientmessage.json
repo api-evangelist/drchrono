@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientmessage.json",
+  "title": "PatientMessage",
+  "required": [
+    "doctor",
+    "patient",
+    "subject"
+  ],
+  "type": "object",
+  "properties": {
+    "body": {
+      "type": "string",
+      "description": "",
+      "title": "Body"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "attachments": {
+      "items": {
+        "title": "PatientMessageAttachment",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "updated_at": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Updated at"
+          },
+          "created_at": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Created at"
+          },
+          "attachment": {
+            "type": "string",
+            "description": "",
+            "title": "Attachment"
+          },
+          "doctor": {
+            "type": "integer",
+            "description": "",
+            "title": "Doctor"
+          }
+        }
+      },
+      "type": "array",
+      "description": "",
+      "title": "Attachments"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "message": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Message"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "subject": {
+      "type": "string",
+      "description": "",
+      "title": "Subject"
+    }
+  },
+  "x-verbose-required": []
+}

@@ -1,0 +1,16 @@
+{
+  "title": "SoapNoteLineItemFieldType Example",
+  "description": "Example SoapNoteLineItemFieldType resource for drchrono REST API",
+  "resource": "SoapNoteLineItemFieldType",
+  "path": "/api/clinical_note_field_types/{id}",
+  "example": {
+    "comment": "example-comment",
+    "archived": false,
+    "clinical_note_template": "example-clinical_note_template",
+    "data_type": "example-data_type",
+    "required": false,
+    "allowed_values": [],
+    "id": 1,
+    "name": "example-name"
+  }
+}

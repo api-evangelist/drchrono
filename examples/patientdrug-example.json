@@ -1,0 +1,16 @@
+{
+  "title": "PatientDrug Example",
+  "description": "Example PatientDrug resource for drchrono REST API",
+  "resource": "PatientDrug",
+  "path": "/api/medications/{id}",
+  "example": {
+    "dispense_quantity": 0.0,
+    "prn": false,
+    "pharmacy_note": "example-pharmacy_note",
+    "number_refills": 1,
+    "patient": 1,
+    "id": 1,
+    "dosage_quantity": "example-dosage_quantity",
+    "doctor": 1
+  }
+}

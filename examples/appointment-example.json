@@ -1,0 +1,16 @@
+{
+  "title": "Appointment Example",
+  "description": "Example Appointment resource for drchrono REST API",
+  "resource": "Appointment",
+  "path": "/api/appointments_list/{id}",
+  "example": {
+    "status": "example-status",
+    "icd9_codes": [],
+    "office": 1,
+    "base_recurring_appointment": "example-base_recurring_appointment",
+    "color": "example-color",
+    "vitals": {},
+    "first_billed_date": "example-first_billed_date",
+    "last_billed_date": "example-last_billed_date"
+  }
+}

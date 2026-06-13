@@ -1,0 +1,16 @@
+{
+  "title": "LabOrder Example",
+  "description": "Example LabOrder resource for drchrono REST API",
+  "resource": "LabOrder",
+  "path": "/api/lab_orders_summary/{id}",
+  "example": {
+    "status": "example-status",
+    "documents": [],
+    "patient": 1,
+    "doctor": 1,
+    "timestamp": "example-timestamp",
+    "notes": "example-notes",
+    "accession_number": "example-accession_number",
+    "requisition_id": "example-requisition_id"
+  }
+}

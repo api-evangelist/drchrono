@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientproblem.json",
+  "title": "PatientProblem",
+  "required": [
+    "doctor",
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "category": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The category of the problem. Either `problem-list-item` or `health-concern`",
+      "title": "Category"
+    },
+    "icd_code": {
+      "type": "string",
+      "description": "ICD9 or ICD10 code for the problem",
+      "title": "Icd code"
+    },
+    "icd_version": {
+      "enum": [
+        "9",
+        "10"
+      ],
+      "type": "string",
+      "description": "Either `9` or `10`. If omitted in writing, default to 10.",
+      "title": "Icd version"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "",
+      "title": "Appointment"
+    },
+    "description": {
+      "type": "string",
+      "description": "",
+      "title": "Description"
+    },
+    "info_url": {
+      "readOnly": true,
+      "type": "string",
+      "description": "External URL with more information about the problem, intended for patient education",
+      "title": "Info url"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Any additional notes by the provider",
+      "title": "Notes"
+    },
+    "verification_status": {
+      "enum": [
+        "",
+        "unconfirmed",
+        "provisional",
+        "differential",
+        "confirmed",
+        "refuted",
+        "entered-in-error"
+      ],
+      "description": "The verification status of the problem:\n- `unconfirmed`\n- `provisional`\n- `differential`\n- `confirmed`\n- `refuted`\n- `entered-in-error`\n"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive",
+        "resolved"
+      ],
+      "type": "string",
+      "description": "Either `active`, `inactive` or `resolved`. If omitted in writing, default to `active`",
+      "title": "Status"
+    },
+    "snomed_ct_code": {
+      "type": "string",
+      "description": "SnoMED code for the problem",
+      "title": "SnoMED CT code"
+    },
+    "abatement_date": {
+      "readOnly": true,
+      "title": "Abatement Date",
+      "type": "string",
+      "description": "The problem's resolution date.",
+      "format": "date"
+    },
+    "date_onset": {
+      "type": "string",
+      "description": "",
+      "title": "Date onset"
+    },
+    "date_diagnosis": {
+      "type": "string",
+      "description": "",
+      "title": "Date diagnosis"
+    },
+    "date_changed": {
+      "type": "string",
+      "description": "",
+      "title": "Date changed"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "problem_type": {
+      "readOnly": true,
+      "enum": [
+        "",
+        "sdoh",
+        "functional status",
+        "disability status",
+        "cognitive status"
+      ],
+      "type": "string",
+      "description": "The type of problem:\n- `sdoh`: Social Determinants of Health (SDOH).\n- `functional status`: Functional Status.\n- `disability status`: Disability Status.\n- `cognitive status`: Cognitive Status.\n",
+      "title": "Problem Type"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the problem",
+      "title": "Name"
+    }
+  },
+  "x-verbose-required": []
+}

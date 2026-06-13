@@ -1,0 +1,16 @@
+{
+  "title": "CashPaymentLog Example",
+  "description": "Example CashPaymentLog resource for drchrono REST API",
+  "resource": "CashPaymentLog",
+  "path": "/api/patient_payment_log/{id}",
+  "example": {
+    "appointment": "example-appointment",
+    "doctor": "example-doctor",
+    "payment_method": "example-payment_method",
+    "updated_at": "example-updated_at",
+    "created_by": "example-created_by",
+    "source": "example-source",
+    "amount": 0.0,
+    "action": "example-action"
+  }
+}

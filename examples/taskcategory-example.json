@@ -1,0 +1,15 @@
+{
+  "title": "TaskCategory Example",
+  "description": "Example TaskCategory resource for drchrono REST API",
+  "resource": "TaskCategory",
+  "path": "/api/task_categories/{id}",
+  "example": {
+    "archived": false,
+    "is_global": "example-is_global",
+    "name": "example-name",
+    "practice_group": 1,
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "id": 1
+  }
+}

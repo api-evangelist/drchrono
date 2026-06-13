@@ -1,0 +1,16 @@
+{
+  "title": "PatientAllergy Example",
+  "description": "Example PatientAllergy resource for drchrono REST API",
+  "resource": "PatientAllergy",
+  "path": "/api/allergies/{id}",
+  "example": {
+    "status": "example-status",
+    "reaction": "example-reaction",
+    "patient": 1,
+    "description": "example-description",
+    "doctor": 1,
+    "snomed_reaction": "example-snomed_reaction",
+    "notes": "example-notes",
+    "verification_status": "example-verification_status"
+  }
+}

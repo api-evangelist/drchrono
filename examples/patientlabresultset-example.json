@@ -1,0 +1,16 @@
+{
+  "title": "PatientLabResultSet Example",
+  "description": "Example PatientLabResultSet resource for drchrono REST API",
+  "resource": "PatientLabResultSet",
+  "path": "/api/patient_lab_results/{id}",
+  "example": {
+    "doctor_signoff": false,
+    "loinc_code": "example-loinc_code",
+    "patient": 1,
+    "ordering_doctor": 1,
+    "lab_abnormal_flag": "example-lab_abnormal_flag",
+    "lab_normal_range_units": "example-lab_normal_range_units",
+    "created_at": "example-created_at",
+    "lab_normal_range": "example-lab_normal_range"
+  }
+}

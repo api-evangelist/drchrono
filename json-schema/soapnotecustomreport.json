@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/soapnotecustomreport.json",
+  "title": "SoapNoteCustomReport",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "Indicates that the doctor has soft-deleted this template, and will not use it for future appointments",
+      "title": "Archived"
+    },
+    "workflow_key": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Identifier for this template. If it's a workflow form, it will be one of `\"hp_cc_history_present_illness\"`, `\"hp_med_fam_social_history\"`, `\"hp_review_of_systems\"`, `\"hp_physical_exam\"`, `\"hp_assessment\"`, `\"hp_plan\"`, `\"hp_meds_allergies\"`, `\"soap_subjective\"`, `\"soap_objective\"`, `\"soap_assessment\"`, `\"soap_plan\"`, `\"onpatient_additional_info\"`, or `\"onpatient_reasons_for_visit\"`. Otherwise, it will be `\"custom_{id}\".`",
+      "title": "Workflow Key"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Doctor"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "is_persistent": {
+      "type": "boolean",
+      "description": "If this is true, this report will be the same across all notes",
+      "title": "Is persistent"
+    },
+    "clinical_note_fields": {
+      "items": {
+        "title": "Clinical Note Field",
+        "type": "object",
+        "description": "Array of field objects",
+        "properties": {
+          "archived": {
+            "type": "boolean",
+            "description": "Indicates that the field has been soft-deleted by the doctor",
+            "title": "Archived"
+          },
+          "name": {
+            "type": "string",
+            "description": "",
+            "title": "Name"
+          },
+          "data_type": {
+            "type": "string",
+            "description": "One of `\"\"`, `\"Checkbox\"`, `\"NullCheckbox\"`, `\"String\"`, `\"TwoStrings\"`, `\"FreeDraw\"`, `\"Photo\"`, `\"Header\"`, `\"Subheader\"`",
+            "title": "Data Type"
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Indicates that a note should not be locked unless a value is provided for this field",
+            "title": "Required"
+          },
+          "allowed_values": {
+            "items": {
+              "type": "string",
+              "description": "",
+              "title": ""
+            },
+            "type": "array",
+            "description": "",
+            "title": "Allowed Values"
+          },
+          "clinical_note_template": {
+            "type": "integer",
+            "description": "",
+            "title": "Clinical Note Template"
+          }
+        }
+      },
+      "type": "array",
+      "description": "clinical note fields",
+      "title": "Clinical Note Fields"
+    },
+    "is_onpatient": {
+      "type": "boolean",
+      "description": "",
+      "title": "Is onpatient"
+    },
+    "order": {
+      "title": "SoapNoteCustomReport",
+      "type": "object",
+      "description": "Order of templates",
+      "properties": {
+        "on_complete_note": {
+          "type": "integer",
+          "description": "Order of the template on complete notes",
+          "title": "On complete note"
+        },
+        "on_ipad": {
+          "type": "integer",
+          "description": "Order of the template on iPad",
+          "title": "On ipad"
+        }
+      }
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": [
+    "clinical_note_fields"
+  ]
+}

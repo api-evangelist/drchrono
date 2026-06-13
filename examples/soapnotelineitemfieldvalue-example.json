@@ -1,0 +1,14 @@
+{
+  "title": "SoapNoteLineItemFieldValue Example",
+  "description": "Example SoapNoteLineItemFieldValue resource for drchrono REST API",
+  "resource": "SoapNoteLineItemFieldValue",
+  "path": "/api/clinical_note_field_values/{id}",
+  "example": {
+    "clinical_note_field": 1,
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "value": "example-value",
+    "appointment": 1,
+    "id": 1
+  }
+}

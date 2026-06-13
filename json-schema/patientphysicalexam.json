@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientphysicalexam.json",
+  "title": "PatientPhysicalExam",
+  "required": [
+    "doctor",
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "value_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Description of value",
+      "title": "Value name"
+    },
+    "value_code_system": {
+      "type": "string",
+      "description": "Can be `SNOMEDCT`, `ICD10CM`, `LOINC`",
+      "title": "Value code system"
+    },
+    "code": {
+      "type": "string",
+      "description": "Code from different code system",
+      "title": "Code"
+    },
+    "appointment": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Appointment"
+    },
+    "name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Description of physical exam",
+      "title": "Name"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "effective_time": {
+      "type": "string",
+      "description": "",
+      "title": "Effective time"
+    },
+    "value_code": {
+      "type": "string",
+      "description": "Code from different code system represent physical exam value",
+      "title": "Value code"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "code_system": {
+      "type": "string",
+      "description": "Can be `SNOMEDCT`, `LOINC`",
+      "title": "Code system"
+    }
+  },
+  "x-verbose-required": []
+}

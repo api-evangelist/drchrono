@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/labtest.json",
+  "title": "LabTest",
+  "required": [
+    "lab_order"
+  ],
+  "type": "object",
+  "properties": {
+    "report_notes": {
+      "type": "string",
+      "description": "Notes which are not meant for labs, but are copied on the results.",
+      "title": "Report notes"
+    },
+    "status": {
+      "enum": [
+        "P",
+        "I",
+        "C",
+        "F",
+        "X"
+      ],
+      "type": "string",
+      "description": "One of `\"preliminary\"`, `\"pending\"`, `\"correction\"`, `\"final\"` or `\"canceled\"`. Defaults to `\"preliminary\"`",
+      "title": "Status"
+    },
+    "code": {
+      "type": "string",
+      "description": "",
+      "title": "Code"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of the ICD-10 code",
+      "title": "Description"
+    },
+    "specimen_condition": {
+      "type": "string",
+      "description": "",
+      "title": "Specimen condition"
+    },
+    "collection_date": {
+      "type": "string",
+      "description": "The date the specimen were collected",
+      "title": "Collection date"
+    },
+    "internal_notes": {
+      "type": "string",
+      "description": "Notes which are meant for, and read by, the labs",
+      "title": "Internal notes"
+    },
+    "specimen_total_volume": {
+      "type": "number",
+      "description": "",
+      "title": "Specimen total volume"
+    },
+    "specimen_source": {
+      "type": "string",
+      "description": "",
+      "title": "Specimen source"
+    },
+    "lab_order": {
+      "type": "integer",
+      "description": "ID of associated lab order",
+      "title": "Lab order"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name for the test",
+      "title": "Name"
+    }
+  },
+  "x-verbose-required": []
+}

@@ -1,0 +1,187 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/task.json",
+  "title": "Task",
+  "required": [
+    "title",
+    "status"
+  ],
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "integer",
+      "description": "",
+      "title": "Category"
+    },
+    "due_date": {
+      "title": "TaskReminder",
+      "type": "object",
+      "description": "When the task is due",
+      "properties": {
+        "time": {
+          "type": "string",
+          "description": "Due date time",
+          "title": "Time"
+        }
+      }
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "",
+      "title": "Archived"
+    },
+    "associated_items": {
+      "items": {
+        "title": "AssociatedTaskItem",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "task": {
+            "type": "integer",
+            "description": "",
+            "title": "Task"
+          },
+          "type": {
+            "enum": [
+              "Document",
+              "Message",
+              "Lab result",
+              "Lab order",
+              "Patient",
+              "Appointment",
+              "Lab document",
+              "Communication"
+            ],
+            "type": "string",
+            "description": "Can be one of `\"Appointment\"`, `\"Patient\"`, `\"Message\"`, `\"Document\"`, `\"Lab order\"`",
+            "title": "Type"
+          },
+          "value": {
+            "type": "integer",
+            "description": "ID of the specified type object",
+            "title": "Value"
+          }
+        }
+      },
+      "type": "array",
+      "description": "Associated task items",
+      "title": "Associated items"
+    },
+    "assigned_by": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of `/api/users/` who assigned the task",
+      "title": "Assigned by"
+    },
+    "assignee_user": {
+      "type": "string",
+      "description": "Either `assignee_user` or `assignee_group` should be set",
+      "title": "Assignee user"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "assignee_group": {
+      "type": "integer",
+      "description": "Either `assignee_user` or `assignee_group` should be set",
+      "title": "Assignee group"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "created_by": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of `/api/users` who created the task",
+      "title": "Created by"
+    },
+    "priority": {
+      "enum": [
+        "10",
+        "20",
+        "30",
+        "40"
+      ],
+      "type": "string",
+      "description": "Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)",
+      "title": "Priority"
+    },
+    "status": {
+      "type": "integer",
+      "description": "",
+      "title": "Status"
+    },
+    "notes": {
+      "items": {
+        "title": "TaskNote",
+        "type": "object",
+        "description": "Task note object",
+        "properties": {
+          "archived": {
+            "type": "boolean",
+            "description": "",
+            "title": "Archived"
+          },
+          "task": {
+            "type": "integer",
+            "description": "ID of `/api/tasks`",
+            "title": "Task"
+          },
+          "text": {
+            "type": "string",
+            "description": "",
+            "title": "Text"
+          },
+          "created_at": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Created at"
+          },
+          "updated_at": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Updated at"
+          },
+          "created_by": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Created by"
+          },
+          "id": {
+            "readOnly": true,
+            "type": "integer",
+            "description": "",
+            "title": "ID"
+          }
+        }
+      },
+      "type": "array",
+      "description": "Additional notes of the task",
+      "title": "Notes"
+    },
+    "title": {
+      "type": "string",
+      "description": "",
+      "title": "Title"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": [
+    "notes",
+    "associated_items"
+  ]
+}

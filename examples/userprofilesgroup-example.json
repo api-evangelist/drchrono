@@ -1,0 +1,15 @@
+{
+  "title": "UserProfilesGroup Example",
+  "description": "Example UserProfilesGroup resource for drchrono REST API",
+  "resource": "UserProfilesGroup",
+  "path": "/api/user_groups/{id}",
+  "example": {
+    "archived": false,
+    "name": "example-name",
+    "practice_group": "example-practice_group",
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "members": [],
+    "id": 1
+  }
+}

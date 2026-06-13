@@ -1,0 +1,16 @@
+{
+  "title": "PatientFlagType Example",
+  "description": "Example PatientFlagType resource for drchrono REST API",
+  "resource": "PatientFlagType",
+  "path": "/api/patient_flag_types/{id}",
+  "example": {
+    "archived": false,
+    "name": "example-name",
+    "doctor": 1,
+    "color": "example-color",
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "priority": 1,
+    "id": 1
+  }
+}

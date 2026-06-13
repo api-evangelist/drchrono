@@ -1,0 +1,16 @@
+{
+  "title": "Procedure Example",
+  "description": "Example Procedure resource for drchrono REST API",
+  "resource": "Procedure",
+  "path": "/api/procedures/{id}",
+  "example": {
+    "status": "example-status",
+    "code": "example-code",
+    "patient": 1,
+    "description": "example-description",
+    "doctor": 1,
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "procedure_type": "example-procedure_type"
+  }
+}

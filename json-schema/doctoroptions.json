@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/doctoroptions.json",
+  "title": "DoctorOptions",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "default_supervising_provider": {
+      "type": "integer",
+      "description": "ID of an `/api/doctors` instance.",
+      "title": "Supervising provider"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "ID of an `/api/doctors` instance.",
+      "title": "Doctor"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "patient_statement_office": {
+      "type": "integer",
+      "description": "ID of an `/api/offices` instance.",
+      "title": "Patient statement office"
+    },
+    "allowed_payment_methods": {
+      "type": "array",
+      "description": "",
+      "title": "Allowed Payment Methods"
+    },
+    "default_report": {
+      "type": "integer",
+      "description": "ID of an `/api/clinical_note_templates` instance.",
+      "title": "Default Report"
+    },
+    "default_billing_provider": {
+      "type": "integer",
+      "description": "ID of an `/api/doctors` instance.",
+      "title": "Billing provider"
+    },
+    "default_reminder_profile": {
+      "type": "integer",
+      "description": "ID of an `/api/reminder_profiles` instance.",
+      "title": "Default Reminder profile"
+    },
+    "enable_everhealth_scribe": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "Whether the EverHealth Scribe feature is enabled for this doctor.",
+      "title": "Enable EverHealth Scribe"
+    },
+    "office_for_lab_results": {
+      "type": "integer",
+      "description": "ID of an `/api/offices` instance.",
+      "title": "Office for lab results"
+    },
+    "erx_supervising_providers": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array",
+      "description": "Array or IDs of `/api/doctors` instances.",
+      "title": "Supervising providers"
+    },
+    "iframe_apps": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "description": "Integrated applications",
+      "title": "Integrated applications"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

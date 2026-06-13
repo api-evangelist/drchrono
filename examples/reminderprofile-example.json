@@ -1,0 +1,12 @@
+{
+  "title": "ReminderProfile Example",
+  "description": "Example ReminderProfile resource for drchrono REST API",
+  "resource": "ReminderProfile",
+  "path": "/api/reminder_profiles/{id}",
+  "example": {
+    "reminders": [],
+    "id": 1,
+    "name": "example-name",
+    "doctor": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "title": "UserProfile Example",
+  "description": "Example UserProfile resource for drchrono REST API",
+  "resource": "UserProfile",
+  "path": "/api/users/{id}",
+  "example": {
+    "username": "example-username",
+    "doctor": "example-doctor",
+    "practice_group": "example-practice_group",
+    "is_doctor": "example-is_doctor",
+    "is_staff": "example-is_staff",
+    "id": "example-id",
+    "permissions": "example-permissions"
+  }
+}

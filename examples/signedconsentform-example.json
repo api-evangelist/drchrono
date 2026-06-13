@@ -1,0 +1,16 @@
+{
+  "title": "SignedConsentForm Example",
+  "description": "Example SignedConsentForm resource for drchrono REST API",
+  "resource": "SignedConsentForm",
+  "path": "/api/signed_consent_forms/{id}",
+  "example": {
+    "date_signed": "example-date_signed",
+    "archived": false,
+    "appointment": 1,
+    "signature_file": "example-signature_file",
+    "updated_at": "example-updated_at",
+    "patient": 1,
+    "consent_form": 1,
+    "id": 1
+  }
+}

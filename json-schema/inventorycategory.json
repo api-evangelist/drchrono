@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/inventorycategory.json",
+  "title": "InventoryCategory",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "archived": {
+      "type": "boolean",
+      "description": "If the category is archived or not",
+      "title": "Archived"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the inventory category",
+      "title": "Name"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Doctor"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "category_type": {
+      "enum": [
+        "vaccine",
+        "product",
+        "service"
+      ],
+      "type": "string",
+      "description": "Can be one of `\"vaccine\"`, `\"product\"` or `\"service\"`",
+      "title": "Category type"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Task Example",
+  "description": "Example Task resource for drchrono REST API",
+  "resource": "Task",
+  "path": "/api/tasks/{id}",
+  "example": {
+    "category": 1,
+    "due_date": {},
+    "archived": false,
+    "associated_items": [],
+    "assigned_by": "example-assigned_by",
+    "assignee_user": "example-assignee_user",
+    "created_at": "example-created_at",
+    "assignee_group": 1
+  }
+}

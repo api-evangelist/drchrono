@@ -1,0 +1,16 @@
+{
+  "title": "CustomVitalType Example",
+  "description": "Example CustomVitalType resource for drchrono REST API",
+  "resource": "CustomVitalType",
+  "path": "/api/custom_vitals/{id}",
+  "example": {
+    "archived": false,
+    "description": "example-description",
+    "data_type": "example-data_type",
+    "doctor": "example-doctor",
+    "is_fraction_field": false,
+    "fraction_delimiter": "example-fraction_delimiter",
+    "allowed_values": [],
+    "id": 1
+  }
+}

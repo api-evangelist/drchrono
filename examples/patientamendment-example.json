@@ -1,0 +1,15 @@
+{
+  "title": "PatientAmendment Example",
+  "description": "Example PatientAmendment resource for drchrono REST API",
+  "resource": "PatientAmendment",
+  "path": "/api/amendments/{id}",
+  "example": {
+    "amendment_name": "example-amendment_name",
+    "appointment": 1,
+    "doctor": 1,
+    "comments": "example-comments",
+    "amendment_file": "example-amendment_file",
+    "patient": 1,
+    "id": 1
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/eobobject.json",
+  "title": "EOBObject",
+  "required": [
+    "doctor",
+    "insurance_payer_id",
+    "insurance_payer_name",
+    "insurance_payer_trace_number"
+  ],
+  "type": "object",
+  "properties": {
+    "posted_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Posted date"
+    },
+    "insurance_payer_name": {
+      "type": "string",
+      "description": "",
+      "title": "Insurance payer name"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "payment_method": {
+      "enum": [
+        "",
+        "ACH",
+        "BOPCCP",
+        "BOPCTX",
+        "CHK",
+        "FWT",
+        "VPAY",
+        "NON"
+      ],
+      "type": "string",
+      "description": "`\"\"` - Unknown, `\"ACH\"` - Automated Clearing House (ACH), `\"BOPCCP\"` - Cash Concentration/Disbursement plus Addenda (CCD+) (ACH), `\"BOPCTX\"` - Corporate Trade Exchange (CTX) (ACH), `\"CHK\"` - Check, `\"FWT\"` - Federal Reserve Funds/Wire Transfer - Nonrepetitive, `\"VPAY\"` - vPayment, `\"NON\"` - Non-Payment Data",
+      "title": "Payment method"
+    },
+    "deposit_date": {
+      "type": "string",
+      "description": "Date when EOB gets deposited.",
+      "title": "Deposit date"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "insurance_payer_id": {
+      "type": "string",
+      "description": "",
+      "title": "Insurance payer id"
+    },
+    "scanned_eob": {
+      "type": "string",
+      "description": "",
+      "title": "Scanned eob"
+    },
+    "insurance_payer_trace_number": {
+      "type": "string",
+      "description": "",
+      "title": "Insurance payer trace number"
+    },
+    "total_paid": {
+      "type": "number",
+      "description": "Total amount paid. If missing, default to 0.00",
+      "title": "Total paid"
+    },
+    "check_date": {
+      "type": "string",
+      "description": "Date of check. If missing, default to the date when the request is made",
+      "title": "Check date"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

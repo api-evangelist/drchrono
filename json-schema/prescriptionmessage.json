@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/prescriptionmessage.json",
+  "title": "PrescriptionMessage",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "message_status": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Message status for Incoming and Outgoing values. Success message for message_type are: `NewRx` : `Sent`, `RefillRequest` : `Received`, `RefillResponse` : `Sent`.",
+      "title": "Message status"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "An optional field which refers to a patient.",
+      "title": "Patient"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "message_type": {
+      "type": "string",
+      "description": "Possible values are `NewRx` for outgoing new prescriptions, `RefillRequest` for incoming refill requests, `RefillResponse` for outgoing refill responses, `Error` for incoming errors, `Status` and `Verify` for incoming status reports from Surescripts.",
+      "title": "Message type"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "parent_message": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Refers to the parent message, used for refill responses and incoming error/status reports.",
+      "title": "Parent message"
+    },
+    "message_direction": {
+      "readOnly": true,
+      "enum": [
+        "I",
+        "O"
+      ],
+      "type": "string",
+      "description": "Possible values are `Outgoing` and `Incoming`.",
+      "title": "Message direction"
+    },
+    "pharmacy": {
+      "type": "string",
+      "description": "NCPDPID allocated #ID of the Pharmacy",
+      "title": "Pharmacy"
+    },
+    "json_data": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Data sent along with `NewRx`, `RefillRequest`, and `RefillResponses` messages. The format varies, but most likely it will contain `BenefitsCoordination` section with insurance info and `MedicationPrescribed` with medication info. `Patient`, `Pharmacy`, and `Prescriber` are also usually present.",
+      "title": "Json data"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

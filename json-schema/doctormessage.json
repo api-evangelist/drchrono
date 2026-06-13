@@ -1,0 +1,220 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/doctormessage.json",
+  "title": "DoctorMessage",
+  "required": [
+    "doctor",
+    "title"
+  ],
+  "type": "object",
+  "properties": {
+    "type_description": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Type Description",
+      "title": "Type description"
+    },
+    "patient_middle_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Patient Middle Name",
+      "title": "Patient middle name"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "owner": {
+      "type": "string",
+      "description": "ID of `/api/users` who owns the message, who may be the doctor themselves or one of their staff members",
+      "title": "Owner"
+    },
+    "responsible_user_first_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Responsible User First Name",
+      "title": "Responsible user first name"
+    },
+    "received_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Received at"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "doctor_last_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Doctor Last Name",
+      "title": "Doctor last name"
+    },
+    "owner_first_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Owner First Name",
+      "title": "Owner first name"
+    },
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "If true, indicates that the message has been soft-deleted",
+      "title": "Archived"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "owner_last_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Owner Last Name",
+      "title": "Owner last name"
+    },
+    "patient_first_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Patient First Name",
+      "title": "Patient first name"
+    },
+    "attachment": {
+      "type": "string",
+      "description": "Files are passed using `multipart/form-data` encoding, but returned as URLs.",
+      "title": "Attachment"
+    },
+    "outgoing_fax_recipient_fax_number": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Outgoing fax recipient fax number",
+      "title": "Outgoing fax recipient fax number"
+    },
+    "responsible_user_last_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Responsible User Last Name",
+      "title": "Responsible user last name"
+    },
+    "type": {
+      "enum": [
+        "GP",
+        "GC",
+        "GT",
+        "GZ",
+        "IF",
+        "OF",
+        "IL",
+        "IR",
+        "OR",
+        "IE",
+        "CE",
+        "CH",
+        "OA",
+        "PO",
+        "PI",
+        "PM",
+        "OO",
+        "OD",
+        "ID",
+        "DL",
+        "CN"
+      ],
+      "type": "string",
+      "description": "\nValue | Description\n----- | -----------\n`\"GP\"` | Generated PDF\n`\"GC\"` | Generated CSV\n`\"GZ\"` | Generated ZIP\n`\"IF\"` | Incoming Fax\n`\"OF\"` | Outgoing Fax\n`\"IL\"` | Incoming Labs\n`\"IR\"` | Inbound Referrals\n`\"OR\"` | Outbound Referrals\n`\"IE\"` | Incoming eRx\n`\"OA\"` | Online Appointments\n`\"PO\"` | Patient Onboarding\n`\"PI\"` | Patient Incoming Message\n`\"PM\"` | Patient Outgoing Message\n`\"OO\"` | Demo Meeting Message\n`\"OD\"` | Outbound Direct Message\n`\"ID\"` | Inbound Direct Message\n",
+      "title": "Type"
+    },
+    "patient_last_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Patient Last Name",
+      "title": "Patient last name"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "ID of patient that the message concerns, if applicable",
+      "title": "Patient"
+    },
+    "doctor_first_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Doctor First Name",
+      "title": "Doctor first name"
+    },
+    "read": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "",
+      "title": "Read"
+    },
+    "responsible_user": {
+      "type": "string",
+      "description": "ID of `/api/users` who has been assigned to process the message, who may be the doctor themselves or one of their staff members",
+      "title": "Responsible user"
+    },
+    "workflow_step": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Used by doctors and their staff to keep track of what step of processing the message is in",
+      "title": "Workflow step"
+    },
+    "outgoing_fax_recipient_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Outgoing fax recipient name",
+      "title": "Outgoing fax recipient name"
+    },
+    "doctor_middle_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Doctor Middle Name",
+      "title": "Doctor middle name"
+    },
+    "message_notes": {
+      "items": {
+        "title": "MessageNote",
+        "type": "object",
+        "description": "Additional note",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Content of the note",
+            "title": "Text"
+          },
+          "created_at": {
+            "readOnly": true,
+            "type": "string",
+            "description": "",
+            "title": "Created at"
+          },
+          "created_by": {
+            "readOnly": true,
+            "type": "string",
+            "description": "ID of `/api/users` who created the note",
+            "title": "Created by"
+          }
+        }
+      },
+      "type": "array",
+      "description": "Array of notes attached to the message",
+      "title": "Message notes"
+    },
+    "title": {
+      "type": "string",
+      "description": "",
+      "title": "Title"
+    },
+    "starred": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "",
+      "title": "Starred"
+    }
+  },
+  "x-verbose-required": []
+}

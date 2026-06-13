@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/taskstatus.json",
+  "title": "TaskStatus",
+  "required": [
+    "name",
+    "practice_group"
+  ],
+  "type": "object",
+  "properties": {
+    "archived": {
+      "type": "boolean",
+      "description": "",
+      "title": "Archived"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "status_category": {
+      "enum": [
+        "O",
+        "P",
+        "H",
+        "C"
+      ],
+      "type": "string",
+      "description": "Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)",
+      "title": "Status category"
+    },
+    "practice_group": {
+      "type": "integer",
+      "description": "",
+      "title": "Practice group"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "task_category": {
+      "type": "integer",
+      "description": "ID of `/api/task_categories`",
+      "title": "Task category"
+    }
+  },
+  "x-verbose-required": []
+}

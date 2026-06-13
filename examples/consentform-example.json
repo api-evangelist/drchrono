@@ -1,0 +1,16 @@
+{
+  "title": "ConsentForm Example",
+  "description": "Example ConsentForm resource for drchrono REST API",
+  "resource": "ConsentForm",
+  "path": "/api/consent_forms/{id}",
+  "example": {
+    "archived": false,
+    "is_mandatory": false,
+    "uri": "example-uri",
+    "doctor": 1,
+    "updated_at": "example-updated_at",
+    "created_at": "example-created_at",
+    "title": "example-title",
+    "assign_by_default": false
+  }
+}

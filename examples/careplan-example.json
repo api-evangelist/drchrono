@@ -1,0 +1,16 @@
+{
+  "title": "CarePlan Example",
+  "description": "Example CarePlan resource for drchrono REST API",
+  "resource": "CarePlan",
+  "path": "/api/care_plans/{id}",
+  "example": {
+    "code": "example-code",
+    "appointment": "example-appointment",
+    "description": "example-description",
+    "title": "example-title",
+    "created_at": "example-created_at",
+    "plan_type": "example-plan_type",
+    "updated_at": "example-updated_at",
+    "scheduled_date": "example-scheduled_date"
+  }
+}

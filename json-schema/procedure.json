@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/procedure.json",
+  "title": "Procedure",
+  "properties": {
+    "status": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Status"
+    },
+    "code": {
+      "type": "string",
+      "description": "",
+      "title": "Code"
+    },
+    "patient": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "Patient ID",
+      "title": "Patient"
+    },
+    "description": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Description"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "Doctor ID",
+      "title": "Doctor"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "procedure_type": {
+      "enum": [
+        "C",
+        "H",
+        "U",
+        "S"
+      ],
+      "type": "string",
+      "description": "One of `\"CPT(C)\"`, `\"HCPCS(H)\"`, `\"Custom(U)\"`",
+      "title": "Procedure type"
+    },
+    "date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Date of service for the procedure",
+      "title": "Date"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "Appointment ID",
+      "title": "Appointment"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  }
+}

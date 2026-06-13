@@ -1,0 +1,16 @@
+{
+  "title": "DoctorFeeSchedule Example",
+  "description": "Example DoctorFeeSchedule resource for drchrono REST API",
+  "resource": "DoctorFeeSchedule",
+  "path": "/api/fee_schedules/{id}",
+  "example": {
+    "code_type": "example-code_type",
+    "insured_out_of_network_price": 0.0,
+    "office": 1,
+    "updated_at": "example-updated_at",
+    "code": "example-code",
+    "billing_description": "example-billing_description",
+    "id": 1,
+    "picklist_category": "example-picklist_category"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "title": "TaskStatus Example",
+  "description": "Example TaskStatus resource for drchrono REST API",
+  "resource": "TaskStatus",
+  "path": "/api/task_statuses/{id}",
+  "example": {
+    "archived": false,
+    "name": "example-name",
+    "status_category": "example-status_category",
+    "practice_group": 1,
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "id": 1,
+    "task_category": 1
+  }
+}

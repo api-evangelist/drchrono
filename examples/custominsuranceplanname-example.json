@@ -1,0 +1,15 @@
+{
+  "title": "CustomInsurancePlanName Example",
+  "description": "Example CustomInsurancePlanName resource for drchrono REST API",
+  "resource": "CustomInsurancePlanName",
+  "path": "/api/custom_insurance_plan_names/{id}",
+  "example": {
+    "archived": false,
+    "doctor": "example-doctor",
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "insurance_plan_name": "example-insurance_plan_name",
+    "user": "example-user",
+    "id": 1
+  }
+}

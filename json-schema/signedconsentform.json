@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/signedconsentform.json",
+  "title": "SignedConsentForm",
+  "required": [
+    "patient",
+    "appointment",
+    "consent_form"
+  ],
+  "type": "object",
+  "properties": {
+    "date_signed": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Date when the consent form is signed.  Automatically set when the record is created",
+      "title": "Date signed"
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Indicates that the consent form has been archived and should not be used",
+      "title": "Archived"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "ID of the appointment that the consent form is signed for",
+      "title": "Appointment"
+    },
+    "signature_file": {
+      "format": "binary",
+      "type": "string",
+      "description": "File with the signature of the patient",
+      "title": "Signature file"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Date and time when the signature was last updated",
+      "title": "Updated at"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "ID of the patient who signed the consent form",
+      "title": "Patient"
+    },
+    "consent_form": {
+      "type": "integer",
+      "description": "ID of the consent form that is signed",
+      "title": "Consent form"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "ID consent form signature",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "WorkSchedule Example",
+  "description": "Example WorkSchedule resource for drchrono REST API",
+  "resource": "WorkSchedule",
+  "path": "/api/doctor_work_schedule",
+  "example": {
+    "work_days": [],
+    "id": 1,
+    "office": 1,
+    "doctor": 1
+  }
+}

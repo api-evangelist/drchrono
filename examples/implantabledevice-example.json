@@ -1,0 +1,16 @@
+{
+  "title": "ImplantableDevice Example",
+  "description": "Example ImplantableDevice resource for drchrono REST API",
+  "resource": "ImplantableDevice",
+  "path": "/api/implantable_devices/{id}",
+  "example": {
+    "status": "example-status",
+    "lot_number": "example-lot_number",
+    "archived": false,
+    "manufacturing_date": "example-manufacturing_date",
+    "patient": "example-patient",
+    "expiration_date": "example-expiration_date",
+    "created_at": "example-created_at",
+    "brand_name": "example-brand_name"
+  }
+}

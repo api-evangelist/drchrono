@@ -1,0 +1,16 @@
+{
+  "title": "DoctorOptions Example",
+  "description": "Example DoctorOptions resource for drchrono REST API",
+  "resource": "DoctorOptions",
+  "path": "/api/doctor_options/{id}",
+  "example": {
+    "default_supervising_provider": 1,
+    "doctor": 1,
+    "updated_at": "example-updated_at",
+    "patient_statement_office": 1,
+    "allowed_payment_methods": [],
+    "default_report": 1,
+    "default_billing_provider": 1,
+    "default_reminder_profile": 1
+  }
+}

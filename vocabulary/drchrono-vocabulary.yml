@@ -1,0 +1,813 @@
+name: drchrono API Vocabulary
+description: Terms and concepts used in the drchrono EHR REST API
+version: v4
+url: https://app.drchrono.com/api-docs/
+terms:
+- term: archived
+  label: Archived
+  definition: Indicates that the object has been soft-deleted and should not be used
+  type: boolean
+  context: AppointmentProfile
+- term: name
+  label: Name
+  definition: name field in drchrono AppointmentProfile
+  type: string
+  context: AppointmentProfile
+- term: doctor
+  label: Doctor
+  definition: doctor field in drchrono AppointmentProfile
+  type: integer
+  context: AppointmentProfile
+- term: color
+  label: Color
+  definition: color field in drchrono AppointmentProfile
+  type: string
+  context: AppointmentProfile
+- term: reason
+  label: Reason
+  definition: reason field in drchrono AppointmentProfile
+  type: string
+  context: AppointmentProfile
+- term: sort_order
+  label: Sort Order
+  definition: Override the usual ordering ordering of appointments in the patient's
+    appointments page. Lower values are shown at the top
+  type: integer
+  context: AppointmentProfile
+- term: duration
+  label: Duration
+  definition: Length of an appointment in minutes
+  type: integer
+  context: AppointmentProfile
+- term: id
+  label: Id
+  definition: id field in drchrono AppointmentProfile
+  type: integer
+  context: AppointmentProfile
+- term: online_scheduling
+  label: Online Scheduling
+  definition: Whether this profile should be available for online scheduling
+  type: boolean
+  context: AppointmentProfile
+- term: code
+  label: Code
+  definition: code field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: appointment
+  label: Appointment
+  definition: appointment field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: description
+  label: Description
+  definition: description field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: title
+  label: Title
+  definition: title field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: created_at
+  label: Created At
+  definition: created_at field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: plan_type
+  label: Plan Type
+  definition: 'Can be one of the following: `1`(Goal), `2`(Patient education), `3`(Patient
+    decision aid), `4`(Patient clinical instruction), `5`(Referral to other doctor),
+    `6`(Health concerns)'
+  type: string
+  context: CarePlan
+- term: updated_at
+  label: Updated At
+  definition: updated_at field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: scheduled_date
+  label: Scheduled Date
+  definition: scheduled_date field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: patient
+  label: Patient
+  definition: patient field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: code_system
+  label: Code System
+  definition: code_system field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: instructions
+  label: Instructions
+  definition: instructions field in drchrono CarePlan
+  type: string
+  context: CarePlan
+- term: iso_weekday
+  label: Iso Weekday
+  definition: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+  type: string
+  context: WorkDay
+- term: enabled
+  label: Enabled
+  definition: whether the work day is enabled
+  type: boolean
+  context: WorkDay
+- term: work_hours
+  label: Work Hours
+  definition: work hours of the work day
+  type: array
+  context: WorkDay
+- term: code_type
+  label: Code Type
+  definition: code_type field in drchrono FeeScheduleItem
+  type: string
+  context: FeeScheduleItem
+- term: insured_out_of_network_price
+  label: Insured Out Of Network Price
+  definition: insured_out_of_network_price field in drchrono FeeScheduleItem
+  type: number
+  context: FeeScheduleItem
+- term: billing_description
+  label: Billing Description
+  definition: billing_description field in drchrono FeeScheduleItem
+  type: string
+  context: FeeScheduleItem
+- term: picklist_category
+  label: Picklist Category
+  definition: 'Optional: Category to organize the code into.'
+  type: string
+  context: FeeScheduleItem
+- term: allowed_amount
+  label: Allowed Amount
+  definition: Typical allowed amount for payer. Not used if blank.
+  type: number
+  context: FeeScheduleItem
+- term: ndc_quantity
+  label: Ndc Quantity
+  definition: ndc_quantity field in drchrono FeeScheduleItem
+  type: number
+  context: FeeScheduleItem
+- term: cash_price
+  label: Cash Price
+  definition: cash_price field in drchrono FeeScheduleItem
+  type: number
+  context: FeeScheduleItem
+- term: plan_name
+  label: Plan Name
+  definition: Name of insurance plan.
+  type: string
+  context: FeeScheduleItem
+- term: ndc_units
+  label: Ndc Units
+  definition: ndc_units field in drchrono FeeScheduleItem
+  type: string
+  context: FeeScheduleItem
+- term: ndc_code
+  label: Ndc Code
+  definition: ndc_code field in drchrono FeeScheduleItem
+  type: string
+  context: FeeScheduleItem
+- term: payer_id
+  label: Payer Id
+  definition: Fee Schedule pricing specific to this payer, if null, then applies as
+    default to all payers without a more specific fee schedule.
+  type: string
+  context: FeeScheduleItem
+- term: cpt_hcpcs_modifier2
+  label: Cpt Hcpcs Modifier2
+  definition: cpt_hcpcs_modifier2 field in drchrono FeeScheduleItem
+  type: string
+  context: FeeScheduleItem
+- term: cpt_hcpcs_modifier3
+  label: Cpt Hcpcs Modifier3
+  definition: cpt_hcpcs_modifier3 field in drchrono FeeScheduleItem
+  type: string
+  context: FeeScheduleItem
+- term: cpt_hcpcs_modifier1
+  label: Cpt Hcpcs Modifier1
+  definition: cpt_hcpcs_modifier1 field in drchrono FeeScheduleItem
+  type: string
+  context: FeeScheduleItem
+- term: cpt_hcpcs_modifier4
+  label: Cpt Hcpcs Modifier4
+  definition: cpt_hcpcs_modifier4 field in drchrono FeeScheduleItem
+  type: string
+  context: FeeScheduleItem
+- term: insured_price
+  label: Insured Price
+  definition: insured_price field in drchrono FeeScheduleItem
+  type: number
+  context: FeeScheduleItem
+- term: base_price
+  label: Base Price
+  definition: base_price field in drchrono FeeScheduleItem
+  type: number
+  context: FeeScheduleItem
+- term: priority
+  label: Priority
+  definition: Priority of the flag type
+  type: integer
+  context: PatientFlagType
+- term: website
+  label: Website
+  definition: website field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: doctor_work_schedule
+  label: Doctor Work Schedule
+  definition: Doctor work schedule (beta)
+  type: string
+  context: Doctor
+- term: first_name
+  label: First Name
+  definition: first_name field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: last_name
+  label: Last Name
+  definition: last_name field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: suffix
+  label: Suffix
+  definition: suffix field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: profile_picture
+  label: Profile Picture
+  definition: profile_picture field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: country
+  label: Country
+  definition: Two-letter country code. Default is `US`
+  type: string
+  context: Doctor
+- term: practice_group_name
+  label: Practice Group Name
+  definition: practice_group_name field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: specialty
+  label: Specialty
+  definition: specialty field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: is_account_suspended
+  label: Is Account Suspended
+  definition: Indicates the doctor's account is suspended or not
+  type: boolean
+  context: Doctor
+- term: office_phone
+  label: Office Phone
+  definition: office_phone field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: npi_number
+  label: Npi Number
+  definition: If both this field and `group_npi_number` are set, prefer this field
+  type: string
+  context: Doctor
+- term: group_npi_number
+  label: Group Npi Number
+  definition: group_npi_number field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: home_phone
+  label: Home Phone
+  definition: home_phone field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: practice_group
+  label: Practice Group
+  definition: The ID of the practice group this user belongs to. This can be used
+    to identify users in the same practice.
+  type: string
+  context: Doctor
+- term: timezone
+  label: Timezone
+  definition: timezone field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: cell_phone
+  label: Cell Phone
+  definition: cell_phone field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: email
+  label: Email
+  definition: email field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: job_title
+  label: Job Title
+  definition: job_title field in drchrono Doctor
+  type: string
+  context: Doctor
+- term: status
+  label: Status
+  definition: Either "Error" or "Failed"
+  type: string
+  context: AsyncResourceError
+- term: uuid
+  label: Uuid
+  definition: The UUID used to get the data for the asynchronous request
+  type: string
+  context: AsyncResourceError
+- term: detail
+  label: Detail
+  definition: Instructions on what to do next
+  type: string
+  context: AsyncResourceError
+- term: cpt_codes
+  label: Cpt Codes
+  definition: Array of CPT Code objects
+  type: array
+  context: BillingProfile
+- term: icd9_codes
+  label: Icd9 Codes
+  definition: ICD9 Codes represented in string format
+  type: array
+  context: BillingProfile
+- term: hcpcs_codes
+  label: Hcpcs Codes
+  definition: Array of HCPCS Code objects
+  type: array
+  context: BillingProfile
+- term: custom_procedure_codes
+  label: Custom Procedure Codes
+  definition: Array of custom procedure code objects
+  type: array
+  context: BillingProfile
+- term: icd10_codes
+  label: Icd10 Codes
+  definition: ICD10 Codes represented in string format
+  type: array
+  context: BillingProfile
+- term: payment_method
+  label: Payment Method
+  definition: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card,
+    "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover,
+    "SQR1" for Square (legacy), "SQRE" for Square, "PT'
+  type: string
+  context: CashPaymentLog
+- term: created_by
+  label: Created By
+  definition: ID of user who created the payment
+  type: string
+  context: CashPaymentLog
+- term: source
+  label: Source
+  definition: source field in drchrono CashPaymentLog
+  type: string
+  context: CashPaymentLog
+- term: amount
+  label: Amount
+  definition: amount field in drchrono CashPaymentLog
+  type: number
+  context: CashPaymentLog
+- term: action
+  label: Action
+  definition: '`C`(Create), `U`(Update), `D`(Delete), `F`(Fill), `A`(Autofill)'
+  type: string
+  context: CashPaymentLog
+- term: timestamp
+  label: Timestamp
+  definition: timestamp field in drchrono TelemedicineAppointmentEventLog
+  type: string
+  context: TelemedicineAppointmentEventLog
+- term: event_type
+  label: Event Type
+  definition: event_type field in drchrono TelemedicineAppointmentEventLog
+  type: string
+  context: TelemedicineAppointmentEventLog
+- term: content
+  label: Content
+  definition: The yellow notepad text content
+  type: string
+  context: YellowNotepad
+- term: template_id
+  label: Template Id
+  definition: ID of the associated clinical note template
+  type: integer
+  context: YellowNotepad
+- term: appointment_id
+  label: Appointment Id
+  definition: ID of the associated appointment
+  type: integer
+  context: YellowNotepad
+- term: body
+  label: Body
+  definition: body field in drchrono PatientMessage
+  type: string
+  context: PatientMessage
+- term: attachments
+  label: Attachments
+  definition: attachments field in drchrono PatientMessage
+  type: array
+  context: PatientMessage
+- term: message
+  label: Message
+  definition: message field in drchrono PatientMessage
+  type: string
+  context: PatientMessage
+- term: subject
+  label: Subject
+  definition: subject field in drchrono PatientMessage
+  type: string
+  context: PatientMessage
+- term: office
+  label: Office
+  definition: ID of the office where the schedule block is applied
+  type: integer
+  context: ScheduleBlock
+- term: start_time
+  label: Start Time
+  definition: Start time of the schedule block in ISO 8601 format
+  type: string
+  context: ScheduleBlock
+- term: exam_room
+  label: Exam Room
+  definition: ID of the exam room where the schedule block is applied
+  type: integer
+  context: ScheduleBlock
+- term: series
+  label: Series
+  definition: Series ID if the schedule block is part of a recurring series
+  type: integer
+  context: ScheduleBlock
+- term: end_time
+  label: End Time
+  definition: End time of the schedule block in ISO 8601 format
+  type: string
+  context: ScheduleBlock
+- term: provider
+  label: Provider
+  definition: ID of the provider or doctor who owns this schedule block
+  type: integer
+  context: ScheduleBlock
+- term: appointment_break
+  label: Appointment Break
+  definition: ID of an associated appointment break, if applicable
+  type: integer
+  context: ScheduleBlock
+- term: order
+  label: Order
+  definition: displayed order in patient's demographic page
+  type: integer
+  context: CustomAppointmentFieldType
+- term: field_desc
+  label: Field Desc
+  definition: Description of the custom field
+  type: string
+  context: CustomAppointmentFieldType
+- term: field_name
+  label: Field Name
+  definition: field_name field in drchrono CustomAppointmentFieldType
+  type: string
+  context: CustomAppointmentFieldType
+- term: members
+  label: Members
+  definition: Users in this user group.
+  type: array
+  context: UserProfilesGroup
+- term: username
+  label: Username
+  definition: username field in drchrono UserProfile
+  type: string
+  context: UserProfile
+- term: is_doctor
+  label: Is Doctor
+  definition: Mutually exclusive with `is_staff`
+  type: string
+  context: UserProfile
+- term: is_staff
+  label: Is Staff
+  definition: Mutually exclusive with `is_doctor`
+  type: string
+  context: UserProfile
+- term: permissions
+  label: Permissions
+  definition: Permissions the user has.
+  type: string
+  context: UserProfile
+- term: value_name
+  label: Value Name
+  definition: Description of value
+  type: string
+  context: PatientCommunication
+- term: value_code_system
+  label: Value Code System
+  definition: Can be `SNOMEDCT`, `ICD10CM`, `LOINC`
+  type: string
+  context: PatientCommunication
+- term: effective_time
+  label: Effective Time
+  definition: effective_time field in drchrono PatientCommunication
+  type: string
+  context: PatientCommunication
+operations:
+- operation: daysheet_charges_list
+  method: GET
+  path: /api/day_sheet_charges
+  summary: ''
+  tags:
+  - Billing
+- operation: claim_billing_notes_create
+  method: POST
+  path: /api/claim_billing_notes
+  summary: ''
+  tags:
+  - Clinical
+- operation: claim_billing_notes_list
+  method: GET
+  path: /api/claim_billing_notes
+  summary: ''
+  tags:
+  - Clinical
+- operation: signed_consent_forms_create
+  method: POST
+  path: /api/signed_consent_forms
+  summary: signed_consent_forms Create
+  tags:
+  - Clinical
+- operation: signed_consent_forms_partial_update
+  method: PATCH
+  path: /api/signed_consent_forms
+  summary: signed_consent_forms Update
+  tags:
+  - Clinical
+- operation: signed_consent_forms_list
+  method: GET
+  path: /api/signed_consent_forms
+  summary: signed_consent_forms Get
+  tags:
+  - Clinical
+- operation: custom_appointment_fields_create
+  method: POST
+  path: /api/custom_appointment_fields
+  summary: ''
+  tags:
+  - Clinical
+- operation: custom_appointment_fields_list
+  method: GET
+  path: /api/custom_appointment_fields
+  summary: ''
+  tags:
+  - Clinical
+- operation: lab_orders_update
+  method: PUT
+  path: /api/lab_orders/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: lab_orders_partial_update
+  method: PATCH
+  path: /api/lab_orders/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: lab_orders_read
+  method: GET
+  path: /api/lab_orders/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: lab_orders_delete
+  method: DELETE
+  path: /api/lab_orders/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: clinical_notes_list_create
+  method: POST
+  path: /api/clinical_notes_list
+  summary: ''
+  tags:
+  - Clinical
+- operation: clinical_notes_list_list
+  method: GET
+  path: /api/clinical_notes_list
+  summary: ''
+  tags:
+  - Clinical
+- operation: custom_vitals_read
+  method: GET
+  path: /api/custom_vitals/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: sublabs_update
+  method: PUT
+  path: /api/sublabs/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: sublabs_partial_update
+  method: PATCH
+  path: /api/sublabs/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: sublabs_read
+  method: GET
+  path: /api/sublabs/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: sublabs_delete
+  method: DELETE
+  path: /api/sublabs/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: patients_qrda1
+  method: GET
+  path: /api/patients/{id}/qrda1
+  summary: ''
+  tags:
+  - Clinical
+- operation: problems_create
+  method: POST
+  path: /api/problems
+  summary: ''
+  tags:
+  - Clinical
+- operation: problems_list
+  method: GET
+  path: /api/problems
+  summary: ''
+  tags:
+  - Clinical
+- operation: staff_list
+  method: GET
+  path: /api/staff
+  summary: ''
+  tags:
+  - Clinical
+- operation: patient_messages_update
+  method: PUT
+  path: /api/patient_messages/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: patient_messages_partial_update
+  method: PATCH
+  path: /api/patient_messages/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: patient_messages_read
+  method: GET
+  path: /api/patient_messages/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: yellow_notepad_create
+  method: POST
+  path: /api/yellow_notepad
+  summary: ''
+  tags:
+  - Clinical
+- operation: yellow_notepad_retrieve
+  method: GET
+  path: /api/yellow_notepad
+  summary: ''
+  tags:
+  - Clinical
+- operation: eligibility_checks_list
+  method: GET
+  path: /api/eligibility_checks
+  summary: ''
+  tags:
+  - Billing
+- operation: doctor_work_schedule_update
+  method: PUT
+  path: /api/doctor_work_schedule/{id}
+  summary: ''
+  tags:
+  - Practice Management
+- operation: doctor_work_schedule_partial_update
+  method: PATCH
+  path: /api/doctor_work_schedule/{id}
+  summary: ''
+  tags:
+  - Practice Management
+- operation: doctor_work_schedule_read
+  method: GET
+  path: /api/doctor_work_schedule/{id}
+  summary: ''
+  tags:
+  - Practice Management
+- operation: medications_create
+  method: POST
+  path: /api/medications
+  summary: ''
+  tags:
+  - Clinical
+- operation: medications_list
+  method: GET
+  path: /api/medications
+  summary: ''
+  tags:
+  - Clinical
+- operation: custom_demographics_create
+  method: POST
+  path: /api/custom_demographics
+  summary: ''
+  tags:
+  - Clinical
+- operation: custom_demographics_list
+  method: GET
+  path: /api/custom_demographics
+  summary: ''
+  tags:
+  - Clinical
+- operation: appointments_list_create
+  method: POST
+  path: /api/appointments_list
+  summary: ''
+  tags:
+  - Clinical
+- operation: appointments_list_list
+  method: GET
+  path: /api/appointments_list
+  summary: ''
+  tags:
+  - Clinical
+- operation: appointment_profiles_create
+  method: POST
+  path: /api/appointment_profiles
+  summary: ''
+  tags:
+  - Clinical
+- operation: appointment_profiles_list
+  method: GET
+  path: /api/appointment_profiles
+  summary: ''
+  tags:
+  - Clinical
+- operation: patient_communications_create
+  method: POST
+  path: /api/patient_communications
+  summary: ''
+  tags:
+  - Clinical
+- operation: patient_communications_list
+  method: GET
+  path: /api/patient_communications
+  summary: ''
+  tags:
+  - Clinical
+- operation: patient_authorizations_list
+  method: GET
+  path: /api/patient_authorizations
+  summary: ''
+  tags:
+  - Billing
+- operation: appointment_profiles_update
+  method: PUT
+  path: /api/appointment_profiles/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: appointment_profiles_partial_update
+  method: PATCH
+  path: /api/appointment_profiles/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: appointment_profiles_read
+  method: GET
+  path: /api/appointment_profiles/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: appointment_profiles_delete
+  method: DELETE
+  path: /api/appointment_profiles/{id}
+  summary: ''
+  tags:
+  - Clinical
+- operation: messages_create
+  method: POST
+  path: /api/messages
+  summary: ''
+  tags:
+  - Practice Management
+- operation: messages_list
+  method: GET
+  path: /api/messages
+  summary: ''
+  tags:
+  - Practice Management
+- operation: clinical_note_field_values_update
+  method: PUT
+  path: /api/clinical_note_field_values/{id}
+  summary: ''
+  tags:
+  - Clinical

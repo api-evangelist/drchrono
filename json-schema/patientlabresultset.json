@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientlabresultset.json",
+  "title": "PatientLabResultSet",
+  "required": [
+    "ordering_doctor",
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "doctor_signoff": {
+      "type": "boolean",
+      "description": "Check this box when the doctor has reviewed the lab result and taken appropriate action.",
+      "title": "Doctor signoff"
+    },
+    "loinc_code": {
+      "type": "string",
+      "description": "",
+      "title": "LOINC code"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "ordering_doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Ordering doctor"
+    },
+    "lab_abnormal_flag": {
+      "enum": [
+        "",
+        "L",
+        "H",
+        "LL",
+        "HH",
+        "<",
+        ">",
+        "N",
+        "A",
+        "AA",
+        "null",
+        "U",
+        "D",
+        "B",
+        "W",
+        "S",
+        "R",
+        "I",
+        "MS",
+        "VS"
+      ],
+      "type": "string",
+      "description": "HL7 codified abnormal flag for the result.",
+      "title": "Abnormal flag"
+    },
+    "lab_normal_range_units": {
+      "type": "string",
+      "description": "",
+      "title": "Normal range units"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "lab_normal_range": {
+      "type": "string",
+      "description": "",
+      "title": "Normal range"
+    },
+    "doctor_comments": {
+      "type": "string",
+      "description": "Comment from the doctor on lab result.",
+      "title": "Comments"
+    },
+    "date_test_performed": {
+      "type": "string",
+      "description": "Date of lab test.",
+      "title": "Date test performed"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "lab_result_value": {
+      "type": "string",
+      "description": "",
+      "title": "Result value"
+    },
+    "lab_result_value_as_float": {
+      "type": "number",
+      "description": "",
+      "title": "Lab result value as float"
+    },
+    "scanned_in_result": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Scanned in PDF for this lab result (optional).",
+      "title": "Scanned in result"
+    },
+    "title": {
+      "type": "string",
+      "description": "",
+      "title": "Title"
+    },
+    "lab_order_status": {
+      "enum": [
+        "",
+        "Order Entered",
+        "Discontinued",
+        "In Progress",
+        "Results Received",
+        "Results Reviewed with Patient",
+        "Paper Order"
+      ],
+      "type": "string",
+      "description": "Status of the lab order.",
+      "title": "Status"
+    },
+    "lab_imported_from_ccr": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Imported CCR document that contains lab results.",
+      "title": "Lab imported from ccr"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "lab_result_value_units": {
+      "type": "string",
+      "description": "",
+      "title": "Result units"
+    }
+  },
+  "x-verbose-required": []
+}

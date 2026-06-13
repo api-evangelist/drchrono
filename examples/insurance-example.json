@@ -1,0 +1,11 @@
+{
+  "title": "Insurance Example",
+  "description": "Example Insurance resource for drchrono REST API",
+  "resource": "Insurance",
+  "path": "/api/insurances/{id}",
+  "example": {
+    "payer_name": "example-payer_name",
+    "state": "example-state",
+    "payer_id": "example-payer_id"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Staff Example",
+  "description": "Example Staff resource for drchrono REST API",
+  "resource": "Staff",
+  "path": "/api/staff/{id}",
+  "example": {
+    "username": "example-username",
+    "first_name": "example-first_name",
+    "last_name": "example-last_name",
+    "user_id": "example-user_id",
+    "doctor": "example-doctor",
+    "created_at": "example-created_at",
+    "updated_at": "example-updated_at",
+    "id": 1
+  }
+}

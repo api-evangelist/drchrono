@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/custompatientfieldtype.json",
+  "title": "CustomPatientFieldType",
+  "required": [
+    "doctor",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "archived": {
+      "type": "boolean",
+      "description": "Indicates that the object has been soft-deleted, and should not be used",
+      "title": "Archived"
+    },
+    "description": {
+      "type": "string",
+      "description": "",
+      "title": "Description"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "template_name": {
+      "type": "string",
+      "description": "Custom Patient Demographics with `template_name` set can be inserted into clinical notes via Form Builder. Only letters (a-z or A-Z), numbers (0-9) or underscore(_) are allowed for template name.",
+      "title": "Template name"
+    },
+    "allowed_values": {
+      "type": "string",
+      "description": "Allowed values if needed. Values must be separated by comma `,`",
+      "title": "Allowed values"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    }
+  },
+  "x-verbose-required": []
+}

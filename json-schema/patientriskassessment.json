@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientriskassessment.json",
+  "title": "PatientRiskAssessment",
+  "required": [
+    "doctor",
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "value_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Value name"
+    },
+    "value_code_system": {
+      "type": "string",
+      "description": "",
+      "title": "Value code system"
+    },
+    "code": {
+      "type": "string",
+      "description": "",
+      "title": "Code"
+    },
+    "appointment": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Appointment"
+    },
+    "name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "effective_time": {
+      "type": "string",
+      "description": "",
+      "title": "Effective time"
+    },
+    "value_code": {
+      "type": "string",
+      "description": "",
+      "title": "Value code"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "code_system": {
+      "type": "string",
+      "description": "",
+      "title": "Code system"
+    }
+  },
+  "x-verbose-required": []
+}

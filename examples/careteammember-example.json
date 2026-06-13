@@ -1,0 +1,13 @@
+{
+  "title": "CareTeamMember Example",
+  "description": "Example CareTeamMember resource for drchrono REST API",
+  "resource": "CareTeamMember",
+  "path": "/api/care_team_members/{id}",
+  "example": {
+    "patient": "example-patient",
+    "created_at": "example-created_at",
+    "appointment": "example-appointment",
+    "id": 1,
+    "user": "example-user"
+  }
+}

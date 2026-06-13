@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientallergy.json",
+  "title": "PatientAllergy",
+  "required": [
+    "doctor",
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "type": "string",
+      "description": "One of `\"active\"`, `\"inactive\"`. If absent in `POST`, default to `\"active\"`",
+      "title": "Status"
+    },
+    "reaction": {
+      "type": "string",
+      "description": "Short description of the patient's allergic reaction, such as `\"Hives\"`",
+      "title": "Reaction"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the allergy, such as `\"Cat hair\"`",
+      "title": "Description"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "Id of the doctor who diagnosed the allergy",
+      "title": "Doctor"
+    },
+    "snomed_reaction": {
+      "enum": [
+        "",
+        "14669001",
+        "4448006",
+        "39579001",
+        "57676002",
+        "43724002",
+        "49727002",
+        "386661006",
+        "25064002",
+        "247472004",
+        "271795006",
+        "68962001",
+        "68235000",
+        "422587007",
+        "95388000",
+        "271807003",
+        "271825005",
+        "64531003",
+        "267036007",
+        "162397003",
+        "65124004"
+      ],
+      "type": "string",
+      "description": "SNOMED code for the reaction. For possible SnoMED codes, please see [this link from PHIN VADS](https://phinvads.cdc.gov/vads/ViewValueSet.action?id=896AABB4-5ACD-DE11-913D-0015173D1785)",
+      "title": "Snomed reaction"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Any additional notes from the provider",
+      "title": "Notes"
+    },
+    "verification_status": {
+      "enum": [
+        "confirmed",
+        "unconfirmed",
+        "refuted",
+        "entered-in-error"
+      ],
+      "type": "string",
+      "description": "One of `\"confirmed\"`, `\"unconfirmed\"`, `\"refuted\" or `\"entered-in-error\"`",
+      "title": "Verification status"
+    },
+    "snomed_code": {
+      "type": "string",
+      "description": "SNOMED code for the allergy",
+      "title": "Snomed code"
+    },
+    "rxnorm": {
+      "type": "string",
+      "description": "If the allergy is a drug allergy, this is the RxNorm code of the drug",
+      "title": "Rxnorm"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": [
+    "description"
+  ]
+}

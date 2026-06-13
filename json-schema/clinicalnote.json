@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/clinicalnote.json",
+  "title": "ClinicalNote",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "patient": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Patient"
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "",
+      "title": "Archived"
+    },
+    "clinical_note_sections": {
+      "items": {
+        "title": "Clinical Note Section",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "values": {
+            "items": {
+              "title": "Value",
+              "type": "object",
+              "description": "",
+              "properties": {
+                "clinical_note_field": {
+                  "type": "integer",
+                  "description": "",
+                  "title": "Clinical Note Field"
+                },
+                "id": {
+                  "type": "integer",
+                  "description": "",
+                  "title": "Id"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "",
+                  "title": ""
+                }
+              }
+            },
+            "type": "array",
+            "description": "",
+            "title": "Values"
+          },
+          "clinical_note_template": {
+            "type": "integer",
+            "description": "",
+            "title": "Clinical Note Template"
+          },
+          "name": {
+            "type": "string",
+            "description": "",
+            "title": "Name"
+          }
+        }
+      },
+      "type": "array",
+      "description": "",
+      "title": "Clinical Note Sections"
+    },
+    "appointment": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Appointment"
+    },
+    "signee": {
+      "title": "ClinicalNote",
+      "type": "object",
+      "description": "",
+      "properties": {
+        "locked_by": {
+          "readOnly": true,
+          "type": "string",
+          "description": "",
+          "title": "Locked by"
+        },
+        "supervisor_locked_by": {
+          "readOnly": true,
+          "type": "string",
+          "description": "",
+          "title": "Supervisor locked by"
+        }
+      }
+    }
+  },
+  "x-verbose-required": []
+}

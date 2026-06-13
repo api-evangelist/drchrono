@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/asyncresourceerror.json",
+  "title": "AsyncResourceError",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Either \"Error\" or \"Failed\"",
+      "title": "Status"
+    },
+    "uuid": {
+      "type": "string",
+      "description": "The UUID used to get the data for the asynchronous request",
+      "title": "UUID"
+    },
+    "detail": {
+      "type": "string",
+      "description": "Instructions on what to do next",
+      "title": "Detail"
+    }
+  }
+}

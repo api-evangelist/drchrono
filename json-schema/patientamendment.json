@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/patientamendment.json",
+  "title": "PatientAmendment",
+  "required": [
+    "patient",
+    "doctor",
+    "amendment_name",
+    "amendment_file"
+  ],
+  "type": "object",
+  "properties": {
+    "amendment_name": {
+      "type": "string",
+      "description": "",
+      "title": "Amendment name"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "ID of the appointment to which the amendment applies, if any. If present, the `amendment_file` will be appended to the clinical note for this appointment.",
+      "title": "Appointment"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "ID of the doctor who owns the amendment",
+      "title": "Doctor"
+    },
+    "comments": {
+      "type": "string",
+      "description": "",
+      "title": "Comments"
+    },
+    "amendment_file": {
+      "type": "string",
+      "description": "A PDF file containing the amended information for the patient's record",
+      "title": "Amendment file"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "ID of the patient to whom the amendment applies",
+      "title": "Patient"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

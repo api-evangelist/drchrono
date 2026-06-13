@@ -1,0 +1,15 @@
+{
+  "title": "CustomPatientFieldType Example",
+  "description": "Example CustomPatientFieldType resource for drchrono REST API",
+  "resource": "CustomPatientFieldType",
+  "path": "/api/custom_demographics/{id}",
+  "example": {
+    "archived": false,
+    "description": "example-description",
+    "doctor": 1,
+    "template_name": "example-template_name",
+    "allowed_values": "example-allowed_values",
+    "id": 1,
+    "name": "example-name"
+  }
+}

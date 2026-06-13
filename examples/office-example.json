@@ -1,0 +1,16 @@
+{
+  "title": "Office Example",
+  "description": "Example Office resource for drchrono REST API",
+  "resource": "Office",
+  "path": "/api/offices/{id}",
+  "example": {
+    "phone_number": "example-phone_number",
+    "city": "example-city",
+    "archived": false,
+    "office_work_schedule": "example-office_work_schedule",
+    "name": "example-name",
+    "doctor": "example-doctor",
+    "country": "example-country",
+    "start_time": "example-start_time"
+  }
+}

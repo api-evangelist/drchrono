@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/inventoryvaccine.json",
+  "title": "InventoryVaccine",
+  "required": [
+    "doctor",
+    "name",
+    "manufacturer_code"
+  ],
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "integer",
+      "description": "ID of `/api/inventory_categories`",
+      "title": "Category"
+    },
+    "lot_number": {
+      "type": "string",
+      "description": "",
+      "title": "Lot number"
+    },
+    "manufacturer_code": {
+      "type": "string",
+      "description": "",
+      "title": "Manufacturer code"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "original_quantity": {
+      "type": "integer",
+      "description": "Default to zero",
+      "title": "Original quantity"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive",
+        "archived",
+        "voided"
+      ],
+      "type": "string",
+      "description": "Status of vaccine, could be one of `active`, `inactive`, `archived`, `voided`, default to `active`",
+      "title": "Status"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "price_with_tax": {
+      "type": "number",
+      "description": "",
+      "title": "Price with tax"
+    },
+    "expiry": {
+      "type": "string",
+      "description": "When will the vaccine expire",
+      "title": "Expiry"
+    },
+    "note": {
+      "type": "string",
+      "description": "",
+      "title": "Note"
+    },
+    "sales_tax_applicable": {
+      "type": "boolean",
+      "description": "Is sales tax applicable to this service/product? Default to false",
+      "title": "Sales tax applicable"
+    },
+    "cost": {
+      "type": "number",
+      "description": "Base cost for consumables.",
+      "title": "Cost"
+    },
+    "price": {
+      "type": "number",
+      "description": "",
+      "title": "Price"
+    },
+    "vaccination_type": {
+      "type": "string",
+      "description": "Default to `\"standard vaccine\"`",
+      "title": "Vaccination type"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "manufacturer": {
+      "type": "string",
+      "description": "",
+      "title": "Manufacturer"
+    },
+    "current_quantity": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "This field can onlyu be changed by creating new patient vaccine record. Current quantity of an inventory vaccine is calculated by subtract number of records pointing to this inventory from the original quantity value.",
+      "title": "Current quantity"
+    },
+    "cvx_code": {
+      "type": "string",
+      "description": "",
+      "title": "Cvx code"
+    }
+  },
+  "x-verbose-required": []
+}

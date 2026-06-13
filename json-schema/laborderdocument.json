@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/laborderdocument.json",
+  "title": "LabOrderDocument",
+  "required": [
+    "lab_order",
+    "document",
+    "type"
+  ],
+  "type": "object",
+  "properties": {
+    "hl7": {
+      "type": "string",
+      "description": "The HL7 data that the document was generated from",
+      "title": "HL7"
+    },
+    "timestamp": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Time at which the document was uploaded",
+      "title": "Timestamp"
+    },
+    "lab_order": {
+      "type": "integer",
+      "description": "ID of the order this document is associated with",
+      "title": "Lab order"
+    },
+    "document": {
+      "type": "string",
+      "description": "",
+      "title": "Document"
+    },
+    "type": {
+      "enum": [
+        "REQ",
+        "ABN",
+        "R-A",
+        "RES"
+      ],
+      "type": "string",
+      "description": "\nValue | Notes\n----- | -----\n`\"REQ\"` | requisition form                                              |\n`\"ABN\"` | `ABN (Advance Beneficiary Notice)`                            |\n`\"R-A\"` | requisition form and :abbr:`ABN (Advance Beneficiary Notice)` |\n`\"RES\"` | lab results                                                   |\n",
+      "title": "Type"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

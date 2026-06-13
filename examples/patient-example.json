@@ -1,0 +1,16 @@
+{
+  "title": "Patient Example",
+  "description": "Example Patient resource for drchrono REST API",
+  "resource": "Patient",
+  "path": "/api/patients/{id}",
+  "example": {
+    "medication_history_consent": "example-medication_history_consent",
+    "last_name": "example-last_name",
+    "emergency_contact_phone": "example-emergency_contact_phone",
+    "primary_care_physician": "example-primary_care_physician",
+    "date_of_first_appointment": "example-date_of_first_appointment",
+    "tertiary_insurance": {},
+    "patient_flags_attached": [],
+    "updated_at": "example-updated_at"
+  }
+}

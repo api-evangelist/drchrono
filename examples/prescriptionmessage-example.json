@@ -1,0 +1,16 @@
+{
+  "title": "PrescriptionMessage Example",
+  "description": "Example PrescriptionMessage resource for drchrono REST API",
+  "resource": "PrescriptionMessage",
+  "path": "/api/prescription_messages/{id}",
+  "example": {
+    "message_status": "example-message_status",
+    "patient": 1,
+    "doctor": 1,
+    "message_type": "example-message_type",
+    "created_at": "example-created_at",
+    "parent_message": "example-parent_message",
+    "message_direction": "example-message_direction",
+    "pharmacy": "example-pharmacy"
+  }
+}

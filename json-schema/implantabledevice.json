@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/implantabledevice.json",
+  "title": "ImplantableDevice",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "status": {
+      "readOnly": true,
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "type": "string",
+      "description": "One of `'active'` or `'inactive'`",
+      "title": "Status"
+    },
+    "lot_number": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Device lot number"
+    },
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "",
+      "title": "Archived"
+    },
+    "manufacturing_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Manufacturing date"
+    },
+    "patient": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Patient"
+    },
+    "expiration_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Expiration date"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "brand_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Brand name"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "gmdn_pt_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "\"GMDN PT Name\" or \"SNOMED CT Description\" mapped to the attribute in  the \"GMDN PT Name\"",
+      "title": "GMDN PT Name"
+    },
+    "version_or_model": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Version or model"
+    },
+    "serial_number": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Serial number"
+    },
+    "udi": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Unique Device Identifier"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "procedure": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of `/api/procedures` object",
+      "title": "Procedure"
+    },
+    "company_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Company name"
+    }
+  },
+  "x-verbose-required": []
+}

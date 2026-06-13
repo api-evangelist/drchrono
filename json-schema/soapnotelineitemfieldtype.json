@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/soapnotelineitemfieldtype.json",
+  "title": "SoapNoteLineItemFieldType",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "comment": {
+      "type": "string",
+      "description": "Comment",
+      "title": "Comment"
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Indicates that the field has been soft-deleted by the doctor and will not be used in future notes",
+      "title": "Archived"
+    },
+    "clinical_note_template": {
+      "readOnly": true,
+      "type": "string",
+      "description": "ID of the `/api/clinical_note_templates` object that the field belongs to",
+      "title": "Clinical note template"
+    },
+    "data_type": {
+      "type": "string",
+      "description": "One of `\"\"`, `\"Checkbox\"`, `\"NullCheckbox\"`, `\"String\"`, `\"TwoStrings\"`, `\"FreeDraw\"`, `\"Photo\"`, `\"Header\"`, `\"Subheader\"`",
+      "title": "Data type"
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Indicates that a note should not be locked unless a value is provided for this field",
+      "title": "Required"
+    },
+    "allowed_values": {
+      "items": {
+        "type": "string",
+        "description": "Value option",
+        "title": ""
+      },
+      "type": "array",
+      "description": "Value options the field type relies on if applicable, otherwise it will be an empty array",
+      "title": "Allowed values"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    }
+  },
+  "x-verbose-required": []
+}

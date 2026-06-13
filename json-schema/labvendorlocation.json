@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/labvendorlocation.json",
+  "title": "LabVendorLocation",
+  "required": [
+    "name",
+    "facility_code"
+  ],
+  "type": "object",
+  "properties": {
+    "vendor_name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Vendor name"
+    },
+    "facility_code": {
+      "type": "string",
+      "description": "Used for identifying the lab in orders and results",
+      "title": "Facility code"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    }
+  },
+  "x-verbose-required": []
+}

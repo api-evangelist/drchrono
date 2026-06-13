@@ -1,0 +1,16 @@
+{
+  "title": "FeeSchedule Example",
+  "description": "Example FeeSchedule resource for drchrono REST API",
+  "resource": "FeeSchedule",
+  "path": "/api/fee_schedules_v2/{id}",
+  "example": {
+    "ineffective_date": "example-ineffective_date",
+    "assignees": [],
+    "items": [],
+    "created_at": "example-created_at",
+    "payer_id": "example-payer_id",
+    "updated_at": "example-updated_at",
+    "assignee_type": "example-assignee_type",
+    "specialities": []
+  }
+}

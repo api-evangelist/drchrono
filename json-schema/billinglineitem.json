@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/billinglineitem.json",
+  "title": "BillingLineItem",
+  "required": [
+    "appointment",
+    "code",
+    "procedure_type",
+    "diagnosis_pointers"
+  ],
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "",
+      "title": "Code"
+    },
+    "ins3_paid": {
+      "readOnly": true,
+      "type": "number",
+      "description": "Amount paid by patinet's tertiary insurer",
+      "title": "Ins3 paid"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "posted_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "date of line_item creation",
+      "title": "Posted date"
+    },
+    "billing_status": {
+      "readOnly": true,
+      "enum": [
+        "",
+        "Incomplete Information",
+        "In Process Emdeon",
+        "In Process iHCFA",
+        "In Process Gateway",
+        "In Process Jopari",
+        "In Process Waystar",
+        "In Process EPS",
+        "Rejected Emdeon",
+        "Rejected iHCFA",
+        "Rejected Gateway",
+        "Rejected Jopari",
+        "Rejected Waystar",
+        "Rejected EPS",
+        "In Process Payer",
+        "Payer Acknowledged",
+        "Rejected Payer",
+        "Paid in Full",
+        "Partially Paid",
+        "Coordination of Benefits",
+        "ERA Received",
+        "ERA Denied"
+      ],
+      "type": "string",
+      "description": "One of `\"\"`, `\"Incomplete Information\"`, `\"In Process Emdeon\"`, `\"In Process iHCFA\"`, `\"In Process Gateway\"`, `\"Rejected Emdeon\"`, `\"Rejected iHCFA\"`, `\"Rejected Gateway\"`, `\"In Process Payer\"`, `\"Payer Acknowledged\"`, `\"Rejected Payer\"`, `\"Paid in Full\"`,  `\"Partially Paid\"`,  `\"Coordination of Benefits\"`,  `\"ERA Received\"`,  `\"ERA Denied\"`",
+      "title": "Billing status"
+    },
+    "pt_paid": {
+      "type": "number",
+      "description": "Amount paid by patient",
+      "title": "Pt paid"
+    },
+    "allowed": {
+      "readOnly": true,
+      "type": "number",
+      "description": "Amount allowed by insurance",
+      "title": "Allowed"
+    },
+    "patient": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Patient ID",
+      "title": "Patient"
+    },
+    "adjustment": {
+      "readOnly": true,
+      "type": "number",
+      "description": "Adjustment from total billed",
+      "title": "Adjustment"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Doctor ID",
+      "title": "Doctor"
+    },
+    "balance_pt": {
+      "readOnly": true,
+      "type": "number",
+      "description": "Patient balance",
+      "title": "Balance pt"
+    },
+    "units": {
+      "type": "string",
+      "description": "Default to \"UN\"",
+      "title": "Units"
+    },
+    "balance_ins": {
+      "type": "number",
+      "description": "Insurance balance",
+      "title": "Balance ins"
+    },
+    "paid_total": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Total amount paid",
+      "title": "Paid total"
+    },
+    "diagnosis_pointers": {
+      "items": {
+        "type": "string",
+        "description": "String representation of an integer or ICD code",
+        "title": ""
+      },
+      "type": "array",
+      "description": "List of 4 diagnosis pointers",
+      "title": "Diagnosis pointers"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "Appointment ID",
+      "title": "Appointment"
+    },
+    "description": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Description"
+    },
+    "balance_total": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Total balance",
+      "title": "Balance total"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price of procedure",
+      "title": "Price"
+    },
+    "expected_reimbursement": {
+      "readOnly": true,
+      "type": "number",
+      "description": "",
+      "title": "Expected reimbursement"
+    },
+    "ins2_paid": {
+      "readOnly": true,
+      "type": "number",
+      "description": "Amount paid by patient's secondary insurer",
+      "title": "Ins2 paid"
+    },
+    "ins1_paid": {
+      "readOnly": true,
+      "type": "number",
+      "description": "Amount paid by patient's primary insurer",
+      "title": "Ins1 paid"
+    },
+    "insurance_status": {
+      "readOnly": true,
+      "type": "string",
+      "description": "This corresponds to the \"Status/Adj Type\" from billing detail screen",
+      "title": "Insurance status"
+    },
+    "billed": {
+      "readOnly": true,
+      "type": "number",
+      "description": "Total billed",
+      "title": "Billed"
+    },
+    "modifiers": {
+      "items": {
+        "type": "string",
+        "description": "String representation of modifier",
+        "title": ""
+      },
+      "type": "array",
+      "description": "List of 4 code modifiers",
+      "title": "Modifiers"
+    },
+    "denied_flag": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "",
+      "title": "Denied flag"
+    },
+    "ins_total": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Total amount paid by patient's insurers",
+      "title": "Ins total"
+    },
+    "procedure_type": {
+      "enum": [
+        "C",
+        "H",
+        "U",
+        "S"
+      ],
+      "type": "string",
+      "description": "One of `\"CPT(C)\"`, `\"HCPCS(H)\"`, `\"Custom(U)\"`, use 1 character identifier when using `POST`",
+      "title": "Procedure type"
+    },
+    "service_date": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Date on which the service was rendered",
+      "title": "Service date"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "",
+      "title": "Quantity"
+    }
+  },
+  "x-verbose-required": [
+    "description"
+  ]
+}

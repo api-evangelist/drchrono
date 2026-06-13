@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/soapnotelineitemfieldvalue.json",
+  "title": "SoapNoteLineItemFieldValue",
+  "x-verbose-required": [],
+  "required": [
+    "appointment",
+    "clinical_note_field",
+    "value"
+  ],
+  "type": "object",
+  "description": "Values entered by doctor when charting a particular appointment",
+  "properties": {
+    "clinical_note_field": {
+      "type": "integer",
+      "description": "ID of `/api/clinical_note_field_types` object that indicates type of the value",
+      "title": "Clinical note field"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "value": {
+      "type": "string",
+      "description": "Value of the field. Interpretation varies by field type.\n`clinical_note_field.data_type` | Value | Description\n------------------------------- | ----- | -----------\n`\"Header\"` | string | \n`\"SubHeader\"` | string |\n`\"String\"` | string | If field is single/multiple select field, make sure value presents in allowed values set.\n`\"TwoStrings\"` | string | String is seperated by `\"/\"`\n`\"NullCheckbox\"` | string | Can be `\"0\"`, `\"1\"`, `\"2\"`, `\"0\"`-`Not selected`, `\"1\"`-`No`, `\"2\"`-`Yes`\n`\"Checkbox\"` | string | Can be `\"True\"`, `\"False\"`\n",
+      "title": "Value"
+    },
+    "appointment": {
+      "type": "integer",
+      "description": "ID of appointment that the value applies to",
+      "title": "Appointment"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  }
+}

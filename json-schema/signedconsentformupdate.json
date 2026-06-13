@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/signedconsentformupdate.json",
+  "title": "SignedConsentFormUpdate",
+  "type": "object",
+  "properties": {
+    "appointment": {
+      "type": "integer",
+      "description": "ID of the appointment that the consent form is signed for",
+      "title": "Appointment"
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Indicates that the consent form has been archived and should not be used",
+      "title": "Archived"
+    },
+    "consent_form": {
+      "type": "integer",
+      "description": "ID of the consent form that is signed",
+      "title": "Consent form"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "ID of the patient who signed the consent form",
+      "title": "Patient"
+    },
+    "signature_file": {
+      "format": "binary",
+      "type": "string",
+      "description": "File with the signature of the patient",
+      "title": "Signature file"
+    }
+  },
+  "x-verbose-required": []
+}

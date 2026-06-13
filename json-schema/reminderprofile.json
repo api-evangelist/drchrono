@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/reminderprofile.json",
+  "title": "ReminderProfile",
+  "required": [
+    "doctor",
+    "reminders"
+  ],
+  "type": "object",
+  "properties": {
+    "reminders": {
+      "items": {
+        "title": "ReminderTemplate",
+        "type": "object",
+        "description": "Array of reminders",
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "description": "",
+            "title": "Amount"
+          },
+          "type": {
+            "enum": [
+              "email",
+              "sms",
+              "phone",
+              "auto_call"
+            ],
+            "type": "string",
+            "description": "One of `\"email\"`, `\"sms\"` or `\"auto_call\"`",
+            "title": "Type"
+          },
+          "unit": {
+            "enum": [
+              "minutes",
+              "hours",
+              "days",
+              "weeks"
+            ],
+            "type": "string",
+            "description": "One of `\"email\"`, `\"sms\"` or `\"auto_call\"`",
+            "title": "Unit"
+          }
+        }
+      },
+      "type": "array",
+      "description": "Reminders set in the profile",
+      "title": "Reminders"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "Doctor who created the profile. Other doctors in the practice group may have access to their profiles",
+      "title": "Doctor"
+    }
+  },
+  "x-verbose-required": []
+}

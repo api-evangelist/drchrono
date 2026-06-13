@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/appointmentprofile.json",
+  "title": "AppointmentProfile",
+  "x-verbose-required": [],
+  "required": [
+    "name",
+    "color",
+    "online_scheduling"
+  ],
+  "type": "object",
+  "description": "Appointment profiles are for common kinds of appointments a doctor might have, such as \"physical exam\", which have a standard duration and should show up as the same color on the calendar.",
+  "properties": {
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "Indicates that the object has been soft-deleted and should not be used",
+      "title": "Archived"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "color": {
+      "type": "string",
+      "description": "",
+      "title": "Color"
+    },
+    "reason": {
+      "type": "string",
+      "description": "",
+      "title": "Reason"
+    },
+    "sort_order": {
+      "type": "integer",
+      "description": "Override the usual ordering ordering of appointments in the patient's appointments page. Lower values are shown at the top",
+      "title": "Sort order"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Length of an appointment in minutes",
+      "title": "Duration"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    },
+    "online_scheduling": {
+      "type": "boolean",
+      "description": "Whether this profile should be available for online scheduling",
+      "title": "Online scheduling"
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/auditlog.json",
+  "title": "AuditLog",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "patient": {
+      "type": "string",
+      "description": "Patient's name",
+      "title": "Patient"
+    },
+    "description": {
+      "type": "string",
+      "description": "Text description of the audit log",
+      "title": "Description"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "IPv4 address of the user",
+      "title": "IP Address"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "appointment_id": {
+      "type": "integer",
+      "description": "",
+      "title": "Appointment Id"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "field": {
+      "type": "string",
+      "description": "Related field of this audit entry",
+      "title": "Field"
+    },
+    "name_of_user": {
+      "type": "string",
+      "description": "",
+      "title": "User name"
+    },
+    "action": {
+      "enum": [
+        "Not specified",
+        "Create",
+        "Read",
+        "Update",
+        "Delete"
+      ],
+      "type": "string",
+      "description": "",
+      "title": "Action"
+    },
+    "user_id": {
+      "type": "integer",
+      "description": "",
+      "title": "User id"
+    },
+    "doctor_id": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor id"
+    },
+    "type": {
+      "enum": [
+        "Account",
+        "Allergy",
+        "API",
+        "Appointment Template",
+        "Appointment Profile",
+        "Appointment",
+        "Billing Profile",
+        "Chart",
+        "Clinical Note",
+        "Direct Message",
+        "Data Export",
+        "EPCS",
+        "eRx",
+        "Family History",
+        "Fee Schedule",
+        "Immunization",
+        "Insurance Authorization",
+        "Insurance",
+        "Insurance Credit Card Payment",
+        "Login",
+        "Medical Form",
+        "Medication",
+        "MedList",
+        "Office",
+        "OnPatient",
+        "Patient Flag",
+        "Permissions",
+        "Phone Log",
+        "Problem",
+        "Refill Request",
+        "Uploaded Documents",
+        "Sample Data",
+        "Telehealth",
+        "Fax",
+        "Vital Flowsheet",
+        "Navigation View",
+        "Break The Glass",
+        "Lab Order",
+        "File Access"
+      ],
+      "type": "string",
+      "description": "Type of audit log",
+      "title": "Type"
+    },
+    "page": {
+      "type": "string",
+      "description": "Related page of this audit entry",
+      "title": "Page"
+    }
+  },
+  "x-verbose-required": [
+    "description"
+  ]
+}

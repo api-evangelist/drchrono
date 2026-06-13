@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/drchrono/json-schema/laborder.json",
+  "title": "LabOrder",
+  "required": [
+    "sublab",
+    "doctor",
+    "patient"
+  ],
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Equivalent to HL7's ORC.5. Defaults to `\"N\"`.\nValue | Notes\n----- | -----\n`\"N\"` | not sent                                          |\n`\"Q\"` | queued for processing                             |\n`\"A\"` | `ABN (Advance Beneficiary Notice)` required       |\n`\"S\"` | send                                              |\n`\"R\"` | results received                                  |\n`\"E\"` | error                                             |\n",
+      "title": "Status"
+    },
+    "documents": {
+      "items": {
+        "type": "string",
+        "description": "ID of an associated lab document",
+        "title": ""
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "Associated `/lab_documents` objects",
+      "title": "Documents"
+    },
+    "patient": {
+      "type": "integer",
+      "description": "",
+      "title": "Patient"
+    },
+    "doctor": {
+      "type": "integer",
+      "description": "",
+      "title": "Doctor"
+    },
+    "timestamp": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Time at which the order was submitted. Defaults to now",
+      "title": "Timestamp"
+    },
+    "notes": {
+      "type": "string",
+      "description": "",
+      "title": "Notes"
+    },
+    "accession_number": {
+      "type": "string",
+      "description": "For external use only",
+      "title": "Accession number"
+    },
+    "requisition_id": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The ID printed on the requisition PDF. Generally the same as id.",
+      "title": "Requisition id"
+    },
+    "external_requisition_id": {
+      "type": "string",
+      "description": "Alternative requisition ID field for orders created outside of DrChrono.",
+      "title": "External Requisition ID"
+    },
+    "priority": {
+      "enum": [
+        "N",
+        "S"
+      ],
+      "type": "string",
+      "description": "`\"Normal\"` or `\"STAT\"`. Default `\"Normal\"`",
+      "title": "Priority"
+    },
+    "icd10_codes": {
+      "items": {
+        "title": "ICD10Code",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The numeric ICD-10 code",
+            "title": "Code"
+          },
+          "description": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Short description  of the ICD-10 code",
+            "title": "Description"
+          }
+        }
+      },
+      "type": "array",
+      "description": "ICD-10 codes of the conditions which the tests concerns.",
+      "title": "Icd10 codes"
+    },
+    "sublab": {
+      "type": "integer",
+      "description": "",
+      "title": "Sublab"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}
