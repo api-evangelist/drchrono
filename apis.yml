@@ -1,6 +1,6 @@
 name: drchrono
 description: drchrono is an EHR platform with a REST API for managing patient records, clinical encounters, appointments, prescriptions, billing, and HIPAA-compliant medical data exchange. It provides OAuth 2.0-secured endpoints covering patient management, clinical documentation, lab integration, scheduling, billing, and practice administration, enabling healthcare app developers to build integrations with the drchrono EHR ecosystem.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/drchrono/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -22,7 +22,7 @@ type: Index
 apis:
   - name: drchrono REST API
     description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://app.drchrono.com/api-docs/tutorial/
     baseURL: https://app.drchrono.com/api
     tags:
