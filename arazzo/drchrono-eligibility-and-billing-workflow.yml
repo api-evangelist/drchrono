@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: drChrono Eligibility and Billing
+  summary: Run the revenue cycle by checking insurance eligibility, reviewing day sheet charges, and adding a claim billing note.
+  description: >-
+    A revenue cycle flow against the drChrono EHR REST API. Insurance eligibility is
+    checked for the patient and appointment, the day sheet charges are reviewed, and a
+    claim billing note is added to support clean claim submission. This connects the
+    front-office eligibility check to the back-office billing and collections workflow.
+    Every step inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: drchronoApi
+  url: ../openapi/drchrono-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: eligibility-and-billing
+  summary: Check eligibility, review charges, and add a claim billing note.
+  description: >-
+    Checks insurance eligibility, reviews day sheet charges, and adds a billing note
+    to the claim under the supplied provider.
+  inputs:
+    type: object
+    required:
+    - patientId
+    - appointmentId
+    - doctorId
+    - billingNote
+    properties:
+      patientId:
+        type: string
+        description: Identifier of the patient in the revenue cycle.
+      appointmentId:
+        type: string
+        description: Identifier of the appointment the charges and claim relate to.
+      doctorId:
+        type: string
+        description: Identifier of the provider associated with the claim.
+      billingNote:
+        type: object
+        description: The drChrono claim billing note resource to add to the claim.
+  steps:
+  - stepId: checkEligibility
+    description: Check insurance eligibility for the patient and appointment.
+    operationId: eligibility_checks_list
+    parameters:
+    - name: patient
+      in: query
+      value: $inputs.patientId
+    - name: appointment
+      in: query
+      value: $inputs.appointmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eligibility: $response.body
+  - stepId: reviewCharges
+    description: Review the day sheet charges for the patient.
+    operationId: daysheet_charges_list
+    parameters:
+    - name: patient_id
+      in: query
+      value: $inputs.patientId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      charges: $response.body
+  - stepId: addBillingNote
+    description: Add a billing note to the claim for the appointment.
+    operationId: claim_billing_notes_create
+    parameters:
+    - name: appointment
+      in: query
+      value: $inputs.appointmentId
+    - name: doctor
+      in: query
+      value: $inputs.doctorId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.billingNote
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      billingNoteId: $response.body#/id
+  outputs:
+    eligibility: $steps.checkEligibility.outputs.eligibility
+    charges: $steps.reviewCharges.outputs.charges
+    billingNoteId: $steps.addBillingNote.outputs.billingNoteId

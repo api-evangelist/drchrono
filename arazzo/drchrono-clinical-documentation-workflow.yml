@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: drChrono Clinical Documentation
+  summary: Document a patient visit by recording a problem, a medication, and a clinical note.
+  description: >-
+    A clinical documentation flow against the drChrono EHR REST API, capturing the
+    USCDI data classes that make up an encounter. A problem is added to the patient's
+    problem list, a medication is recorded, and a clinical note is documented for the
+    visit. This is the core charting step a provider completes during or after a
+    patient encounter. Every step inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: drchronoApi
+  url: ../openapi/drchrono-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: clinical-documentation
+  summary: Record a problem, medication, and clinical note for a visit.
+  description: >-
+    Adds a problem, records a medication, and documents a clinical note for the
+    patient under the supplied provider.
+  inputs:
+    type: object
+    required:
+    - patientId
+    - doctorId
+    - problem
+    - medication
+    - clinicalNote
+    properties:
+      patientId:
+        type: string
+        description: Identifier of the patient being documented.
+      doctorId:
+        type: string
+        description: Identifier of the documenting provider.
+      problem:
+        type: object
+        description: The drChrono problem resource to add to the patient's problem list.
+      medication:
+        type: object
+        description: The drChrono medication resource to record for the patient.
+      clinicalNote:
+        type: object
+        description: The drChrono clinical note resource documenting the visit.
+  steps:
+  - stepId: addProblem
+    description: Add a problem to the patient's problem list.
+    operationId: problems_create
+    parameters:
+    - name: patient
+      in: query
+      value: $inputs.patientId
+    - name: doctor
+      in: query
+      value: $inputs.doctorId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.problem
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      problemId: $response.body#/id
+  - stepId: addMedication
+    description: Record a medication for the patient.
+    operationId: medications_create
+    parameters:
+    - name: patient
+      in: query
+      value: $inputs.patientId
+    - name: doctor
+      in: query
+      value: $inputs.doctorId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.medication
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      medicationId: $response.body#/id
+  - stepId: addClinicalNote
+    description: Document a clinical note for the visit.
+    operationId: clinical_notes_list_create
+    parameters:
+    - name: patient
+      in: query
+      value: $inputs.patientId
+    - name: doctor
+      in: query
+      value: $inputs.doctorId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.clinicalNote
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      noteUuid: $response.body#/id
+  outputs:
+    problemId: $steps.addProblem.outputs.problemId
+    medicationId: $steps.addMedication.outputs.medicationId
+    noteUuid: $steps.addClinicalNote.outputs.noteUuid

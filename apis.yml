@@ -75,6 +75,23 @@ common:
     url: https://www.drchrono.com/api-development-terms-conditions/
   - type: SupportPortal
     url: https://support.drchrono.com/home/api
+  - type: ArazzoWorkflows
+    workflows:
+    - url: arazzo/drchrono-appointment-scheduling-workflow.yml
+      name: drChrono Appointment Scheduling
+      summary: "Read a patient record, book an appointment, then read the appointment back to confirm it was created."
+    - url: arazzo/drchrono-chart-export-workflow.yml
+      name: drChrono Chart Export
+      summary: "Pull a patient chart by reading the patient, listing problems and medications, and exporting a C-CDA document."
+    - url: arazzo/drchrono-clinical-documentation-workflow.yml
+      name: drChrono Clinical Documentation
+      summary: "Document a patient visit by recording a problem, a medication, and a clinical note."
+    - url: arazzo/drchrono-eligibility-and-billing-workflow.yml
+      name: drChrono Eligibility and Billing
+      summary: "Run the revenue cycle by checking insurance eligibility, reviewing day sheet charges, and adding a claim billing note."
+    - url: arazzo/drchrono-patient-registration-workflow.yml
+      name: drChrono Patient Registration (Upsert)
+      summary: "Search for an existing patient by name and update it if found, otherwise create a new patient record."
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

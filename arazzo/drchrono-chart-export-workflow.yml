@@ -1,0 +1,79 @@
+arazzo: 1.0.1
+info:
+  title: drChrono Chart Export
+  summary: Pull a patient chart by reading the patient, listing problems and medications, and exporting a C-CDA document.
+  description: >-
+    A patient chart export flow against the drChrono EHR REST API, assembling the
+    USCDI data classes needed for clinical record portability. The patient record
+    is read, the problem list and medication list are pulled, and a C-CDA continuity
+    of care document is exported. This supports record requests, referrals, and
+    transitions of care. Every step inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: drchronoApi
+  url: ../openapi/drchrono-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: chart-export
+  summary: Export a patient chart with problems, medications, and a C-CDA document.
+  description: >-
+    Reads the patient, lists problems and medications, and exports the C-CDA
+    continuity of care document.
+  inputs:
+    type: object
+    required:
+    - patientId
+    properties:
+      patientId:
+        type: string
+        description: Identifier of the patient whose chart is being exported.
+  steps:
+  - stepId: readPatient
+    description: Read the patient record being exported.
+    operationId: patients_read
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.patientId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      patient: $response.body
+  - stepId: listProblems
+    description: List the patient's problems.
+    operationId: problems_list
+    parameters:
+    - name: patient
+      in: query
+      value: $inputs.patientId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      problems: $response.body
+  - stepId: listMedications
+    description: List the patient's medications.
+    operationId: medications_list
+    parameters:
+    - name: patient
+      in: query
+      value: $inputs.patientId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      medications: $response.body
+  - stepId: exportCcda
+    description: Export the patient's C-CDA continuity of care document.
+    operationId: patients_ccda
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.patientId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ccda: $response.body
+  outputs:
+    patient: $steps.readPatient.outputs.patient
+    problems: $steps.listProblems.outputs.problems
+    medications: $steps.listMedications.outputs.medications
+    ccda: $steps.exportCcda.outputs.ccda

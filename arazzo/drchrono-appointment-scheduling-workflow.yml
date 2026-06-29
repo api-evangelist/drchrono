@@ -1,0 +1,68 @@
+arazzo: 1.0.1
+info:
+  title: drChrono Appointment Scheduling
+  summary: Read a patient record, book an appointment, then read the appointment back to confirm it was created.
+  description: >-
+    An appointment scheduling flow against the drChrono EHR REST API. The patient
+    is read to confirm the record exists, an appointment is created against that
+    patient, and the booked appointment is read back to confirm. This mirrors the
+    typical front-desk scheduling step that precedes a clinical encounter. Every
+    step inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: drchronoApi
+  url: ../openapi/drchrono-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: appointment-scheduling
+  summary: Book an appointment for a patient and confirm it.
+  description: >-
+    Reads the patient, creates the appointment, and reads it back to confirm.
+  inputs:
+    type: object
+    required:
+    - patientId
+    - appointment
+    properties:
+      patientId:
+        type: string
+        description: Identifier of the patient the appointment is booked for.
+      appointment:
+        type: object
+        description: The drChrono appointment resource to book (doctor, office, scheduled time, and exam room).
+  steps:
+  - stepId: readPatient
+    description: Read the patient record the appointment will be booked for.
+    operationId: patients_read
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.patientId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      patientId: $response.body#/id
+  - stepId: bookAppointment
+    description: Create the appointment against the patient.
+    operationId: appointments_create
+    requestBody:
+      contentType: application/json
+      payload: $inputs.appointment
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      appointmentId: $response.body#/id
+  - stepId: confirmAppointment
+    description: Read the booked appointment back to confirm it was created.
+    operationId: appointments_read
+    parameters:
+    - name: id
+      in: path
+      value: $steps.bookAppointment.outputs.appointmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      appointment: $response.body
+  outputs:
+    appointmentId: $steps.bookAppointment.outputs.appointmentId
+    appointment: $steps.confirmAppointment.outputs.appointment

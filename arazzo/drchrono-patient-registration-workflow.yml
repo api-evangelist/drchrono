@@ -1,0 +1,91 @@
+arazzo: 1.0.1
+info:
+  title: drChrono Patient Registration (Upsert)
+  summary: Search for an existing patient by name and update it if found, otherwise create a new patient record.
+  description: >-
+    A patient demographic upsert against the drChrono EHR REST API, aligning with
+    USCDI patient demographic data elements. The patient is searched by name; when
+    a match is found the existing patient record is updated, and when no match is
+    found a new patient is created. This is the standard deduplicating intake step
+    at the front of most clinical and revenue cycle integrations. Every step inlines
+    its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: drchronoApi
+  url: ../openapi/drchrono-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: patient-registration-upsert
+  summary: Upsert a drChrono patient by name.
+  description: >-
+    Searches for a patient by name and branches to update the matched patient or
+    create a new one.
+  inputs:
+    type: object
+    required:
+    - patientName
+    - patient
+    properties:
+      patientName:
+        type: string
+        description: Patient name used to detect an existing record in the practice.
+      patient:
+        type: object
+        description: The drChrono patient resource to create or use as the update body.
+  steps:
+  - stepId: findPatient
+    description: Search for an existing patient by name.
+    operationId: patients_list_list
+    parameters:
+    - name: patient
+      in: query
+      value: $inputs.patientName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedPatientId: $response.body#/results/0/id
+    onSuccess:
+    - name: patientExists
+      type: goto
+      stepId: updatePatient
+      criteria:
+      - context: $response.body
+        condition: $.count > 0
+        type: jsonpath
+    - name: patientMissing
+      type: goto
+      stepId: createPatient
+      criteria:
+      - context: $response.body
+        condition: $.count == 0
+        type: jsonpath
+  - stepId: updatePatient
+    description: Update the matched patient record with the supplied demographics.
+    operationId: patients_partial_update
+    parameters:
+    - name: id
+      in: path
+      value: $steps.findPatient.outputs.matchedPatientId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.patient
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      patientId: $response.body#/id
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: createPatient
+    description: Create a new patient when no existing record matched the name.
+    operationId: patients_create
+    requestBody:
+      contentType: application/json
+      payload: $inputs.patient
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      patientId: $response.body#/id
+  outputs:
+    updatedPatientId: $steps.updatePatient.outputs.patientId
+    createdPatientId: $steps.createPatient.outputs.patientId
