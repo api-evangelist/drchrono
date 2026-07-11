@@ -47,6 +47,10 @@ apis:
       - FN: drchrono API Support
         email: api@drchrono.com
 common:
+  - type: DomainSecurity
+    url: security/drchrono-domain-security.yml
+  - type: Authentication
+    url: authentication/drchrono-authentication.yml
   - type: OAuthScopes
     url: scopes/drchrono-scopes.yml
   - type: Website

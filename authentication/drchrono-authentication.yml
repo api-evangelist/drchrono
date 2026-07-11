@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/drchrono-rest-api-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: drchrono_oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.drchrono.com/o/authorize/
+    tokenUrl: https://app.drchrono.com/o/token/
+    scopes: 22
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
