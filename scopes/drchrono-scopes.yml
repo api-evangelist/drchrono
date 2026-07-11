@@ -1,0 +1,148 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/drchrono-rest-api-openapi.yml
+schemes:
+- name: drchrono_oauth2
+  source: openapi/drchrono-rest-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.drchrono.com/o/authorize/
+    tokenUrl: https://app.drchrono.com/o/token/
+scopes:
+- scope: billing
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: billing:patient-payment:read
+  description: View patient payment information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: billing:patient-payment:write
+  description: Modify patient payment information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: billing:read
+  description: View billing information.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: billing:write
+  description: Modify billing information.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: calendar:read
+  description: View your appointments.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: calendar:write
+  description: Schedule appointments and modify the data associated with them.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: clinical:read
+  description: View clinical information, such as vitals, clinical notes, medications and diagnoses.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: clinical:write
+  description: Create and modify clinical information, such as vitals, clinical notes, medications
+    and diagnoses.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: labs:read
+  description: View patient lab orders and results.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: labs:write
+  description: Create and modify patient lab orders and results.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: messages:read
+  description: View messages in your message center.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: messages:write
+  description: Create and modify messages in your message center.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: patients:read
+  description: View detailed patient information.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: patients:summary:read
+  description: View summary information about your patients. This includes patients' name, chart_id,
+    age, and gender.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: patients:summary:write
+  description: Create new patients and set their name, chart_id, age, and gender.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: patients:write
+  description: Create patients and modify detailed patient information.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: settings:read
+  description: View resources that requires Settings permission, such as custom fields.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: settings:write
+  description: Create resources that requires Settings permission, such as custom fields.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: tasks:read
+  description: View tasks in your tasks center
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: tasks:write
+  description: Create and modify tasks in your tasks center
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: user:read
+  description: View your basic information.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml
+- scope: user:write
+  description: Edit select account information, such as creating new exam rooms.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/drchrono-rest-api-openapi.yml

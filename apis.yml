@@ -47,6 +47,8 @@ apis:
       - FN: drchrono API Support
         email: api@drchrono.com
 common:
+  - type: OAuthScopes
+    url: scopes/drchrono-scopes.yml
   - type: Website
     url: https://www.drchrono.com
   - type: Documentation
