@@ -2,13 +2,11 @@
   "repo": "drchrono",
   "feeds": [
     {
-      "source": "https://drchrono.com/blog/",
-      "feed_url": "",
-      "saved": 0,
-      "method": "agent-scrape"
+      "source": "https://www.linkedin.com/company/drchrono",
+      "error": "HTTPError"
     }
   ],
-  "post_count": 9,
-  "fetched": "2026-06-27T12:38:07Z",
-  "agent_pulled": "2026-06-27"
+  "post_count": 13,
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
