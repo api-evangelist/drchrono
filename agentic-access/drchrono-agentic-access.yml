@@ -1,0 +1,5337 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/drchrono-rest-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 327
+  by_action_class:
+    connected: 164
+    acting: 163
+  by_consequence:
+    read: 164
+    write: 158
+    physical: 5
+  human_in_the_loop_required: 0
+operations:
+- path: /api/day_sheet_charges
+  method: get
+  operationId: daysheet_charges_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/claim_billing_notes
+  method: post
+  operationId: claim_billing_notes_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - billing:read
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/claim_billing_notes
+  method: get
+  operationId: claim_billing_notes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/signed_consent_forms
+  method: post
+  operationId: signed_consent_forms_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/signed_consent_forms
+  method: patch
+  operationId: signed_consent_forms_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/signed_consent_forms
+  method: get
+  operationId: signed_consent_forms_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/custom_appointment_fields
+  method: post
+  operationId: custom_appointment_fields_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/custom_appointment_fields
+  method: get
+  operationId: custom_appointment_fields_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_orders/{id}
+  method: put
+  operationId: lab_orders_update
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_orders/{id}
+  method: patch
+  operationId: lab_orders_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_orders/{id}
+  method: get
+  operationId: lab_orders_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_orders/{id}
+  method: delete
+  operationId: lab_orders_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/clinical_notes_list
+  method: post
+  operationId: clinical_notes_list_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/clinical_notes_list
+  method: get
+  operationId: clinical_notes_list_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/custom_vitals/{id}
+  method: get
+  operationId: custom_vitals_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sublabs/{id}
+  method: put
+  operationId: sublabs_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sublabs/{id}
+  method: patch
+  operationId: sublabs_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sublabs/{id}
+  method: get
+  operationId: sublabs_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sublabs/{id}
+  method: delete
+  operationId: sublabs_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients/{id}/qrda1
+  method: get
+  operationId: patients_qrda1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/problems
+  method: post
+  operationId: problems_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/problems
+  method: get
+  operationId: problems_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/staff
+  method: get
+  operationId: staff_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_messages/{id}
+  method: put
+  operationId: patient_messages_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - messages:read
+    - messages:write
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_messages/{id}
+  method: patch
+  operationId: patient_messages_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - messages:read
+    - messages:write
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_messages/{id}
+  method: get
+  operationId: patient_messages_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - messages:read
+    - messages:write
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/yellow_notepad
+  method: post
+  operationId: yellow_notepad_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/yellow_notepad
+  method: get
+  operationId: yellow_notepad_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/eligibility_checks
+  method: get
+  operationId: eligibility_checks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/doctor_work_schedule/{id}
+  method: put
+  operationId: doctor_work_schedule_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - user:read
+    - user:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/doctor_work_schedule/{id}
+  method: patch
+  operationId: doctor_work_schedule_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - user:read
+    - user:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/doctor_work_schedule/{id}
+  method: get
+  operationId: doctor_work_schedule_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/medications
+  method: post
+  operationId: medications_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/medications
+  method: get
+  operationId: medications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/custom_demographics
+  method: post
+  operationId: custom_demographics_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/custom_demographics
+  method: get
+  operationId: custom_demographics_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointments_list
+  method: post
+  operationId: appointments_list_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointments_list
+  method: get
+  operationId: appointments_list_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointment_profiles
+  method: post
+  operationId: appointment_profiles_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointment_profiles
+  method: get
+  operationId: appointment_profiles_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_communications
+  method: post
+  operationId: patient_communications_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_communications
+  method: get
+  operationId: patient_communications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_authorizations
+  method: get
+  operationId: patient_authorizations_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointment_profiles/{id}
+  method: put
+  operationId: appointment_profiles_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointment_profiles/{id}
+  method: patch
+  operationId: appointment_profiles_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointment_profiles/{id}
+  method: get
+  operationId: appointment_profiles_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointment_profiles/{id}
+  method: delete
+  operationId: appointment_profiles_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/messages
+  method: post
+  operationId: messages_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - messages:read
+    - messages:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/messages
+  method: get
+  operationId: messages_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - messages:read
+    - messages:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/clinical_note_field_values/{id}
+  method: put
+  operationId: clinical_note_field_values_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/clinical_note_field_values/{id}
+  method: patch
+  operationId: clinical_note_field_values_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/clinical_note_field_values/{id}
+  method: get
+  operationId: clinical_note_field_values_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/task_categories
+  method: post
+  operationId: task_categories_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_categories
+  method: get
+  operationId: task_categories_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/fee_schedules_v2
+  method: get
+  operationId: fee_schedules_v2_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/custom_insurance_plan_names/{id}
+  method: get
+  operationId: custom_insurance_plan_names_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/care_team_members
+  method: get
+  operationId: care_team_members_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/user_groups
+  method: get
+  operationId: user_groups_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/line_items_list
+  method: post
+  operationId: line_items_list_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - billing:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/line_items_list
+  method: get
+  operationId: line_items_list_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/consent_forms/{id}/unapply_from_appointment
+  method: post
+  operationId: consent_forms_unapply_from_appointment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/consent_forms/{id}/apply_to_appointment
+  method: post
+  operationId: consent_forms_apply_to_appointment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/consent_forms
+  method: post
+  operationId: consent_forms_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/consent_forms
+  method: get
+  operationId: consent_forms_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/reminder_profiles/{id}
+  method: put
+  operationId: reminder_profiles_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/reminder_profiles/{id}
+  method: patch
+  operationId: reminder_profiles_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/reminder_profiles/{id}
+  method: get
+  operationId: reminder_profiles_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/reminder_profiles/{id}
+  method: delete
+  operationId: reminder_profiles_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/day_sheet_patient_payments
+  method: get
+  operationId: day_sheet_patient_payments_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/offices/{id}/add_exam_room
+  method: post
+  operationId: offices_add_exam_room
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - user:read
+    - user:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/eligibility_checks/{id}
+  method: get
+  operationId: eligibility_checks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients_list
+  method: post
+  operationId: patients_list_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients_list
+  method: get
+  operationId: patients_list_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_interventions
+  method: post
+  operationId: patient_interventions_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_interventions
+  method: get
+  operationId: patient_interventions_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_messages
+  method: post
+  operationId: patient_messages_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - messages:read
+    - messages:write
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_messages
+  method: get
+  operationId: patient_messages_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - messages:read
+    - messages:write
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_physical_exams/{id}
+  method: put
+  operationId: patient_physical_exams_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_physical_exams/{id}
+  method: patch
+  operationId: patient_physical_exams_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_physical_exams/{id}
+  method: get
+  operationId: patient_physical_exams_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/clinical_note_field_values
+  method: post
+  operationId: clinical_note_field_values_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/clinical_note_field_values
+  method: get
+  operationId: clinical_note_field_values_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/inventory_vaccines/{id}
+  method: get
+  operationId: inventory_vaccines_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients
+  method: post
+  operationId: patients_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients
+  method: get
+  operationId: patients_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/implantable_devices/{id}
+  method: get
+  operationId: implantable_devices_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_communications/{id}
+  method: put
+  operationId: patient_communications_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_communications/{id}
+  method: patch
+  operationId: patient_communications_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_communications/{id}
+  method: get
+  operationId: patient_communications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/offices
+  method: get
+  operationId: offices_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/prescription_messages/{id}
+  method: get
+  operationId: prescription_messages_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/implantable_devices
+  method: get
+  operationId: implantable_devices_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_risk_assessments
+  method: post
+  operationId: patient_risk_assessments_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_risk_assessments
+  method: get
+  operationId: patient_risk_assessments_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/task_statuses/{id}
+  method: put
+  operationId: task_statuses_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_statuses/{id}
+  method: patch
+  operationId: task_statuses_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_statuses/{id}
+  method: get
+  operationId: task_statuses_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients_summary
+  method: post
+  operationId: patients_summary_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:summary:read
+    - patients:summary:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients_summary
+  method: get
+  operationId: patients_summary_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:summary:read
+    - patients:summary:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/documents/{id}
+  method: put
+  operationId: documents_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/documents/{id}
+  method: patch
+  operationId: documents_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/documents/{id}
+  method: get
+  operationId: documents_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/documents/{id}
+  method: delete
+  operationId: documents_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/office_work_schedule
+  method: get
+  operationId: office_work_schedule_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients/{id}/onpatient_access
+  method: post
+  operationId: patients_onpatient_access_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients/{id}/onpatient_access
+  method: get
+  operationId: patients_onpatient_access_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients/{id}/onpatient_access
+  method: delete
+  operationId: patients_onpatient_access_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/comm_logs
+  method: post
+  operationId: comm_logs_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/comm_logs
+  method: get
+  operationId: comm_logs_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_results/{id}
+  method: put
+  operationId: lab_results_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_results/{id}
+  method: patch
+  operationId: lab_results_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_results/{id}
+  method: get
+  operationId: lab_results_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_results/{id}
+  method: delete
+  operationId: lab_results_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/medications/{id}
+  method: put
+  operationId: medications_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/medications/{id}
+  method: patch
+  operationId: medications_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/medications/{id}
+  method: get
+  operationId: medications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/day_sheet_credits
+  method: get
+  operationId: daysheet_credits_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/task_templates
+  method: post
+  operationId: task_templates_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_templates
+  method: get
+  operationId: task_templates_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/transactions_list
+  method: post
+  operationId: transactions_list_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - billing:read
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/transactions_list
+  method: get
+  operationId: transactions_list_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/medications/{id}/append_to_pharmacy_note
+  method: patch
+  operationId: medications_append_to_pharmacy_note
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/office_work_schedule/{id}
+  method: put
+  operationId: office_work_schedule_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - user:read
+    - user:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/office_work_schedule/{id}
+  method: patch
+  operationId: office_work_schedule_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - user:read
+    - user:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/office_work_schedule/{id}
+  method: get
+  operationId: office_work_schedule_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_vaccine_records/{id}
+  method: put
+  operationId: patient_vaccine_records_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_vaccine_records/{id}
+  method: patch
+  operationId: patient_vaccine_records_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_vaccine_records/{id}
+  method: get
+  operationId: patient_vaccine_records_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_flag_types/{id}
+  method: put
+  operationId: patient_flag_types_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_flag_types/{id}
+  method: patch
+  operationId: patient_flag_types_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_flag_types/{id}
+  method: get
+  operationId: patient_flag_types_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/inventory_categories/{id}
+  method: get
+  operationId: inventory_categories_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/clinical_note_field_types/{id}
+  method: patch
+  operationId: clinical_note_field_types_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/clinical_note_field_types/{id}
+  method: get
+  operationId: clinical_note_field_types_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/tasks/{id}
+  method: put
+  operationId: tasks_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/tasks/{id}
+  method: patch
+  operationId: tasks_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/tasks/{id}
+  method: get
+  operationId: tasks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/doctor_work_schedule
+  method: get
+  operationId: doctor_work_schedule_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/doctor_options
+  method: get
+  operationId: doctor_options_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/fee_schedules
+  method: get
+  operationId: fee_schedules_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_risk_assessments/{id}
+  method: put
+  operationId: patient_risk_assessments_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_risk_assessments/{id}
+  method: patch
+  operationId: patient_risk_assessments_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_risk_assessments/{id}
+  method: get
+  operationId: patient_risk_assessments_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/inventory_categories
+  method: get
+  operationId: inventory_categories_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_documents/{id}
+  method: put
+  operationId: lab_documents_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_documents/{id}
+  method: patch
+  operationId: lab_documents_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_documents/{id}
+  method: get
+  operationId: lab_documents_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_documents/{id}
+  method: delete
+  operationId: lab_documents_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointment_templates/{id}
+  method: put
+  operationId: appointment_templates_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointment_templates/{id}
+  method: patch
+  operationId: appointment_templates_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointment_templates/{id}
+  method: get
+  operationId: appointment_templates_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointment_templates/{id}
+  method: delete
+  operationId: appointment_templates_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_interventions/{id}
+  method: put
+  operationId: patient_interventions_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_interventions/{id}
+  method: patch
+  operationId: patient_interventions_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_interventions/{id}
+  method: get
+  operationId: patient_interventions_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/task_statuses
+  method: post
+  operationId: task_statuses_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_statuses
+  method: get
+  operationId: task_statuses_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/allergies/{id}
+  method: put
+  operationId: allergies_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/allergies/{id}
+  method: patch
+  operationId: allergies_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/allergies/{id}
+  method: get
+  operationId: allergies_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients/{id}/ccda
+  method: get
+  operationId: patients_ccda
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_payments/{id}
+  method: get
+  operationId: patient_payments_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:patient-payment:read
+    - billing:patient-payment:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_orders_summary
+  method: get
+  operationId: lab_orders_summary_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_payments
+  method: post
+  operationId: patient_payments_create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - billing:patient-payment:read
+    - billing:patient-payment:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_payments
+  method: get
+  operationId: patient_payments_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:patient-payment:read
+    - billing:patient-payment:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/clinical_note_field_values_list
+  method: post
+  operationId: clinical_note_field_values_list_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - patients:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/clinical_note_field_values_list
+  method: get
+  operationId: clinical_note_field_values_list_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/care_plans/{id}
+  method: get
+  operationId: care_plans_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/billing_profiles
+  method: get
+  operationId: billing_profiles_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/billing_profiles/{id}
+  method: get
+  operationId: billing_profiles_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/availability
+  method: get
+  operationId: availability
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/task_templates/{id}
+  method: put
+  operationId: task_templates_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_templates/{id}
+  method: patch
+  operationId: task_templates_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_templates/{id}
+  method: get
+  operationId: task_templates_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/fee_schedules/{id}
+  method: get
+  operationId: fee_schedules_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointments/{id}
+  method: put
+  operationId: appointments_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointments/{id}
+  method: patch
+  operationId: appointments_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointments/{id}
+  method: get
+  operationId: appointments_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointments/{id}
+  method: delete
+  operationId: appointments_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/telehealth_appointments
+  method: post
+  operationId: telehealth_appointments_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/telehealth_appointments
+  method: get
+  operationId: telehealth_appointments_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/care_plans
+  method: get
+  operationId: care_plans_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_physical_exams
+  method: post
+  operationId: patient_physical_exams_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_physical_exams
+  method: get
+  operationId: patient_physical_exams_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/line_item_deletions
+  method: get
+  operationId: line_item_deletions_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/signed_consent_forms/{id}
+  method: get
+  operationId: signed_consent_forms_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/clinical_note_templates/{id}
+  method: get
+  operationId: clinical_note_templates_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/transactions
+  method: get
+  operationId: transactions_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_results
+  method: post
+  operationId: lab_results_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_results
+  method: get
+  operationId: lab_results_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/custom_insurance_plan_names
+  method: get
+  operationId: custom_insurance_plan_names_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/problems/{id}
+  method: put
+  operationId: problems_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/problems/{id}
+  method: patch
+  operationId: problems_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/problems/{id}
+  method: get
+  operationId: problems_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/amendments
+  method: post
+  operationId: amendments_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/amendments
+  method: get
+  operationId: amendments_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_orders
+  method: post
+  operationId: lab_orders_create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_orders
+  method: get
+  operationId: lab_orders_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/doctors/{id}
+  method: get
+  operationId: doctors_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_flag_types
+  method: post
+  operationId: patient_flag_types_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_flag_types
+  method: get
+  operationId: patient_flag_types_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/day_sheet_totals
+  method: get
+  operationId: daysheet_totals_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/custom_appointment_fields/{id}
+  method: put
+  operationId: custom_appointment_fields_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/custom_appointment_fields/{id}
+  method: patch
+  operationId: custom_appointment_fields_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/custom_appointment_fields/{id}
+  method: get
+  operationId: custom_appointment_fields_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/eobs
+  method: post
+  operationId: eobs_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - billing:read
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/eobs
+  method: get
+  operationId: eobs_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/users/{id}
+  method: get
+  operationId: users_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/insurances
+  method: get
+  operationId: insurances_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/telehealth_appointment_history
+  method: post
+  operationId: telehealth_appointment_history_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/telehealth_appointment_history
+  method: get
+  operationId: telehealth_appointment_history_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/task_notes
+  method: post
+  operationId: task_notes_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_notes
+  method: get
+  operationId: task_notes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/tasks
+  method: post
+  operationId: tasks_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/tasks
+  method: get
+  operationId: tasks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients_summary/{id}
+  method: put
+  operationId: patients_summary_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:summary:read
+    - patients:summary:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients_summary/{id}
+  method: patch
+  operationId: patients_summary_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:summary:read
+    - patients:summary:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients_summary/{id}
+  method: get
+  operationId: patients_summary_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:summary:read
+    - patients:summary:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients_summary/{id}
+  method: delete
+  operationId: patients_summary_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:summary:read
+    - patients:summary:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_documents
+  method: post
+  operationId: lab_documents_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_documents
+  method: get
+  operationId: lab_documents_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/consent_forms/{id}
+  method: put
+  operationId: consent_forms_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/consent_forms/{id}
+  method: patch
+  operationId: consent_forms_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/consent_forms/{id}
+  method: get
+  operationId: consent_forms_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_tests/{id}
+  method: put
+  operationId: lab_tests_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_tests/{id}
+  method: patch
+  operationId: lab_tests_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_tests/{id}
+  method: get
+  operationId: lab_tests_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/lab_tests/{id}
+  method: delete
+  operationId: lab_tests_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/prescription_messages_list
+  method: post
+  operationId: prescription_messages_list_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/prescription_messages_list
+  method: get
+  operationId: prescription_messages_list_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients/{id}
+  method: put
+  operationId: patients_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients/{id}
+  method: patch
+  operationId: patients_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients/{id}
+  method: get
+  operationId: patients_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patients/{id}
+  method: delete
+  operationId: patients_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patients/{id}/ccda_async
+  method: get
+  operationId: patients_ccda_async
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/custom_vitals
+  method: get
+  operationId: custom_vitals_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/schedule_blocks
+  method: post
+  operationId: schedule_blocks_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/schedule_blocks
+  method: get
+  operationId: schedule_blocks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/care_team_members/{id}
+  method: get
+  operationId: care_team_members_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/claim_billing_notes/{id}
+  method: get
+  operationId: claim_billing_notes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/inventory_vaccines
+  method: post
+  operationId: inventory_vaccines_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/inventory_vaccines
+  method: get
+  operationId: inventory_vaccines_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/transactions/{id}
+  method: get
+  operationId: transactions_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/procedures
+  method: get
+  operationId: procedures_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_lab_results/{id}
+  method: put
+  operationId: patient_lab_results_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_lab_results/{id}
+  method: patch
+  operationId: patient_lab_results_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_lab_results/{id}
+  method: get
+  operationId: patient_lab_results_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_lab_results/{id}
+  method: delete
+  operationId: patient_lab_results_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/amendments/{id}
+  method: put
+  operationId: amendments_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/amendments/{id}
+  method: patch
+  operationId: amendments_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/amendments/{id}
+  method: get
+  operationId: amendments_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/amendments/{id}
+  method: delete
+  operationId: amendments_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_tests
+  method: post
+  operationId: lab_tests_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_tests
+  method: get
+  operationId: lab_tests_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointments_list/{id}
+  method: put
+  operationId: appointments_list_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointments_list/{id}
+  method: patch
+  operationId: appointments_list_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointments_list/{id}
+  method: get
+  operationId: appointments_list_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointments_list/{id}
+  method: delete
+  operationId: appointments_list_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_lab_results
+  method: post
+  operationId: patient_lab_results_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_lab_results
+  method: get
+  operationId: patient_lab_results_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/task_categories/{id}
+  method: put
+  operationId: task_categories_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_categories/{id}
+  method: patch
+  operationId: task_categories_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_categories/{id}
+  method: get
+  operationId: task_categories_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/fee_schedules_v2/{id}
+  method: get
+  operationId: fee_schedules_v2_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/insurances/{id}
+  method: get
+  operationId: insurances_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/clinical_notes
+  method: get
+  operationId: clinical_notes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/eligibility_checks_list
+  method: post
+  operationId: eligibility_checks_list_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/eligibility_checks_list
+  method: get
+  operationId: eligibility_checks_list_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - patients:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/telehealth_appointment_history/{id}
+  method: get
+  operationId: telehealth_appointment_history_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/clinical_notes/{id}
+  method: get
+  operationId: clinical_notes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/clinical_note_field_types
+  method: get
+  operationId: clinical_note_field_types_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/documents
+  method: post
+  operationId: documents_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/documents
+  method: get
+  operationId: documents_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/staff/{id}
+  method: get
+  operationId: staff_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/users
+  method: get
+  operationId: users_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/schedule_blocks/{id}
+  method: put
+  operationId: schedule_blocks_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/schedule_blocks/{id}
+  method: patch
+  operationId: schedule_blocks_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/schedule_blocks/{id}
+  method: get
+  operationId: schedule_blocks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/schedule_blocks/{id}
+  method: delete
+  operationId: schedule_blocks_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/lab_orders_summary/{id}
+  method: get
+  operationId: lab_orders_summary_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/audit_log
+  method: get
+  operationId: audit_log_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/task_notes/{id}
+  method: put
+  operationId: task_notes_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_notes/{id}
+  method: patch
+  operationId: task_notes_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - tasks:read
+    - tasks:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/task_notes/{id}
+  method: get
+  operationId: task_notes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - tasks:read
+    - tasks:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/custom_demographics/{id}
+  method: put
+  operationId: custom_demographics_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/custom_demographics/{id}
+  method: patch
+  operationId: custom_demographics_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/custom_demographics/{id}
+  method: get
+  operationId: custom_demographics_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - patients:read
+    - patients:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/messages/{id}
+  method: put
+  operationId: messages_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - messages:read
+    - messages:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/messages/{id}
+  method: patch
+  operationId: messages_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - messages:read
+    - messages:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/messages/{id}
+  method: get
+  operationId: messages_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - messages:read
+    - messages:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/messages/{id}
+  method: delete
+  operationId: messages_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - messages:read
+    - messages:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/eobs/{id}
+  method: get
+  operationId: eobs_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/doctor_options/{id}
+  method: get
+  operationId: doctor_options_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/allergies
+  method: post
+  operationId: allergies_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/allergies
+  method: get
+  operationId: allergies_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointments
+  method: post
+  operationId: appointments_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointments
+  method: get
+  operationId: appointments_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/procedures/{id}
+  method: get
+  operationId: procedures_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/clinical_note_templates
+  method: get
+  operationId: clinical_note_templates_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/line_items/{id}
+  method: put
+  operationId: line_items_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - billing:read
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/line_items/{id}
+  method: patch
+  operationId: line_items_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - billing:read
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/line_items/{id}
+  method: get
+  operationId: line_items_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/line_items/{id}
+  method: delete
+  operationId: line_items_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - billing:read
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/doctors
+  method: get
+  operationId: doctors_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/reminder_profiles
+  method: post
+  operationId: reminder_profiles_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/reminder_profiles
+  method: get
+  operationId: reminder_profiles_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_payment_log
+  method: get
+  operationId: patient_payment_log_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/offices/{id}
+  method: put
+  operationId: offices_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - user:read
+    - user:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/offices/{id}
+  method: patch
+  operationId: offices_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - user:read
+    - user:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/offices/{id}
+  method: get
+  operationId: offices_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - user:read
+    - user:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_payment_log/{id}
+  method: get
+  operationId: patient_payment_log_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/appointment_templates
+  method: post
+  operationId: appointment_templates_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/appointment_templates
+  method: get
+  operationId: appointment_templates_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - settings:read
+    - settings:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/patient_vaccine_records
+  method: post
+  operationId: patient_vaccine_records_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/patient_vaccine_records
+  method: get
+  operationId: patient_vaccine_records_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/telehealth_appointments/{id}
+  method: put
+  operationId: telehealth_appointments_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/telehealth_appointments/{id}
+  method: patch
+  operationId: telehealth_appointments_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/telehealth_appointments/{id}
+  method: get
+  operationId: telehealth_appointments_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/comm_logs/{id}
+  method: put
+  operationId: comm_logs_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/comm_logs/{id}
+  method: patch
+  operationId: comm_logs_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - calendar:read
+    - calendar:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/comm_logs/{id}
+  method: get
+  operationId: comm_logs_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - calendar:read
+    - calendar:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/prescription_messages
+  method: get
+  operationId: prescription_messages_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - clinical:read
+    - clinical:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/user_groups/{id}
+  method: get
+  operationId: user_groups_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/line_items
+  method: post
+  operationId: line_items_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - billing:read
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/line_items
+  method: get
+  operationId: line_items_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    - billing:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sublabs
+  method: post
+  operationId: sublabs_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - labs:read
+    - labs:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sublabs
+  method: get
+  operationId: sublabs_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - labs:read
+    - labs:write
+    token:
+      max-ttl: 3600
+    audit: none

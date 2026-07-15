@@ -47,6 +47,8 @@ apis:
       - FN: drchrono API Support
         email: api@drchrono.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/drchrono-agentic-access.yml
   - type: DomainSecurity
     url: security/drchrono-domain-security.yml
   - type: Authentication
