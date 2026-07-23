@@ -1,0 +1,4734 @@
+openapi: 3.0.0
+info:
+  version: v4 - Hunt Valley
+  description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
+  x-logo:
+    url: https://www.drchrono.com/site_media/images/logos/drchrono-black-wpadding.png
+    altText: DrChrono Logo
+  title: DrChrono EHR REST Administrative Practice Management API
+servers:
+- url: https://app.drchrono.com
+tags:
+- description: Create and manage practice management resources
+  name: Practice Management
+paths:
+  /api/doctor_work_schedule/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: doctor_work_schedule_update
+      description: Update an existing doctor's entire work schedule
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: doctor_work_schedule_partial_update
+      description: Update an existing doctor's work schedule
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkSchedule'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: doctor_work_schedule_read
+      description: Retrieve a work schedule for the doctor (beta)
+  /api/messages:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorMessage'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: responsible_user
+        required: false
+        description: ''
+        name: responsible_user
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: updated_since
+        required: false
+        description: ''
+        name: updated_since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: received_since
+        required: false
+        description: ''
+        name: received_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: owner
+        required: false
+        description: ''
+        name: owner
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: type
+        required: false
+        description: ''
+        name: type
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - message-center
+      x-practice-access: '"share_communications" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - messages:read
+        - messages:write
+      operationId: messages_create
+      description: Create messages in doctor's message center
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/DoctorMessage'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: responsible_user
+        required: false
+        description: ''
+        name: responsible_user
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: updated_since
+        required: false
+        description: ''
+        name: updated_since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: received_since
+        required: false
+        description: ''
+        name: received_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: owner
+        required: false
+        description: ''
+        name: owner
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: type
+        required: false
+        description: ''
+        name: type
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - message-center
+      x-practice-access: '"share_communications" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - messages:read
+        - messages:write
+      operationId: messages_list
+      description: Retrieve or search messages in doctor's message center
+  /api/task_categories:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCategory'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_categories_create
+      description: Create a task category
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/TaskCategory'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_categories_list
+      description: Retrieve or search task categories
+  /api/offices/{id}/add_exam_room:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Office'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: offices_add_exam_room
+      description: Add an exam room to the office
+  /api/inventory_vaccines/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryVaccine'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: cvx_code
+        required: false
+        description: ''
+        name: cvx_code
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - clinical-notes
+      x-practice-access: '"share_inventory" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - clinical:read
+        - clinical:write
+      operationId: inventory_vaccines_read
+      description: Retrieve an existing vaccine inventory
+  /api/offices:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Office'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: offices_list
+      description: Retrieve or search offices
+  /api/task_statuses/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_statuses_update
+      description: Update an existing task status
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_statuses_partial_update
+      description: Update an existing task status
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskStatus'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_statuses_read
+      description: Retrieve an existing task status
+  /api/office_work_schedule:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkSchedule'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2: []
+      operationId: office_work_schedule_list
+      description: Get the work schedule for the authed doctor's primary office (beta)
+  /api/task_templates:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskTemplate'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_templates_create
+      description: Create a task template
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/TaskTemplate'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_templates_list
+      description: Retrieve or search task templates
+  /api/office_work_schedule/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: office_work_schedule_update
+      description: Update an existing office's entire work schedule
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: office_work_schedule_partial_update
+      description: Update an existing office's work schedule
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkSchedule'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: office_work_schedule_read
+      description: Retrieve a work schedule (beta)
+  /api/inventory_categories/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryCategory'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - clinical-notes
+      x-practice-access: '"share_inventory" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - clinical:read
+        - clinical:write
+      operationId: inventory_categories_read
+      description: Retrieve an existing inventory category
+  /api/tasks/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_date
+        required: false
+        description: ''
+        name: due_at_date
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_unknown
+        required: false
+        description: ''
+        name: due_at_unknown
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_since
+        required: false
+        description: ''
+        name: due_at_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_range
+        required: false
+        description: ''
+        name: due_at_range
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: tasks_update
+      description: Update an existing task
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_date
+        required: false
+        description: ''
+        name: due_at_date
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_unknown
+        required: false
+        description: ''
+        name: due_at_unknown
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_since
+        required: false
+        description: ''
+        name: due_at_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_range
+        required: false
+        description: ''
+        name: due_at_range
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: tasks_partial_update
+      description: Update an existing task
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_date
+        required: false
+        description: ''
+        name: due_at_date
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_unknown
+        required: false
+        description: ''
+        name: due_at_unknown
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_since
+        required: false
+        description: ''
+        name: due_at_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_range
+        required: false
+        description: ''
+        name: due_at_range
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: tasks_read
+      description: Retrieve an existing task
+  /api/doctor_work_schedule:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkSchedule'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2: []
+      operationId: doctor_work_schedule_list
+      description: Get the work schedule for the authed doctor's primary office (beta)
+  /api/inventory_categories:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/InventoryCategory'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - clinical-notes
+      x-practice-access: '"share_inventory" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - clinical:read
+        - clinical:write
+      operationId: inventory_categories_list
+      description: Retrieve or search inventory categories
+  /api/task_statuses:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskStatus'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_statuses_create
+      description: Create a task status
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/TaskStatus'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_statuses_list
+      description: Retrieve or search task statuses
+  /api/task_templates/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_templates_update
+      description: Update an existing task template
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_templates_partial_update
+      description: Update an existing task template
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskTemplate'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_templates_read
+      description: Retrieve an existing task template
+  /api/task_notes:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskNote'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: integer
+          description: ''
+          title: task
+        required: false
+        description: ''
+        name: task
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_notes_create
+      description: Create a task note
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/TaskNote'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: task
+        required: false
+        description: ''
+        name: task
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_notes_list
+      description: Retrieve or search task notes
+  /api/tasks:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_date
+        required: false
+        description: ''
+        name: due_at_date
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_unknown
+        required: false
+        description: ''
+        name: due_at_unknown
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_since
+        required: false
+        description: ''
+        name: due_at_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_range
+        required: false
+        description: ''
+        name: due_at_range
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: tasks_create
+      description: Create a task
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Task'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: category
+        required: false
+        description: ''
+        name: category
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_date
+        required: false
+        description: ''
+        name: due_at_date
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_unknown
+        required: false
+        description: ''
+        name: due_at_unknown
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_since
+        required: false
+        description: ''
+        name: due_at_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_user
+        required: false
+        description: ''
+        name: assignee_user
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: assignee_group
+        required: false
+        description: ''
+        name: assignee_group
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: due_at_range
+        required: false
+        description: ''
+        name: due_at_range
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: tasks_list
+      description: Retrieve or search tasks
+  /api/inventory_vaccines:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryVaccine'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: cvx_code
+        required: false
+        description: ''
+        name: cvx_code
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - clinical-notes
+      x-practice-access: '"share_inventory" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - clinical:read
+        - clinical:write
+      operationId: inventory_vaccines_create
+      description: Create vaccine inventory
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/InventoryVaccine'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: status
+        required: false
+        description: ''
+        name: status
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: cvx_code
+        required: false
+        description: ''
+        name: cvx_code
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - clinical-notes
+      x-practice-access: '"share_inventory" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - clinical:read
+        - clinical:write
+      operationId: inventory_vaccines_list
+      description: Retrieve or search vaccine inventories
+  /api/task_categories/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_categories_update
+      description: Update an existing task category
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_categories_partial_update
+      description: Update an existing task category
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCategory'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_categories_read
+      description: Retrieve an existing task category
+  /api/task_notes/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: task
+        required: false
+        description: ''
+        name: task
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_notes_update
+      description: Update an existing task note
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: task
+        required: false
+        description: ''
+        name: task
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_notes_partial_update
+      description: Update an existing task note
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskNote'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: task
+        required: false
+        description: ''
+        name: task
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - tasks:read
+        - tasks:write
+      operationId: task_notes_read
+      description: Retrieve an existing task note
+  /api/messages/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: responsible_user
+        required: false
+        description: ''
+        name: responsible_user
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: updated_since
+        required: false
+        description: ''
+        name: updated_since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: received_since
+        required: false
+        description: ''
+        name: received_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: owner
+        required: false
+        description: ''
+        name: owner
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: type
+        required: false
+        description: ''
+        name: type
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - message-center
+      x-practice-access: '"share_communications" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - messages:read
+        - messages:write
+      operationId: messages_update
+      description: Update an existing message in doctor's message center
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: responsible_user
+        required: false
+        description: ''
+        name: responsible_user
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: updated_since
+        required: false
+        description: ''
+        name: updated_since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: received_since
+        required: false
+        description: ''
+        name: received_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: owner
+        required: false
+        description: ''
+        name: owner
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: type
+        required: false
+        description: ''
+        name: type
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - message-center
+      x-practice-access: '"share_communications" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - messages:read
+        - messages:write
+      operationId: messages_partial_update
+      description: Update an existing message in doctor's message center
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorMessage'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: responsible_user
+        required: false
+        description: ''
+        name: responsible_user
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: updated_since
+        required: false
+        description: ''
+        name: updated_since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: received_since
+        required: false
+        description: ''
+        name: received_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: owner
+        required: false
+        description: ''
+        name: owner
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: type
+        required: false
+        description: ''
+        name: type
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - message-center
+      x-practice-access: '"share_communications" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - messages:read
+        - messages:write
+      operationId: messages_read
+      description: Retrieve an existing message in doctor's message center
+    delete:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: responsible_user
+        required: false
+        description: ''
+        name: responsible_user
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: updated_since
+        required: false
+        description: ''
+        name: updated_since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: received_since
+        required: false
+        description: ''
+        name: received_since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: owner
+        required: false
+        description: ''
+        name: owner
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: type
+        required: false
+        description: ''
+        name: type
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - message-center
+      x-practice-access: '"share_communications" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - messages:read
+        - messages:write
+      operationId: messages_delete
+      description: Delete an existing message in doctor's message center
+  /api/offices/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: offices_update
+      description: Update an existing office
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: offices_partial_update
+      description: Update an existing office
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Office'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Practice Management
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: offices_read
+      description: Retrieve an existing office
+components:
+  schemas:
+    TaskTemplate:
+      required:
+      - name
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        name:
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          readOnly: true
+          type: string
+          description: ''
+          title: Practice group
+        default_category:
+          type: integer
+          description: ''
+          title: Default category
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        default_title:
+          type: string
+          description: ''
+          title: Default title
+        default_note:
+          type: string
+          description: ''
+          title: Default note
+        default_status:
+          type: integer
+          description: ''
+          title: Default status
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        default_assignee_group:
+          type: integer
+          description: ''
+          title: Default assignee group
+        default_assignee_user:
+          type: string
+          description: ''
+          title: Default assignee user
+        default_due_date_offset:
+          type: string
+          description: Offset due date, format should follow `"[DD] [HH:[MM:]]ss[.uuuuuu]"`
+          title: Default due date offset
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        default_priority:
+          enum:
+          - '10'
+          - '20'
+          - '30'
+          - '40'
+          type: string
+          description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
+          title: Default priority
+      x-verbose-required: []
+    Office:
+      required: []
+      type: object
+      properties:
+        phone_number:
+          readOnly: true
+          type: string
+          description: ''
+          title: Phone number
+        city:
+          readOnly: true
+          type: string
+          description: ''
+          title: City
+        archived:
+          type: boolean
+          description: Indicates that the object has been soft-deleted and should not be used
+          title: Archived
+        office_work_schedule:
+          $ref: '#/components/schemas/WorkSchedule'
+          description: Office work schedule (beta)
+          title: Office Work schedule
+        name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Name
+        doctor:
+          readOnly: true
+          type: string
+          description: ID of the doctor who owns the office
+          title: Doctor
+        country:
+          readOnly: true
+          enum:
+          - ''
+          - AF
+          - AX
+          - AL
+          - DZ
+          - AS
+          - AD
+          - AO
+          - AI
+          - AQ
+          - AG
+          - AR
+          - AM
+          - AW
+          - AU
+          - AT
+          - AZ
+          - BS
+          - BH
+          - BD
+          - BB
+          - BY
+          - BE
+          - BZ
+          - BJ
+          - BM
+          - BT
+          - BO
+          - BQ
+          - BA
+          - BW
+          - BV
+          - BR
+          - IO
+          - BN
+          - BG
+          - BF
+          - BI
+          - KH
+          - CM
+          - CA
+          - CV
+          - KY
+          - CF
+          - TD
+          - CL
+          - CN
+          - CX
+          - CC
+          - CO
+          - KM
+          - CG
+          - CD
+          - CK
+          - CR
+          - CI
+          - HR
+          - CU
+          - CW
+          - CY
+          - CZ
+          - CYM
+          - DK
+          - DJ
+          - DM
+          - DO
+          - EC
+          - EG
+          - SV
+          - GQ
+          - ER
+          - EE
+          - ET
+          - FK
+          - FO
+          - FJ
+          - FI
+          - FR
+          - GF
+          - PF
+          - TF
+          - GA
+          - GM
+          - GE
+          - DE
+          - GH
+          - GI
+          - GR
+          - GL
+          - GD
+          - GP
+          - GU
+          - GT
+          - GG
+          - GN
+          - GW
+          - GY
+          - HT
+          - HM
+          - VA
+          - HN
+          - HK
+          - HU
+          - IS
+          - IN
+          - ID
+          - IR
+          - IQ
+          - IE
+          - IM
+          - IL
+          - IT
+          - JM
+          - JP
+          - JE
+          - JO
+          - KZ
+          - KE
+          - KI
+          - KP
+          - KR
+          - XK
+          - KW
+          - KG
+          - LA
+          - LV
+          - LB
+          - LS
+          - LR
+          - LY
+          - LI
+          - LT
+          - LU
+          - MO
+          - MK
+          - MG
+          - MW
+          - MY
+          - MV
+          - ML
+          - MT
+          - MH
+          - MQ
+          - MR
+          - MU
+          - YT
+          - MX
+          - FM
+          - MD
+          - MC
+          - MN
+          - ME
+          - MS
+          - MA
+          - MZ
+          - MM
+          - NA
+          - NR
+          - NP
+          - NL
+          - NC
+          - NZ
+          - NI
+          - NE
+          - NG
+          - NU
+          - NF
+          - MP
+          - 'NO'
+          - OM
+          - PK
+          - PW
+          - PS
+          - PA
+          - PG
+          - PY
+          - PE
+          - PH
+          - PN
+          - PL
+          - PT
+          - PR
+          - QA
+          - RE
+          - RO
+          - RU
+          - RW
+          - BL
+          - SH
+          - KN
+          - LC
+          - MF
+          - PM
+          - VC
+          - WS
+          - SM
+          - ST
+          - SA
+          - SN
+          - RS
+          - SC
+          - SL
+          - SG
+          - SX
+          - SK
+          - SI
+          - SB
+          - SO
+          - ZA
+          - GS
+          - SS
+          - ES
+          - LK
+          - SD
+          - SR
+          - SJ
+          - SZ
+          - SE
+          - CH
+          - SY
+          - TW
+          - TJ
+          - TZ
+          - TH
+          - TL
+          - TG
+          - TK
+          - TO
+          - TT
+          - TN
+          - TR
+          - TM
+          - TC
+          - TV
+          - UG
+          - UA
+          - AE
+          - GB
+          - US
+          - UM
+          - UY
+          - UZ
+          - VU
+          - VE
+          - VN
+          - VG
+          - VI
+          - WF
+          - EH
+          - YE
+          - ZM
+          - ZW
+          type: string
+          description: Two-letter country code
+          title: Country
+        start_time:
+          type: string
+          description: Truncated to the hour. Default is `00:00:00`
+          title: Start time
+        fax_number:
+          readOnly: true
+          type: string
+          description: ''
+          title: Fax number
+        online_timeslots:
+          items:
+            title: OfficeOnlineHours
+            type: object
+            description: ''
+            properties:
+              minute:
+                type: integer
+                description: One of `0`, `15`, `30` or `45`
+                title: Minute
+              day:
+                type: integer
+                description: '`0`(Monday), ..., `6`(Sunday)'
+                title: Day
+              hour:
+                type: integer
+                description: From `0` to `23`
+                title: Hour
+          type: array
+          description: Array of timslots
+          title: Online timeslots
+        state:
+          readOnly: true
+          enum:
+          - AL
+          - AK
+          - AS
+          - AZ
+          - AR
+          - AA
+          - AE
+          - AP
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - GU
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - MP
+          - OH
+          - OK
+          - OR
+          - PA
+          - PR
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VT
+          - VI
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          type: string
+          description: Two-letter abbreviation
+          title: State
+        end_time:
+          type: string
+          description: Truncated to the hour. Default is `24:00`
+          title: End time
+        exam_rooms:
+          readOnly: true
+          type: string
+          description: ''
+          title: Exam rooms
+        address:
+          readOnly: true
+          type: string
+          description: ''
+          title: Address
+        tax_id_number_professional:
+          readOnly: true
+          type: string
+          description: 'Billing Tax ID #'
+          title: Tax id number professional
+        zip_code:
+          readOnly: true
+          type: string
+          description: ''
+          title: Zip code
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        online_scheduling:
+          type: boolean
+          description: Default is `false`
+          title: Online scheduling
+      x-verbose-required:
+      - online_timeslots
+    Task:
+      required:
+      - title
+      - status
+      type: object
+      properties:
+        category:
+          type: integer
+          description: ''
+          title: Category
+        due_date:
+          title: TaskReminder
+          type: object
+          description: When the task is due
+          properties:
+            time:
+              type: string
+              description: Due date time
+              title: Time
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        associated_items:
+          items:
+            title: AssociatedTaskItem
+            type: object
+            description: ''
+            properties:
+              task:
+                type: integer
+                description: ''
+                title: Task
+              type:
+                enum:
+                - Document
+                - Message
+                - Lab result
+                - Lab order
+                - Patient
+                - Appointment
+                - Lab document
+                - Communication
+                type: string
+                description: Can be one of `"Appointment"`, `"Patient"`, `"Message"`, `"Document"`, `"Lab order"`
+                title: Type
+              value:
+                type: integer
+                description: ID of the specified type object
+                title: Value
+          type: array
+          description: Associated task items
+          title: Associated items
+        assigned_by:
+          readOnly: true
+          type: string
+          description: ID of `/api/users/` who assigned the task
+          title: Assigned by
+        assignee_user:
+          type: string
+          description: Either `assignee_user` or `assignee_group` should be set
+          title: Assignee user
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        assignee_group:
+          type: integer
+          description: Either `assignee_user` or `assignee_group` should be set
+          title: Assignee group
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of `/api/users` who created the task
+          title: Created by
+        priority:
+          enum:
+          - '10'
+          - '20'
+          - '30'
+          - '40'
+          type: string
+          description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
+          title: Priority
+        status:
+          type: integer
+          description: ''
+          title: Status
+        notes:
+          items:
+            title: TaskNote
+            type: object
+            description: Task note object
+            properties:
+              archived:
+                type: boolean
+                description: ''
+                title: Archived
+              task:
+                type: integer
+                description: ID of `/api/tasks`
+                title: Task
+              text:
+                type: string
+                description: ''
+                title: Text
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              updated_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Updated at
+              created_by:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created by
+              id:
+                readOnly: true
+                type: integer
+                description: ''
+                title: ID
+          type: array
+          description: Additional notes of the task
+          title: Notes
+        title:
+          type: string
+          description: ''
+          title: Title
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required:
+      - notes
+      - associated_items
+    TaskNote:
+      required:
+      - task
+      - text
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: If the task note is archived or not
+          title: Archived
+        task:
+          type: integer
+          description: ID of task this note is related with
+          title: Task
+        text:
+          type: string
+          description: Content of the task note
+          title: Text
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of the `/api/users` who created the note
+          title: Created by
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    WorkHours:
+      type: object
+      properties:
+        start_time:
+          type: string
+          description: start time of the work hour
+          title: Start time
+        enabled:
+          type: boolean
+          description: whether the work hour is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work hour
+          title: ID
+        end_time:
+          type: string
+          description: end time of the work hour
+          title: End time
+    TaskCategory:
+      required:
+      - name
+      - practice_group
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        is_global:
+          readOnly: true
+          type: string
+          description: Indicates that the category is a system wide (pre-defined) category
+          title: Is global
+        name:
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    TaskStatus:
+      required:
+      - name
+      - practice_group
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        name:
+          type: string
+          description: ''
+          title: Name
+        status_category:
+          enum:
+          - O
+          - P
+          - H
+          - C
+          type: string
+          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
+          title: Status category
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        task_category:
+          type: integer
+          description: ID of `/api/task_categories`
+          title: Task category
+      x-verbose-required: []
+    DoctorMessage:
+      required:
+      - doctor
+      - title
+      type: object
+      properties:
+        type_description:
+          readOnly: true
+          type: string
+          description: Type Description
+          title: Type description
+        patient_middle_name:
+          readOnly: true
+          type: string
+          description: Patient Middle Name
+          title: Patient middle name
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        owner:
+          type: string
+          description: ID of `/api/users` who owns the message, who may be the doctor themselves or one of their staff members
+          title: Owner
+        responsible_user_first_name:
+          readOnly: true
+          type: string
+          description: Responsible User First Name
+          title: Responsible user first name
+        received_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Received at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        doctor_last_name:
+          readOnly: true
+          type: string
+          description: Doctor Last Name
+          title: Doctor last name
+        owner_first_name:
+          readOnly: true
+          type: string
+          description: Owner First Name
+          title: Owner first name
+        archived:
+          readOnly: true
+          type: boolean
+          description: If true, indicates that the message has been soft-deleted
+          title: Archived
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        owner_last_name:
+          readOnly: true
+          type: string
+          description: Owner Last Name
+          title: Owner last name
+        patient_first_name:
+          readOnly: true
+          type: string
+          description: Patient First Name
+          title: Patient first name
+        attachment:
+          type: string
+          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
+          title: Attachment
+        outgoing_fax_recipient_fax_number:
+          readOnly: true
+          type: string
+          description: Outgoing fax recipient fax number
+          title: Outgoing fax recipient fax number
+        responsible_user_last_name:
+          readOnly: true
+          type: string
+          description: Responsible User Last Name
+          title: Responsible user last name
+        type:
+          enum:
+          - GP
+          - GC
+          - GT
+          - GZ
+          - IF
+          - OF
+          - IL
+          - IR
+          - OR
+          - IE
+          - CE
+          - CH
+          - OA
+          - PO
+          - PI
+          - PM
+          - OO
+          - OD
+          - ID
+          - DL
+          - CN
+          type: string
+          description: '
+
+            Value | Description
+
+            ----- | -----------
+
+            `"GP"` | Generated PDF
+
+            `"GC"` | Generated CSV
+
+            `"GZ"` | Generated ZIP
+
+            `"IF"` | Incoming Fax
+
+            `"OF"` | Outgoing Fax
+
+            `"IL"` | Incoming Labs
+
+            `"IR"` | Inbound Referrals
+
+            `"OR"` | Outbound Referrals
+
+            `"IE"` | Incoming eRx
+
+            `"OA"` | Online Appointments
+
+            `"PO"` | Patient Onboarding
+
+            `"PI"` | Patient Incoming Message
+
+            `"PM"` | Patient Outgoing Message
+
+            `"OO"` | Demo Meeting Message
+
+            `"OD"` | Outbound Direct Message
+
+            `"ID"` | Inbound Direct Message
+
+            '
+          title: Type
+        patient_last_name:
+          readOnly: true
+          type: string
+          description: Patient Last Name
+          title: Patient last name
+        patient:
+          type: integer
+          description: ID of patient that the message concerns, if applicable
+          title: Patient
+        doctor_first_name:
+          readOnly: true
+          type: string
+          description: Doctor First Name
+          title: Doctor first name
+        read:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Read
+        responsible_user:
+          type: string
+          description: ID of `/api/users` who has been assigned to process the message, who may be the doctor themselves or one of their staff members
+          title: Responsible user
+        workflow_step:
+          readOnly: true
+          type: string
+          description: Used by doctors and their staff to keep track of what step of processing the message is in
+          title: Workflow step
+        outgoing_fax_recipient_name:
+          readOnly: true
+          type: string
+          description: Outgoing fax recipient name
+          title: Outgoing fax recipient name
+        doctor_middle_name:
+          readOnly: true
+          type: string
+          description: Doctor Middle Name
+          title: Doctor middle name
+        message_notes:
+          items:
+            title: MessageNote
+            type: object
+            description: Additional note
+            properties:
+              text:
+                type: string
+                description: Content of the note
+                title: Text
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              created_by:
+                readOnly: true
+                type: string
+                description: ID of `/api/users` who created the note
+                title: Created by
+          type: array
+          description: Array of notes attached to the message
+          title: Message notes
+        title:
+          type: string
+          description: ''
+          title: Title
+        starred:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Starred
+      x-verbose-required: []
+    WorkSchedule:
+      type: object
+      properties:
+        work_days:
+          items:
+            $ref: '#/components/schemas/WorkDay'
+          type: array
+          description: work days of the work schedule
+          title: Work days
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID for the work schedule
+          title: ID
+        office:
+          type: integer
+          description: ID of office for work schedule
+          title: Office
+        doctor:
+          type: integer
+          description: ID of doctor for work schedule
+          title: Office
+    WorkDay:
+      type: object
+      properties:
+        iso_weekday:
+          type: string
+          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+          title: ISO weekday
+        enabled:
+          type: boolean
+          description: whether the work day is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work day
+          title: ID
+        work_hours:
+          items:
+            $ref: '#/components/schemas/WorkHours'
+          type: array
+          description: work hours of the work day
+          title: Work hours
+    InventoryCategory:
+      required: []
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: If the category is archived or not
+          title: Archived
+        name:
+          type: string
+          description: Name of the inventory category
+          title: Name
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        category_type:
+          enum:
+          - vaccine
+          - product
+          - service
+          type: string
+          description: Can be one of `"vaccine"`, `"product"` or `"service"`
+          title: Category type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    InventoryVaccine:
+      required:
+      - doctor
+      - name
+      - manufacturer_code
+      type: object
+      properties:
+        category:
+          type: integer
+          description: ID of `/api/inventory_categories`
+          title: Category
+        lot_number:
+          type: string
+          description: ''
+          title: Lot number
+        manufacturer_code:
+          type: string
+          description: ''
+          title: Manufacturer code
+        name:
+          type: string
+          description: ''
+          title: Name
+        original_quantity:
+          type: integer
+          description: Default to zero
+          title: Original quantity
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        status:
+          enum:
+          - active
+          - inactive
+          - archived
+          - voided
+          type: string
+          description: Status of vaccine, could be one of `active`, `inactive`, `archived`, `voided`, default to `active`
+          title: Status
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        price_with_tax:
+          type: number
+          description: ''
+          title: Price with tax
+        expiry:
+          type: string
+          description: When will the vaccine expire
+          title: Expiry
+        note:
+          type: string
+          description: ''
+          title: Note
+        sales_tax_applicable:
+          type: boolean
+          description: Is sales tax applicable to this service/product? Default to false
+          title: Sales tax applicable
+        cost:
+          type: number
+          description: Base cost for consumables.
+          title: Cost
+        price:
+          type: number
+          description: ''
+          title: Price
+        vaccination_type:
+          type: string
+          description: Default to `"standard vaccine"`
+          title: Vaccination type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        manufacturer:
+          type: string
+          description: ''
+          title: Manufacturer
+        current_quantity:
+          readOnly: true
+          type: integer
+          description: This field can onlyu be changed by creating new patient vaccine record. Current quantity of an inventory vaccine is calculated by subtract number of records pointing to this inventory from the original quantity value.
+          title: Current quantity
+        cvx_code:
+          type: string
+          description: ''
+          title: Cvx code
+      x-verbose-required: []
+  securitySchemes:
+    drchrono_oauth2:
+      type: oauth2
+      description: ''
+      flows:
+        authorizationCode:
+          scopes:
+            billing:patient-payment:read: View patient payment information
+            billing:read: View billing information.
+            patients:read: View detailed patient information.
+            user:write: Edit select account information, such as creating new exam rooms.
+            messages:write: Create and modify messages in your message center.
+            messages:read: View messages in your message center.
+            tasks:write: Create and modify tasks in your tasks center
+            tasks:read: View tasks in your tasks center
+            labs:write: Create and modify patient lab orders and results.
+            patients:write: Create patients and modify detailed patient information.
+            settings:write: Create resources that requires Settings permission, such as custom fields.
+            billing:patient-payment:write: Modify patient payment information
+            clinical:write: Create and modify clinical information, such as vitals, clinical notes, medications and diagnoses.
+            patients:summary:write: Create new patients and set their name, chart_id, age, and gender.
+            calendar:read: View your appointments.
+            user:read: View your basic information.
+            billing:write: Modify billing information.
+            settings:read: View resources that requires Settings permission, such as custom fields.
+            labs:read: View patient lab orders and results.
+            calendar:write: Schedule appointments and modify the data associated with them.
+            patients:summary:read: View summary information about your patients. This includes patients' name, chart_id, age, and gender.
+            clinical:read: View clinical information, such as vitals, clinical notes, medications and diagnoses.
+          tokenUrl: https://app.drchrono.com/o/token/
+          authorizationUrl: https://app.drchrono.com/o/authorize/

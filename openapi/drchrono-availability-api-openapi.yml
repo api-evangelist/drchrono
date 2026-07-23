@@ -1,0 +1,92 @@
+openapi: 3.0.0
+info:
+  version: v4 - Hunt Valley
+  description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
+  x-logo:
+    url: https://www.drchrono.com/site_media/images/logos/drchrono-black-wpadding.png
+    altText: DrChrono Logo
+  title: DrChrono EHR REST Administrative Availability API
+servers:
+- url: https://app.drchrono.com
+tags:
+- name: Availability
+paths:
+  /api/availability:
+    get:
+      description: Retrieve availability slots for the given date and office, doctor, or exam room.
+      parameters:
+      - schema:
+          type: integer
+          description: ''
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: date
+        required: false
+        description: ''
+        name: date
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: date_range
+        required: false
+        description: ''
+        name: date_range
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: duration
+        required: false
+        description: ''
+        name: duration
+        in: query
+      operationId: availability
+      tags:
+      - Availability
+components:
+  securitySchemes:
+    drchrono_oauth2:
+      type: oauth2
+      description: ''
+      flows:
+        authorizationCode:
+          scopes:
+            billing:patient-payment:read: View patient payment information
+            billing:read: View billing information.
+            patients:read: View detailed patient information.
+            user:write: Edit select account information, such as creating new exam rooms.
+            messages:write: Create and modify messages in your message center.
+            messages:read: View messages in your message center.
+            tasks:write: Create and modify tasks in your tasks center
+            tasks:read: View tasks in your tasks center
+            labs:write: Create and modify patient lab orders and results.
+            patients:write: Create patients and modify detailed patient information.
+            settings:write: Create resources that requires Settings permission, such as custom fields.
+            billing:patient-payment:write: Modify patient payment information
+            clinical:write: Create and modify clinical information, such as vitals, clinical notes, medications and diagnoses.
+            patients:summary:write: Create new patients and set their name, chart_id, age, and gender.
+            calendar:read: View your appointments.
+            user:read: View your basic information.
+            billing:write: Modify billing information.
+            settings:read: View resources that requires Settings permission, such as custom fields.
+            labs:read: View patient lab orders and results.
+            calendar:write: Schedule appointments and modify the data associated with them.
+            patients:summary:read: View summary information about your patients. This includes patients' name, chart_id, age, and gender.
+            clinical:read: View clinical information, such as vitals, clinical notes, medications and diagnoses.
+          tokenUrl: https://app.drchrono.com/o/token/
+          authorizationUrl: https://app.drchrono.com/o/authorize/

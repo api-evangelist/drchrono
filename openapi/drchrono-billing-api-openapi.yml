@@ -1,0 +1,5480 @@
+openapi: 3.0.0
+info:
+  version: v4 - Hunt Valley
+  description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
+  x-logo:
+    url: https://www.drchrono.com/site_media/images/logos/drchrono-black-wpadding.png
+    altText: DrChrono Logo
+  title: DrChrono EHR REST Administrative Billing API
+servers:
+- url: https://app.drchrono.com
+tags:
+- description: Create and manage billing resources
+  name: Billing
+paths:
+  /api/day_sheet_charges:
+    get:
+      description: Retrieve daysheet charges report for a given date range
+      parameters:
+      - schema:
+          type: string
+          description: Start date of report (M/D/YYYY)
+          title: start_date
+        required: true
+        name: start_date
+        in: query
+      - schema:
+          type: string
+          description: End date of report (M/D/YYYY)
+          title: end_date
+        required: true
+        name: end_date
+        in: query
+      - schema:
+          type: string
+          description: Filters report by scheduled time or date of entry if not provided. Can be one of ('scheduled_time', ' ')
+          title: charges_date_type
+        required: false
+        name: charges_date_type
+        in: query
+      - schema:
+          type: string
+          description: Filters report by given value. Can be one of ('reimbursement_analysis', ' ')
+          title: report_type
+        required: false
+        name: report_type
+        in: query
+      - schema:
+          type: string
+          description: Filters report by professional or institutional claims. Can be one of ('institutional', 'professional', ' ')
+          title: claim_type
+        required: false
+        name: claim_type
+        in: query
+      - schema:
+          type: integer
+          description: Filters report by a given patient ID
+          title: patient_id
+        required: false
+        name: patient_id
+        in: query
+      - schema:
+          type: string
+          description: Filters report by a given office
+          title: office
+        required: false
+        name: office_id
+        in: query
+      - schema:
+          type: integer
+          description: Filters report by a given examroom ID
+          title: examroom_id
+        required: false
+        name: examroom_id
+        in: query
+      - schema:
+          type: boolean
+          description: Runs report for all providers in the practice group
+          title: pg_mode
+        required: false
+        name: pg_mode
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - access-patient-payments
+      security:
+      - drchrono_oauth2:
+        - billing
+      operationId: daysheet_charges_list
+  /api/eligibility_checks:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Coverage'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: appointment_date
+        required: false
+        description: ''
+        name: appointment_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: query_date_range
+        required: false
+        description: ''
+        name: query_date_range
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: appointment_date_range
+        required: false
+        description: ''
+        name: appointment_date_range
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: query_date
+        required: false
+        description: ''
+        name: query_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - scheduling
+      - manage-patients
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - calendar:write
+        - patients:read
+        - patients:write
+      operationId: eligibility_checks_list
+      description: Retrieve or search past eligibility checks for patient
+  /api/patient_authorizations:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/PatientAuthorization'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: start_date
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: date_range
+        required: false
+        description: ''
+        name: date_range
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: date
+        required: false
+        description: ''
+        name: end_date
+        in: query
+      tags:
+      - Billing
+      x-permissions: null
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security: null
+      operationId: patient_authorizations_list
+      description: Retrieve or search patient authorizations
+  /api/custom_insurance_plan_names/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomInsurancePlanName'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: user
+        required: false
+        description: ''
+        name: user
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: name
+        required: false
+        description: ''
+        name: name
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - settings
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - settings:read
+        - settings:write
+      operationId: custom_insurance_plan_names_read
+      description: Retrieve an existing custom insurance plan name
+  /api/line_items_list:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    description: 'Status of the request.  Possible values are "In progress", "Complete", "Failed", "Canceled".
+
+                      '
+                    title: status
+                  uuid:
+                    type: string
+                    description: UUID of the batch of billing line items.
+                    title: uuid
+                  description:
+                    type: string
+                    description: Contains link to load the batch by UUID
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          title: order_by
+        required: false
+        description: 'Order results by a specific field. Valid options include [id, updated_at]. Default: id.'
+        name: order_by
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: Date of billing line item creation
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: Patient associated with the billing line item
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: Office associated with the billing line item
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: Date on which the service was rendered
+          title: service_date
+        required: false
+        description: ''
+        name: service_date
+        in: query
+      - schema:
+          type: string
+          description: Bounded date range in which the service was rendered
+          title: service_date_range
+        required: false
+        description: ''
+        name: service_date_range
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+      operationId: line_items_list_create
+      description: Create a billing line items list request
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  status:
+                    type: string
+                    description: 'Status of the request.  Possible values are "In progress", "Complete", "Failed", "Canceled".
+
+                      '
+                    title: status
+                  results:
+                    items:
+                      $ref: '#/components/schemas/BillingLineItem'
+                    type: array
+                    description: result data. only presented when the status is "completed"
+                    title: data
+                  uuid:
+                    type: string
+                    description: UUID of the batch of billing line items.
+                    title: uuid
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResourceError'
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: uuid
+        required: false
+        description: 'The UUID token for the batch of patients.  This is returned in the response of the create endpoint.
+
+          '
+        name: uuid
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+      operationId: line_items_list_list
+      description: Retrieve the list of billing line items
+  /api/day_sheet_patient_payments:
+    get:
+      description: Retrieve daysheet cash report for a given date range
+      parameters:
+      - schema:
+          type: string
+          description: Start date of report (M/D/YYYY)
+          title: start_date
+        required: true
+        name: start_date
+        in: query
+      - schema:
+          type: string
+          description: End date of report (M/D/YYYY)
+          title: end_date
+        required: true
+        name: end_date
+        in: query
+      - schema:
+          type: string
+          description: Filters report by scheduled time or date of entry if not provided. Can be one of ('scheduled_time', ' ')
+          title: charges_date_type
+        required: false
+        name: charges_date_type
+        in: query
+      - schema:
+          type: string
+          description: Filters report by given value. Can be one of ('reimbursement_analysis', ' ')
+          title: report_type
+        required: false
+        name: report_type
+        in: query
+      - schema:
+          type: string
+          description: Filters report by professional or institutional claims. Can be one of ('institutional', 'professional', ' ')
+          title: claim_type
+        required: false
+        name: claim_type
+        in: query
+      - schema:
+          type: integer
+          description: Filters report by a given patient ID
+          title: patient_id
+        required: false
+        name: patient_id
+        in: query
+      - schema:
+          type: string
+          description: Filters report by a given office
+          title: office
+        required: false
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: Filters report by a given examroom ID
+          title: examroom_id
+        required: false
+        name: examroom_id
+        in: query
+      - schema:
+          type: bool
+          description: Enables backward compatibility for legacy version
+          title: legacy
+        required: false
+        name: legacy
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - access-patient-payments
+      security:
+      - drchrono_oauth2:
+        - billing
+      operationId: day_sheet_patient_payments_list
+  /api/eligibility_checks/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coverage'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: appointment_date
+        required: false
+        description: ''
+        name: appointment_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: query_date_range
+        required: false
+        description: ''
+        name: query_date_range
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: appointment_date_range
+        required: false
+        description: ''
+        name: appointment_date_range
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: query_date
+        required: false
+        description: ''
+        name: query_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - scheduling
+      - manage-patients
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - calendar:write
+        - patients:read
+        - patients:write
+      operationId: eligibility_checks_read
+      description: Retrieve an existing past eligibility check
+  /api/comm_logs:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneCallLog'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - scheduling
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - calendar:write
+      operationId: comm_logs_create
+      description: Create communication (phone call) logs
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/PhoneCallLog'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - scheduling
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - calendar:write
+      operationId: comm_logs_list
+      description: Retrieve or search communicatioin (phone call) logs
+  /api/day_sheet_credits:
+    get:
+      description: Retrieve daysheet credits/adjustments report for a given date range
+      parameters:
+      - schema:
+          type: string
+          description: Start date of report (M/D/YYYY)
+          title: start_date
+        required: true
+        name: start_date
+        in: query
+      - schema:
+          type: string
+          description: End date of report (M/D/YYYY)
+          title: end_date
+        required: true
+        name: end_date
+        in: query
+      - schema:
+          type: string
+          description: Filters report by posted date or deposit date. Defaults to date of entry if not provided. Can be one of ('credit', 'debit', ' ')
+          title: credits_date_type
+        required: false
+        name: credits_date_type
+        in: query
+      - schema:
+          type: string
+          description: Filters report by given value. Can be one of ('reimbursement_analysis', ' ')
+          title: report_type
+        required: false
+        name: report_type
+        in: query
+      - schema:
+          type: string
+          description: Filters report by professional or institutional claims. Can be one of ('institutional', 'professional', ' ')
+          title: claim_type
+        required: false
+        name: claim_type
+        in: query
+      - schema:
+          type: integer
+          description: Filters report by a given patient ID
+          title: patient_id
+        required: false
+        name: patient_id
+        in: query
+      - schema:
+          type: string
+          description: Filters report by a given office
+          title: office
+        required: false
+        name: office_id
+        in: query
+      - schema:
+          type: integer
+          description: Filters report by a given examroom ID
+          title: examroom_id
+        required: false
+        name: examroom_id
+        in: query
+      - schema:
+          type: boolean
+          description: Runs report for all providers in the practice group
+          title: pg_mode
+        required: false
+        name: pg_mode
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - access-patient-payments
+      security:
+      - drchrono_oauth2:
+        - billing
+      operationId: daysheet_credits_list
+  /api/transactions_list:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    description: Status of the request. Upon creation this will be "In progress"
+                    title: status
+                  uuid:
+                    type: string
+                    description: UUID of the batch of patients.
+                    title: uuid
+                  description:
+                    type: string
+                    description: Contains link to load the batch by UUID
+          description: Created
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          title: order_by
+        required: false
+        description: 'Order results by a specific field. Valid options include [id, updated_at]. Default: id.'
+        name: order_by
+        in: query
+      - schema:
+          type: integer
+          title: Page size
+        description: Number of results to return per page. Value between 1 and 1000.
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          title: page
+        description: Number of page to return. Value between 1 and max number of pages in result set.
+        required: false
+        name: page
+        in: query
+      - schema:
+          type: integer
+          title: line_item
+        description: Line item ID
+        required: false
+        name: line_item
+        in: query
+      - schema:
+          type: string
+          title: posted_date
+        description: Posted date
+        required: false
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          title: appointment
+        description: appointment
+        required: false
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          title: since
+        description: since
+        required: false
+        name: since
+        in: query
+      - schema:
+          type: integer
+          title: doctor
+        description: doctor
+        required: false
+        name: doctor
+        in: query
+      - schema:
+          type: boolean
+          title: verbose
+        description: When True includes full details
+        required: false
+        name: verbose
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: transactions_list_create
+      description: 'Create transactions list request.  Use the UUID returned in the response to retrieve the batch of records. Results returned in order of id or updated_at.
+
+        '
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  status:
+                    type: string
+                    description: 'Status of the request.  Possible values are "In progress" or "Complete".
+
+                      '
+                    title: status
+                  pagination:
+                    properties:
+                      count:
+                        type: int
+                        description: the count of all records in the result set.
+                        title: count
+                      pages:
+                        type: int
+                        description: the total pages of all pages in the result set.
+                        title: pages
+                      page:
+                        type: int
+                        description: the current page (starting with 1) in the total pages.
+                        title: page
+                    type: object
+                    description: information on the total pages, current page and total count.
+                    title: pagination
+                  results:
+                    items:
+                      $ref: '#/components/schemas/LineItemTransaction'
+                    type: array
+                    description: result data. only presented when the status is "Complete"
+                    title: data
+                  uuid:
+                    type: string
+                    description: UUID of the batch.
+                    title: uuid
+          description: OK
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResourceError'
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The UUID token for the batch of transactions
+          title: uuid
+        required: true
+        description: 'The UUID token for the batch of transactions.  This is returned in the response of the `create` endpoint.
+
+          '
+        name: uuid
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: transactions_list_list
+      description: Retrieve or search transactions in batches. Results returned in order of ID or updated_at.
+  /api/patient_payments/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashPayment'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - access-patient-payments
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:patient-payment:read
+        - billing:patient-payment:write
+      operationId: patient_payments_read
+      description: Retrieve an existing patient payment
+  /api/patient_payments:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashPayment'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - access-patient-payments
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:patient-payment:read
+        - billing:patient-payment:write
+      operationId: patient_payments_create
+      description: Create patient payment
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/CashPayment'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - access-patient-payments
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:patient-payment:read
+        - billing:patient-payment:write
+      operationId: patient_payments_list
+      description: Retrieve or search patient payments
+  /api/clinical_note_field_values_list:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    description: Status of the request. Upon creation this will be "In progress"
+                    title: status
+                  uuid:
+                    type: string
+                    description: UUID of the batch.
+                    title: uuid
+                  description:
+                    type: string
+                    description: Contains link to load the batch by UUID
+                    title: description
+          description: Created
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          title: order_by
+        required: false
+        description: 'Order results by a specific field. Valid options include [id, updated_at]. Default: id.'
+        name: order_by
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page. Value between 1 and 20000.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: Number of page to return. Value between 1 and max number of pages in result set.
+          title: Page
+        required: false
+        name: page
+        in: query
+      - schema:
+          type: string
+          description: Inclusive lower bound on updated_at
+          title: since
+        required: false
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: Appointment ID filter
+          title: appointment
+        required: false
+        name: appointment
+        in: query
+      - schema:
+          type: integer
+          description: ID of clinical note report template
+          title: clinical_note_template
+        required: false
+        name: clinical_note_template
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - scheduling
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - patients:read
+      operationId: clinical_note_field_values_list_create
+      description: 'Create clinical note field value list request.  Use the UUID returned in the response to retrieve the batch of records. Results returned in order of ID.
+
+        '
+  /api/billing_profiles:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/BillingProfile'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_billing_profiles" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: billing_profiles_list
+      description: Retrieve or search billing profiles
+  /api/billing_profiles/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingProfile'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_billing_profiles" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: billing_profiles_read
+      description: Retrieve an existing billing profiles
+  /api/line_item_deletions:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  results:
+                    items:
+                      $ref: '#/components/schemas/BillingLineItemDeletion'
+                    type: array
+                    description: Result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next paginated page
+                    title: next
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The datetime to query by
+          title: since
+        required: false
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: The original appointment ID to filter results by
+          title: appointment_id
+        required: false
+        name: appointment_id
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+      operationId: line_item_deletions_list
+      description: 'Retrieve or search billing line item deletions. When a billing line item is deleted, a record of its original ID and the appointment it was attached to will be logged and is accessible from this resource.
+
+        '
+  /api/transactions:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/LineItemTransaction'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: line_item
+        required: false
+        description: ''
+        name: line_item
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: transactions_list
+      description: Retrieve or search insurance transactions associated with billing line items
+  /api/custom_insurance_plan_names:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/CustomInsurancePlanName'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: user
+        required: false
+        description: ''
+        name: user
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: name
+        required: false
+        description: ''
+        name: name
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - settings
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - settings:read
+        - settings:write
+      operationId: custom_insurance_plan_names_list
+      description: Retrieve or search custom insurance plan names
+  /api/day_sheet_totals:
+    get:
+      description: Retrieve daysheet totals report for a given date range
+      parameters:
+      - schema:
+          type: string
+          description: Start date of report (M/D/YYYY)
+          title: start_date
+        required: true
+        name: start_date
+        in: query
+      - schema:
+          type: string
+          description: End date of report (M/D/YYYY)
+          title: end_date
+        required: true
+        name: end_date
+        in: query
+      - schema:
+          type: string
+          description: Filters report by scheduled time or date of entry if not provided. Can be one of ('scheduled_time', ' ')
+          title: charges_date_type
+        required: false
+        name: charges_date_type
+        in: query
+      - schema:
+          type: string
+          description: Filters report by given value. Can be one of ('reimbursement_analysis', ' ')
+          title: report_type
+        required: false
+        name: report_type
+        in: query
+      - schema:
+          type: string
+          description: Filters report by date of service if receives value of 'check' otherwise defaults to posted date. Can be one of ('check', ' ')
+          title: credits_date_type
+        required: false
+        name: credits_date_type
+        in: query
+      - schema:
+          type: string
+          description: Groups data
+          title: group_by
+        required: false
+        name: group_by
+        in: query
+      - schema:
+          type: string
+          description: Sub-groups data
+          title: sub_group_by
+        required: false
+        name: sub_group_by
+        in: query
+      - schema:
+          type: string
+          description: Tertiary Groups data
+          title: tertiary_group_by
+        required: false
+        name: tertiary_group_by
+        in: query
+      - schema:
+          type: string
+          description: Includes moved cash if value of 'simple' is passed. Can be one of ('simple', ' ')
+          title: cash_view_type
+        required: false
+        name: cash_view_type
+        in: query
+      - schema:
+          type: integer
+          description: Filters report by a given patient ID
+          title: patient_id
+        required: false
+        name: patient_id
+        in: query
+      - schema:
+          type: string
+          description: Filters report by a given office
+          title: office_id
+        required: false
+        name: office_id
+        in: query
+      - schema:
+          type: integer
+          description: Filters report by a given examroom ID
+          title: examroom_id
+        required: false
+        name: examroom_id
+        in: query
+      - schema:
+          type: boolean
+          description: Runs report for all providers in the practice group
+          title: pg_mode
+        required: false
+        name: pg_mode
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - access-patient-payments
+      security:
+      - drchrono_oauth2:
+        - billing
+      operationId: daysheet_totals_list
+  /api/transactions/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineItemTransaction'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: line_item
+        required: false
+        description: ''
+        name: line_item
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: transactions_read
+      description: Retrieve an existing insurance transaction
+  /api/procedures:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Procedure'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: mu_date
+        required: false
+        description: ''
+        name: mu_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: mu_date_range
+        required: false
+        description: ''
+        name: mu_date_range
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: service_date
+        required: false
+        description: ''
+        name: service_date
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: procedures_list
+  /api/eligibility_checks_list:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  status:
+                    type: string
+                    description: 'Status of the request.  Possible values are "Complete" or "In progress".
+
+                      '
+                    title: status
+                  pagination:
+                    properties:
+                      count:
+                        type: int
+                        description: the count of all records in the result set.
+                        title: count
+                      pages:
+                        type: int
+                        description: the total pages of all pages in the result set.
+                        title: pages
+                      page:
+                        type: int
+                        description: the current page (starting with 1) in the total pages.
+                        title: page
+                    type: object
+                    description: information on the total pages, current page and total count.
+                    title: pagination
+                  results:
+                    items:
+                      $ref: '#/components/schemas/Coverage'
+                    type: array
+                    description: result data. only presented when the status is "Complete"
+                    title: data
+                  uuid:
+                    type: string
+                    description: UUID of the batch.
+                    title: uuid
+          description: OK
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResourceError'
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: uuid
+        required: false
+        description: 'The UUID token for the batch of eligibility checks.  This is returned in the response of the `create` endpoint.
+
+          '
+        name: uuid
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - scheduling
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - patients:read
+      operationId: eligibility_checks_list_list
+      description: Retrieve or search eligibility checks in batches. Results returned in order of ID or updated_at.
+  /api/procedures/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Procedure'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: mu_date
+        required: false
+        description: ''
+        name: mu_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: mu_date_range
+        required: false
+        description: ''
+        name: mu_date_range
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: service_date
+        required: false
+        description: ''
+        name: service_date
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: procedures_read
+  /api/line_items/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: Date on which the service was rendered
+          title: service_date
+        required: false
+        description: ''
+        name: service_date
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: line_items_update
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: Date on which the service was rendered
+          title: service_date
+        required: false
+        description: ''
+        name: service_date
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: line_items_partial_update
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingLineItem'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: Date on which the service was rendered
+          title: service_date
+        required: false
+        description: ''
+        name: service_date
+        in: query
+      - schema:
+          type: string
+          description: Bounded date range in which the service was rendered
+          title: service_date_range
+        required: false
+        description: ''
+        name: service_date_range
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: line_items_read
+      description: Retrieve an existing billing line item
+    delete:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: Date on which the service was rendered
+          title: service_date
+        required: false
+        description: ''
+        name: service_date
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: line_items_delete
+  /api/patient_payment_log:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/CashPaymentLog'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: patient_payment_log_list
+      description: Retrieve or search patient payment logs
+  /api/patient_payment_log/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashPaymentLog'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: patient_payment_log_read
+      description: Retrieve an existing patient payment log
+  /api/comm_logs/{id}:
+    put:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - scheduling
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - calendar:write
+      operationId: comm_logs_update
+      description: Update an existing communication (phone call) logs
+    patch:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - scheduling
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - calendar:write
+      operationId: comm_logs_partial_update
+      description: Update an existing communication (phone call) logs
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneCallLog'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - scheduling
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - calendar:write
+      operationId: comm_logs_read
+      description: Retrieve an existing communication (phone call) logs
+  /api/line_items:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingLineItem'
+          description: Created
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: service_date
+        required: false
+        description: ''
+        name: service_date
+        in: query
+      - schema:
+          type: boolean
+          description: ''
+          title: use_fee_schedule_defaults
+        required: false
+        description: When true, resolves price and modifiers from the fee schedule before creating the line item. Only applies to CPT (C) and HCPCS (H) procedure types. Caller-supplied price and modifiers take precedence over fee schedule values.
+        name: use_fee_schedule_defaults
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: line_items_create
+      description: Create billing line item for appointments
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/BillingLineItem'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: string
+          description: date of line_item creation
+          title: posted_date
+        required: false
+        description: ''
+        name: posted_date
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: office
+        required: false
+        description: ''
+        name: office
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: since
+        required: false
+        description: ''
+        name: since
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: appointment
+        required: false
+        description: ''
+        name: appointment
+        in: query
+      - schema:
+          type: string
+          description: Date on which the service was rendered
+          title: service_date
+        required: false
+        description: ''
+        name: service_date
+        in: query
+      tags:
+      - Billing
+      x-permissions:
+      - billing
+      - show-billing-tab
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - billing:read
+        - billing:write
+      operationId: line_items_list
+      description: Retrieve or search billing line items
+components:
+  schemas:
+    AsyncResourceError:
+      properties:
+        status:
+          type: string
+          description: Either "Error" or "Failed"
+          title: Status
+        uuid:
+          type: string
+          description: The UUID used to get the data for the asynchronous request
+          title: UUID
+        detail:
+          type: string
+          description: Instructions on what to do next
+          title: Detail
+    LineItemTransaction:
+      required: []
+      type: object
+      properties:
+        insurance:
+          properties:
+            id_number:
+              type: string
+              description: Insurance company ID number
+              title: ID number
+            message:
+              type: string
+              description: Additional information about the insurance
+              title: Message
+            name:
+              type: string
+              description: Insurance company name
+              title: Name
+          type: object
+          description: Information about the insurance associated with the transaction.
+          title: Insurance
+        ins_paid:
+          type: number
+          description: ''
+          title: Ins paid
+        posted_date:
+          readOnly: true
+          type: string
+          description: Date when transaction is created
+          title: Posted date
+        appointment:
+          type: integer
+          description: Appointment ID
+          title: Appointment
+        ins_name:
+          type: integer
+          description: Can be one of the following, `1`(Primary Insurance), `2`(Secondary Insurance)
+          title: Ins name
+        doctor:
+          type: integer
+          description: Doctor ID
+          title: Doctor
+        adjustment_group_code:
+          readOnly: true
+          enum:
+          - ''
+          - CO
+          - OA
+          - PI
+          - PR
+          type: string
+          description: Group code for adjustment
+          title: Adjustment group code
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        line_item:
+          type: integer
+          description: ID of `/api/line_item` object
+          title: Line item
+        claim_status:
+          readOnly: true
+          enum:
+          - ''
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '10'
+          - '13'
+          - '15'
+          - '16'
+          - '17'
+          - '19'
+          - '20'
+          - '21'
+          - '22'
+          - '23'
+          - '25'
+          - '27'
+          type: string
+          description: Status of claim
+          title: Claim status
+        check_date:
+          readOnly: true
+          type: string
+          description: Date of check
+          title: Check date
+        trace_number:
+          type: string
+          description: Check number
+          title: Trace number
+        adjustment_reason:
+          enum:
+          - '-3'
+          - '-2'
+          - '-4'
+          - '-1'
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
+          - '11'
+          - '12'
+          - '13'
+          - '14'
+          - '15'
+          - '16'
+          - '18'
+          - '19'
+          - '20'
+          - '21'
+          - '22'
+          - '23'
+          - '24'
+          - '26'
+          - '27'
+          - '29'
+          - '31'
+          - '32'
+          - '33'
+          - '34'
+          - '35'
+          - '39'
+          - '40'
+          - '44'
+          - '45'
+          - '49'
+          - '50'
+          - '51'
+          - '53'
+          - '54'
+          - '55'
+          - '56'
+          - '58'
+          - '59'
+          - '60'
+          - '61'
+          - '66'
+          - '69'
+          - '70'
+          - '74'
+          - '75'
+          - '76'
+          - '78'
+          - '85'
+          - '87'
+          - '89'
+          - '90'
+          - '91'
+          - '94'
+          - '95'
+          - '96'
+          - '97'
+          - '100'
+          - '101'
+          - '102'
+          - '103'
+          - '104'
+          - '105'
+          - '106'
+          - '107'
+          - '108'
+          - '109'
+          - '110'
+          - '111'
+          - '112'
+          - '114'
+          - '115'
+          - '116'
+          - '117'
+          - '118'
+          - '119'
+          - '121'
+          - '122'
+          - '125'
+          - '128'
+          - '129'
+          - '130'
+          - '131'
+          - '132'
+          - '133'
+          - '134'
+          - '135'
+          - '136'
+          - '137'
+          - '138'
+          - '139'
+          - '140'
+          - '142'
+          - '143'
+          - '144'
+          - '146'
+          - '147'
+          - '148'
+          - '149'
+          - '150'
+          - '151'
+          - '152'
+          - '153'
+          - '154'
+          - '155'
+          - '157'
+          - '158'
+          - '159'
+          - '160'
+          - '161'
+          - '162'
+          - '163'
+          - '164'
+          - '165'
+          - '166'
+          - '167'
+          - '168'
+          - '169'
+          - '170'
+          - '171'
+          - '172'
+          - '173'
+          - '174'
+          - '175'
+          - '176'
+          - '177'
+          - '178'
+          - '179'
+          - '180'
+          - '181'
+          - '182'
+          - '183'
+          - '184'
+          - '185'
+          - '186'
+          - '187'
+          - '188'
+          - '189'
+          - '190'
+          - '191'
+          - '192'
+          - '193'
+          - '194'
+          - '195'
+          - '197'
+          - '198'
+          - '199'
+          - '200'
+          - '201'
+          - '202'
+          - '203'
+          - '204'
+          - '205'
+          - '206'
+          - '207'
+          - '208'
+          - '209'
+          - '210'
+          - '211'
+          - '212'
+          - '213'
+          - '214'
+          - '215'
+          - '216'
+          - '217'
+          - '218'
+          - '219'
+          - '220'
+          - '221'
+          - '222'
+          - '223'
+          - '224'
+          - '225'
+          - '226'
+          - '227'
+          - '228'
+          - '229'
+          - '230'
+          - '231'
+          - '232'
+          - '233'
+          - '234'
+          - '235'
+          - '236'
+          - '237'
+          - '238'
+          - '239'
+          - '240'
+          - '241'
+          - '242'
+          - '243'
+          - '244'
+          - '245'
+          - '246'
+          - '247'
+          - '248'
+          - '249'
+          - '250'
+          - '251'
+          - '252'
+          - '253'
+          - '254'
+          - '256'
+          - '257'
+          - '258'
+          - '259'
+          - '260'
+          - '261'
+          - '262'
+          - '263'
+          - '264'
+          - '265'
+          - '266'
+          - '267'
+          - '268'
+          - '269'
+          - '270'
+          - '271'
+          - '272'
+          - '273'
+          - '274'
+          - '275'
+          - '276'
+          - '277'
+          - '279'
+          - '286'
+          - '287'
+          - '288'
+          - '297'
+          - A0
+          - A1
+          - A5
+          - A6
+          - A7
+          - A8
+          - B1
+          - B4
+          - B5
+          - B7
+          - B8
+          - B9
+          - B10
+          - B11
+          - B12
+          - B13
+          - B14
+          - B15
+          - B16
+          - B20
+          - B22
+          - B23
+          - P1
+          - P2
+          - P3
+          - P4
+          - P5
+          - P6
+          - P7
+          - P8
+          - P9
+          - P10
+          - P11
+          - P12
+          - P13
+          - P14
+          - P15
+          - P16
+          - P17
+          - P18
+          - P19
+          - P20
+          - P21
+          - P22
+          - P23
+          - W1
+          - W2
+          - W3
+          - W4
+          - Y1
+          - Y2
+          - Y3
+          type: string
+          description: Reason for adjustment
+          title: Adjustment reason
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        adjustment:
+          type: number
+          description: Adjustment from total billed
+          title: Adjustment
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+      x-verbose-required: []
+    PhoneCallLog:
+      required:
+      - patient
+      - doctor
+      type: object
+      properties:
+        scheduled_time:
+          type: string
+          description: Date of phone call, if `appointment` is set, this field will be set as the `scheduled_time` of that appointment
+          title: Scheduled time
+        archived:
+          readOnly: true
+          type: boolean
+          description: If this phone call log is archived or not
+          title: Archived
+        appointment:
+          type: integer
+          description: Appointment related with the phone call log
+          title: Appointment
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        title:
+          type: string
+          description: Title of this log
+          title: Title
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        author:
+          readOnly: true
+          type: string
+          description: Author of post.
+          title: Author
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        cash_charged:
+          type: number
+          description: Amount of cash needs to be charged
+          title: Cash charged
+        duration:
+          type: integer
+          description: Duration of the phone call
+          title: Duration
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        message:
+          type: string
+          description: Additional message for the phone call
+          title: Message
+        type:
+          type: string
+          description: Type of phone call log
+          title: Type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    BillingProfile:
+      required: []
+      type: object
+      properties:
+        cpt_codes:
+          items:
+            title: ''
+            type: object
+            description: CPT Code object
+            properties:
+              diagnosis_pointers_icd9:
+                items:
+                  type: string
+                  description: ''
+                  title: ''
+                type: array
+                description: ICD9 codes represented in strings
+                title: Diagnosis pointers icd9
+              code:
+                type: string
+                description: ''
+                title: Code
+              price:
+                type: string
+                description: This field is represented in string format
+                title: Price
+              ndc_code:
+                items:
+                  title: ''
+                  type: object
+                  description: NDC code object
+                  properties:
+                    ndc_package_code:
+                      type: string
+                      description: ''
+                      title: Ndc package code
+                    units:
+                      enum:
+                      - F2
+                      - GR
+                      - ME
+                      - ML
+                      - UN
+                      type: string
+                      description: Can be one of `F2`(International Unit), `GR`(Gram), `ME`(Milligram), `ML`(Millimeter) or `UN`(Unit)
+                      title: Units
+                    quantity:
+                      type: string
+                      description: ''
+                      title: Quantity
+                type: array
+                description: Array of NDC Code objects
+                title: Ndc code
+              diagnosis_pointers_icd10:
+                items:
+                  type: string
+                  description: ''
+                  title: ''
+                type: array
+                description: ICD10 codes represented in strings
+                title: Diagnosis pointers icd10
+              modifiers:
+                items:
+                  type: string
+                  description: ''
+                  title: ''
+                type: array
+                description: Modifiers represented in strings
+                title: Modifiers
+              quantity:
+                type: string
+                description: This field is represented in string format
+                title: Quantity
+          readOnly: true
+          type: array
+          description: Array of CPT Code objects
+          title: Cpt codes
+        archived:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Archived
+        icd9_codes:
+          items:
+            type: string
+            description: ICD9 Code in string format
+            title: ''
+          readOnly: true
+          type: array
+          description: ICD9 Codes represented in string format
+          title: Icd9 codes
+        name:
+          type: string
+          description: ''
+          title: Name
+        hcpcs_codes:
+          items:
+            title: ''
+            type: object
+            description: HCPCS code object
+            properties:
+              diagnosis_pointers_icd9:
+                items:
+                  type: string
+                  description: ICD9 Code in string format
+                  title: ''
+                type: array
+                description: ICD9 codes represented in array of strings
+                title: Diagnosis pointers icd9
+              code:
+                type: string
+                description: ''
+                title: Code
+              price:
+                type: string
+                description: This field is represented in string format
+                title: Price
+              ndc_code:
+                items:
+                  title: ''
+                  type: object
+                  description: NDC code object
+                  properties:
+                    ndc_package_code:
+                      type: string
+                      description: ''
+                      title: Ndc package code
+                    units:
+                      enum:
+                      - F2
+                      - GR
+                      - ME
+                      - ML
+                      - UN
+                      type: string
+                      description: Can be one of `F2`(International Unit), `GR`(Gram), `ME`(Milligram), `ML`(Millimeter) or `UN`(Unit)
+                      title: Units
+                    quantity:
+                      type: string
+                      description: ''
+                      title: Quantity
+                type: array
+                description: Array of NDC Code objects
+                title: Ndc code
+              diagnosis_pointers_icd10:
+                items:
+                  type: string
+                  description: ICD Code in string format
+                  title: ''
+                type: array
+                description: ICD10 codes represented in array of strings
+                title: Diagnosis pointers icd10
+              modifiers:
+                items:
+                  type: string
+                  description: Modifier in string format
+                  title: ''
+                type: array
+                description: Modifiers represented in array of strings
+                title: Modifiers
+              quantity:
+                type: string
+                description: This field is represented in string format
+                title: Quantity
+          readOnly: true
+          type: array
+          description: Array of HCPCS Code objects
+          title: Hcpcs codes
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        custom_procedure_codes:
+          items:
+            title: ''
+            type: object
+            description: Custom procedure code object
+            properties:
+              price:
+                type: string
+                description: This field is represented in string format
+                title: Price
+              code:
+                type: string
+                description: ''
+                title: Code
+              quantity:
+                type: string
+                description: This field is represented in string format
+                title: Quantity
+          readOnly: true
+          type: array
+          description: Array of custom procedure code objects
+          title: Custom procedure codes
+        icd10_codes:
+          items:
+            type: string
+            description: ICD10 Code in string format
+            title: ''
+          readOnly: true
+          type: array
+          description: ICD10 Codes represented in string format
+          title: Icd10 codes
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    PatientAuthorization:
+      required:
+      - doctor
+      - patient
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status
+          title: Status
+        patient:
+          readOnly: true
+          type: string
+          description: ''
+          title: Patient
+        end_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: End Date
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        number_of_visits:
+          readOnly: true
+          type: integer
+          description: ''
+          title: Number of visits
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        specialty:
+          type: string
+          description: Specialty
+          title: Specialty
+        auth_number:
+          type: string
+          description: Authorization Number
+          title: Authorization Number
+        start_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: Start Date
+        patient_id:
+          type: integer
+          description: ''
+          title: Patient Id
+        visits_remaining:
+          readOnly: true
+          type: integer
+          description: ''
+          title: Visits remainings
+        notes:
+          type: string
+          description: Notes
+          title: Notes
+        doctor_id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: Doctor Id
+        procedure_codes:
+          items:
+            title: ''
+            type: object
+            description: Procedure code object
+            properties:
+              price:
+                type: string
+                description: This field is represented in string format
+                title: Price
+              code:
+                type: string
+                description: ''
+                title: Code
+              quantity:
+                type: string
+                description: This field is represented in string format
+                title: Quantity
+          readOnly: true
+          type: array
+          description: Array of procedure code objects
+          title: Procedure codes
+        expired:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Expired authorization
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    Procedure:
+      properties:
+        status:
+          readOnly: true
+          type: string
+          description: ''
+          title: Status
+        code:
+          type: string
+          description: ''
+          title: Code
+        patient:
+          readOnly: true
+          type: integer
+          description: Patient ID
+          title: Patient
+        description:
+          readOnly: true
+          type: string
+          description: ''
+          title: Description
+        doctor:
+          readOnly: true
+          type: integer
+          description: Doctor ID
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        procedure_type:
+          enum:
+          - C
+          - H
+          - U
+          - S
+          type: string
+          description: One of `"CPT(C)"`, `"HCPCS(H)"`, `"Custom(U)"`
+          title: Procedure type
+        date:
+          readOnly: true
+          type: string
+          description: Date of service for the procedure
+          title: Date
+        appointment:
+          type: integer
+          description: Appointment ID
+          title: Appointment
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+    Coverage:
+      required: []
+      type: object
+      properties:
+        coverage_subscriber:
+          readOnly: true
+          type: string
+          description: A variable size object containing subscriber information, if returned by the clearinghouse that ran the eligibility check
+          title: Coverage subscriber
+        appointment:
+          readOnly: true
+          type: string
+          description: ''
+          title: Appointment
+        eligibility:
+          type: string
+          description: '
+
+            Value | Description
+
+            --- | ----
+
+            `''1''` | Active Coverage
+
+            `''2''` | Active - Full Risk Capitation
+
+            `''3''` | Active - Services Capitated
+
+            `''4''` | Active - Services Capitated to Primary Care Physician
+
+            `''5''` | Active - Pending Investigation
+
+            `''6''` | Inactive
+
+            `''7''` | Inactive - Pending Eligibility Update
+
+            `''8''` | Inactive - Pending Investigation
+
+            `''A''` | Co-Insurance
+
+            `''B''` | Co-Payment
+
+            `''C''` | Deductible
+
+            `''CB''` | Coverage Basis
+
+            `''D''` | Benefit Description
+
+            `''E''` | Exclusions
+
+            `''F''` | Limitations
+
+            `''G''` | Out of Pocket (Stop Loss)
+
+            `''H''` | Unlimited
+
+            `''I''` | Non-Covered
+
+            `''J''` | Cost Containment
+
+            `''K''` | Reserve
+
+            `''L''` | Primary Care Provider
+
+            `''M''` | Pre-existing Condition
+
+            `''MC''` | Managed Care Coordinator
+
+            `''N''` | Services Restricted to Following Provider
+
+            `''O''` | Not Deemed a Medical Necessity
+
+            `''P''` | Benefit Disclaimer
+
+            `''Q''` | Second Surgical Opinion Required
+
+            `''R''` | Other or Additional Payor
+
+            `''S''` | Prior Year(s) History
+
+            `''T''` | Card(s) Reported Lost/Stolen
+
+            `''U''` | Contact Following Entity for Eligibility or Benefit Information
+
+            `''V''` | Cannot Process
+
+            `''W''` | Other Source of Data
+
+            `''X''` | Health Care Facility
+
+            `''Y''` | Spend Down
+
+            '
+          title: Eligibility
+        payer_name:
+          type: string
+          description: The name of the payer as returned by the clearinghouse that ran the eligibility check
+          title: Payer name
+        coverage_details:
+          readOnly: true
+          type: string
+          description: A variable size object containing the details of the eligibility check, if returned by the clearinghouse that ran the eligibility check
+          title: Coverage details
+        updated_at:
+          readOnly: true
+          type: string
+          description: Timestamp of most recent record update
+          title: Updated at
+        query_date:
+          readOnly: true
+          type: string
+          description: The time at which the request was made
+          title: Query date
+        service_type_description:
+          readOnly: true
+          type: string
+          description: ''
+          title: Service type description
+        patient:
+          readOnly: true
+          type: string
+          description: ''
+          title: Patient
+        request_service_type:
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
+          - '11'
+          - '12'
+          - '13'
+          - '14'
+          - '15'
+          - '16'
+          - '17'
+          - '18'
+          - '19'
+          - '20'
+          - '21'
+          - '22'
+          - '23'
+          - '24'
+          - '25'
+          - '26'
+          - '27'
+          - '28'
+          - '30'
+          - '32'
+          - '33'
+          - '34'
+          - '35'
+          - '36'
+          - '37'
+          - '38'
+          - '39'
+          - '40'
+          - '41'
+          - '42'
+          - '43'
+          - '44'
+          - '45'
+          - '46'
+          - '47'
+          - '48'
+          - '49'
+          - '50'
+          - '51'
+          - '52'
+          - '53'
+          - '54'
+          - '55'
+          - '56'
+          - '57'
+          - '58'
+          - '59'
+          - '60'
+          - '61'
+          - '62'
+          - '63'
+          - '64'
+          - '65'
+          - '66'
+          - '67'
+          - '68'
+          - '69'
+          - '70'
+          - '71'
+          - '72'
+          - '73'
+          - '74'
+          - '75'
+          - '76'
+          - '77'
+          - '78'
+          - '79'
+          - '80'
+          - '81'
+          - '82'
+          - '83'
+          - '84'
+          - '85'
+          - '86'
+          - '87'
+          - '88'
+          - '89'
+          - '90'
+          - '91'
+          - '92'
+          - '93'
+          - '94'
+          - '95'
+          - '96'
+          - '97'
+          - '98'
+          - '99'
+          - A0
+          - A1
+          - A2
+          - A3
+          - A4
+          - A5
+          - A6
+          - A7
+          - A8
+          - A9
+          - AA
+          - AB
+          - AC
+          - AD
+          - AE
+          - AF
+          - AG
+          - AH
+          - AI
+          - AJ
+          - AK
+          - AL
+          - AM
+          - AN
+          - AO
+          - AQ
+          - AR
+          - B1
+          - B2
+          - B3
+          - BA
+          - BB
+          - BC
+          - BD
+          - BE
+          - BF
+          - BG
+          - BH
+          - BI
+          - BJ
+          - BK
+          - BL
+          - BM
+          - BN
+          - BP
+          - BQ
+          - BR
+          - BS
+          - BT
+          - BU
+          - BV
+          - BW
+          - BX
+          - BY
+          - BZ
+          - C1
+          - CA
+          - CB
+          - CC
+          - CD
+          - CE
+          - CF
+          - CG
+          - CH
+          - CI
+          - CJ
+          - CK
+          - CL
+          - CM
+          - CN
+          - CO
+          - CP
+          - CQ
+          - DG
+          - DM
+          - DS
+          - GF
+          - GN
+          - GY
+          - IC
+          - MH
+          - NI
+          - 'ON'
+          - PT
+          - PU
+          - RN
+          - RT
+          - TC
+          - TN
+          - UC
+          type: string
+          description: '
+
+            Value | Description
+
+            --- | ----
+
+            `''1''` | Medical Care
+
+            `''2''` | Surgical
+
+            `''3''` | Consultation
+
+            `''4''` | Diagnostic X-Ray
+
+            `''5''` | Diagnostic Lab
+
+            `''6''` | Radiation Therapy
+
+            `''7''` | Anesthesia
+
+            `''8''` | Surgical Assistance
+
+            `''9''` | Other Medical
+
+            `''10''` | Blood Charges
+
+            `''11''` | Used Durable Medical Equipment
+
+            `''12''` | Durable Medical Equipment Purchase
+
+            `''13''` | Ambulatory Service Center Facility
+
+            `''14''` | Renal Supplies in the Home
+
+            `''15''` | Alternate Method Dialysis
+
+            `''16''` | Chronic Renal Disease (CRD) Equipment
+
+            `''17''` | Pre-Admission Testing
+
+            `''18''` | Durable Medical Equipment Rental
+
+            `''19''` | Pneumonia Vaccine
+
+            `''20''` | Second Surgical Opinion
+
+            `''21''` | Third Surgical Opinion
+
+            `''22''` | Social Work
+
+            `''23''` | Diagnostic Dental
+
+            `''24''` | Periodontics
+
+            `''25''` | Restorative
+
+            `''26''` | Endodontics
+
+            `''27''` | Maxillofacial Prosthetics
+
+            `''28''` | Adjunctive Dental Services
+
+            `''30''` | Health Benefit Plan Coverage
+
+            `''32''` | Plan Waiting Period
+
+            `''33''` | Chiropractic
+
+            `''34''` | Chiropractic Office Visits
+
+            `''35''` | Dental Care
+
+            `''36''` | Dental Crowns
+
+            `''37''` | Dental Accident
+
+            `''38''` | Orthodontics
+
+            `''39''` | Prosthodontics
+
+            `''40''` | Oral Surgery
+
+            `''41''` | Routine (Preventive) Dental
+
+            `''42''` | Home Health Care
+
+            `''43''` | Home Health Prescriptions
+
+            `''44''` | Home Health Visits
+
+            `''45''` | Hospice
+
+            `''46''` | Respite Care
+
+            `''47''` | Hospital
+
+            `''48''` | Hospital - Inpatient
+
+            `''49''` | Hospital - Room and Board
+
+            `''50''` | Hospital - Outpatient
+
+            `''51''` | Hospital - Emergency Accident
+
+            `''52''` | Hospital - Emergency Medical
+
+            `''53''` | Hospital - Ambulatory Surgical
+
+            `''54''` | Long Term Care
+
+            `''55''` | Major Medical
+
+            `''56''` | Medically Related Transportation
+
+            `''57''` | Air Transportation
+
+            `''58''` | Cabulance
+
+            `''59''` | Licensed Ambulance
+
+            `''60''` | General Benefits
+
+            `''61''` | In-vitro Fertilization
+
+            `''62''` | MRI/CAT Scan
+
+            `''63''` | Donor Procedures
+
+            `''64''` | Acupuncture
+
+            `''65''` | Newborn Care
+
+            `''66''` | Pathology
+
+            `''67''` | Smoking Cessation
+
+            `''68''` | Well Baby Care
+
+            `''69''` | Maternity
+
+            `''70''` | Transplants
+
+            `''71''` | Audiology Exam
+
+            `''72''` | Inhalation Therapy
+
+            `''73''` | Diagnostic Medical
+
+            `''74''` | Private Duty Nursing
+
+            `''75''` | Prosthetic Device
+
+            `''76''` | Dialysis
+
+            `''77''` | Otological Exam
+
+            `''78''` | Chemotherapy
+
+            `''79''` | Allergy Testing
+
+            `''80''` | Immunizations
+
+            `''81''` | Routine Physical
+
+            `''82''` | Family Planning
+
+            `''83''` | Infertility
+
+            `''84''` | Abortion
+
+            `''85''` | AIDS
+
+            `''86''` | Emergency Services
+
+            `''87''` | Cancer
+
+            `''88''` | Pharmacy
+
+            `''89''` | Free Standing Prescription Drug
+
+            `''90''` | Mail Order Prescription Drug
+
+            `''91''` | Brand Name Prescription Drug
+
+            `''92''` | Generic Prescription Drug
+
+            `''93''` | Podiatry
+
+            `''94''` | Podiatry - Office Visits
+
+            `''95''` | Podiatry - Nursing Home Visits
+
+            `''96''` | Professional (Physician)
+
+            `''97''` | Anesthesiologist
+
+            `''98''` | Professional (Physician) Visit - Office
+
+            `''99''` | Professional (Physician) Visit - Inpatient
+
+            `''A0''` | Professional (Physician) Visit - Outpatient
+
+            `''A1''` | Professional (Physician) Visit - Nursing Home
+
+            `''A2''` | Professional (Physician) Visit - Skilled Nursing Facility
+
+            `''A3''` | Professional (Physician) Visit - Home
+
+            `''A4''` | Psychiatric
+
+            `''A5''` | Psychiatric - Room and Board
+
+            `''A6''` | Psychotherapy
+
+            `''A7''` | Psychiatric - Inpatient
+
+            `''A8''` | Psychiatric - Outpatient
+
+            `''A9''` | Rehabilitation
+
+            `''AA''` | Rehabilitation - Room and Board
+
+            `''AB''` | Rehabilitation - Inpatient
+
+            `''AC''` | Rehabilitation - Outpatient
+
+            `''AD''` | Occupational Therapy
+
+            `''AE''` | Physical Medicine
+
+            `''AF''` | Speech Therapy
+
+            `''AG''` | Skilled Nursing Care
+
+            `''AH''` | Skilled Nursing Care - Room and Board
+
+            `''AI''` | Substance Abuse
+
+            `''AJ''` | Alcoholism
+
+            `''AK''` | Drug Addiction
+
+            `''AL''` | Vision (Optometry)
+
+            `''AM''` | Frames
+
+            `''AN''` | Routine Exam
+
+            `''AO''` | Lenses
+
+            `''AQ''` | Nonmedically Necessary Physical
+
+            `''AR''` | Experimental Drug Therapy
+
+            `''B1''` | Burn Care
+
+            `''B2''` | Brand Name Prescription Drug - Formulary
+
+            `''B3''` | Brand Name Prescription Drug - Non-Formulary
+
+            `''BA''` | Independent Medical Evaluation
+
+            `''BB''` | Partial Hospitalization (Psychiatric)
+
+            `''BC''` | Day Care (Psychiatric)
+
+            `''BD''` | Cognitive Therapy
+
+            `''BE''` | Massage Therapy
+
+            `''BF''` | Pulmonary Rehabilitation
+
+            `''BG''` | Cardiac Rehabilitation
+
+            `''BH''` | Pediatric
+
+            `''BI''` | Nursery
+
+            `''BJ''` | Skin
+
+            `''BK''` | Orthopedic
+
+            `''BL''` | Cardiac
+
+            `''BM''` | Lymphatic
+
+            `''BN''` | Gastrointestinal
+
+            `''BP''` | Endocrine
+
+            `''BQ''` | Neurology
+
+            `''BR''` | Eye
+
+            `''BS''` | Invasive Procedures
+
+            `''BT''` | Gynecological
+
+            `''BU''` | Obstetrical
+
+            `''BV''` | Obstetrical/Gynecological
+
+            `''BW''` | Mail Order Prescription Drug: Brand Name
+
+            `''BX''` | Mail Order Prescription Drug: Generic
+
+            `''BY''` | Physician Visit - Office: Sick
+
+            `''BZ''` | Physician Visit - Office: Well
+
+            `''C1''` | Coronary Care
+
+            `''CA''` | Private Duty Nursing - Inpatient
+
+            `''CB''` | Private Duty Nursing - Home
+
+            `''CC''` | Surgical Benefits - Professional (Physician)
+
+            `''CD''` | Surgical Benefits - Facility
+
+            `''CE''` | Mental Health Provider - Inpatient
+
+            `''CF''` | Mental Health Provider - Outpatient
+
+            `''CG''` | Mental Health Facility - Inpatient
+
+            `''CH''` | Mental Health Facility - Outpatient
+
+            `''CI''` | Substance Abuse Facility - Inpatient
+
+            `''CJ''` | Substance Abuse Facility - Outpatient
+
+            `''CK''` | Screening X-ray
+
+            `''CL''` | Screening laboratory
+
+            `''CM''` | Mammogram, High Risk Patient
+
+            `''CN''` | Mammogram, Low Risk Patient
+
+            `''CO''` | Flu Vaccination
+
+            `''CP''` | Eyewear and Eyewear Accessories
+
+            `''CQ''` | Case Management
+
+            `''DG''` | Dermatology
+
+            `''DM''` | Durable Medical Equipment
+
+            `''DS''` | Diabetic Supplies
+
+            `''GF''` | Generic Prescription Drug - Formulary
+
+            `''GN''` | Generic Prescription Drug - Non-Formulary
+
+            `''GY''` | Allergy
+
+            `''IC''` | Intensive Care
+
+            `''MH''` | Mental Health
+
+            `''NI''` | Neonatal Intensive Care
+
+            `''ON''` | Oncology
+
+            `''PT''` | Physical Therapy
+
+            `''PU''` | Pulmonary
+
+            `''RN''` | Renal
+
+            `''RT''` | Residential Psychiatric Treatment
+
+            `''TC''` | Transitional Care
+
+            `''TN''` | Transitional Nursery Care
+
+            `''UC''` | Urgent Care
+
+            '
+          title: Request service type
+        id:
+          readOnly: true
+          type: integer
+          description: System identifier
+          title: ID
+        cob_level:
+          readOnly: true
+          type: string
+          description: 'The level of insurance the eligibility check was run on. Can be one of the following: `Primary Insurance` or `Secondary Insurance`'
+          title: Cob level
+      x-verbose-required: []
+    CustomInsurancePlanName:
+      required: []
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        doctor:
+          readOnly: true
+          type: string
+          description: List custom appointment fields defined by the doctor with the given ID
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        insurance_plan_name:
+          type: string
+          description: Custom name
+          title: Insurance plan name
+        user:
+          readOnly: true
+          type: string
+          description: User who created the custom insurance plan name
+          title: User
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    CashPayment:
+      required:
+      - patient
+      type: object
+      properties:
+        line_item:
+          type: integer
+          description: ''
+          title: Line item
+        posted_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: Posted date
+        appointment:
+          type: integer
+          description: If this is absent, the apponitment will be inferred from line item
+          title: Appointment
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        payment_method:
+          enum:
+          - DRCP
+          - CASH
+          - CHCK
+          - DBIT
+          - CRDT
+          - AMEX
+          - VISA
+          - MSTR
+          - DISC
+          - SQR1
+          - SQRE
+          - PTPA
+          - ONPT
+          - OTHR
+          type: string
+          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square, "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for Other`'
+          title: Payment method
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        payment_transaction_type:
+          enum:
+          - ''
+          - REF
+          - COR
+          - COPAY
+          - COINSR
+          - OTHR
+          type: string
+          description: '`"" for Credit, "REF" for Refund, "COR" for Correction, "COPAY" for Copay, "COINSR" for Coinsurance, "OTHR" for Other`'
+          title: Payment transaction type
+        created_by:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created by
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        amount:
+          type: number
+          description: Amount of cash for this payment, cannot be zero
+          title: Amount
+        notes:
+          type: string
+          description: ''
+          title: Notes
+        trace_number:
+          type: string
+          description: ''
+          title: Trace number
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        received_date:
+          type: string
+          description: ''
+          title: Received date
+      x-verbose-required: []
+    BillingLineItemDeletion:
+      type: object
+      properties:
+        billing_line_item_id:
+          readOnly: true
+          type: number
+          description: The ID of the original billing line item
+          title: Billing Line Item ID
+        created_at:
+          readOnly: true
+          type: string
+          description: Date when the billing line item was deleted
+          title: Created At
+        appointment_id:
+          readOnly: true
+          type: number
+          description: Appointment ID of the original billing line item
+          title: Appointment ID
+    CashPaymentLog:
+      required: []
+      type: object
+      properties:
+        appointment:
+          readOnly: true
+          type: string
+          description: ID of appointment associated with the payment
+          title: Appointment
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        payment_method:
+          enum:
+          - DRCP
+          - CASH
+          - CHCK
+          - DBIT
+          - CRDT
+          - AMEX
+          - VISA
+          - MSTR
+          - DISC
+          - SQR1
+          - SQRE
+          - PTPA
+          - ONPT
+          - OTHR
+          type: string
+          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square, "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for Other`'
+          title: Payment method
+        updated_at:
+          type: string
+          description: ''
+          title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of user who created the payment
+          title: Created by
+        source:
+          type: string
+          description: ''
+          title: Source
+        amount:
+          type: number
+          description: ''
+          title: Amount
+        action:
+          enum:
+          - C
+          - U
+          - D
+          - F
+          - A
+          type: string
+          description: '`C`(Create), `U`(Update), `D`(Delete), `F`(Fill), `A`(Autofill)'
+          title: Action
+        patient:
+          readOnly: true
+          type: string
+          description: ''
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    BillingLineItem:
+      required:
+      - appointment
+      - code
+      - procedure_type
+      - diagnosis_pointers
+      type: object
+      properties:
+        code:
+          type: string
+          description: ''
+          title: Code
+        ins3_paid:
+          readOnly: true
+          type: number
+          description: Amount paid by patinet's tertiary insurer
+          title: Ins3 paid
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        posted_date:
+          readOnly: true
+          type: string
+          description: date of line_item creation
+          title: Posted date
+        billing_status:
+          readOnly: true
+          enum:
+          - ''
+          - Incomplete Information
+          - In Process Emdeon
+          - In Process iHCFA
+          - In Process Gateway
+          - In Process Jopari
+          - In Process Waystar
+          - In Process EPS
+          - Rejected Emdeon
+          - Rejected iHCFA
+          - Rejected Gateway
+          - Rejected Jopari
+          - Rejected Waystar
+          - Rejected EPS
+          - In Process Payer
+          - Payer Acknowledged
+          - Rejected Payer
+          - Paid in Full
+          - Partially Paid
+          - Coordination of Benefits
+          - ERA Received
+          - ERA Denied
+          type: string
+          description: One of `""`, `"Incomplete Information"`, `"In Process Emdeon"`, `"In Process iHCFA"`, `"In Process Gateway"`, `"Rejected Emdeon"`, `"Rejected iHCFA"`, `"Rejected Gateway"`, `"In Process Payer"`, `"Payer Acknowledged"`, `"Rejected Payer"`, `"Paid in Full"`,  `"Partially Paid"`,  `"Coordination of Benefits"`,  `"ERA Received"`,  `"ERA Denied"`
+          title: Billing status
+        pt_paid:
+          type: number
+          description: Amount paid by patient
+          title: Pt paid
+        allowed:
+          readOnly: true
+          type: number
+          description: Amount allowed by insurance
+          title: Allowed
+        patient:
+          readOnly: true
+          type: string
+          description: Patient ID
+          title: Patient
+        adjustment:
+          readOnly: true
+          type: number
+          description: Adjustment from total billed
+          title: Adjustment
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        doctor:
+          readOnly: true
+          type: string
+          description: Doctor ID
+          title: Doctor
+        balance_pt:
+          readOnly: true
+          type: number
+          description: Patient balance
+          title: Balance pt
+        units:
+          type: string
+          description: Default to "UN"
+          title: Units
+        balance_ins:
+          type: number
+          description: Insurance balance
+          title: Balance ins
+        paid_total:
+          readOnly: true
+          type: string
+          description: Total amount paid
+          title: Paid total
+        diagnosis_pointers:
+          items:
+            type: string
+            description: String representation of an integer or ICD code
+            title: ''
+          type: array
+          description: List of 4 diagnosis pointers
+          title: Diagnosis pointers
+        appointment:
+          type: integer
+          description: Appointment ID
+          title: Appointment
+        description:
+          readOnly: true
+          type: string
+          description: ''
+          title: Description
+        balance_total:
+          readOnly: true
+          type: string
+          description: Total balance
+          title: Balance total
+        price:
+          type: number
+          description: Price of procedure
+          title: Price
+        expected_reimbursement:
+          readOnly: true
+          type: number
+          description: ''
+          title: Expected reimbursement
+        ins2_paid:
+          readOnly: true
+          type: number
+          description: Amount paid by patient's secondary insurer
+          title: Ins2 paid
+        ins1_paid:
+          readOnly: true
+          type: number
+          description: Amount paid by patient's primary insurer
+          title: Ins1 paid
+        insurance_status:
+          readOnly: true
+          type: string
+          description: This corresponds to the "Status/Adj Type" from billing detail screen
+          title: Insurance status
+        billed:
+          readOnly: true
+          type: number
+          description: Total billed
+          title: Billed
+        modifiers:
+          items:
+            type: string
+            description: String representation of modifier
+            title: ''
+          type: array
+          description: List of 4 code modifiers
+          title: Modifiers
+        denied_flag:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Denied flag
+        ins_total:
+          readOnly: true
+          type: string
+          description: Total amount paid by patient's insurers
+          title: Ins total
+        procedure_type:
+          enum:
+          - C
+          - H
+          - U
+          - S
+          type: string
+          description: One of `"CPT(C)"`, `"HCPCS(H)"`, `"Custom(U)"`, use 1 character identifier when using `POST`
+          title: Procedure type
+        service_date:
+          readOnly: true
+          type: string
+          description: Date on which the service was rendered
+          title: Service date
+        quantity:
+          type: number
+          description: ''
+          title: Quantity
+      x-verbose-required:
+      - description
+  securitySchemes:
+    drchrono_oauth2:
+      type: oauth2
+      description: ''
+      flows:
+        authorizationCode:
+          scopes:
+            billing:patient-payment:read: View patient payment information
+            billing:read: View billing information.
+            patients:read: View detailed patient information.
+            user:write: Edit select account information, such as creating new exam rooms.
+            messages:write: Create and modify messages in your message center.
+            messages:read: View messages in your message center.
+            tasks:write: Create and modify tasks in your tasks center
+            tasks:read: View tasks in your tasks center
+            labs:write: Create and modify patient lab orders and results.
+            patients:write: Create patients and modify detailed patient information.
+            settings:write: Create resources that requires Settings permission, such as custom fields.
+            billing:patient-payment:write: Modify patient payment information
+            clinical:write: Create and modify clinical information, such as vitals, clinical notes, medications and diagnoses.
+            patients:summary:write: Create new patients and set their name, chart_id, age, and gender.
+            calendar:read: View your appointments.
+            user:read: View your basic information.
+            billing:write: Modify billing information.
+            settings:read: View resources that requires Settings permission, such as custom fields.
+            labs:read: View patient lab orders and results.
+            calendar:write: Schedule appointments and modify the data associated with them.
+            patients:summary:read: View summary information about your patients. This includes patients' name, chart_id, age, and gender.
+            clinical:read: View clinical information, such as vitals, clinical notes, medications and diagnoses.
+          tokenUrl: https://app.drchrono.com/o/token/
+          authorizationUrl: https://app.drchrono.com/o/authorize/

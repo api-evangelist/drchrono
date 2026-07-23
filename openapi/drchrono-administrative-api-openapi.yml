@@ -1,0 +1,1109 @@
+openapi: 3.0.0
+info:
+  version: v4 - Hunt Valley
+  description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
+  x-logo:
+    url: https://www.drchrono.com/site_media/images/logos/drchrono-black-wpadding.png
+    altText: DrChrono Logo
+  title: DrChrono EHR REST Administrative API
+servers:
+- url: https://app.drchrono.com
+tags:
+- description: Create and manage administrative resources
+  name: Administrative
+paths:
+  /api/user_groups:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/UserProfilesGroup'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Administrative
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2: []
+      operationId: user_groups_list
+      description: Retrieve or search user groups
+  /api/doctor_options:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/DoctorOptions'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Administrative
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: doctor_options_list
+      description: Retrieve or search doctor options within practice group
+  /api/doctors/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Administrative
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: doctors_read
+      description: Retrieve an existing doctor
+  /api/users/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Administrative
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2: []
+      operationId: users_read
+      description: Retrieve an existing user, `/api/users/current` can be used to identify logged in user, it will redirect to `/api/users/{current_user_id}`
+  /api/users:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/UserProfile'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Administrative
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2: []
+      operationId: users_list
+      description: Retrieve or search users, `/api/users/current` can be used to identify logged in user, it will redirect to `/api/users/{current_user_id}`
+  /api/doctor_options/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorOptions'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      tags:
+      - Administrative
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: doctor_options_read
+      description: Retrieve existing options for a doctor
+  /api/doctors:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type: string
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Doctor'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type: string
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Administrative
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2:
+        - user:read
+        - user:write
+      operationId: doctors_list
+      description: Retrieve or search doctors within practice group
+  /api/user_groups/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfilesGroup'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      tags:
+      - Administrative
+      x-permissions: []
+      x-practice-access: Data access among practice is available
+      security:
+      - drchrono_oauth2: []
+      operationId: user_groups_read
+      description: Retrieve an existing user group
+components:
+  schemas:
+    WorkHours:
+      type: object
+      properties:
+        start_time:
+          type: string
+          description: start time of the work hour
+          title: Start time
+        enabled:
+          type: boolean
+          description: whether the work hour is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work hour
+          title: ID
+        end_time:
+          type: string
+          description: end time of the work hour
+          title: End time
+    UserProfile:
+      required: []
+      type: object
+      properties:
+        username:
+          type: string
+          description: ''
+          title: Username
+        doctor:
+          readOnly: true
+          type: string
+          description: For staff members, this is their primary physician's ID. For doctors, it is their own ID.
+          title: Doctor
+        practice_group:
+          readOnly: true
+          type: string
+          description: The ID of the practice group this user belongs to. This can be used to identify users in the same practice.
+          title: Practice group
+        is_doctor:
+          readOnly: true
+          type: string
+          description: Mutually exclusive with `is_staff`
+          title: Is doctor
+        is_staff:
+          readOnly: true
+          type: string
+          description: Mutually exclusive with `is_doctor`
+          title: Is staff
+        id:
+          readOnly: true
+          type: string
+          description: ''
+          title: Id
+        permissions:
+          readOnly: true
+          type: string
+          description: Permissions the user has.
+          title: Permissions
+      x-verbose-required: []
+    UserProfilesGroup:
+      required: []
+      type: object
+      properties:
+        archived:
+          readOnly: true
+          type: boolean
+          description: Group is archived or not
+          title: Archived
+        name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          readOnly: true
+          type: string
+          description: Practice group this user group belongs to
+          title: Practice group
+        created_at:
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          type: string
+          description: ''
+          title: Updated at
+        members:
+          items:
+            type: string
+            description: ID of `/api/users`
+            title: ''
+          readOnly: true
+          type: array
+          description: Users in this user group.
+          title: Members
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    WorkSchedule:
+      type: object
+      properties:
+        work_days:
+          items:
+            $ref: '#/components/schemas/WorkDay'
+          type: array
+          description: work days of the work schedule
+          title: Work days
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID for the work schedule
+          title: ID
+        office:
+          type: integer
+          description: ID of office for work schedule
+          title: Office
+        doctor:
+          type: integer
+          description: ID of doctor for work schedule
+          title: Office
+    WorkDay:
+      type: object
+      properties:
+        iso_weekday:
+          type: string
+          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+          title: ISO weekday
+        enabled:
+          type: boolean
+          description: whether the work day is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work day
+          title: ID
+        work_hours:
+          items:
+            $ref: '#/components/schemas/WorkHours'
+          type: array
+          description: work hours of the work day
+          title: Work hours
+    DoctorOptions:
+      required: []
+      type: object
+      properties:
+        default_supervising_provider:
+          type: integer
+          description: ID of an `/api/doctors` instance.
+          title: Supervising provider
+        doctor:
+          type: integer
+          description: ID of an `/api/doctors` instance.
+          title: Doctor
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        patient_statement_office:
+          type: integer
+          description: ID of an `/api/offices` instance.
+          title: Patient statement office
+        allowed_payment_methods:
+          type: array
+          description: ''
+          title: Allowed Payment Methods
+        default_report:
+          type: integer
+          description: ID of an `/api/clinical_note_templates` instance.
+          title: Default Report
+        default_billing_provider:
+          type: integer
+          description: ID of an `/api/doctors` instance.
+          title: Billing provider
+        default_reminder_profile:
+          type: integer
+          description: ID of an `/api/reminder_profiles` instance.
+          title: Default Reminder profile
+        enable_everhealth_scribe:
+          readOnly: true
+          type: boolean
+          description: Whether the EverHealth Scribe feature is enabled for this doctor.
+          title: Enable EverHealth Scribe
+        office_for_lab_results:
+          type: integer
+          description: ID of an `/api/offices` instance.
+          title: Office for lab results
+        erx_supervising_providers:
+          items:
+            type: integer
+          type: array
+          description: Array or IDs of `/api/doctors` instances.
+          title: Supervising providers
+        iframe_apps:
+          items:
+            type: string
+          type: array
+          description: Integrated applications
+          title: Integrated applications
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    Doctor:
+      required: []
+      type: object
+      properties:
+        website:
+          type: string
+          description: ''
+          title: Website
+        doctor_work_schedule:
+          $ref: '#/components/schemas/WorkSchedule'
+          description: Doctor work schedule (beta)
+          title: Doctor Work Schedule
+        first_name:
+          type: string
+          description: ''
+          title: First name
+        last_name:
+          type: string
+          description: ''
+          title: Last name
+        suffix:
+          type: string
+          description: ''
+          title: Suffix
+        profile_picture:
+          readOnly: true
+          type: string
+          description: ''
+          title: Profile picture
+        country:
+          enum:
+          - BD
+          - WF
+          - BF
+          - BG
+          - BA
+          - BB
+          - BE
+          - BL
+          - BM
+          - BN
+          - BO
+          - JP
+          - BI
+          - BJ
+          - BT
+          - JM
+          - BV
+          - JO
+          - WS
+          - BQ
+          - BR
+          - BS
+          - JE
+          - BY
+          - BZ
+          - RU
+          - RW
+          - RS
+          - TL
+          - RE
+          - TM
+          - TJ
+          - RO
+          - TK
+          - GW
+          - GU
+          - GT
+          - GS
+          - GR
+          - GQ
+          - GP
+          - BH
+          - GY
+          - GG
+          - GF
+          - GE
+          - GD
+          - GB
+          - GA
+          - GN
+          - GM
+          - GL
+          - KW
+          - GI
+          - GH
+          - OM
+          - TN
+          - BW
+          - HR
+          - HT
+          - HU
+          - HK
+          - HN
+          - HM
+          - KR
+          - AD
+          - PR
+          - PS
+          - PW
+          - PT
+          - KN
+          - PY
+          - AI
+          - PA
+          - PF
+          - PG
+          - PE
+          - PK
+          - PH
+          - PN
+          - PL
+          - PM
+          - ZM
+          - EH
+          - EE
+          - EG
+          - ZA
+          - EC
+          - AL
+          - AO
+          - KZ
+          - ET
+          - ZW
+          - KY
+          - ES
+          - ER
+          - ME
+          - MD
+          - MG
+          - MF
+          - MA
+          - MC
+          - UZ
+          - MM
+          - ML
+          - MO
+          - MN
+          - MH
+          - MK
+          - MU
+          - MT
+          - MW
+          - MV
+          - MQ
+          - MP
+          - MS
+          - MR
+          - AU
+          - UG
+          - MY
+          - MX
+          - MZ
+          - FR
+          - AW
+          - AF
+          - AX
+          - FI
+          - FJ
+          - FK
+          - FM
+          - FO
+          - NI
+          - NL
+          - 'NO'
+          - NA
+          - VU
+          - NC
+          - NE
+          - NF
+          - NG
+          - NZ
+          - NP
+          - NR
+          - NU
+          - CK
+          - CI
+          - CH
+          - CO
+          - CN
+          - CM
+          - CL
+          - CC
+          - CA
+          - CG
+          - CF
+          - CD
+          - CZ
+          - CY
+          - CX
+          - CR
+          - KP
+          - CW
+          - CV
+          - CU
+          - SZ
+          - SY
+          - SX
+          - KG
+          - KE
+          - SS
+          - SR
+          - KI
+          - KH
+          - SV
+          - KM
+          - ST
+          - SK
+          - SJ
+          - SI
+          - SH
+          - SO
+          - SN
+          - SM
+          - SL
+          - SC
+          - SB
+          - SA
+          - SG
+          - SE
+          - SD
+          - DO
+          - DM
+          - DJ
+          - DK
+          - DE
+          - YE
+          - AT
+          - DZ
+          - US
+          - UY
+          - YT
+          - UM
+          - LB
+          - LC
+          - LA
+          - TV
+          - TW
+          - TT
+          - TR
+          - LK
+          - LI
+          - LV
+          - TO
+          - LT
+          - LU
+          - LR
+          - LS
+          - TH
+          - TF
+          - TG
+          - TD
+          - TC
+          - LY
+          - VA
+          - VC
+          - AE
+          - VE
+          - AG
+          - VG
+          - IQ
+          - VI
+          - IS
+          - IR
+          - AM
+          - IT
+          - VN
+          - AQ
+          - AS
+          - AR
+          - IM
+          - IL
+          - IO
+          - IN
+          - TZ
+          - AZ
+          - IE
+          - ID
+          - UA
+          - QA
+          type: string
+          description: Two-letter country code. Default is `US`
+          title: Country
+        practice_group_name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Practice group name
+        specialty:
+          type: string
+          description: ''
+          title: Specialty
+        is_account_suspended:
+          type: boolean
+          description: Indicates the doctor's account is suspended or not
+          title: Is account suspended
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        office_phone:
+          type: string
+          description: ''
+          title: Office phone
+        npi_number:
+          type: string
+          description: If both this field and `group_npi_number` are set, prefer this field
+          title: Npi number
+        group_npi_number:
+          type: string
+          description: ''
+          title: Group npi number
+        home_phone:
+          type: string
+          description: ''
+          title: Home phone
+        practice_group:
+          readOnly: true
+          type: string
+          description: The ID of the practice group this user belongs to. This can be used to identify users in the same practice.
+          title: Practice group
+        timezone:
+          type: string
+          description: ''
+          title: Timezone
+        cell_phone:
+          type: string
+          description: ''
+          title: Cell phone
+        email:
+          readOnly: true
+          type: string
+          description: ''
+          title: Email
+        job_title:
+          enum:
+          - ''
+          - Provider/Staff (Private Practice)
+          - Provider/Staff (Hospital)
+          - Patients/Interview Candidate
+          - Educator/Student
+          - API/Developer
+          - Consultant
+          - Other
+          type: string
+          description: ''
+          title: Job title
+      x-verbose-required: []
+  securitySchemes:
+    drchrono_oauth2:
+      type: oauth2
+      description: ''
+      flows:
+        authorizationCode:
+          scopes:
+            billing:patient-payment:read: View patient payment information
+            billing:read: View billing information.
+            patients:read: View detailed patient information.
+            user:write: Edit select account information, such as creating new exam rooms.
+            messages:write: Create and modify messages in your message center.
+            messages:read: View messages in your message center.
+            tasks:write: Create and modify tasks in your tasks center
+            tasks:read: View tasks in your tasks center
+            labs:write: Create and modify patient lab orders and results.
+            patients:write: Create patients and modify detailed patient information.
+            settings:write: Create resources that requires Settings permission, such as custom fields.
+            billing:patient-payment:write: Modify patient payment information
+            clinical:write: Create and modify clinical information, such as vitals, clinical notes, medications and diagnoses.
+            patients:summary:write: Create new patients and set their name, chart_id, age, and gender.
+            calendar:read: View your appointments.
+            user:read: View your basic information.
+            billing:write: Modify billing information.
+            settings:read: View resources that requires Settings permission, such as custom fields.
+            labs:read: View patient lab orders and results.
+            calendar:write: Schedule appointments and modify the data associated with them.
+            patients:summary:read: View summary information about your patients. This includes patients' name, chart_id, age, and gender.
+            clinical:read: View clinical information, such as vitals, clinical notes, medications and diagnoses.
+          tokenUrl: https://app.drchrono.com/o/token/
+          authorizationUrl: https://app.drchrono.com/o/authorize/
