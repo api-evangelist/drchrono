@@ -1,6 +1,19 @@
 name: drchrono
 description: drchrono is an EHR platform with a REST API for managing patient records, clinical encounters, appointments, prescriptions, billing, and HIPAA-compliant medical data exchange. It provides OAuth 2.0-secured endpoints covering patient management, clinical documentation, lab integration, scheduling, billing, and practice administration, enabling healthcare app developers to build integrations with the drchrono EHR ecosystem.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/drchrono.png
 url: https://raw.githubusercontent.com/api-evangelist/drchrono/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -20,32 +33,114 @@ tags:
 aid: drchrono
 type: Index
 apis:
-  - name: drchrono REST API
-    description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://app.drchrono.com/api-docs/tutorial/
-    baseURL: https://app.drchrono.com/api
-    tags:
-      - EHR
-      - Healthcare
-      - Patient Records
-      - Appointments
-      - Billing
-      - Lab Integration
-    properties:
-      - type: Documentation
-        url: https://app.drchrono.com/api-docs/tutorial/
-      - type: OpenAPI
-        url: https://app.drchrono.com/api-docs/
-      - type: Postman
-        url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
-      - type: Authentication
-        url: https://app.drchrono.com/o/authorize/
-      - type: Webhooks
-        url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
-    contact:
-      - FN: drchrono API Support
-        email: api@drchrono.com
+- aid: drchrono:drchrono-administrative-api
+  name: drchrono Administrative API
+  description: Create and manage administrative resources
+  humanURL: https://app.drchrono.com/api-docs/tutorial/
+  baseURL: https://app.drchrono.com/api
+  tags:
+  - Administrative
+  properties:
+  - type: OpenAPI
+    url: openapi/drchrono-administrative-api-openapi.yml
+  - type: Documentation
+    url: https://app.drchrono.com/api-docs/tutorial/
+  - type: Postman
+    url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
+  - type: Authentication
+    url: https://app.drchrono.com/o/authorize/
+  - type: Webhooks
+    url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+- aid: drchrono:drchrono-audit-api
+  name: drchrono Audit API
+  description: Search Audit Logs
+  humanURL: https://app.drchrono.com/api-docs/tutorial/
+  baseURL: https://app.drchrono.com/api
+  tags:
+  - Audit
+  properties:
+  - type: OpenAPI
+    url: openapi/drchrono-audit-api-openapi.yml
+  - type: Documentation
+    url: https://app.drchrono.com/api-docs/tutorial/
+  - type: Postman
+    url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
+  - type: Authentication
+    url: https://app.drchrono.com/o/authorize/
+  - type: Webhooks
+    url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+- aid: drchrono:drchrono-availability-api
+  name: drchrono Availability API
+  description: The Availability API from drchrono — 1 operation(s) for availability.
+  humanURL: https://app.drchrono.com/api-docs/tutorial/
+  baseURL: https://app.drchrono.com/api
+  tags:
+  - Availability
+  properties:
+  - type: OpenAPI
+    url: openapi/drchrono-availability-api-openapi.yml
+  - type: Documentation
+    url: https://app.drchrono.com/api-docs/tutorial/
+  - type: Postman
+    url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
+  - type: Authentication
+    url: https://app.drchrono.com/o/authorize/
+  - type: Webhooks
+    url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+- aid: drchrono:drchrono-billing-api
+  name: drchrono Billing API
+  description: Create and manage billing resources
+  humanURL: https://app.drchrono.com/api-docs/tutorial/
+  baseURL: https://app.drchrono.com/api
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/drchrono-billing-api-openapi.yml
+  - type: Documentation
+    url: https://app.drchrono.com/api-docs/tutorial/
+  - type: Postman
+    url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
+  - type: Authentication
+    url: https://app.drchrono.com/o/authorize/
+  - type: Webhooks
+    url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+- aid: drchrono:drchrono-clinical-api
+  name: drchrono Clinical API
+  description: Create and manage clinical resources
+  humanURL: https://app.drchrono.com/api-docs/tutorial/
+  baseURL: https://app.drchrono.com/api
+  tags:
+  - Clinical
+  properties:
+  - type: OpenAPI
+    url: openapi/drchrono-clinical-api-openapi.yml
+  - type: Documentation
+    url: https://app.drchrono.com/api-docs/tutorial/
+  - type: Postman
+    url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
+  - type: Authentication
+    url: https://app.drchrono.com/o/authorize/
+  - type: Webhooks
+    url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+- aid: drchrono:drchrono-practice-management-api
+  name: drchrono Practice Management API
+  description: Create and manage practice management resources
+  humanURL: https://app.drchrono.com/api-docs/tutorial/
+  baseURL: https://app.drchrono.com/api
+  tags:
+  - Practice Management
+  properties:
+  - type: OpenAPI
+    url: openapi/drchrono-practice-management-api-openapi.yml
+  - type: Documentation
+    url: https://app.drchrono.com/api-docs/tutorial/
+  - type: Postman
+    url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
+  - type: Authentication
+    url: https://app.drchrono.com/o/authorize/
+  - type: Webhooks
+    url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
 common:
   - type: AgenticAccess
     url: agentic-access/drchrono-agentic-access.yml
