@@ -1,0 +1,24 @@
+{
+  "provider": "drchrono",
+  "sources": [
+    "drchrono-administrative-api-openapi.yml",
+    "drchrono-audit-api-openapi.yml",
+    "drchrono-availability-api-openapi.yml",
+    "drchrono-billing-api-openapi.yml",
+    "drchrono-clinical-api-openapi.yml",
+    "drchrono-practice-management-api-openapi.yml"
+  ],
+  "outputs": [
+    "drchrono-administrative-api-openapi.yml",
+    "drchrono-audit-api-openapi.yml",
+    "drchrono-availability-api-openapi.yml",
+    "drchrono-billing-api-openapi.yml",
+    "drchrono-clinical-api-openapi.yml",
+    "drchrono-practice-management-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
