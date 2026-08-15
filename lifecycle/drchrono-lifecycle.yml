@@ -1,0 +1,122 @@
+generated: '2026-08-14'
+method: searched
+source: https://app.drchrono.com/api-docs/
+name: drchrono API Lifecycle
+description: >-
+  Versioning, stability and deprecation posture for the DrChrono EHR REST API, read from the
+  "Versions and deprecation" section DrChrono publishes in its API reference, plus the status page
+  and the dated changelogs it maintains.
+
+versioning:
+  scheme: named major versions
+  current: v4 (Hunt Valley)
+  in_path: false
+  header: X-DRC-API-Version
+  header_note: Optional per-request override; otherwise the version is pinned on the API application.
+  docs: https://app.drchrono.com/api-docs/
+
+stability_policy:
+  published: true
+  url: https://app.drchrono.com/api-docs/
+  statement: >-
+    Changes to the current API version are limited to adding endpoints, adding fields to existing
+    endpoints, or adding optional query parameters. Any new field that is not read-only will be
+    optional.
+
+deprecation_policy:
+  published: true
+  url: https://app.drchrono.com/api-docs/
+  sunset_headers: false
+  rfc8594: false
+  header_note: >-
+    DrChrono publishes a written deprecation policy but does NOT emit RFC 8594 Sunset or Deprecation
+    response headers. Deprecation is announced in the changelog and the version map, not in the
+    runtime signal.
+  states:
+    - state: Active
+      meaning: >-
+        Latest version. Actively supported, receives new features, bug fixes and optimisations that
+        do not break backwards compatibility.
+    - state: Deprecated
+      meaning: >-
+        Surpassed by a newer active version. Remains in this state for one year, passively supported;
+        may not receive new features but will likely receive security updates and performance
+        improvements.
+    - state: Unsupported
+      meaning: >-
+        May be deactivated at any time. Applications on an unsupported version should migrate to an
+        active version.
+  deprecation_window: 1 year from deprecation to unsupported
+
+version_map:
+  - version: v4
+    previous_name: null
+    codename: Hunt Valley
+    start_date: '2018-09'
+    deprecation_date: null
+    state: Active
+    docs: https://app.drchrono.com/api-docs/
+  - version: v3
+    previous_name: v2016_06
+    codename: Sunnyvale
+    start_date: '2016-06'
+    deprecation_date: null
+    docs: https://app.drchrono.com/api-docs-old/v3/documentation
+  - version: v2
+    previous_name: v2015_08
+    codename: Mountain View
+    start_date: '2015-08'
+    deprecation_date: TBA
+    docs: https://app.drchrono.com/api-docs-old/v2/documentation
+  - version: v1
+    codename: New York
+    docs: https://app.drchrono.com/api-docs-old/
+  - version: v0
+    codename: Stonehenge
+    docs: https://app.drchrono.com/api-docs-old/
+
+deprecated_operations:
+  count: 0
+  note: >-
+    No operation in the OpenAPI DrChrono publishes at https://app.drchrono.com/openapi-schema carries
+    deprecated: true. Field-level deprecation IS announced in prose — the changelog states that
+    Patient.default_pharmacy "will be deprecated in a future version" in favour of
+    preferred_pharmacies — but it is not marked in the machine-readable contract.
+
+deprecated_fields:
+  - object: Patient
+    field: default_pharmacy
+    replacement: preferred_pharmacies
+    announced: '2023-05-31'
+    machine_readable: false
+    source: https://app.drchrono.com/api-docs-old/v4/changelog
+
+status_page:
+  url: https://status.drchrono.com/
+  provider: Atlassian Statuspage
+  machine_readable: https://status.drchrono.com/api/v2/status.json
+  probed: '2026-08-14'
+  http_status: 200
+
+changelog:
+  see_also: changelog/drchrono-changelog.yml
+  sources:
+    - name: Current changelog
+      url: https://headwayapp.co/drchrono-changelog
+      scope: product and platform releases
+    - name: V4 API changelog
+      url: https://app.drchrono.com/api-docs-old/v4/changelog
+      scope: dated API-level changes to v4 (Hunt Valley)
+    - name: V3 API changelog
+      url: https://app.drchrono.com/api-docs-old/v3/changelog
+      scope: superseded version
+
+sla:
+  published: false
+  note: >-
+    No public uptime SLA or credit schedule was found on drchrono.com, the status page, or the API
+    terms. Commercial terms are quote-based; an SLA may exist in a signed contract.
+
+support:
+  api_email: api@drchrono.com
+  support_portal: https://support.drchrono.com/home/api

@@ -1,0 +1,175 @@
+generated: '2026-08-14'
+method: probed
+source: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4/metadata
+name: drchrono SMART on FHIR R4 API
+description: >-
+  DrChrono runs a second, entirely separate machine-readable API surface alongside its OAuth 2.0 REST
+  v4 API — a SMART on FHIR R4 server serving 27 US Core resource types, read-only, with a live
+  CapabilityStatement, a SMART discovery document, an OpenID Connect discovery document, FHIR Bulk
+  Data Export, and a public FHIR Endpoint directory listing 105 practice-specific service bases.
+  This is the ONC §170.315(g)(10) standardized API surface for the DrChrono EHR.
+
+ownership_note: >-
+  The FHIR server is hosted on everhealthsoftware.com, not drchrono.com. This is DrChrono's parent
+  brand: DrChrono has been a wholly-owned part of EverCommerce's EverHealth portfolio since 2021, its
+  own API terms of service name "EverHealth Solutions Inc." as the contracting Company, and the
+  CapabilityStatement served at this host identifies itself as software.name "DrChrono FHIR Server"
+  with name "DrChrono FHIR Server Capability Statement". The DrChrono-published FHIR API
+  documentation at drchrono-fhirpresentation.everhealthsoftware.com states these exact base URLs and
+  asserts that "DrChrono owns the Materials".
+
+fhir_version: 4.0.1
+status: active
+software:
+  name: DrChrono FHIR Server
+  version: 1.0.0.0
+  release_date: '2018-05-01'
+publisher: DHIT
+capability_statement_date: '2018-05-04'
+formats: [json, xml]
+mode: read-only
+
+urls:
+  base_url: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/{practice_id}/r4
+  documented_example_base: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4
+  metadata: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4/metadata
+  smart_configuration: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4/.well-known/smart-configuration
+  service_base_directory: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/r4/endpoints
+  authorization_root: https://drchrono-fhir.everhealthsoftware.com/core
+  openid_configuration: https://drchrono-fhir.everhealthsoftware.com/core/.well-known/openid-configuration
+  documentation: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+
+probes:
+  - url: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4/metadata
+    status: 200
+    content_type: application/fhir+json
+    file: fhir/drchrono-fhir-r4-capabilitystatement.json
+  - url: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4/.well-known/smart-configuration
+    status: 200
+    file: well-known/drchrono-fhir-smart-configuration.json
+  - url: https://drchrono-fhir.everhealthsoftware.com/core/.well-known/openid-configuration
+    status: 200
+    file: well-known/drchrono-fhir-openid-configuration.json
+  - url: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/r4/endpoints
+    status: 200
+    content_type: application/fhir+json
+    file: fhir/drchrono-fhir-r4-endpoints.json
+  - url: https://app.drchrono.com/api/fhir/r4/metadata
+    status: 401
+    note: The app.drchrono.com host answers 401 "Authorization failed." for every /api/* path, including nonexistent ones, so this is not evidence of a second FHIR surface.
+
+service_base_directory:
+  format: FHIR Bundle of Endpoint + Organization resources
+  entry_count: 210
+  practice_count: 105
+  note: >-
+    Each participating practice gets its own FHIR service base of the form
+    /fhir/drchrono/{practice_id}/r4. The public directory is the ONC-required service base URL
+    publication, and it is machine-readable and unauthenticated.
+
+security:
+  cors: true
+  service: OAuth
+  smart_version: SMART App Launch
+  oauth_uris_extension: http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris
+  authorization_endpoint: https://drchrono-fhir.everhealthsoftware.com/core/connect/authorize
+  token_endpoint: https://drchrono-fhir.everhealthsoftware.com/core/connect/token
+  introspection_endpoint: https://drchrono-fhir.everhealthsoftware.com/core/connect/introspect
+  revocation_endpoint: https://drchrono-fhir.everhealthsoftware.com/core/connect/revocation
+  registration_endpoint: https://drchrono-fhir.everhealthsoftware.com/core/permissions
+  registration_note: >-
+    Registration is NOT dynamic client registration. The endpoint is a permissions console; DrChrono's
+    documentation states that only vendor admins of the EHR can add a client app, supplying an
+    application URL, redirect URL, logout URL, scope list, application name and OAuth flow.
+  grant_types: [authorization_code, client_credentials, refresh_token, implicit, 'urn:ietf:params:oauth:grant-type:device_code']
+  token_endpoint_auth_methods: [client_secret_basic, client_secret_post, private_key_jwt]
+  pkce: true
+  code_challenge_methods: [S256]
+  smart_capabilities:
+    - launch-ehr
+    - launch-standalone
+    - client-public
+    - client-confidential-symmetric
+    - client-confidential-asymmetric
+    - sso-openid-connect
+    - context-passthrough-banner
+    - context-passthrough-style
+    - context-ehr-patient
+    - context-ehr-encounter
+    - context-standalone-patient
+    - context-standalone-encounter
+    - permission-offline
+    - permission-patient
+    - permission-user
+    - permission-v1
+    - permission-v2
+    - context-banner
+    - context-style
+    - authorize-post
+  scope_count: 233
+  see_also: scopes/drchrono-fhir-smart-scopes.yml
+
+resource_count: 27
+resources:
+  - {type: Group, interactions: [], operations: [export]}
+  - {type: Patient, interactions: [read, search-type], operations: [patient-export], search: [patient, _id, identifier, name, gender, family, given, birthdate]}
+  - {type: AllergyIntolerance, interactions: [read, search-type], search: [patient, date, clinical-status]}
+  - {type: Binary, interactions: [read, search-type], search: [patient, date]}
+  - {type: CarePlan, interactions: [read, search-type], search: [patient, date, category, status]}
+  - {type: CareTeam, interactions: [read, search-type], search: [patient, status]}
+  - {type: ClinicalImpression, interactions: [read, search-type], search: [patient, date]}
+  - {type: Condition, interactions: [read, search-type], search: [patient, category, clinical-status, date]}
+  - {type: Coverage, interactions: [read, search-type], search: [patient]}
+  - {type: Device, interactions: [read, search-type], search: [patient, type]}
+  - {type: DiagnosticReport, interactions: [read, search-type], search: [patient, date, category, code]}
+  - {type: DocumentReference, interactions: [read, search-type], search: [patient, _id, category, status, type, period, date]}
+  - {type: Encounter, interactions: [read, search-type], search: [_id, identifier, patient, date, status]}
+  - {type: Goal, interactions: [read, search-type], search: [patient, date, target-date]}
+  - {type: Immunization, interactions: [read, search-type], search: [patient, date]}
+  - {type: Location, interactions: [read, search-type], search: [patient, date]}
+  - {type: MedicationDispense, interactions: [read, search-type], search: [status, type, patient]}
+  - {type: MedicationRequest, interactions: [read, search-type], search: [patient, code, intent, status, date]}
+  - {type: Observation, interactions: [read, search-type], search: [patient, code, category, date]}
+  - {type: Organization, interactions: [read, search-type], search: [identifier, name, address, address-city, address-country, address-state, address-postalcode]}
+  - {type: Practitioner, interactions: [read, search-type], search: [_id, identifier]}
+  - {type: PractitionerRole, interactions: [read, search-type], search: [_id, identifier]}
+  - {type: Procedure, interactions: [read, search-type], search: [patient, date]}
+  - {type: Provenance, interactions: [read, search-type], search: []}
+  - {type: RelatedPerson, interactions: [read, search-type], search: [_id, identifier]}
+  - {type: ServiceRequest, interactions: [read], search: [status, patient, category, code, _id, authored]}
+  - {type: Specimen, interactions: [read, search-type], search: [patient, _id]}
+
+bulk_data_export:
+  supported: true
+  operations:
+    - name: patient-export
+      request: GET [fhir base]/Patient/$export
+      scope: all patients the client is authorized to see
+    - name: export
+      request: GET [fhir base]/Group/[id]/$export
+      scope: a specified group of patients
+  required_headers:
+    Accept: application/fhir+json
+    Prefer: respond-async
+  kickoff_response: 202 Accepted with a Content-Location polling URL
+  output_format: ndjson
+  auth: >-
+    client_credentials with a JWT client assertion
+    (client_assertion_type urn:ietf:params:oauth:client-assertion-type:jwt-bearer) and scope system/*.read
+  source: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+
+uscdi:
+  certification_criteria: ['§170.315(g)(7)', '§170.315(g)(9)', '§170.315(g)(10)']
+  statement: >-
+    DrChrono states that the SMART on FHIR API allows other health IT applications to make read-only
+    data requests for patient health information that is part of the USCDI, and that available data
+    is limited to what USCDI defines. C-CDA handling uses the latest cumulative C-CDA document per
+    patient by EffectiveDateTime.
+  source: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+
+divergence_from_rest:
+  - The FHIR surface is READ-ONLY; the REST v4 API supports create, update and delete.
+  - Identifier spaces do not overlap — FHIR resource ids are opaque strings, REST ids are integers.
+  - Separate authorization servers, separate scope vocabularies (SMART patient/user/system scopes vs DrChrono billing/clinical/patients scopes).
+  - The FHIR surface carries Bulk Data Export; the REST API has no bulk export equivalent.
+  - The REST API carries writes, webhooks, billing, tasks and scheduling that have no FHIR projection.

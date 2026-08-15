@@ -1,0 +1,297 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DrChrono EHR REST Administrative API",
+    "version": "v4 - Hunt Valley"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Administrative",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "user_groups_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/user_groups",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search user groups"
+        },
+        {
+          "info": {
+            "name": "doctor_options_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/doctor_options",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search doctor options within practice group"
+        },
+        {
+          "info": {
+            "name": "doctors_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/doctors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing doctor"
+        },
+        {
+          "info": {
+            "name": "users_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing user, `/api/users/current` can be used to identify logged in user, it will redirect to `/api/users/{current_user_id}`"
+        },
+        {
+          "info": {
+            "name": "users_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/users",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search users, `/api/users/current` can be used to identify logged in user, it will redirect to `/api/users/{current_user_id}`"
+        },
+        {
+          "info": {
+            "name": "doctor_options_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/doctor_options/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve existing options for a doctor"
+        },
+        {
+          "info": {
+            "name": "doctors_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/doctors",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search doctors within practice group"
+        },
+        {
+          "info": {
+            "name": "user_groups_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/user_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing user group"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

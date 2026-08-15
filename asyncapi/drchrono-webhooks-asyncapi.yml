@@ -1,0 +1,1319 @@
+asyncapi: 3.0.0
+info:
+  title: DrChrono EHR Webhooks
+  version: v4
+  description: AsyncAPI description of the DrChrono EHR webhook surface, generated faithfully from the webhook reference
+    DrChrono publishes at https://app.drchrono.com/api-docs/. Every event name, header, body key, delivery rule
+    and verification step below is taken from that document; nothing is invented. DrChrono does NOT publish an AsyncAPI
+    of its own — payload schemas are documented only as "the same serializer as the DrChrono API", so message payloads
+    here are typed as the REST object without field-level detail rather than guessed at.
+  contact:
+    name: DrChrono API Support
+    email: api@drchrono.com
+    url: https://app.drchrono.com/api-docs/
+  externalDocs:
+    description: DrChrono webhook documentation
+    url: https://app.drchrono.com/api-docs/
+defaultContentType: application/json
+servers:
+  subscriber:
+    host: '{callbackHost}'
+    protocol: https
+    description: Subscriber-hosted HTTPS endpoint. DrChrono POSTs deliveries to a callback URL you register on your
+      API application; there is no DrChrono-hosted broker, topic or stream.
+    variables:
+      callbackHost:
+        description: Host of your registered callback URL.
+channels:
+  callback:
+    address: '{callbackUrl}'
+    title: Registered webhook callback URL
+    description: The HTTPS callback URL registered against a DrChrono API application. All events for that application
+      are delivered to this one URL as POST requests; the X-drchrono-event header discriminates.
+    parameters:
+      callbackUrl:
+        description: Callback URL configured in the webhook section of a saved DrChrono API application.
+    messages:
+      APPOINTMENT_CREATE:
+        $ref: '#/components/messages/APPOINTMENT_CREATE'
+      APPOINTMENT_MODIFY:
+        $ref: '#/components/messages/APPOINTMENT_MODIFY'
+      APPOINTMENT_DELETE:
+        $ref: '#/components/messages/APPOINTMENT_DELETE'
+      CASH_PAYMENT_DELETE:
+        $ref: '#/components/messages/CASH_PAYMENT_DELETE'
+      CLINICAL_NOTE_LOCK:
+        $ref: '#/components/messages/CLINICAL_NOTE_LOCK'
+      CLINICAL_NOTE_UNLOCK:
+        $ref: '#/components/messages/CLINICAL_NOTE_UNLOCK'
+      LAB_ORDER_CREATE:
+        $ref: '#/components/messages/LAB_ORDER_CREATE'
+      LAB_ORDER_MODIFY:
+        $ref: '#/components/messages/LAB_ORDER_MODIFY'
+      LAB_ORDER_DELETE:
+        $ref: '#/components/messages/LAB_ORDER_DELETE'
+      LINE_ITEM_CREATE:
+        $ref: '#/components/messages/LINE_ITEM_CREATE'
+      LINE_ITEM_MODIFY:
+        $ref: '#/components/messages/LINE_ITEM_MODIFY'
+      LINE_ITEM_DELETE:
+        $ref: '#/components/messages/LINE_ITEM_DELETE'
+      LINE_ITEM_TRANSACTION_DELETE:
+        $ref: '#/components/messages/LINE_ITEM_TRANSACTION_DELETE'
+      PATIENT_CREATE:
+        $ref: '#/components/messages/PATIENT_CREATE'
+      PATIENT_MODIFY:
+        $ref: '#/components/messages/PATIENT_MODIFY'
+      PATIENT_ALLERGY_CREATE:
+        $ref: '#/components/messages/PATIENT_ALLERGY_CREATE'
+      PATIENT_ALLERGY_MODIFY:
+        $ref: '#/components/messages/PATIENT_ALLERGY_MODIFY'
+      PATIENT_FLAG_CREATE:
+        $ref: '#/components/messages/PATIENT_FLAG_CREATE'
+      PATIENT_FLAG_CMODIFY:
+        $ref: '#/components/messages/PATIENT_FLAG_CMODIFY'
+      PATIENT_PROBLEM_CREATE:
+        $ref: '#/components/messages/PATIENT_PROBLEM_CREATE'
+      PATIENT_PROBLEM_MODIFY:
+        $ref: '#/components/messages/PATIENT_PROBLEM_MODIFY'
+      PATIENT_MEDICATION_CREATE:
+        $ref: '#/components/messages/PATIENT_MEDICATION_CREATE'
+      PATIENT_MEDICATION_MODIFY:
+        $ref: '#/components/messages/PATIENT_MEDICATION_MODIFY'
+      TASK_CREATE:
+        $ref: '#/components/messages/TASK_CREATE'
+      TASK_MODIFY:
+        $ref: '#/components/messages/TASK_MODIFY'
+      TASK_DELETE:
+        $ref: '#/components/messages/TASK_DELETE'
+      VACCINE_ADMINISTERED:
+        $ref: '#/components/messages/VACCINE_ADMINISTERED'
+operations:
+  receive_APPOINTMENT_CREATE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time an appointment is created
+    messages:
+    - $ref: '#/channels/callback/messages/APPOINTMENT_CREATE'
+  receive_APPOINTMENT_MODIFY:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time an appointment is modified
+    messages:
+    - $ref: '#/channels/callback/messages/APPOINTMENT_MODIFY'
+  receive_APPOINTMENT_DELETE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time an appointment is deleted
+    messages:
+    - $ref: '#/channels/callback/messages/APPOINTMENT_DELETE'
+  receive_CASH_PAYMENT_DELETE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient payment is deleted
+    messages:
+    - $ref: '#/channels/callback/messages/CASH_PAYMENT_DELETE'
+  receive_CLINICAL_NOTE_LOCK:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a clinical note is locked
+    messages:
+    - $ref: '#/channels/callback/messages/CLINICAL_NOTE_LOCK'
+  receive_CLINICAL_NOTE_UNLOCK:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a clinical note is unlocked
+    messages:
+    - $ref: '#/channels/callback/messages/CLINICAL_NOTE_UNLOCK'
+  receive_LAB_ORDER_CREATE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a lab order is created
+    messages:
+    - $ref: '#/channels/callback/messages/LAB_ORDER_CREATE'
+  receive_LAB_ORDER_MODIFY:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a lab order is modified
+    messages:
+    - $ref: '#/channels/callback/messages/LAB_ORDER_MODIFY'
+  receive_LAB_ORDER_DELETE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a lab order is deleted
+    messages:
+    - $ref: '#/channels/callback/messages/LAB_ORDER_DELETE'
+  receive_LINE_ITEM_CREATE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a line item is created
+    messages:
+    - $ref: '#/channels/callback/messages/LINE_ITEM_CREATE'
+  receive_LINE_ITEM_MODIFY:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a line item is modified
+    messages:
+    - $ref: '#/channels/callback/messages/LINE_ITEM_MODIFY'
+  receive_LINE_ITEM_DELETE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a line item is deleted
+    messages:
+    - $ref: '#/channels/callback/messages/LINE_ITEM_DELETE'
+  receive_LINE_ITEM_TRANSACTION_DELETE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a line item transaction is deleted
+    messages:
+    - $ref: '#/channels/callback/messages/LINE_ITEM_TRANSACTION_DELETE'
+  receive_PATIENT_CREATE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient is created
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_CREATE'
+  receive_PATIENT_MODIFY:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient is modified
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_MODIFY'
+  receive_PATIENT_ALLERGY_CREATE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient allergy is created
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_ALLERGY_CREATE'
+  receive_PATIENT_ALLERGY_MODIFY:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient allergy is modified
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_ALLERGY_MODIFY'
+  receive_PATIENT_FLAG_CREATE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient flag is created
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_FLAG_CREATE'
+  receive_PATIENT_FLAG_CMODIFY:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient flag is modified
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_FLAG_CMODIFY'
+  receive_PATIENT_PROBLEM_CREATE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient problem is created
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_PROBLEM_CREATE'
+  receive_PATIENT_PROBLEM_MODIFY:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient problem is modified
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_PROBLEM_MODIFY'
+  receive_PATIENT_MEDICATION_CREATE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient medication is created
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_MEDICATION_CREATE'
+  receive_PATIENT_MEDICATION_MODIFY:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a patient medication is modified
+    messages:
+    - $ref: '#/channels/callback/messages/PATIENT_MEDICATION_MODIFY'
+  receive_TASK_CREATE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a task is created
+    messages:
+    - $ref: '#/channels/callback/messages/TASK_CREATE'
+  receive_TASK_MODIFY:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a task is modified and any time creation, modification and deletion
+      of task notes, associated task item
+    messages:
+    - $ref: '#/channels/callback/messages/TASK_MODIFY'
+  receive_TASK_DELETE:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a task is deleted
+    messages:
+    - $ref: '#/channels/callback/messages/TASK_DELETE'
+  receive_VACCINE_ADMINISTERED:
+    action: receive
+    channel:
+      $ref: '#/channels/callback'
+    summary: We will deliver a hook any time a vaccine consent form is signed
+    messages:
+    - $ref: '#/channels/callback/messages/VACCINE_ADMINISTERED'
+components:
+  messages:
+    APPOINTMENT_CREATE:
+      name: APPOINTMENT_CREATE
+      title: Appointment Create
+      summary: We will deliver a hook any time an appointment is created
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: APPOINTMENT_CREATE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Appointment related to the triggered event. Uses the same serializer
+              as the /api/appointments REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Appointment
+      x-rest-path: /api/appointments
+    APPOINTMENT_MODIFY:
+      name: APPOINTMENT_MODIFY
+      title: Appointment Modify
+      summary: We will deliver a hook any time an appointment is modified
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: APPOINTMENT_MODIFY
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Appointment related to the triggered event. Uses the same serializer
+              as the /api/appointments REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Appointment
+      x-rest-path: /api/appointments
+    APPOINTMENT_DELETE:
+      name: APPOINTMENT_DELETE
+      title: Appointment Delete
+      summary: We will deliver a hook any time an appointment is deleted
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: APPOINTMENT_DELETE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Appointment related to the triggered event. Uses the same serializer
+              as the /api/appointments REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Appointment
+      x-rest-path: /api/appointments
+    CASH_PAYMENT_DELETE:
+      name: CASH_PAYMENT_DELETE
+      title: Cash Payment Delete
+      summary: We will deliver a hook any time a patient payment is deleted
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: CASH_PAYMENT_DELETE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the PatientPayment related to the triggered event. Uses the same
+              serializer as the /api/patient_payments REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: PatientPayment
+      x-rest-path: /api/patient_payments
+    CLINICAL_NOTE_LOCK:
+      name: CLINICAL_NOTE_LOCK
+      title: Clinical Note Lock
+      summary: We will deliver a hook any time a clinical note is locked
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: CLINICAL_NOTE_LOCK
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the ClinicalNote related to the triggered event. Uses the same serializer
+              as the /api/clinical_notes REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: ClinicalNote
+      x-rest-path: /api/clinical_notes
+    CLINICAL_NOTE_UNLOCK:
+      name: CLINICAL_NOTE_UNLOCK
+      title: Clinical Note Unlock
+      summary: We will deliver a hook any time a clinical note is unlocked
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: CLINICAL_NOTE_UNLOCK
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the ClinicalNote related to the triggered event. Uses the same serializer
+              as the /api/clinical_notes REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: ClinicalNote
+      x-rest-path: /api/clinical_notes
+    LAB_ORDER_CREATE:
+      name: LAB_ORDER_CREATE
+      title: Lab Order Create
+      summary: We will deliver a hook any time a lab order is created
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: LAB_ORDER_CREATE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the LabOrder related to the triggered event. Uses the same serializer
+              as the /api/lab_orders REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: LabOrder
+      x-rest-path: /api/lab_orders
+    LAB_ORDER_MODIFY:
+      name: LAB_ORDER_MODIFY
+      title: Lab Order Modify
+      summary: We will deliver a hook any time a lab order is modified
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: LAB_ORDER_MODIFY
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the LabOrder related to the triggered event. Uses the same serializer
+              as the /api/lab_orders REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: LabOrder
+      x-rest-path: /api/lab_orders
+    LAB_ORDER_DELETE:
+      name: LAB_ORDER_DELETE
+      title: Lab Order Delete
+      summary: We will deliver a hook any time a lab order is deleted
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: LAB_ORDER_DELETE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the LabOrder related to the triggered event. Uses the same serializer
+              as the /api/lab_orders REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: LabOrder
+      x-rest-path: /api/lab_orders
+    LINE_ITEM_CREATE:
+      name: LINE_ITEM_CREATE
+      title: Line Item Create
+      summary: We will deliver a hook any time a line item is created
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: LINE_ITEM_CREATE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the LineItem related to the triggered event. Uses the same serializer
+              as the /api/line_items REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: LineItem
+      x-rest-path: /api/line_items
+    LINE_ITEM_MODIFY:
+      name: LINE_ITEM_MODIFY
+      title: Line Item Modify
+      summary: We will deliver a hook any time a line item is modified
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: LINE_ITEM_MODIFY
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the LineItem related to the triggered event. Uses the same serializer
+              as the /api/line_items REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: LineItem
+      x-rest-path: /api/line_items
+    LINE_ITEM_DELETE:
+      name: LINE_ITEM_DELETE
+      title: Line Item Delete
+      summary: We will deliver a hook any time a line item is deleted
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: LINE_ITEM_DELETE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the LineItem related to the triggered event. Uses the same serializer
+              as the /api/line_items REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: LineItem
+      x-rest-path: /api/line_items
+    LINE_ITEM_TRANSACTION_DELETE:
+      name: LINE_ITEM_TRANSACTION_DELETE
+      title: Line Item Transaction Delete
+      summary: We will deliver a hook any time a line item transaction is deleted
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: LINE_ITEM_TRANSACTION_DELETE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Transaction related to the triggered event. Uses the same serializer
+              as the /api/transactions REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Transaction
+      x-rest-path: /api/transactions
+    PATIENT_CREATE:
+      name: PATIENT_CREATE
+      title: Patient Create
+      summary: We will deliver a hook any time a patient is created
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_CREATE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Patient related to the triggered event. Uses the same serializer
+              as the /api/patients REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Patient
+      x-rest-path: /api/patients
+    PATIENT_MODIFY:
+      name: PATIENT_MODIFY
+      title: Patient Modify
+      summary: We will deliver a hook any time a patient is modified
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_MODIFY
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Patient related to the triggered event. Uses the same serializer
+              as the /api/patients REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Patient
+      x-rest-path: /api/patients
+    PATIENT_ALLERGY_CREATE:
+      name: PATIENT_ALLERGY_CREATE
+      title: Patient Allergy Create
+      summary: We will deliver a hook any time a patient allergy is created
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_ALLERGY_CREATE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Allergy related to the triggered event. Uses the same serializer
+              as the /api/allergies REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Allergy
+      x-rest-path: /api/allergies
+    PATIENT_ALLERGY_MODIFY:
+      name: PATIENT_ALLERGY_MODIFY
+      title: Patient Allergy Modify
+      summary: We will deliver a hook any time a patient allergy is modified
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_ALLERGY_MODIFY
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Allergy related to the triggered event. Uses the same serializer
+              as the /api/allergies REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Allergy
+      x-rest-path: /api/allergies
+    PATIENT_FLAG_CREATE:
+      name: PATIENT_FLAG_CREATE
+      title: Patient Flag Create
+      summary: We will deliver a hook any time a patient flag is created
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_FLAG_CREATE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the PatientFlag related to the triggered event. Uses the same serializer
+              as the /api/patient_flags REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: PatientFlag
+      x-rest-path: /api/patient_flags
+    PATIENT_FLAG_CMODIFY:
+      name: PATIENT_FLAG_CMODIFY
+      title: Patient Flag Cmodify
+      summary: We will deliver a hook any time a patient flag is modified
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_FLAG_CMODIFY
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the PatientFlag related to the triggered event. Uses the same serializer
+              as the /api/patient_flags REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: PatientFlag
+      x-rest-path: /api/patient_flags
+    PATIENT_PROBLEM_CREATE:
+      name: PATIENT_PROBLEM_CREATE
+      title: Patient Problem Create
+      summary: We will deliver a hook any time a patient problem is created
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_PROBLEM_CREATE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Problem related to the triggered event. Uses the same serializer
+              as the /api/problems REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Problem
+      x-rest-path: /api/problems
+    PATIENT_PROBLEM_MODIFY:
+      name: PATIENT_PROBLEM_MODIFY
+      title: Patient Problem Modify
+      summary: We will deliver a hook any time a patient problem is modified
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_PROBLEM_MODIFY
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Problem related to the triggered event. Uses the same serializer
+              as the /api/problems REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Problem
+      x-rest-path: /api/problems
+    PATIENT_MEDICATION_CREATE:
+      name: PATIENT_MEDICATION_CREATE
+      title: Patient Medication Create
+      summary: We will deliver a hook any time a patient medication is created
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_MEDICATION_CREATE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Medication related to the triggered event. Uses the same serializer
+              as the /api/medications REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Medication
+      x-rest-path: /api/medications
+    PATIENT_MEDICATION_MODIFY:
+      name: PATIENT_MEDICATION_MODIFY
+      title: Patient Medication Modify
+      summary: We will deliver a hook any time a patient medication is modified
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: PATIENT_MEDICATION_MODIFY
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Medication related to the triggered event. Uses the same serializer
+              as the /api/medications REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Medication
+      x-rest-path: /api/medications
+    TASK_CREATE:
+      name: TASK_CREATE
+      title: Task Create
+      summary: We will deliver a hook any time a task is created
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: TASK_CREATE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Task related to the triggered event. Uses the same serializer
+              as the /api/tasks REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Task
+      x-rest-path: /api/tasks
+    TASK_MODIFY:
+      name: TASK_MODIFY
+      title: Task Modify
+      summary: We will deliver a hook any time a task is modified and any time creation, modification and deletion
+        of task notes, associated task item
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: TASK_MODIFY
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Task related to the triggered event. Uses the same serializer
+              as the /api/tasks REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Task
+      x-rest-path: /api/tasks
+    TASK_DELETE:
+      name: TASK_DELETE
+      title: Task Delete
+      summary: We will deliver a hook any time a task is deleted
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: TASK_DELETE
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the Task related to the triggered event. Uses the same serializer
+              as the /api/tasks REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: Task
+      x-rest-path: /api/tasks
+    VACCINE_ADMINISTERED:
+      name: VACCINE_ADMINISTERED
+      title: Vaccine Administered
+      summary: We will deliver a hook any time a vaccine consent form is signed
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-drchrono-event:
+            type: string
+            const: VACCINE_ADMINISTERED
+            description: Event that triggered this hook
+          X-drchrono-signature:
+            type: string
+            description: Secret token associated with this webhook
+          X-drchrono-delivery:
+            type: string
+            description: ID of this delivery
+        required:
+        - X-drchrono-event
+        - X-drchrono-signature
+        - X-drchrono-delivery
+      payload:
+        type: object
+        properties:
+          receiver:
+            type: object
+            description: JSON representation of the webhook registration
+          object:
+            type: object
+            description: JSON representation of the PatientVaccineRecord related to the triggered event. Uses the
+              same serializer as the /api/patient_vaccine_records REST endpoint.
+        required:
+        - receiver
+        - object
+      x-rest-object: PatientVaccineRecord
+      x-rest-path: /api/patient_vaccine_records
+x-delivery:
+  transport: HTTP POST to a subscriber-registered callback URL
+  ping: 'A PING delivery is sent with header X-drchrono-event: PING when the "Ping webhook" button is used.'
+  success: Any 2xx response is treated as delivered. Anything else, including 302, is a failure.
+  retries:
+  - attempt: 1
+    after: 1 hour after the initial event
+  - attempt: 2
+    after: 3 hours after the initial event
+  - attempt: 3
+    after: 7 hours after the initial event
+  after_retries: Deliveries still failing after three retries must be redelivered by hand from the deliveries view.
+  ordering: No ordering guarantee is published.
+  response_capture: DrChrono records only the response status code; response headers and body are discarded.
+x-verification:
+  trigger: On webhook creation and any time the callback URL changes.
+  mechanism: 'DrChrono sends a GET to the callback URL with a msg query parameter. The subscriber must reply 200
+    with JSON {"secret_token": "<hex>"} where <hex> is HMAC-SHA256 of msg keyed by the webhook secret token.'
+  algorithm: HMAC-SHA256, hex digest
+x-security:
+  shared_secret_header: X-drchrono-signature carries the webhook secret token; subscribers should verify it on every
+    delivery.
+  signature_note: The signature header carries the shared secret itself rather than an HMAC of the request body,
+    so it authenticates the sender but does not attest to payload integrity. Subscribers handling PHI should terminate
+    TLS themselves and treat the header as a bearer secret.
+  secret_guidance: DrChrono recommends a high-entropy secret, e.g. ruby -rsecurerandom -e 'puts SecureRandom.hex(20)'
+x-registration:
+  requirement: An API application must exist on file (a Test Model application is sufficient).
+  scope: One webhook per API application; events are selected per webhook.
+  console: Webhook section of a saved API application in DrChrono account settings.
+x-provenance:
+  generated: '2026-08-14'
+  method: generated
+  source: https://app.drchrono.com/api-docs/
+  note: Generated by the API Evangelist enrichment pipeline from DrChrono-published documentation. Not a DrChrono
+    artifact.

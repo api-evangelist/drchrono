@@ -1,18 +1,157 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/drchrono-rest-api-openapi.yml
+generated: '2026-08-14'
+method: searched
+source: https://app.drchrono.com/api-docs/
+docs: https://app.drchrono.com/api-docs/tutorial/
+name: drchrono Authentication
+description: >-
+  DrChrono runs two independent OAuth 2.0 estates that share no tokens, no scopes and no discovery
+  surface. The proprietary REST v4 API authenticates against app.drchrono.com with a DrChrono-specific
+  scope vocabulary and a hard 48-hour access-token lifetime. The ONC-certified SMART on FHIR R4 API
+  authenticates against a separate EverHealth-hosted authorization server with SMART scopes, PKCE and
+  OIDC. A token from one is not valid against the other.
+
 summary:
-  types:
-  - oauth2
-  oauth2_flows:
-  - authorizationCode
+  types: [oauth2]
+  oauth2_flows: [authorizationCode, clientCredentials, refreshToken, implicit, deviceCode]
+  api_keys: false
+  basic_auth: false
+  mutual_tls: false
+  openid_connect: true
+  openid_connect_scope: FHIR surface only
+
 schemes:
-- name: drchrono_oauth2
-  type: oauth2
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://app.drchrono.com/o/authorize/
-    tokenUrl: https://app.drchrono.com/o/token/
-    scopes: 22
-  sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - name: drchrono_oauth2
+    surface: REST v4 API (app.drchrono.com)
+    type: oauth2
+    declared_in: openapi/_original/drchrono-rest-api-openapi-schema.json
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://app.drchrono.com/o/authorize/
+        tokenUrl: https://app.drchrono.com/o/token/
+        revocationUrl: https://app.drchrono.com/o/revoke_token
+        scopes: 22
+        scope_artifact: scopes/drchrono-scopes.yml
+    token:
+      transport: 'Authorization: Bearer <access_token>'
+      access_token_lifetime_hours: 48
+      refresh: refresh_token grant against the same token endpoint, omitting redirect_uri
+      authorization_code_lifetime: >-
+        Very short. DrChrono warns the code "expires extremely quickly" and that the exchange must
+        happen before the redirect page is rendered to the user.
+      rotation: not documented
+    client_registration:
+      self_serve: true
+      console: https://app.drchrono.com/api-management/
+      path_in_app: Account > Other Settings > API
+      requires: application name, one or more redirect URIs
+      issues: client id, client secret
+      note: A free DrChrono account is enough to create an API application.
+    scope_default_hazard: >-
+      Omitting the scope parameter on the authorize call requests ALL scopes. DrChrono's own
+      documentation advises requesting only what is needed; the default is maximal, not minimal.
+    permission_gate:
+      description: >-
+        Scopes alone do not authorise access. DrChrono enforces a second, independent gate: a primary
+        user must grant the corresponding permission to the user inside the DrChrono web app. A token
+        carrying the correct scope still returns 403 when the in-app permission is absent, and this is
+        the single most common integration failure on this API.
+      example: >-
+        The share_communications permission controls whether /api/messages and /api/lab_results share
+        practice communication data over the API; it is editable only by DrChrono employees on request
+        to api@drchrono.com.
+    discovery:
+      oauth_authorization_server: false
+      openid_configuration: false
+      note: >-
+        No RFC 8414 or OIDC metadata document is published for this authorization server.
+        https://app.drchrono.com/.well-known/oauth-authorization-server returned 404 on 2026-08-14.
+        Endpoints exist only in prose.
+    sources:
+      - https://app.drchrono.com/api-docs/
+      - https://app.drchrono.com/api-docs/tutorial/
+      - openapi/_original/drchrono-rest-api-openapi-schema.json
+
+  - name: drchrono_smart_fhir
+    surface: SMART on FHIR R4 API (drchrono-fhirpresentation.everhealthsoftware.com)
+    type: oauth2
+    openid_connect: true
+    issuer: https://drchrono-fhir.everhealthsoftware.com/core
+    declared_in: well-known/drchrono-fhir-smart-configuration.json
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://drchrono-fhir.everhealthsoftware.com/core/connect/authorize
+        tokenUrl: https://drchrono-fhir.everhealthsoftware.com/core/connect/token
+        pkce: required in practice (S256 is the only advertised challenge method)
+        aud_parameter: 'the FHIR base URL must be passed as aud on the authorize call'
+      - flow: clientCredentials
+        tokenUrl: https://drchrono-fhir.everhealthsoftware.com/core/connect/token
+        client_assertion: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer'
+        used_for: FHIR Bulk Data Export with scope system/*.read
+      - flow: refreshToken
+      - flow: implicit
+      - flow: deviceCode
+        grant: 'urn:ietf:params:oauth:grant-type:device_code'
+    endpoints:
+      introspection: https://drchrono-fhir.everhealthsoftware.com/core/connect/introspect
+      revocation: https://drchrono-fhir.everhealthsoftware.com/core/connect/revocation
+      registration: https://drchrono-fhir.everhealthsoftware.com/core/permissions
+    client_auth_methods: [client_secret_basic, client_secret_post, private_key_jwt]
+    scopes: 233
+    scope_artifact: scopes/drchrono-fhir-smart-scopes.yml
+    client_registration:
+      self_serve: false
+      dynamic_client_registration: false
+      note: >-
+        The registration endpoint is a permissions console. DrChrono states only EHR vendor admins can
+        add a client app, supplying application URL, redirect URL, logout URL, scope list, application
+        name and OAuth flow.
+    discovery:
+      smart_configuration: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4/.well-known/smart-configuration
+      openid_configuration: https://drchrono-fhir.everhealthsoftware.com/core/.well-known/openid-configuration
+      status: both returned 200 on 2026-08-14 and are saved verbatim under well-known/
+    sources:
+      - well-known/drchrono-fhir-smart-configuration.json
+      - well-known/drchrono-fhir-openid-configuration.json
+      - https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+
+  - name: drchrono_iframe_jwt
+    surface: Embedded iframe applications inside the DrChrono patient chart and clinical note
+    type: jwt
+    algorithm: HS256
+    key: the API application's client_secret
+    claims: [doctor_id, patient_id, practice_id, iat]
+    description: >-
+      DrChrono appends a signed JWT to the iframe src when rendering a third-party application inside
+      the patient chart or clinical note page. The JWT signs the context parameters so the embedding
+      application can verify it is being loaded by an authorised DrChrono user. Because same-origin
+      policy blocks postMessage-free data exchange, the JWT is the only trusted context channel.
+    guidance: >-
+      Validate the JWT with a vetted library and use ONLY the claims extracted from it — never the raw
+      query parameters. DrChrono's own example allows 60 seconds of clock drift.
+    source: https://app.drchrono.com/api-docs/
+
+  - name: drchrono_webhook_secret
+    surface: Outbound webhook deliveries
+    type: shared secret
+    header: X-drchrono-signature
+    verification_handshake: HMAC-SHA256 hex digest of the msg query parameter, keyed by the webhook secret token
+    description: >-
+      Webhook deliveries carry the shared secret in a header rather than an HMAC of the request body,
+      so the header authenticates the sender but attests nothing about payload integrity. A separate
+      HMAC-SHA256 challenge/response is used once at webhook creation and whenever the callback URL
+      changes.
+    source: https://app.drchrono.com/api-docs/
+
+findings:
+  - >-
+    Neither DrChrono OAuth surface publishes RFC 8414 authorization-server metadata for the REST API;
+    only the FHIR estate is discoverable.
+  - >-
+    The 48-hour access token is short for a background integration and there is no client-credentials
+    flow on the REST API — every REST integration is bound to a human user's authorization and must
+    keep a refresh token alive indefinitely.
+  - >-
+    PKCE is available on the FHIR surface and absent from the REST surface's documentation.
+  - >-
+    The scope/permission double gate is the defining characteristic of DrChrono auth and is invisible
+    in the OpenAPI. It is documented in prose only.

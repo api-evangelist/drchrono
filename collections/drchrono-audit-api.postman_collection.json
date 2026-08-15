@@ -1,0 +1,743 @@
+{
+  "item": [
+    {
+      "id": "2eb3ea8a-0ad0-4c78-ac4f-bab7701a0f96",
+      "name": "Audit",
+      "description": {
+        "content": "Search Audit Logs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "61a1f01a-b4e4-4af8-9874-cf1c318f5833",
+          "name": "audit log list",
+          "request": {
+            "name": "audit log list",
+            "description": {
+              "content": "Retrieve or search audit logs.\n<b>Note:</b> Either `since`, `date` or `date_range` parameter must be specified.\n            ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "audit_log"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_range",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "doctor",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appointment",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "billing:patient-payment:read billing:read patients:read user:write messages:write messages:read tasks:write tasks:read labs:write patients:write settings:write billing:patient-payment:write clinical:write patients:summary:write calendar:read user:read billing:write settings:read labs:read calendar:write patients:summary:read clinical:read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://app.drchrono.com/o/token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://app.drchrono.com/o/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d4ca51d5-95b1-4092-8689-8cae42795851",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "audit_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "doctor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "appointment",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"previous\": \"string\",\n  \"data\": [\n    {\n      \"patient\": \"string\",\n      \"description\": \"string\",\n      \"ip_address\": \"string\",\n      \"created_at\": \"string\",\n      \"appointment_id\": 5043,\n      \"updated_at\": \"string\",\n      \"field\": \"string\",\n      \"name_of_user\": \"string\",\n      \"action\": \"Read\",\n      \"user_id\": 5942,\n      \"doctor_id\": 5867,\n      \"type\": \"Family History\",\n      \"page\": \"string\"\n    },\n    {\n      \"patient\": \"string\",\n      \"description\": \"string\",\n      \"ip_address\": \"string\",\n      \"created_at\": \"string\",\n      \"appointment_id\": 6265,\n      \"updated_at\": \"string\",\n      \"field\": \"string\",\n      \"name_of_user\": \"string\",\n      \"action\": \"Read\",\n      \"user_id\": 9,\n      \"doctor_id\": 2220,\n      \"type\": \"Appointment Template\",\n      \"page\": \"string\"\n    }\n  ],\n  \"next\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7335e2e-e9a6-4c48-9bb1-596365f1a8ae",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "audit_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "doctor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "appointment",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ac275a0-8a0c-4b03-9b9d-0f988d1c3205",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "audit_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "doctor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "appointment",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b3822f8-598c-4180-ac24-e9dcdb769861",
+              "name": "Permission Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "audit_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "doctor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "appointment",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d51f732d-549d-47c4-8063-9b4a026bfee9",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "audit_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "doctor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "appointment",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5483649a-69b3-4429-a1a8-585056964016",
+              "name": "Method Not Allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "audit_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "doctor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "appointment",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be8233cf-f3f1-4f6e-b72c-79565bd3beb7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "audit_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "doctor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "appointment",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.drchrono.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dbd134b0-e535-43a1-925f-0a6231aa32f5",
+    "name": "DrChrono EHR REST Administrative Audit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.",
+      "type": "text/plain"
+    }
+  }
+}

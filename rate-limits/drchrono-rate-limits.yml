@@ -1,3 +1,14 @@
+generated: '2026-08-14'
+method: searched
+source: https://app.drchrono.com/api-docs/
+limit_count: 2
+response_headers: []
+response_headers_note: >-
+  DrChrono publishes NO rate-limit response headers — no X-RateLimit-*, no RateLimit-*, no
+  Retry-After. Re-verified against the API reference on 2026-08-14. A client cannot read remaining
+  quota or reset time from a response; it must count its own calls and back off to the top of the
+  next hour on 429. This is the single biggest agent-readiness gap on this API: the limit is
+  documented but not signalled at runtime.
 name: drchrono API Rate Limits
 description: drchrono enforces rate limits at the API application level to protect platform stability. Limits are applied per registered API application regardless of the practice subscription tier. Rate limit increases can be requested by emailing api@drchrono.com.
 url: https://app.drchrono.com/api-docs/tutorial/

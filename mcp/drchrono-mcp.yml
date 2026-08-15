@@ -1,0 +1,2818 @@
+generated: '2026-08-14'
+method: derived
+source: openapi/_original/drchrono-rest-api-openapi-schema.json (harvested 2026-08-14 from https://app.drchrono.com/openapi-schema)
+name: drchrono MCP Server
+status: candidate
+description: 'DrChrono ships NO Model Context Protocol server. Searched the DrChrono developer documentation, support
+  portal, GitHub organisation and the public MCP registries on 2026-08-14: every DrChrono MCP server that exists
+  is third-party (community repositories, lobehub, viasocket, Apify, iPaaS connectors). The tool list below is a
+  DERIVED CANDIDATE — one tool per operationId in the OpenAPI DrChrono publishes — recorded so the shape of an MCP
+  surface over this API is legible. It is not a server, it has no endpoint, and no endpoint URL has been invented
+  for it.'
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: oauth
+  verified: searched
+  note: 'mode: none because no first-party MCP server exists in either shape — no hosted https endpoint an agent
+    can POST to, and no vendor-published stdio package a human can install. auth records what a server WOULD need:
+    DrChrono REST access is OAuth 2.0 authorization_code with 48-hour access tokens, so any MCP server over this
+    API is a per-user OAuth broker, not an API-key passthrough.'
+third_party_servers:
+- name: community DrChrono MCP servers
+  first_party: false
+  note: Several unaffiliated implementations are listed in MCP directories (lobehub, viasocket, Apify, awesome-mcp-servers).
+    None is published or endorsed by DrChrono; none is recorded as a DrChrono agent surface.
+candidate_surface:
+  protocol: MCP
+  transport_if_built: streamable-http
+  auth_if_built: OAuth 2.0 authorization_code against https://app.drchrono.com/o/authorize/ and /o/token/, 48-hour
+    access tokens, refresh_token rotation
+  scope_source: scopes/drchrono-scopes.yml (22 DrChrono REST scopes)
+  safety_note: Every tool below touches PHI. A real DrChrono MCP server needs the agentic-access consequence classification
+    in agentic-access/drchrono-agentic-access.yml enforced at the tool boundary, and the in-app permission gate
+    honoured — an OAuth scope alone does not authorise access.
+tool_count: 329
+tool_split:
+  read: 166
+  write: 163
+tools:
+- tool: allergies_create
+  method: POST
+  path: /api/allergies
+  summary: Create patient allergy
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: allergies_list
+  method: GET
+  path: /api/allergies
+  summary: Retrieve or search patient allergies
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: allergies_partial_update
+  method: PATCH
+  path: /api/allergies/{id}
+  summary: Update an existing patient allergy
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: allergies_read
+  method: GET
+  path: /api/allergies/{id}
+  summary: Retrieve an existing patient allergy
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: allergies_update
+  method: PUT
+  path: /api/allergies/{id}
+  summary: Update an existing patient allergy
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: amendments_create
+  method: POST
+  path: /api/amendments
+  summary: Create patient amendments to a patient's clinical records
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: amendments_delete
+  method: DELETE
+  path: /api/amendments/{id}
+  summary: Delete an existing patient amendment, you can only interact with amendments created by your API application
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: amendments_list
+  method: GET
+  path: /api/amendments
+  summary: Retrieve or search patient amendments. You can only interact with amendments created by your API application
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: amendments_partial_update
+  method: PATCH
+  path: /api/amendments/{id}
+  summary: Update an existing patient amendment, you can only interact with amendments created by your API application
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: amendments_read
+  method: GET
+  path: /api/amendments/{id}
+  summary: Retrieve an existing patient amendment, you can only interact with amendments created by your API application
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: amendments_update
+  method: PUT
+  path: /api/amendments/{id}
+  summary: Update an existing patient amendment, you can only interact with amendments created by your API application
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: appointment_profiles_create
+  method: POST
+  path: /api/appointment_profiles
+  summary: Create appointment profiles for a doctor's calendar
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: appointment_profiles_delete
+  method: DELETE
+  path: /api/appointment_profiles/{id}
+  summary: Delete an existing appointment profile
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: appointment_profiles_list
+  method: GET
+  path: /api/appointment_profiles
+  summary: Retrieve or search appointment profiles for a doctor's calendar
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: appointment_profiles_partial_update
+  method: PATCH
+  path: /api/appointment_profiles/{id}
+  summary: Update an existing appointment profile
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: appointment_profiles_read
+  method: GET
+  path: /api/appointment_profiles/{id}
+  summary: Retrieve an existing appointment profile
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: appointment_profiles_update
+  method: PUT
+  path: /api/appointment_profiles/{id}
+  summary: Update an existing appointment profile
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: appointment_templates_create
+  method: POST
+  path: /api/appointment_templates
+  summary: Create appointment templates for a doctor's calendar
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: appointment_templates_delete
+  method: DELETE
+  path: /api/appointment_templates/{id}
+  summary: Delete an existing appointment template
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: appointment_templates_list
+  method: GET
+  path: /api/appointment_templates
+  summary: Retrieve or search appointment templates for a doctor's calendar
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: appointment_templates_partial_update
+  method: PATCH
+  path: /api/appointment_templates/{id}
+  summary: Update an existing appointment template
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: appointment_templates_read
+  method: GET
+  path: /api/appointment_templates/{id}
+  summary: Retrieve an existing appointment template
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: appointment_templates_update
+  method: PUT
+  path: /api/appointment_templates/{id}
+  summary: Update an existing appointment template
+  scopes:
+  - calendar:read
+  - calendar:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: appointments_create
+  method: POST
+  path: /api/appointments
+  summary: Create a new appointment or break on doctor's calendar
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: appointments_delete
+  method: DELETE
+  path: /api/appointments/{id}
+  summary: Delete an existing appointment or break
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: appointments_list
+  method: GET
+  path: /api/appointments
+  summary: "Retrieve or search appointment or breaks.\n<b>Note:</b> Either `since`, `occurred_since`, `date` or\
+    \ `date_range` parameter must be specified.\n          results r"
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: appointments_list_create
+  method: POST
+  path: /api/appointments_list
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: appointments_list_delete
+  method: DELETE
+  path: /api/appointments_list/{id}
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: appointments_list_list
+  method: GET
+  path: /api/appointments_list
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: appointments_list_partial_update
+  method: PATCH
+  path: /api/appointments_list/{id}
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: appointments_list_read
+  method: GET
+  path: /api/appointments_list/{id}
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: appointments_list_update
+  method: PUT
+  path: /api/appointments_list/{id}
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: appointments_partial_update
+  method: PATCH
+  path: /api/appointments/{id}
+  summary: Update an existing appointment or break
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: appointments_read
+  method: GET
+  path: /api/appointments/{id}
+  summary: Retrieve an existing appointment or break
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: appointments_update
+  method: PUT
+  path: /api/appointments/{id}
+  summary: Update an existing appointment or break
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: audit_log_list
+  method: GET
+  path: /api/audit_log
+  summary: 'Retrieve or search audit logs.
+
+    <b>Note:</b> Either `since`, `date` or `date_range` parameter must be specified.'
+  scopes:
+  - billing:read
+  read_only: true
+- tool: availability
+  method: GET
+  path: /api/availability
+  summary: 'Retrieve availability slots for the given date and office, doctor, or exam room.
+
+
+    If the `exam_room` parameter is not specified, the response will include avail'
+  scopes: null
+  read_only: true
+- tool: billing_profiles_list
+  method: GET
+  path: /api/billing_profiles
+  summary: Retrieve or search billing profiles
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: billing_profiles_read
+  method: GET
+  path: /api/billing_profiles/{id}
+  summary: Retrieve an existing billing profiles
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: care_plans_list
+  method: GET
+  path: /api/care_plans
+  summary: Retrieve or search care plans
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: care_plans_read
+  method: GET
+  path: /api/care_plans/{id}
+  summary: Retrieve an existing care plan
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: care_team_members_list
+  method: GET
+  path: /api/care_team_members
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: care_team_members_read
+  method: GET
+  path: /api/care_team_members/{id}
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: claim_billing_notes_create
+  method: POST
+  path: /api/claim_billing_notes
+  summary: Create a new billing note
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: false
+- tool: claim_billing_notes_list
+  method: GET
+  path: /api/claim_billing_notes
+  summary: Retrieve or search billing notes
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: claim_billing_notes_read
+  method: GET
+  path: /api/claim_billing_notes/{id}
+  summary: Retrieve an existing billing note
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: clinical_note_field_types_list
+  method: GET
+  path: /api/clinical_note_field_types
+  summary: Retrieve or search clinical note field types
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: clinical_note_field_types_read
+  method: GET
+  path: /api/clinical_note_field_types/{id}
+  summary: Retrieve an existing clinial note field type
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: clinical_note_field_types_update
+  method: PATCH
+  path: /api/clinical_note_field_types/{id}
+  summary: Update the `freedraw_image_size` of an existing clinical note FreeDraw Field
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: clinical_note_field_values_create
+  method: POST
+  path: /api/clinical_note_field_values
+  summary: Create clinical note field value
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: clinical_note_field_values_list
+  method: GET
+  path: /api/clinical_note_field_values
+  summary: Retrieve or search clinical note field values
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: clinical_note_field_values_list_create
+  method: POST
+  path: /api/clinical_note_field_values_list
+  summary: Create clinical note field value list request.  Use the UUID returned in the response to retrieve the
+    batch of records. Results returned in order of ID.
+  scopes:
+  - calendar:read
+  - patients:read
+  read_only: false
+- tool: clinical_note_field_values_list_list
+  method: GET
+  path: /api/clinical_note_field_values_list
+  summary: Retrieve or search clinical note values (soap notes) in batches. Results returned in order of ID or by
+    updated_at.
+  scopes:
+  - clinical:read
+  read_only: true
+- tool: clinical_note_field_values_partial_update
+  method: PATCH
+  path: /api/clinical_note_field_values/{id}
+  summary: Update an existing clinical note field value
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: clinical_note_field_values_read
+  method: GET
+  path: /api/clinical_note_field_values/{id}
+  summary: Retrieve an existing clinical note field value
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: clinical_note_field_values_update
+  method: PUT
+  path: /api/clinical_note_field_values/{id}
+  summary: Update an existing clinical note field value
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: clinical_note_templates_list
+  method: GET
+  path: /api/clinical_note_templates
+  summary: Retrieve or search clinical note templates
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: clinical_note_templates_read
+  method: GET
+  path: /api/clinical_note_templates/{id}
+  summary: Retrieve an existing clinical note tempalte
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: clinical_notes_list
+  method: GET
+  path: /api/clinical_notes
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: clinical_notes_list_create
+  method: POST
+  path: /api/clinical_notes_list
+  summary: Create clinical note list request.  Use the UUID returned in the response to retrieve the batch of records.
+    Results returned in order of ID.
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: clinical_notes_list_list
+  method: GET
+  path: /api/clinical_notes_list
+  summary: Retrieve or search clinical notes in batches. Results returned in order of ID.
+  scopes:
+  - clinical:read
+  read_only: true
+- tool: clinical_notes_read
+  method: GET
+  path: /api/clinical_notes/{id}
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: comm_logs_create
+  method: POST
+  path: /api/comm_logs
+  summary: Create communication (phone call) logs
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: comm_logs_list
+  method: GET
+  path: /api/comm_logs
+  summary: Retrieve or search communicatioin (phone call) logs
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: true
+- tool: comm_logs_partial_update
+  method: PATCH
+  path: /api/comm_logs/{id}
+  summary: Update an existing communication (phone call) logs
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: comm_logs_read
+  method: GET
+  path: /api/comm_logs/{id}
+  summary: Retrieve an existing communication (phone call) logs
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: true
+- tool: comm_logs_update
+  method: PUT
+  path: /api/comm_logs/{id}
+  summary: Update an existing communication (phone call) logs
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: consent_forms_apply_to_appointment
+  method: POST
+  path: /api/consent_forms/{id}/apply_to_appointment
+  summary: Assign (apply) a consent form to appointment
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: consent_forms_create
+  method: POST
+  path: /api/consent_forms
+  summary: Create a patient consent form
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: consent_forms_list
+  method: GET
+  path: /api/consent_forms
+  summary: Retrieve or search patient consent forms
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: consent_forms_partial_update
+  method: PATCH
+  path: /api/consent_forms/{id}
+  summary: Update an existing patient consent form
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: consent_forms_read
+  method: GET
+  path: /api/consent_forms/{id}
+  summary: Retrieve an existing patient consent form
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: consent_forms_unapply_from_appointment
+  method: POST
+  path: /api/consent_forms/{id}/unapply_from_appointment
+  summary: Unassign (unapply) a consent form from appointment
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: consent_forms_update
+  method: PUT
+  path: /api/consent_forms/{id}
+  summary: Update an existing patient consent form
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: custom_appointment_fields_create
+  method: POST
+  path: /api/custom_appointment_fields
+  summary: Create custom appointment fields
+  scopes:
+  - clinical:read
+  - clinical:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: custom_appointment_fields_list
+  method: GET
+  path: /api/custom_appointment_fields
+  summary: Retrieve or search custom appointment fields
+  scopes:
+  - clinical:read
+  - clinical:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: custom_appointment_fields_partial_update
+  method: PATCH
+  path: /api/custom_appointment_fields/{id}
+  summary: Update an existing custom appointment field
+  scopes:
+  - clinical:read
+  - clinical:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: custom_appointment_fields_read
+  method: GET
+  path: /api/custom_appointment_fields/{id}
+  summary: Retrieve an existing custom appointment field
+  scopes:
+  - clinical:read
+  - clinical:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: custom_appointment_fields_update
+  method: PUT
+  path: /api/custom_appointment_fields/{id}
+  summary: Update an existing custom appointment field
+  scopes:
+  - clinical:read
+  - clinical:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: custom_demographics_create
+  method: POST
+  path: /api/custom_demographics
+  summary: Create custom demographics fields
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: custom_demographics_list
+  method: GET
+  path: /api/custom_demographics
+  summary: Retrieve or search custom demographics fields
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: custom_demographics_partial_update
+  method: PATCH
+  path: /api/custom_demographics/{id}
+  summary: Update an existing custom demographics field
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: custom_demographics_read
+  method: GET
+  path: /api/custom_demographics/{id}
+  summary: Retrieve an existing custom demographics field
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: custom_demographics_update
+  method: PUT
+  path: /api/custom_demographics/{id}
+  summary: Update an existing custom demographics field
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: custom_insurance_plan_names_list
+  method: GET
+  path: /api/custom_insurance_plan_names
+  summary: Retrieve or search custom insurance plan names
+  scopes:
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: custom_insurance_plan_names_read
+  method: GET
+  path: /api/custom_insurance_plan_names/{id}
+  summary: Retrieve an existing custom insurance plan name
+  scopes:
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: custom_vitals_list
+  method: GET
+  path: /api/custom_vitals
+  summary: Retrieve or search custom vital types
+  scopes:
+  - clinical:read
+  - clinical:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: custom_vitals_read
+  method: GET
+  path: /api/custom_vitals/{id}
+  summary: Retrieve an existing custom vital type
+  scopes:
+  - clinical:read
+  - clinical:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: day_sheet_patient_payments_list
+  method: GET
+  path: /api/day_sheet_patient_payments
+  summary: Retrieve daysheet cash report for a given date range
+  scopes:
+  - billing
+  read_only: true
+- tool: daysheet_charges_list
+  method: GET
+  path: /api/day_sheet_charges
+  summary: Retrieve daysheet charges report for a given date range
+  scopes:
+  - billing
+  read_only: true
+- tool: daysheet_credits_list
+  method: GET
+  path: /api/day_sheet_credits
+  summary: Retrieve daysheet credits/adjustments report for a given date range
+  scopes:
+  - billing
+  read_only: true
+- tool: daysheet_totals_list
+  method: GET
+  path: /api/day_sheet_totals
+  summary: Retrieve daysheet totals report for a given date range
+  scopes:
+  - billing
+  read_only: true
+- tool: doctor_options_list
+  method: GET
+  path: /api/doctor_options
+  summary: Retrieve or search doctor options within practice group
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: doctor_options_read
+  method: GET
+  path: /api/doctor_options/{id}
+  summary: Retrieve existing options for a doctor
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: doctor_work_schedule_list
+  method: GET
+  path: /api/doctor_work_schedule
+  summary: Get the work schedule for the authed doctor's primary office (beta)
+  scopes: null
+  read_only: true
+- tool: doctor_work_schedule_partial_update
+  method: PATCH
+  path: /api/doctor_work_schedule/{id}
+  summary: Update an existing doctor's work schedule
+  scopes:
+  - user:read
+  - user:write
+  read_only: false
+- tool: doctor_work_schedule_read
+  method: GET
+  path: /api/doctor_work_schedule/{id}
+  summary: Retrieve a work schedule for the doctor (beta)
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: doctor_work_schedule_update
+  method: PUT
+  path: /api/doctor_work_schedule/{id}
+  summary: Update an existing doctor's entire work schedule
+  scopes:
+  - user:read
+  - user:write
+  read_only: false
+- tool: doctors_list
+  method: GET
+  path: /api/doctors
+  summary: Retrieve or search doctors within practice group
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: doctors_read
+  method: GET
+  path: /api/doctors/{id}
+  summary: Retrieve an existing doctor
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: documents_create
+  method: POST
+  path: /api/documents
+  summary: Create documents
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: documents_delete
+  method: DELETE
+  path: /api/documents/{id}
+  summary: Delete an existing appointment template
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: documents_list
+  method: GET
+  path: /api/documents
+  summary: Retrieve or search documents
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: documents_partial_update
+  method: PATCH
+  path: /api/documents/{id}
+  summary: Update an existing patient document
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: documents_read
+  method: GET
+  path: /api/documents/{id}
+  summary: Retrieve an existing patient document
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: documents_update
+  method: PUT
+  path: /api/documents/{id}
+  summary: Update an existing patient document
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: eligibility_checks_list
+  method: GET
+  path: /api/eligibility_checks
+  summary: Retrieve or search past eligibility checks for patient
+  scopes:
+  - calendar:read
+  - calendar:write
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: eligibility_checks_list_create
+  method: POST
+  path: /api/eligibility_checks_list
+  summary: Create eligibility checks list request.  Use the UUID returned in the response to retrieve the batch
+    of records. Results returned in order of id or updated_at.
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: eligibility_checks_list_list
+  method: GET
+  path: /api/eligibility_checks_list
+  summary: Retrieve or search eligibility checks in batches. Results returned in order of ID or updated_at.
+  scopes:
+  - calendar:read
+  - patients:read
+  read_only: true
+- tool: eligibility_checks_read
+  method: GET
+  path: /api/eligibility_checks/{id}
+  summary: Retrieve an existing past eligibility check
+  scopes:
+  - calendar:read
+  - calendar:write
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: eobs_create
+  method: POST
+  path: /api/eobs
+  summary: Create EOB object
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: false
+- tool: eobs_list
+  method: GET
+  path: /api/eobs
+  summary: Retrieve or search EOB objects
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: eobs_read
+  method: GET
+  path: /api/eobs/{id}
+  summary: Retrieve an existing EOB object
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: fee_schedules_list
+  method: GET
+  path: /api/fee_schedules
+  summary: null
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: fee_schedules_read
+  method: GET
+  path: /api/fee_schedules/{id}
+  summary: null
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: fee_schedules_v2_list
+  method: GET
+  path: /api/fee_schedules_v2
+  summary: null
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: fee_schedules_v2_read
+  method: GET
+  path: /api/fee_schedules_v2/{id}
+  summary: null
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: implantable_devices_list
+  method: GET
+  path: /api/implantable_devices
+  summary: Retrieve or search implantable devices
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: implantable_devices_read
+  method: GET
+  path: /api/implantable_devices/{id}
+  summary: Retrieve an existing implantable device
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: insurances_list
+  method: GET
+  path: /api/insurances
+  summary: null
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: insurances_read
+  method: GET
+  path: /api/insurances/{id}
+  summary: null
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: inventory_categories_list
+  method: GET
+  path: /api/inventory_categories
+  summary: Retrieve or search inventory categories
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: inventory_categories_read
+  method: GET
+  path: /api/inventory_categories/{id}
+  summary: Retrieve an existing inventory category
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: inventory_vaccines_create
+  method: POST
+  path: /api/inventory_vaccines
+  summary: Create vaccine inventory
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: inventory_vaccines_list
+  method: GET
+  path: /api/inventory_vaccines
+  summary: Retrieve or search vaccine inventories
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: inventory_vaccines_read
+  method: GET
+  path: /api/inventory_vaccines/{id}
+  summary: Retrieve an existing vaccine inventory
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: lab_documents_create
+  method: POST
+  path: /api/lab_documents
+  summary: 'Create lab order documents. An example lab workflow is as following:
+
+
+    - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them i'
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_documents_delete
+  method: DELETE
+  path: /api/lab_documents/{id}
+  summary: Delete an existing lab order document
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_documents_list
+  method: GET
+  path: /api/lab_documents
+  summary: Retrieve or search lab order documents
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: lab_documents_partial_update
+  method: PATCH
+  path: /api/lab_documents/{id}
+  summary: Update an existing lab order document
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_documents_read
+  method: GET
+  path: /api/lab_documents/{id}
+  summary: Retrieve an existing appointment template
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: lab_documents_update
+  method: PUT
+  path: /api/lab_documents/{id}
+  summary: Update an existing lab order document
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_orders_create
+  method: POST
+  path: /api/lab_orders
+  summary: 'Create lab orders. An example lab workflow is as following:
+
+
+    - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them in drchron'
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_orders_delete
+  method: DELETE
+  path: /api/lab_orders/{id}
+  summary: Delete an existing lab order
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_orders_list
+  method: GET
+  path: /api/lab_orders
+  summary: Retrieve or search lab orders
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: lab_orders_partial_update
+  method: PATCH
+  path: /api/lab_orders/{id}
+  summary: Update an existing lab order
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_orders_read
+  method: GET
+  path: /api/lab_orders/{id}
+  summary: Retrieve an existing lab order
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: lab_orders_summary_list
+  method: GET
+  path: /api/lab_orders_summary
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: lab_orders_summary_read
+  method: GET
+  path: /api/lab_orders_summary/{id}
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: lab_orders_update
+  method: PUT
+  path: /api/lab_orders/{id}
+  summary: Update an existing lab order
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_results_create
+  method: POST
+  path: /api/lab_results
+  summary: 'Create lab results. An example lab workflow is as following:
+
+
+    - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them in drchro'
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_results_delete
+  method: DELETE
+  path: /api/lab_results/{id}
+  summary: Delete an existing lab result
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_results_list
+  method: GET
+  path: /api/lab_results
+  summary: Retrieve or search lab results
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: lab_results_partial_update
+  method: PATCH
+  path: /api/lab_results/{id}
+  summary: Update an existing lab result
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_results_read
+  method: GET
+  path: /api/lab_results/{id}
+  summary: Retrieve an existing lab result
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: lab_results_update
+  method: PUT
+  path: /api/lab_results/{id}
+  summary: Update an existing lab result
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_tests_create
+  method: POST
+  path: /api/lab_tests
+  summary: 'Create lab tests. An example lab workflow is as following:
+
+
+    - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them in drchrono'
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_tests_delete
+  method: DELETE
+  path: /api/lab_tests/{id}
+  summary: Delete an existing lab test
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_tests_list
+  method: GET
+  path: /api/lab_tests
+  summary: Retrieve or search lab tests
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: lab_tests_partial_update
+  method: PATCH
+  path: /api/lab_tests/{id}
+  summary: Update an existing lab test
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: lab_tests_read
+  method: GET
+  path: /api/lab_tests/{id}
+  summary: Retrieve an existing lab test
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: lab_tests_update
+  method: PUT
+  path: /api/lab_tests/{id}
+  summary: Update an existing lab test
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: line_item_deletions_list
+  method: GET
+  path: /api/line_item_deletions
+  summary: 'Retrieve or search billing line item deletions. When a billing line item is deleted, a record of its
+    original ID and the appointment it was attached to will be '
+  scopes:
+  - billing:read
+  read_only: true
+- tool: line_items_create
+  method: POST
+  path: /api/line_items
+  summary: Create billing line item for appointments
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: false
+- tool: line_items_delete
+  method: DELETE
+  path: /api/line_items/{id}
+  summary: null
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: false
+- tool: line_items_list
+  method: GET
+  path: /api/line_items
+  summary: Retrieve or search billing line items
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: line_items_list_create
+  method: POST
+  path: /api/line_items_list
+  summary: Create a billing line items list request
+  scopes:
+  - billing:read
+  read_only: false
+- tool: line_items_list_list
+  method: GET
+  path: /api/line_items_list
+  summary: Retrieve the list of billing line items
+  scopes:
+  - billing:read
+  read_only: true
+- tool: line_items_partial_update
+  method: PATCH
+  path: /api/line_items/{id}
+  summary: null
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: false
+- tool: line_items_read
+  method: GET
+  path: /api/line_items/{id}
+  summary: Retrieve an existing billing line item
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: line_items_update
+  method: PUT
+  path: /api/line_items/{id}
+  summary: null
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: false
+- tool: medications_append_to_pharmacy_note
+  method: PATCH
+  path: /api/medications/{id}/append_to_pharmacy_note
+  summary: Append a message to the "pharmacy_note" section of the prescription, in a new paragraph
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: medications_create
+  method: POST
+  path: /api/medications
+  summary: Create patient medications
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: medications_list
+  method: GET
+  path: /api/medications
+  summary: Retrieve or search patient medications
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: medications_partial_update
+  method: PATCH
+  path: /api/medications/{id}
+  summary: Update an existing patient medications
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: medications_read
+  method: GET
+  path: /api/medications/{id}
+  summary: Retrieve an existing patient medications
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: medications_update
+  method: PUT
+  path: /api/medications/{id}
+  summary: Update an existing patient medications
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: message_threads list (beta)
+  method: GET
+  path: /api/message_threads
+  summary: 'Retrieve or search message threads in doctor''s message center. (beta)
+
+
+    Message threads are grouped conversations that aggregate related messages by subject and '
+  scopes:
+  - messages:read
+  - messages:write
+  read_only: true
+- tool: message_threads partial update (beta)
+  method: PATCH
+  path: /api/message_threads/{id}
+  summary: 'Partially update a message thread.
+
+
+    Only the following fields can be updated:
+
+    - `archived` (boolean): Mark thread as archived/unarchived
+
+    - `starred` (boolean): '
+  scopes:
+  - messages:read
+  - messages:write
+  read_only: false
+- tool: message_threads read (beta)
+  method: GET
+  path: /api/message_threads/{id}
+  summary: 'Retrieve a single message thread by ID (beta)
+
+
+    Work to support message threads is currently in development. This is not ready for full use.'
+  scopes:
+  - messages:read
+  - messages:write
+  read_only: true
+- tool: messages_create
+  method: POST
+  path: /api/messages
+  summary: Create messages in doctor's message center
+  scopes:
+  - messages:read
+  - messages:write
+  read_only: false
+- tool: messages_delete
+  method: DELETE
+  path: /api/messages/{id}
+  summary: Delete an existing message in doctor's message center
+  scopes:
+  - messages:read
+  - messages:write
+  read_only: false
+- tool: messages_list
+  method: GET
+  path: /api/messages
+  summary: Retrieve or search messages in doctor's message center
+  scopes:
+  - messages:read
+  - messages:write
+  read_only: true
+- tool: messages_partial_update
+  method: PATCH
+  path: /api/messages/{id}
+  summary: Update an existing message in doctor's message center
+  scopes:
+  - messages:read
+  - messages:write
+  read_only: false
+- tool: messages_read
+  method: GET
+  path: /api/messages/{id}
+  summary: Retrieve an existing message in doctor's message center
+  scopes:
+  - messages:read
+  - messages:write
+  read_only: true
+- tool: messages_update
+  method: PUT
+  path: /api/messages/{id}
+  summary: Update an existing message in doctor's message center
+  scopes:
+  - messages:read
+  - messages:write
+  read_only: false
+- tool: office_work_schedule_list
+  method: GET
+  path: /api/office_work_schedule
+  summary: Get the work schedule for the authed doctor's primary office (beta)
+  scopes: null
+  read_only: true
+- tool: office_work_schedule_partial_update
+  method: PATCH
+  path: /api/office_work_schedule/{id}
+  summary: Update an existing office's work schedule
+  scopes:
+  - user:read
+  - user:write
+  read_only: false
+- tool: office_work_schedule_read
+  method: GET
+  path: /api/office_work_schedule/{id}
+  summary: Retrieve a work schedule (beta)
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: office_work_schedule_update
+  method: PUT
+  path: /api/office_work_schedule/{id}
+  summary: Update an existing office's entire work schedule
+  scopes:
+  - user:read
+  - user:write
+  read_only: false
+- tool: offices_add_exam_room
+  method: POST
+  path: /api/offices/{id}/add_exam_room
+  summary: Add an exam room to the office
+  scopes:
+  - user:read
+  - user:write
+  read_only: false
+- tool: offices_list
+  method: GET
+  path: /api/offices
+  summary: Retrieve or search offices
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: offices_partial_update
+  method: PATCH
+  path: /api/offices/{id}
+  summary: Update an existing office
+  scopes:
+  - user:read
+  - user:write
+  read_only: false
+- tool: offices_read
+  method: GET
+  path: /api/offices/{id}
+  summary: Retrieve an existing office
+  scopes:
+  - user:read
+  - user:write
+  read_only: true
+- tool: offices_update
+  method: PUT
+  path: /api/offices/{id}
+  summary: Update an existing office
+  scopes:
+  - user:read
+  - user:write
+  read_only: false
+- tool: patient_authorizations_list
+  method: GET
+  path: /api/patient_authorizations
+  summary: Retrieve or search patient authorizations
+  scopes: null
+  read_only: true
+- tool: patient_communications_create
+  method: POST
+  path: /api/patient_communications
+  summary: Create patient communication for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_communications_list
+  method: GET
+  path: /api/patient_communications
+  summary: Retrieve or search patient communications for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_communications_partial_update
+  method: PATCH
+  path: /api/patient_communications/{id}
+  summary: Update an existing patient communication for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_communications_read
+  method: GET
+  path: /api/patient_communications/{id}
+  summary: Retrieve an existing patient communication for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_communications_update
+  method: PUT
+  path: /api/patient_communications/{id}
+  summary: Update an existing patient communication for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_flag_types_create
+  method: POST
+  path: /api/patient_flag_types
+  summary: Create patient flag types
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: patient_flag_types_list
+  method: GET
+  path: /api/patient_flag_types
+  summary: Retrieve or search patient flag types
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: patient_flag_types_partial_update
+  method: PATCH
+  path: /api/patient_flag_types/{id}
+  summary: Update an existing patient flag type
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: patient_flag_types_read
+  method: GET
+  path: /api/patient_flag_types/{id}
+  summary: Retrieve an existing patient flag type
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: true
+- tool: patient_flag_types_update
+  method: PUT
+  path: /api/patient_flag_types/{id}
+  summary: Update an existing patient flag type
+  scopes:
+  - patients:read
+  - patients:write
+  - settings:read
+  - settings:write
+  read_only: false
+- tool: patient_interventions_create
+  method: POST
+  path: /api/patient_interventions
+  summary: Create patient intervention for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_interventions_list
+  method: GET
+  path: /api/patient_interventions
+  summary: Retrieve or search patient interventions for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_interventions_partial_update
+  method: PATCH
+  path: /api/patient_interventions/{id}
+  summary: Update an existing patient intervention for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_interventions_read
+  method: GET
+  path: /api/patient_interventions/{id}
+  summary: Retrieve an existing patient intervention for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_interventions_update
+  method: PUT
+  path: /api/patient_interventions/{id}
+  summary: Update an existing patient intervention for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_lab_results_create
+  method: POST
+  path: /api/patient_lab_results
+  summary: null
+  scopes:
+  - labs:read
+  - labs:write
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patient_lab_results_delete
+  method: DELETE
+  path: /api/patient_lab_results/{id}
+  summary: null
+  scopes:
+  - labs:read
+  - labs:write
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patient_lab_results_list
+  method: GET
+  path: /api/patient_lab_results
+  summary: null
+  scopes:
+  - labs:read
+  - labs:write
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patient_lab_results_partial_update
+  method: PATCH
+  path: /api/patient_lab_results/{id}
+  summary: null
+  scopes:
+  - labs:read
+  - labs:write
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patient_lab_results_read
+  method: GET
+  path: /api/patient_lab_results/{id}
+  summary: null
+  scopes:
+  - labs:read
+  - labs:write
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patient_lab_results_update
+  method: PUT
+  path: /api/patient_lab_results/{id}
+  summary: null
+  scopes:
+  - labs:read
+  - labs:write
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patient_messages_create
+  method: POST
+  path: /api/patient_messages
+  summary: null
+  scopes:
+  - messages:read
+  - messages:write
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patient_messages_list
+  method: GET
+  path: /api/patient_messages
+  summary: null
+  scopes:
+  - messages:read
+  - messages:write
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patient_messages_partial_update
+  method: PATCH
+  path: /api/patient_messages/{id}
+  summary: null
+  scopes:
+  - messages:read
+  - messages:write
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patient_messages_read
+  method: GET
+  path: /api/patient_messages/{id}
+  summary: null
+  scopes:
+  - messages:read
+  - messages:write
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patient_messages_update
+  method: PUT
+  path: /api/patient_messages/{id}
+  summary: null
+  scopes:
+  - messages:read
+  - messages:write
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patient_payment_log_list
+  method: GET
+  path: /api/patient_payment_log
+  summary: Retrieve or search patient payment logs
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: patient_payment_log_read
+  method: GET
+  path: /api/patient_payment_log/{id}
+  summary: Retrieve an existing patient payment log
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: patient_payments_create
+  method: POST
+  path: /api/patient_payments
+  summary: Create patient payment
+  scopes:
+  - billing:patient-payment:read
+  - billing:patient-payment:write
+  read_only: false
+- tool: patient_payments_list
+  method: GET
+  path: /api/patient_payments
+  summary: Retrieve or search patient payments
+  scopes:
+  - billing:patient-payment:read
+  - billing:patient-payment:write
+  read_only: true
+- tool: patient_payments_read
+  method: GET
+  path: /api/patient_payments/{id}
+  summary: Retrieve an existing patient payment
+  scopes:
+  - billing:patient-payment:read
+  - billing:patient-payment:write
+  read_only: true
+- tool: patient_physical_exams_create
+  method: POST
+  path: /api/patient_physical_exams
+  summary: Create patient physical exam for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_physical_exams_list
+  method: GET
+  path: /api/patient_physical_exams
+  summary: Retrieve or search patient physical exams for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_physical_exams_partial_update
+  method: PATCH
+  path: /api/patient_physical_exams/{id}
+  summary: Update an existing patient physical exam for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_physical_exams_read
+  method: GET
+  path: /api/patient_physical_exams/{id}
+  summary: Retrieve an existing patient physical exam for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_physical_exams_update
+  method: PUT
+  path: /api/patient_physical_exams/{id}
+  summary: Update an existing patient physical exam for CQM
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_risk_assessments_create
+  method: POST
+  path: /api/patient_risk_assessments
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_risk_assessments_list
+  method: GET
+  path: /api/patient_risk_assessments
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_risk_assessments_partial_update
+  method: PATCH
+  path: /api/patient_risk_assessments/{id}
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_risk_assessments_read
+  method: GET
+  path: /api/patient_risk_assessments/{id}
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_risk_assessments_update
+  method: PUT
+  path: /api/patient_risk_assessments/{id}
+  summary: null
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_vaccine_records_create
+  method: POST
+  path: /api/patient_vaccine_records
+  summary: Create patient vaccine records
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_vaccine_records_list
+  method: GET
+  path: /api/patient_vaccine_records
+  summary: Retrieve or search patient vaccine records
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_vaccine_records_partial_update
+  method: PATCH
+  path: /api/patient_vaccine_records/{id}
+  summary: Update an existing patient vaccine records
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patient_vaccine_records_read
+  method: GET
+  path: /api/patient_vaccine_records/{id}
+  summary: Retrieve an existing patient vaccine records
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: patient_vaccine_records_update
+  method: PUT
+  path: /api/patient_vaccine_records/{id}
+  summary: Update an existing patient vaccine records
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: patients_ccda
+  method: GET
+  path: /api/patients/{id}/ccda
+  summary: Retrieve patient CCDA
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patients_ccda_async
+  method: GET
+  path: /api/patients/{id}/ccda_async
+  summary: Retrieve patient CCDA async.
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patients_create
+  method: POST
+  path: /api/patients
+  summary: Create patient
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patients_delete
+  method: DELETE
+  path: /api/patients/{id}
+  summary: Delete an existing patient
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patients_list
+  method: GET
+  path: /api/patients
+  summary: Retrieve or search patients
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patients_list_create
+  method: POST
+  path: /api/patients_list
+  summary: Submit patient list request.  Use the UUID returned in the response to retrieve the batch of patients.
+  scopes:
+  - patients:read
+  read_only: false
+- tool: patients_list_list
+  method: GET
+  path: /api/patients_list
+  summary: Retrieve or search patients in batches. This resource returns identical data to `GET /api/patients` but
+    uses an asynchronous batch-based approach to data delive
+  scopes:
+  - patients:read
+  read_only: true
+- tool: patients_onpatient_access_create
+  method: POST
+  path: /api/patients/{id}/onpatient_access
+  summary: Send new onpatient invite to patient
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patients_onpatient_access_delete
+  method: DELETE
+  path: /api/patients/{id}/onpatient_access
+  summary: Revoke sent onpatient invites
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patients_onpatient_access_read
+  method: GET
+  path: /api/patients/{id}/onpatient_access
+  summary: Retrieve or search existing onpatient access invites
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patients_partial_update
+  method: PATCH
+  path: /api/patients/{id}
+  summary: Update an existing patient
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: patients_qrda1
+  method: GET
+  path: /api/patients/{id}/qrda1
+  summary: Retrieve patient QRDA1
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patients_read
+  method: GET
+  path: /api/patients/{id}
+  summary: Retrieve an existing patient
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: patients_summary_create
+  method: POST
+  path: /api/patients_summary
+  summary: null
+  scopes:
+  - patients:summary:read
+  - patients:summary:write
+  read_only: false
+- tool: patients_summary_delete
+  method: DELETE
+  path: /api/patients_summary/{id}
+  summary: null
+  scopes:
+  - patients:summary:read
+  - patients:summary:write
+  read_only: false
+- tool: patients_summary_list
+  method: GET
+  path: /api/patients_summary
+  summary: null
+  scopes:
+  - patients:summary:read
+  - patients:summary:write
+  read_only: true
+- tool: patients_summary_partial_update
+  method: PATCH
+  path: /api/patients_summary/{id}
+  summary: null
+  scopes:
+  - patients:summary:read
+  - patients:summary:write
+  read_only: false
+- tool: patients_summary_read
+  method: GET
+  path: /api/patients_summary/{id}
+  summary: null
+  scopes:
+  - patients:summary:read
+  - patients:summary:write
+  read_only: true
+- tool: patients_summary_update
+  method: PUT
+  path: /api/patients_summary/{id}
+  summary: null
+  scopes:
+  - patients:summary:read
+  - patients:summary:write
+  read_only: false
+- tool: patients_update
+  method: PUT
+  path: /api/patients/{id}
+  summary: Update an existing patient
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: prescription_messages_list
+  method: GET
+  path: /api/prescription_messages
+  summary: Retrieve or search prescription messages
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: prescription_messages_list_create
+  method: POST
+  path: /api/prescription_messages_list
+  summary: Create prescription messages list request.  Use the UUID returned in the response to retrieve the batch
+    of records. Results returned in order of id or updated_a
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: prescription_messages_list_list
+  method: GET
+  path: /api/prescription_messages_list
+  summary: Retrieve or search prescription messages in batches. Results returned in order of ID or updated_at.
+  scopes:
+  - clinical:read
+  read_only: true
+- tool: prescription_messages_read
+  method: GET
+  path: /api/prescription_messages/{id}
+  summary: Retrieve an existing prescription message
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: problems_create
+  method: POST
+  path: /api/problems
+  summary: Create patient problems
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: problems_list
+  method: GET
+  path: /api/problems
+  summary: Retrieve or search patient problems
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: problems_partial_update
+  method: PATCH
+  path: /api/problems/{id}
+  summary: Update an existing patient problems
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: problems_read
+  method: GET
+  path: /api/problems/{id}
+  summary: Retrieve an existing patient problems
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: problems_update
+  method: PUT
+  path: /api/problems/{id}
+  summary: Update an existing patient problems
+  scopes:
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: procedures_list
+  method: GET
+  path: /api/procedures
+  summary: null
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: procedures_read
+  method: GET
+  path: /api/procedures/{id}
+  summary: null
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: recurring_appointment_instances_list
+  method: GET
+  path: /api/recurring_appointment_instances
+  summary: 'List all instances (materialized and virtual) within a recurring
+
+    appointment series.
+
+
+    Returns the same appointment response format as `/api/appointments`.
+
+    Mater'
+  scopes:
+  - calendar:read
+  - clinical:read
+  read_only: true
+- tool: reminder_profiles_create
+  method: POST
+  path: /api/reminder_profiles
+  summary: Create reminder profile
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: reminder_profiles_delete
+  method: DELETE
+  path: /api/reminder_profiles/{id}
+  summary: Delete an existing reminder profile
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: reminder_profiles_list
+  method: GET
+  path: /api/reminder_profiles
+  summary: Retrieve or search reminder profiles
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: true
+- tool: reminder_profiles_partial_update
+  method: PATCH
+  path: /api/reminder_profiles/{id}
+  summary: Update an existing reminder profile
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: reminder_profiles_read
+  method: GET
+  path: /api/reminder_profiles/{id}
+  summary: Retrieve an existing reminder profile
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: true
+- tool: reminder_profiles_update
+  method: PUT
+  path: /api/reminder_profiles/{id}
+  summary: Update an existing reminder profile
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: schedule_blocks_create
+  method: POST
+  path: /api/schedule_blocks
+  summary: Create a schedule block
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: schedule_blocks_delete
+  method: DELETE
+  path: /api/schedule_blocks/{id}
+  summary: Delete a schedule block
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: schedule_blocks_list
+  method: GET
+  path: /api/schedule_blocks
+  summary: Retrieve and search schedule blocks
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: true
+- tool: schedule_blocks_partial_update
+  method: PATCH
+  path: /api/schedule_blocks/{id}
+  summary: Partially update a schedule block
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: schedule_blocks_read
+  method: GET
+  path: /api/schedule_blocks/{id}
+  summary: Retrieve a schedule block
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: true
+- tool: schedule_blocks_update
+  method: PUT
+  path: /api/schedule_blocks/{id}
+  summary: Update a schedule block
+  scopes:
+  - calendar:read
+  - calendar:write
+  read_only: false
+- tool: signed_consent_forms_create
+  method: POST
+  path: /api/signed_consent_forms
+  summary: signed_consent_forms Create
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: signed_consent_forms_list
+  method: GET
+  path: /api/signed_consent_forms
+  summary: signed_consent_forms Get
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: signed_consent_forms_partial_update
+  method: PATCH
+  path: /api/signed_consent_forms
+  summary: signed_consent_forms Update
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: false
+- tool: signed_consent_forms_read
+  method: GET
+  path: /api/signed_consent_forms/{id}
+  summary: signed_consent_forms Read
+  scopes:
+  - patients:read
+  - patients:write
+  read_only: true
+- tool: staff_list
+  method: GET
+  path: /api/staff
+  summary: null
+  scopes: null
+  read_only: true
+- tool: staff_read
+  method: GET
+  path: /api/staff/{id}
+  summary: null
+  scopes: null
+  read_only: true
+- tool: sublabs_create
+  method: POST
+  path: /api/sublabs
+  summary: 'Create sub-vendors
+
+
+    - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them in drchrono.
+
+
+    - When results come in, submit the re'
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: sublabs_delete
+  method: DELETE
+  path: /api/sublabs/{id}
+  summary: Delete an existing sub vendor
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: sublabs_list
+  method: GET
+  path: /api/sublabs
+  summary: Retrieve or search sub vendors
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: sublabs_partial_update
+  method: PATCH
+  path: /api/sublabs/{id}
+  summary: Update an existing sub vendor
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: sublabs_read
+  method: GET
+  path: /api/sublabs/{id}
+  summary: Retrieve an existing sub vendor
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: true
+- tool: sublabs_update
+  method: PUT
+  path: /api/sublabs/{id}
+  summary: Update an existing sub vendor
+  scopes:
+  - labs:read
+  - labs:write
+  read_only: false
+- tool: task_categories_create
+  method: POST
+  path: /api/task_categories
+  summary: Create a task category
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_categories_list
+  method: GET
+  path: /api/task_categories
+  summary: Retrieve or search task categories
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: task_categories_partial_update
+  method: PATCH
+  path: /api/task_categories/{id}
+  summary: Update an existing task category
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_categories_read
+  method: GET
+  path: /api/task_categories/{id}
+  summary: Retrieve an existing task category
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: task_categories_update
+  method: PUT
+  path: /api/task_categories/{id}
+  summary: Update an existing task category
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_notes_create
+  method: POST
+  path: /api/task_notes
+  summary: Create a task note
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_notes_list
+  method: GET
+  path: /api/task_notes
+  summary: Retrieve or search task notes
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: task_notes_partial_update
+  method: PATCH
+  path: /api/task_notes/{id}
+  summary: Update an existing task note
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_notes_read
+  method: GET
+  path: /api/task_notes/{id}
+  summary: Retrieve an existing task note
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: task_notes_update
+  method: PUT
+  path: /api/task_notes/{id}
+  summary: Update an existing task note
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_statuses_create
+  method: POST
+  path: /api/task_statuses
+  summary: Create a task status
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_statuses_list
+  method: GET
+  path: /api/task_statuses
+  summary: Retrieve or search task statuses
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: task_statuses_partial_update
+  method: PATCH
+  path: /api/task_statuses/{id}
+  summary: Update an existing task status
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_statuses_read
+  method: GET
+  path: /api/task_statuses/{id}
+  summary: Retrieve an existing task status
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: task_statuses_update
+  method: PUT
+  path: /api/task_statuses/{id}
+  summary: Update an existing task status
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_templates_create
+  method: POST
+  path: /api/task_templates
+  summary: Create a task template
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_templates_list
+  method: GET
+  path: /api/task_templates
+  summary: Retrieve or search task templates
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: task_templates_partial_update
+  method: PATCH
+  path: /api/task_templates/{id}
+  summary: Update an existing task template
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: task_templates_read
+  method: GET
+  path: /api/task_templates/{id}
+  summary: Retrieve an existing task template
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: task_templates_update
+  method: PUT
+  path: /api/task_templates/{id}
+  summary: Update an existing task template
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: tasks_create
+  method: POST
+  path: /api/tasks
+  summary: Create a task
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: tasks_list
+  method: GET
+  path: /api/tasks
+  summary: Retrieve or search tasks
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: tasks_partial_update
+  method: PATCH
+  path: /api/tasks/{id}
+  summary: Update an existing task
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: tasks_read
+  method: GET
+  path: /api/tasks/{id}
+  summary: Retrieve an existing task
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: true
+- tool: tasks_update
+  method: PUT
+  path: /api/tasks/{id}
+  summary: Update an existing task
+  scopes:
+  - tasks:read
+  - tasks:write
+  read_only: false
+- tool: telehealth_appointment_history_create
+  method: POST
+  path: /api/telehealth_appointment_history
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: telehealth_appointment_history_list
+  method: GET
+  path: /api/telehealth_appointment_history
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: telehealth_appointment_history_read
+  method: GET
+  path: /api/telehealth_appointment_history/{id}
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: telehealth_appointments_create
+  method: POST
+  path: /api/telehealth_appointments
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: telehealth_appointments_list
+  method: GET
+  path: /api/telehealth_appointments
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: telehealth_appointments_partial_update
+  method: PATCH
+  path: /api/telehealth_appointments/{id}
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: telehealth_appointments_read
+  method: GET
+  path: /api/telehealth_appointments/{id}
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: true
+- tool: telehealth_appointments_update
+  method: PUT
+  path: /api/telehealth_appointments/{id}
+  summary: null
+  scopes:
+  - calendar:read
+  - calendar:write
+  - clinical:read
+  - clinical:write
+  read_only: false
+- tool: transactions_list
+  method: GET
+  path: /api/transactions
+  summary: Retrieve or search insurance transactions associated with billing line items
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: transactions_list_create
+  method: POST
+  path: /api/transactions_list
+  summary: Create transactions list request.  Use the UUID returned in the response to retrieve the batch of records.
+    Results returned in order of id or updated_at.
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: false
+- tool: transactions_list_list
+  method: GET
+  path: /api/transactions_list
+  summary: Retrieve or search transactions in batches. Results returned in order of ID or updated_at.
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: transactions_read
+  method: GET
+  path: /api/transactions/{id}
+  summary: Retrieve an existing insurance transaction
+  scopes:
+  - billing:read
+  - billing:write
+  read_only: true
+- tool: user_groups_list
+  method: GET
+  path: /api/user_groups
+  summary: Retrieve or search user groups
+  scopes: null
+  read_only: true
+- tool: user_groups_read
+  method: GET
+  path: /api/user_groups/{id}
+  summary: Retrieve an existing user group
+  scopes: null
+  read_only: true
+- tool: users_list
+  method: GET
+  path: /api/users
+  summary: Retrieve or search users, `/api/users/current` can be used to identify logged in user, it will redirect
+    to `/api/users/{current_user_id}`
+  scopes: null
+  read_only: true
+- tool: users_read
+  method: GET
+  path: /api/users/{id}
+  summary: Retrieve an existing user, `/api/users/current` can be used to identify logged in user, it will redirect
+    to `/api/users/{current_user_id}`
+  scopes: null
+  read_only: true

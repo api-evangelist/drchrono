@@ -1,0 +1,203 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4/metadata,
+  https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4/.well-known/smart-configuration,
+  https://app.drchrono.com/api-docs/, https://app.drchrono.com/openapi-schema
+name: drchrono Standards Conformance
+description: >-
+  Which cross-cutting and industry standards DrChrono actually conforms to, asserted from artifacts
+  fetched from DrChrono's own hosts on 2026-08-14 rather than from marketing claims. DrChrono is a
+  strong FHIR/SMART conformer on its ONC-certified interoperability surface and a weak conformer on
+  its proprietary REST v4 API, which predates most of the conventions below.
+
+standards:
+  - id: fhir
+    name: HL7 FHIR
+    conforms: true
+    version: R4 (4.0.1)
+    evidence: >-
+      Live CapabilityStatement at
+      https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4/metadata
+      (HTTP 200, application/fhir+json), fhirVersion 4.0.1, status active, 27 resource types,
+      json and xml formats. Saved verbatim to fhir/drchrono-fhir-r4-capabilitystatement.json.
+    scope: SMART on FHIR surface only; the REST v4 API is not FHIR.
+
+  - id: us-core
+    name: US Core Implementation Guide
+    conforms: true
+    evidence: >-
+      DrChrono's FHIR API documentation maps every supported resource to USCDI data classes and
+      publishes US Core search parameters (us-core-race, us-core-ethnicity on Patient; category
+      token constraints such as 72166-2 on smoking status and vital-signs / laboratory on
+      Observation). Example payloads are labelled "US Core Patient Profile".
+    source: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+
+  - id: smart-app-launch
+    name: SMART App Launch
+    conforms: true
+    evidence: >-
+      smart-configuration served at the FHIR base (HTTP 200) advertising 20 capabilities including
+      launch-ehr, launch-standalone, sso-openid-connect, context-ehr-patient, permission-patient,
+      permission-user, permission-offline, permission-v1 and permission-v2, plus the SMART oauth-uris
+      extension on the CapabilityStatement security block.
+    saved: well-known/drchrono-fhir-smart-configuration.json
+
+  - id: fhir-bulk-data
+    name: FHIR Bulk Data Access (Flat FHIR)
+    conforms: true
+    evidence: >-
+      CapabilityStatement declares the export operation on Group and patient-export on Patient.
+      DrChrono documents GET [base]/Patient/$export and GET [base]/Group/[id]/$export with
+      Prefer respond-async, a 202 + Content-Location polling flow and ndjson output, authorized by
+      client_credentials with a private_key_jwt client assertion and scope system/*.read.
+    source: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+
+  - id: onc-certification
+    name: ONC Health IT Certification — standardized API criteria
+    conforms: true
+    criteria: ['45 CFR §170.315(g)(7)', '45 CFR §170.315(g)(9)', '45 CFR §170.315(g)(10)']
+    evidence: >-
+      DrChrono's own FHIR API documentation states the API interface serves §170.315(g)(7), (g)(9)
+      and (g)(10) requests for "all" patient data or by specific data category, limited to USCDI, and
+      publishes a public FHIR Endpoint service-base directory (210 Bundle entries covering 105
+      practices) as required by the criterion.
+    source: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+    note: >-
+      The specific CHPL listing number was not verified in this pass — support.drchrono.com renders
+      article bodies client-side and returned only a navigation shell to an unauthenticated fetch, so
+      no CHPL identifier is recorded here.
+
+  - id: oauth2
+    name: OAuth 2.0 (RFC 6749)
+    conforms: true
+    evidence: >-
+      Both surfaces run OAuth 2.0. REST v4: authorization_code + refresh_token against
+      https://app.drchrono.com/o/authorize/ and /o/token/, declared as a drchrono_oauth2 securityScheme
+      in the published OpenAPI. FHIR: authorization_code, client_credentials, refresh_token, implicit
+      and device_code advertised in smart-configuration.
+
+  - id: oidc
+    name: OpenID Connect
+    conforms: true
+    scope: FHIR surface only
+    evidence: >-
+      OIDC discovery document served at
+      https://drchrono-fhir.everhealthsoftware.com/core/.well-known/openid-configuration (HTTP 200),
+      sso-openid-connect advertised as a SMART capability, openid/profile/fhirUser scopes supported.
+    note: The REST v4 API is OAuth 2.0 only and publishes no OIDC surface.
+
+  - id: pkce
+    name: PKCE (RFC 7636)
+    conforms: true
+    scope: FHIR surface only
+    evidence: code_challenge_methods_supported = [S256] in smart-configuration; DrChrono documents the authorization-code-with-PKCE flow.
+    note: The REST v4 API documents only the plain authorization-code exchange with client_secret; PKCE is not mentioned.
+
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata
+    conforms: false
+    evidence: >-
+      https://app.drchrono.com/.well-known/oauth-authorization-server returned 404 on 2026-08-14. The
+      FHIR authorization server publishes OIDC metadata but no separate RFC 8414 document was probed
+      as present at the /core root beyond openid-configuration.
+
+  - id: rfc9457
+    name: RFC 9457 Problem Details
+    conforms: false
+    evidence: >-
+      No application/problem+json response is declared anywhere in the 329 operations of the published
+      OpenAPI. Validation errors return a bespoke object keyed by field name.
+
+  - id: rfc9116
+    name: RFC 9116 security.txt
+    conforms: false
+    evidence: /.well-known/security.txt returned 404 on app.drchrono.com, www.drchrono.com and the FHIR resource host.
+
+  - id: rfc8594
+    name: RFC 8594 Sunset header
+    conforms: false
+    evidence: >-
+      DrChrono publishes a written three-state deprecation policy with a one-year deprecated window
+      but emits no Sunset or Deprecation response headers, and marks no operation deprecated in the
+      OpenAPI.
+
+  - id: idempotency
+    name: Idempotency keys (draft-ietf-httpapi-idempotency-key)
+    conforms: false
+    evidence: >-
+      No idempotency key header, replay window or client-generated request identifier is documented.
+      The nearest mechanism is the api_prevent_patient_duplicate flag on POST /api/patients, which is
+      a per-resource duplicate guard returning 409, not idempotent replay.
+
+  - id: ratelimit-headers
+    name: RateLimit header fields (draft-ietf-httpapi-ratelimit-headers)
+    conforms: false
+    evidence: >-
+      A 500/hour limit and a 10/second burst throttle are documented with a 429 on exhaustion, but no
+      X-RateLimit-*, RateLimit-* or Retry-After response header is published.
+
+  - id: pagination
+    name: Pagination
+    conforms: true
+    style: page-based with absolute next/previous URLs
+    evidence: >-
+      List responses carry previous/next absolute URLs; page_size controls size, default and maximum
+      250, /api/appointments capped at 20, verbose=true lowers the cap to 50. The FHIR surface uses
+      FHIR Bundle paging instead.
+
+  - id: openapi
+    name: OpenAPI
+    conforms: true
+    version: 3.0.0
+    evidence: >-
+      DrChrono serves its own OpenAPI 3.0.0 at https://app.drchrono.com/openapi-schema (HTTP 200,
+      745,948 bytes, 170 paths, 329 operations, 100% operationId coverage, 77 component schemas,
+      drchrono_oauth2 securityScheme with 22 scopes). Harvested verbatim to
+      openapi/_original/drchrono-rest-api-openapi-schema.json.
+
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: >-
+      DrChrono documents 27 webhook events with headers, verification and retry semantics but
+      publishes no AsyncAPI document. asyncapi/drchrono-webhooks-asyncapi.yml is an API Evangelist
+      generation from that documentation, not a DrChrono artifact.
+
+  - id: scim
+    name: SCIM
+    conforms: false
+    evidence: No SCIM endpoint or user-provisioning API is documented; user management is via /api/users and the web app.
+
+  - id: odata
+    name: OData
+    conforms: false
+    evidence: Not used.
+
+  - id: jsonapi
+    name: JSON:API
+    conforms: false
+    evidence: Responses use a bespoke previous/results/next envelope, not JSON:API.
+
+  - id: hipaa
+    name: HIPAA
+    conforms: true
+    kind: regulatory obligation, not a certification
+    evidence: >-
+      DrChrono's API terms (published inline in the API reference) define PHI under HIPAA, require
+      developers to enter a business associate agreement with the practice before obtaining PHI, to
+      apply physical, administrative and technical safeguards in accordance with HIPAA, to observe
+      the 45 CFR §164.502(b)(1) minimum-necessary standard, and to transfer PHI only over a dedicated
+      connection or equivalently secure encrypted channel.
+    source: https://app.drchrono.com/api-docs/
+    note: >-
+      DrChrono states that neither party is the business associate of the other under the API terms;
+      the BAA obligation runs between the developer and the practice.
+
+summary:
+  conforms_count: 12
+  does_not_conform_count: 8
+  strongest: FHIR R4 / US Core / SMART App Launch / Bulk Data on the ONC-certified interoperability surface
+  weakest: >-
+    Runtime HTTP conventions on the proprietary REST v4 API — no problem+json, no idempotency, no
+    rate-limit headers, no Sunset headers, no OAuth metadata document, no security.txt.

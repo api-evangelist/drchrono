@@ -1,0 +1,128 @@
+generated: '2026-08-14'
+method: searched
+source: https://app.drchrono.com/api-docs-old/v4/changelog
+name: drchrono API Changelog
+description: >-
+  DrChrono maintains two dated change surfaces. The API-level changelog for v4 (Hunt Valley) lists
+  dated additions and fixes to REST endpoints and fields; the product changelog on Headway lists
+  platform, web and mobile releases. The API changelog is the one that describes contract change —
+  and its most recent dated API entry is 2024-11-01, which is the single most useful signal in this
+  file about how actively the contract itself is moving.
+
+scheme: named major versions (v0 Stonehenge, v1 New York, v2 Mountain View, v3 Sunnyvale, v4 Hunt Valley)
+current_version: v4 (Hunt Valley)
+breaking_change_policy: >-
+  Changes to the current version are additive only — new endpoints, new fields, new optional query
+  parameters. Non-read-only new fields are optional. See lifecycle/drchrono-lifecycle.yml.
+
+sources:
+  - name: V4 API changelog
+    url: https://app.drchrono.com/api-docs-old/v4/changelog
+    scope: contract-level changes to the REST API
+    dated: true
+    entry_count: 35
+    latest_entry: '2024-11-01'
+    http_status: 200
+    probed: '2026-08-14'
+  - name: Product changelog (Headway)
+    url: https://headwayapp.co/drchrono-changelog
+    scope: product, web and mobile releases; not API-contract specific
+    dated: true
+    latest_entry: '2026-07-30'
+    http_status: 200
+    probed: '2026-08-14'
+  - name: V3 API changelog
+    url: https://app.drchrono.com/api-docs-old/v3/changelog
+    scope: superseded version
+
+entries:
+  - date: '2024-11-01'
+    type: addition
+    breaking: false
+    summary: >-
+      Duplicate-patient prevention on the Patients API. With the api_prevent_patient_duplicate
+      feature flag enabled, a create returns the validation error "Potential duplicate patient(s)
+      found." when first name, last name, date of birth and gender match an existing patient. Pass
+      allow_duplicates=True to override.
+    affects: [/api/patients]
+  - date: '2023-11-15'
+    type: fix
+    breaking: false
+    summary: Fixed the verbose functionality on /api/appointments_list so it returns the verbose field listing.
+    affects: [/api/appointments_list]
+  - date: '2023-10-11'
+    type: incident
+    breaking: false
+    summary: PUT/PATCH/POST of preferred_pharmacies temporarily disabled pending a fix.
+    affects: [/api/patients]
+  - date: '2023-10-09'
+    type: addition
+    breaking: false
+    summary: Added the occurred_since filter to /api/appointments.
+    affects: [/api/appointments]
+  - date: '2023-08-04'
+    type: change
+    breaking: false
+    summary: The default preferred pharmacy is now returned as the first item of preferred_pharmacies.
+    affects: [/api/patients]
+  - date: '2023-07-26'
+    type: addition
+    breaking: false
+    summary: Added the /api/staff endpoint.
+    affects: [/api/staff]
+  - date: '2023-07-12'
+    type: change
+    breaking: false
+    summary: >-
+      The share_communications permission can now share communication data via the API only, rather
+      than across the whole practice on both web and API. Editable by DrChrono employees on request
+      to api@drchrono.com.
+    affects: [/api/messages, /api/lab_results]
+  - date: '2023-05-31'
+    type: deprecation-notice
+    breaking: false
+    summary: >-
+      preferred_pharmacies introduced alongside default_pharmacy with defined backward-compatibility
+      behaviour. DrChrono states default_pharmacy "will be deprecated in a future version" and
+      recommends migrating to preferred_pharmacies.
+    affects: [/api/patients]
+  - date: '2023-05-31'
+    type: fix
+    breaking: false
+    summary: Fixed incorrect filtering on /api/care_plans that returned empty responses for some users.
+    affects: [/api/care_plans]
+  - date: '2023-05-12'
+    type: addition
+    breaking: false
+    summary: Added the preferred_pharmacies array field to /api/patients, replacing default_pharmacy functionality.
+    affects: [/api/patients]
+  - date: '2022-06-23'
+    type: change
+    breaking: true
+    summary: The chart_id field on /api/patients now requires the format AAAA000000.
+    affects: [/api/patients]
+  - date: '2021-11-17'
+    type: addition
+    breaking: false
+    summary: Added the /api/patients_list endpoint for requesting batches of patients.
+    affects: [/api/patients_list]
+  - date: '2021-10-01'
+    type: addition
+    breaking: false
+    summary: Added the /api/appointments_list endpoint.
+    affects: [/api/appointments_list]
+  - date: '2021-07-08'
+    type: addition
+    breaking: false
+    summary: Added the fields parameter to /api/appointments to select which fields are returned.
+    affects: [/api/appointments]
+
+notes:
+  - >-
+    The newest dated entry in DrChrono's API changelog is 2024-11-01. The live OpenAPI has moved
+    since — /api/message_threads and /api/recurring_appointment_instances are present in the spec
+    served at https://app.drchrono.com/openapi-schema on 2026-08-14 but appear in no dated changelog
+    entry — so the changelog is not a complete record of contract change.
+  - >-
+    The API changelog lives on the api-docs-old host. There is no RSS or JSON feed; Headway's
+    changelog answered 404 on /drchrono-changelog.rss when probed on 2026-08-14.

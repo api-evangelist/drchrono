@@ -1,0 +1,154 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  registry.npmjs.org, pypi.org, rubygems.org, repo.packagist.org, crates.io, api.nuget.org,
+  api.github.com/orgs/drchrono, and https://app.drchrono.com/api-docs/
+name: drchrono Client Libraries
+description: >-
+  DrChrono ships NO first-party client SDK in any package registry. Every DrChrono client library
+  published to npm, PyPI, RubyGems or Packagist is community-maintained, and the most recent of them
+  was last released in 2023. The only first-party developer code DrChrono publishes is a Django
+  sample application in its GitHub organisation. Recorded as an honest absence — no package below is
+  marked official.
+
+official_sdk_count: 0
+package_count: 7
+
+registries_probed:
+  - {registry: npm, query: drchrono, first_party_hits: 0}
+  - {registry: pypi, query: drchrono, first_party_hits: 0}
+  - {registry: rubygems, query: drchrono, first_party_hits: 0}
+  - {registry: packagist, query: drchrono, first_party_hits: 0}
+  - {registry: crates.io, query: drchrono, first_party_hits: 0, results: 0}
+  - {registry: nuget, query: drchrono, first_party_hits: 0, results: 0}
+  - {registry: maven-central, query: drchrono, first_party_hits: 0}
+  - {registry: pkg.go.dev, query: drchrono, first_party_hits: 0}
+
+packages:
+  - language: php
+    registry: packagist
+    name: drchrono/php-sdk
+    url: https://packagist.org/packages/drchrono/php-sdk
+    install: composer require drchrono/php-sdk
+    version: v1.9.0
+    published: '2026-04-02'
+    downloads: 5216
+    official: false
+    official_check: >-
+      NOT first-party despite the vendor namespace and the description "Official PHP SDK for the
+      DrChrono API". The package's own source repository is github.com/xfairgamex/DrChrono-PHP, which
+      is not the github.com/drchrono organisation, and DrChrono's API documentation links to no PHP
+      SDK. The Packagist vendor prefix is the strongest false-positive in this set — it would score as
+      a first-party SDK on the name alone.
+
+  - language: javascript
+    registry: npm
+    name: drchrono
+    url: https://www.npmjs.com/package/drchrono
+    install: npm install drchrono
+    version: 0.0.5
+    published: '2023-12-01'
+    official: false
+    note: >-
+      Generated with openapi-typescript-codegen from the DrChrono OpenAPI. Published by an individual
+      maintainer (desmondmorris), not DrChrono. Two years without a release while the DrChrono spec
+      has changed.
+
+  - language: javascript
+    registry: npm
+    name: passport-drchrono
+    url: https://www.npmjs.com/package/passport-drchrono
+    install: npm install passport-drchrono
+    version: 1.0.2
+    published: '2019-08-19'
+    official: false
+    scope: OAuth 2.0 authentication strategy only, not an API client
+    note: Published by Nimblr. Seven years without a release.
+
+  - language: javascript
+    registry: npm
+    name: '@pipedream/drchrono'
+    url: https://www.npmjs.com/package/@pipedream/drchrono
+    install: npm install @pipedream/drchrono
+    version: 0.0.1
+    published: '2024-06-12'
+    official: false
+    scope: Pipedream integration components
+    note: Third-party iPaaS connector, not a general client library.
+
+  - language: python
+    registry: pypi
+    name: drchrono
+    url: https://pypi.org/project/drchrono/
+    install: pip install drchrono
+    version: 0.0.11
+    published: '2022-12-13'
+    official: false
+    source_code: https://github.com/hantswilliams/drchrono-wrapper
+    note: >-
+      Community wrapper covering a subset of endpoints (users, doctors, patients, appointments,
+      medications, documents) plus fake-data generation. Nearly four years without a release.
+
+  - language: ruby
+    registry: rubygems
+    name: omniauth-drchrono-oauth2
+    url: https://rubygems.org/gems/omniauth-drchrono-oauth2
+    install: gem install omniauth-drchrono-oauth2
+    version: 1.2.0
+    published: '2019-03-01'
+    downloads: 10520
+    official: false
+    scope: OmniAuth OAuth 2.0 strategy only
+
+  - language: ruby
+    registry: rubygems
+    name: omniauth-drchrono
+    url: https://rubygems.org/gems/omniauth-drchrono
+    install: gem install omniauth-drchrono
+    version: 1.0.0
+    published: '2017-02-17'
+    downloads: 16048
+    official: false
+    scope: OmniAuth OAuth 2.0 strategy only
+    note: Nine years without a release; superseded by omniauth-drchrono-oauth2.
+
+first_party_code:
+  - name: api-example-django
+    kind: sample application
+    url: https://github.com/drchrono/api-example-django
+    registry: null
+    version: null
+    published: null
+    language: python
+    last_pushed: '2025-02-11'
+    official: true
+    note: >-
+      DrChrono's own OAuth 2.0 + REST integration example in Django. It is a sample, not a
+      distributable client library, and is published to no package registry — hence version and
+      published are null rather than omitted. The 2025-02-11 push date is a bulk org-wide touch that
+      hit every repository in the organisation on the same day, so it is not evidence of active
+      maintenance.
+
+github_org:
+  url: https://github.com/drchrono
+  public_repo_count: 47
+  first_party_non_fork_count: 9
+  note: >-
+    The DrChrono GitHub organisation is almost entirely forks of third-party libraries (AFNetworking,
+    django-oauth-toolkit, redoc, PyPDF2, graphene-django). api-example-django is the only
+    DrChrono-authored repository that concerns the API. Every repository was last pushed on
+    2025-02-11 in a single bulk operation.
+
+findings:
+  - >-
+    Zero official SDKs. A developer integrating DrChrono writes an HTTP client by hand or adopts a
+    community package whose newest release predates the current contract.
+  - >-
+    The freshest community client, npm drchrono 0.0.5 (2023-12-01), was generated from the OpenAPI
+    before the 2024-11-01 duplicate-patient change and before /api/message_threads and
+    /api/recurring_appointment_instances appeared in the live spec. It is provably behind the API it
+    wraps.
+  - >-
+    drchrono/php-sdk on Packagist calls itself the "Official PHP SDK" and is not. No apis.yml SDKs
+    pointer was emitted for this repository, because emitting one would credit DrChrono with a client
+    library it does not publish.

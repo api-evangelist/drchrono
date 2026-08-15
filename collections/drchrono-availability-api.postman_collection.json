@@ -1,0 +1,87 @@
+{
+  "item": [
+    {
+      "id": "966f56e1-afa2-4fdf-a169-dbab003f74a1",
+      "name": "Availability",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4b3331c-a132-4471-a48b-016457912dcc",
+          "name": "availability",
+          "request": {
+            "name": "availability",
+            "description": {
+              "content": "Retrieve availability slots for the given date and office, doctor, or exam room.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "doctor",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_range",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "duration",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.drchrono.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6b9bfa2e-9d47-405b-9537-113d8b7194a1",
+    "name": "DrChrono EHR REST Administrative Availability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.",
+      "type": "text/plain"
+    }
+  }
+}

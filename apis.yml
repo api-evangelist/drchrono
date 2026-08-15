@@ -1,5 +1,15 @@
 name: drchrono
-description: drchrono is an EHR platform with a REST API for managing patient records, clinical encounters, appointments, prescriptions, billing, and HIPAA-compliant medical data exchange. It provides OAuth 2.0-secured endpoints covering patient management, clinical documentation, lab integration, scheduling, billing, and practice administration, enabling healthcare app developers to build integrations with the drchrono EHR ecosystem.
+description: >-
+  drchrono, part of EverCommerce's EverHealth portfolio, is an all-in-one EHR, practice management
+  and medical billing platform for independent US medical practices. It publishes two distinct
+  machine-readable API surfaces. The proprietary REST v4 API (codename Hunt Valley) is an OAuth
+  2.0-secured contract of 170 paths and 329 operations covering patients, scheduling, clinical
+  documentation, e-prescribing, labs, tasks, messaging and the full revenue cycle, published as a
+  live OpenAPI 3.0 at https://app.drchrono.com/openapi-schema and complemented by a 27-event webhook
+  surface. Alongside it drchrono runs a read-only, ONC-certified SMART on FHIR R4 server exposing 27
+  US Core resource types for USCDI interoperability, with SMART App Launch and OpenID Connect
+  discovery, FHIR Bulk Data Export, and a public service base directory covering 105 practices. The
+  two estates share no tokens, no scopes and no identifier space.
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -16,7 +26,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/drchrono.png
 url: https://raw.githubusercontent.com/api-evangelist/drchrono/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-08-14'
 specificationVersion: '0.19'
 tags:
   - EHR
@@ -30,6 +40,14 @@ tags:
   - Prescriptions
   - Lab Integration
   - FHIR
+  - SMART on FHIR
+  - USCDI
+  - Interoperability
+  - Webhooks
+  - OAuth 2.0
+  - ONC Certified
+  - Telehealth
+  - Revenue Cycle Management
 aid: drchrono
 type: Index
 apis:
@@ -43,7 +61,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/drchrono-administrative-api-openapi.yml
+  - type: Overlay
+    url: overlays/drchrono-administrative-api-overlay.yaml
   - type: Documentation
+    url: https://app.drchrono.com/api-docs/
+  - type: APIReference
+    url: https://app.drchrono.com/api-docs/
+  - type: GettingStarted
     url: https://app.drchrono.com/api-docs/tutorial/
   - type: Postman
     url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
@@ -61,7 +85,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/drchrono-audit-api-openapi.yml
+  - type: Overlay
+    url: overlays/drchrono-audit-api-overlay.yaml
   - type: Documentation
+    url: https://app.drchrono.com/api-docs/
+  - type: APIReference
+    url: https://app.drchrono.com/api-docs/
+  - type: GettingStarted
     url: https://app.drchrono.com/api-docs/tutorial/
   - type: Postman
     url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
@@ -79,7 +109,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/drchrono-availability-api-openapi.yml
+  - type: Overlay
+    url: overlays/drchrono-availability-api-overlay.yaml
   - type: Documentation
+    url: https://app.drchrono.com/api-docs/
+  - type: APIReference
+    url: https://app.drchrono.com/api-docs/
+  - type: GettingStarted
     url: https://app.drchrono.com/api-docs/tutorial/
   - type: Postman
     url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
@@ -97,7 +133,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/drchrono-billing-api-openapi.yml
+  - type: Overlay
+    url: overlays/drchrono-billing-api-overlay.yaml
   - type: Documentation
+    url: https://app.drchrono.com/api-docs/
+  - type: APIReference
+    url: https://app.drchrono.com/api-docs/
+  - type: GettingStarted
     url: https://app.drchrono.com/api-docs/tutorial/
   - type: Postman
     url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
@@ -115,7 +157,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/drchrono-clinical-api-openapi.yml
+  - type: Overlay
+    url: overlays/drchrono-clinical-api-overlay.yaml
   - type: Documentation
+    url: https://app.drchrono.com/api-docs/
+  - type: APIReference
+    url: https://app.drchrono.com/api-docs/
+  - type: GettingStarted
     url: https://app.drchrono.com/api-docs/tutorial/
   - type: Postman
     url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
@@ -133,7 +181,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/drchrono-practice-management-api-openapi.yml
+  - type: Overlay
+    url: overlays/drchrono-practice-management-api-overlay.yaml
   - type: Documentation
+    url: https://app.drchrono.com/api-docs/
+  - type: APIReference
+    url: https://app.drchrono.com/api-docs/
+  - type: GettingStarted
     url: https://app.drchrono.com/api-docs/tutorial/
   - type: Postman
     url: https://support.drchrono.com/home/getting-started-with-our-apis-via-postman
@@ -141,7 +195,99 @@ apis:
     url: https://app.drchrono.com/o/authorize/
   - type: Webhooks
     url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+- aid: drchrono:drchrono-fhir-r4-api
+  name: drchrono SMART on FHIR R4 API
+  description: >-
+    The ONC-certified SMART on FHIR R4 interoperability API for the DrChrono EHR. Read-only, 27 US
+    Core resource types, FHIR 4.0.1, with a live CapabilityStatement, SMART App Launch discovery,
+    OpenID Connect discovery, FHIR Bulk Data Export, and a public service base directory covering
+    105 practices. Served on DrChrono's EverHealth parent-brand host; the CapabilityStatement
+    identifies itself as the "DrChrono FHIR Server" and DrChrono's own documentation publishes these
+    base URLs.
+  humanURL: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+  baseURL: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4
+  tags:
+  - FHIR
+  - SMART on FHIR
+  - Interoperability
+  - USCDI
+  - ONC Certified
+  properties:
+  - type: CapabilityStatement
+    url: fhir/drchrono-fhir-r4-capabilitystatement.json
+  - type: FHIR
+    url: fhir/drchrono-fhir.yml
+  - type: Documentation
+    url: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+  - type: APIReference
+    url: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+  - type: Authentication
+    url: authentication/drchrono-authentication.yml
+  - type: OAuthScopes
+    url: scopes/drchrono-fhir-smart-scopes.yml
+  - type: OpenIDConnect
+    url: well-known/drchrono-fhir-openid-configuration.json
+  - type: WellKnown
+    url: well-known/drchrono-fhir-smart-configuration.json
+  - type: AgentSkill
+    url: skills/drchrono-fhir-record-retrieval.md
 common:
+  - type: Conventions
+    url: conventions/drchrono-conventions.yml
+  - type: ErrorCatalog
+    url: errors/drchrono-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/drchrono-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/drchrono-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/drchrono-changelog.yml
+  - type: Conformance
+    url: conformance/drchrono-conformance.yml
+  - type: Compliance
+    url: conformance/drchrono-conformance.yml
+  - type: DataModel
+    url: data-model/drchrono-data-model.yml
+  - type: Packages
+    url: packages/drchrono-packages.yml
+  - type: WellKnown
+    url: well-known/drchrono-well-known.yml
+  - type: LLMsTxt
+    url: llms/drchrono-llms.txt
+  - type: AsyncAPI
+    url: asyncapi/drchrono-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/drchrono-webhooks-asyncapi.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Sandbox
+    url: sandbox/drchrono-sandbox.yml
+  - type: Security
+    url: security/drchrono-vulnerability-disclosure.yml
+  - type: VulnerabilityDisclosure
+    url: security/drchrono-vulnerability-disclosure.yml
+  - type: MCPCandidate
+    url: mcp/drchrono-mcp.yml
+  - type: CapabilityStatement
+    url: fhir/drchrono-fhir-r4-capabilitystatement.json
+  - type: FHIR
+    url: fhir/drchrono-fhir.yml
+  - type: DeveloperPortal
+    url: https://app.drchrono.com/api-docs/
+  - type: APIReference
+    url: https://app.drchrono.com/api-docs/
+  - type: GettingStarted
+    url: https://app.drchrono.com/api-docs/tutorial/
+  - type: Support
+    url: https://support.drchrono.com/home/api
+  - type: SignUp
+    url: https://www.drchrono.com/sign-up/
+  - type: PrivacyPolicy
+    url: https://www.drchrono.com/privacy-policy/
+  - type: SecurityPolicy
+    url: https://www.drchrono.com/security-policy/
+  - type: BugBounty
+    url: https://hackerone.com/drchrono
   - type: AgenticAccess
     url: agentic-access/drchrono-agentic-access.yml
   - type: DomainSecurity
@@ -150,6 +296,8 @@ common:
     url: authentication/drchrono-authentication.yml
   - type: OAuthScopes
     url: scopes/drchrono-scopes.yml
+  - type: OAuthScopes
+    url: scopes/drchrono-fhir-smart-scopes.yml
   - type: Website
     url: https://www.drchrono.com
   - type: Documentation
@@ -175,6 +323,8 @@ common:
   - type: Partners
     url: https://www.drchrono.com/partners/
   - type: TermsOfService
+    url: https://app.drchrono.com/api-terms/
+  - type: APITerms
     url: https://www.drchrono.com/api-development-terms-conditions/
   - type: SupportPortal
     url: https://support.drchrono.com/home/api
@@ -198,3 +348,9 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+
+x-enrichment:
+  date: '2026-08-14'
+  status: enriched
+  artifacts_added: 26
+  pass: local-v1

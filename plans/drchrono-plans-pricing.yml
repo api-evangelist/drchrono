@@ -1,3 +1,7 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.drchrono.com/plans-and-pricing/
+plan_count: 5
 name: drchrono Plans and Pricing
 description: drchrono offers five EHR and practice management subscription tiers for medical practices. Pricing is quote-based and not publicly disclosed; prospects must contact drchrono for exact costs. All plans include the REST API, OAuth 2.0 access, and integration capabilities. API rate limits apply uniformly at the application level regardless of plan tier.
 url: https://www.drchrono.com/plans-and-pricing/

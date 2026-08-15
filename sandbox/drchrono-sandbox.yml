@@ -1,0 +1,79 @@
+generated: '2026-08-14'
+method: searched
+source: https://app.drchrono.com/api-docs/tutorial/
+name: drchrono Developer Sandbox
+description: >-
+  DrChrono's development environment is a free live account, not an isolated sandbox. A developer
+  signs up for a free DrChrono account, creates an API application on the API management page, and
+  develops against production app.drchrono.com with real OAuth tokens scoped to that account's own
+  data. DrChrono's API terms refer to "sandbox access" as a thing it can suspend, and API
+  applications carry a "Test Model" state that webhooks can be attached to, but no separate sandbox
+  host, no test-mode credential prefix, and no published fixture or test-data set were found.
+
+model: free-account-on-production
+separate_host: false
+test_credentials_published: false
+
+access:
+  signup:
+    url: https://www.drchrono.com/sign-up/
+    cost: free
+    statement: 'You need a free DrChrono account in order to create and test your application.'
+  application_console:
+    url: https://app.drchrono.com/api-management/
+    path_in_app: Account > Other Settings > API
+    creates: client id, client secret, one or more redirect URIs
+    note: >-
+      The same console pins the API version for the application and hosts the webhook configuration
+      section. Version can be overridden per request with the X-DRC-API-Version header.
+  terms:
+    url: https://app.drchrono.com/api-terms/
+    also_published_inline: https://app.drchrono.com/api-docs/
+
+test_mode:
+  name: Test Model
+  evidence: >-
+    DrChrono's webhook documentation states an API application must exist on file "even if it is in
+    Test Model", which is the only published reference to a test state for an API application.
+  key_prefix: null
+  isolated_data: unknown
+  note: >-
+    DrChrono publishes no description of what Test Model changes — no separate base URL, no distinct
+    credential prefix, no statement about whether writes are isolated. Recorded as present-but-
+    undocumented rather than inferred.
+
+sandbox_in_terms:
+  quote: >-
+    "Company has the right to immediately suspend the API, including sandbox access and API
+    applications..."
+  source: https://app.drchrono.com/api-docs/
+  reading: >-
+    The API terms treat sandbox access as a distinct grantable thing, which suggests a sandbox exists
+    for some developer relationships. No self-serve path to it is documented publicly.
+
+fhir_sandbox:
+  vendor_examples_host: r4devdatastore.dynamicfhirsandbox.com
+  note: >-
+    DrChrono's SMART on FHIR documentation illustrates responses using the DHIT dynamic FHIR sandbox
+    (r4devdatastore.dynamicfhirsandbox.com/fhir/dhithealth/practiceone/r4/...). Those are the FHIR
+    platform vendor's example URLs inside DrChrono's docs, not a DrChrono-operated sandbox, and no
+    credentials for them are published. FHIR client registration is performed by an EHR vendor admin,
+    so there is no self-serve FHIR test path either.
+  source: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+
+test_data:
+  fixtures_published: false
+  test_patients: false
+  magic_identifiers: false
+  time_simulation: false
+  note: >-
+    No test patients, magic identifiers, seeded charts, test clocks or trigger tooling are published.
+    A developer testing a clinical workflow creates the data by hand in a free account.
+
+hazards:
+  - >-
+    Because development runs against production, every integration test writes real records into a
+    real EHR account and consumes the same 500-calls-per-hour rate limit as production traffic.
+  - >-
+    Webhooks fired during testing deliver to the developer's callback URL from the production
+    platform, with the same three-retry schedule.

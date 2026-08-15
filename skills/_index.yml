@@ -1,0 +1,78 @@
+generated: '2026-08-14'
+method: generated
+source: >-
+  openapi/_original/drchrono-rest-api-openapi-schema.json (harvested from https://app.drchrono.com/openapi-schema),
+  https://app.drchrono.com/api-docs/,
+  fhir/drchrono-fhir-r4-capabilitystatement.json
+name: drchrono Agent Skills
+description: >-
+  Packaged operating instructions for the marquee DrChrono flows, mirroring the Arazzo workflows in
+  arazzo/. Every operationId referenced was verified against the OpenAPI DrChrono publishes; every
+  runtime rule (48-hour tokens, the scope-plus-permission double gate, the 500/hour and 10/second
+  limits, the absence of idempotency, the 20-record cap on /api/appointments, the string decimal
+  type) is taken from DrChrono's own documentation. DrChrono publishes no skills or AGENTS.md of its
+  own — searched 2026-08-14.
+
+provider_published: false
+skill_count: 5
+
+skills:
+  - name: drchrono-patient-registration
+    file: drchrono-patient-registration.md
+    surface: REST v4
+    summary: Search before create, upsert a patient, and survive the duplicate-patient 409 guard.
+    operations: [patients_summary_list, patients_list, patients_create, patients_partial_update, patients_read]
+    scopes: ['patients:summary:read', 'patients:summary:write', 'patients:read', 'patients:write']
+    mirrors: arazzo/drchrono-patient-registration-workflow.yml
+
+  - name: drchrono-appointment-scheduling
+    file: drchrono-appointment-scheduling.md
+    surface: REST v4
+    summary: Resolve doctor/office, check availability, book, and read back to detect a duplicate create.
+    operations: [availability, offices_list, doctors_list, appointment_profiles_list, appointments_list, appointments_create, appointments_read, appointments_partial_update]
+    scopes: ['calendar:read', 'calendar:write', 'patients:summary:read', 'user:read']
+    mirrors: arazzo/drchrono-appointment-scheduling-workflow.yml
+
+  - name: drchrono-clinical-documentation
+    file: drchrono-clinical-documentation.md
+    surface: REST v4
+    summary: Record problems, medications and allergies against a visit, respecting the clinical-note lock lifecycle.
+    operations: [patients_read, appointments_read, problems_list, problems_create, medications_list, medications_create, clinical_notes_list, clinical_notes_read, allergies_list, allergies_create]
+    scopes: ['clinical:read', 'clinical:write', 'patients:read', 'calendar:read']
+    mirrors: arazzo/drchrono-clinical-documentation-workflow.yml
+
+  - name: drchrono-eligibility-and-billing
+    file: drchrono-eligibility-and-billing.md
+    surface: REST v4
+    summary: Eligibility, line items, transactions, claim notes and patient payments — all Level 2 endpoints, with the money-retry hazard called out.
+    operations: [insurances_list, eligibility_checks_list, eligibility_checks_read, line_items_list, line_items_read, claim_billing_notes_list, claim_billing_notes_create, patient_payments_list, patient_payments_create, transactions_list]
+    scopes: ['billing:read', 'billing:write', 'billing:patient-payment:read', 'billing:patient-payment:write', 'patients:read']
+    mirrors: arazzo/drchrono-eligibility-and-billing-workflow.yml
+
+  - name: drchrono-fhir-record-retrieval
+    file: drchrono-fhir-record-retrieval.md
+    surface: SMART on FHIR R4
+    summary: Resolve the per-practice FHIR base from the public endpoint directory, authorize with PKCE or client_credentials, read USCDI resources, and run Bulk Data Export.
+    operations: [Patient.search, Patient.read, Condition.search, MedicationRequest.search, AllergyIntolerance.search, Observation.search, DiagnosticReport.search, DocumentReference.search, Immunization.search, 'Patient.$export']
+    scopes: [openid, fhirUser, offline_access, 'patient/*.read', 'user/*.read', 'system/*.read']
+    mirrors: null
+
+shared_rules:
+  - Access tokens live 48 hours; refresh with the refresh_token grant against https://app.drchrono.com/o/token/.
+  - Every REST endpoint is gated on BOTH an OAuth scope and an in-app permission. A 403 on a correctly scoped token means the permission is missing and retrying will not help.
+  - 500 requests per hour per API application, reset at the top of the hour, plus a 10 requests/second burst throttle. No rate-limit response headers exist.
+  - There is no idempotency key. Never blind-retry a POST.
+  - Some endpoints answer 302; the original method and headers must be replayed against Location.
+  - The decimal type is a string truncated to two places on output.
+  - The REST v4 API and the SMART on FHIR R4 API are separate contracts with separate authorization servers and non-overlapping identifier spaces.
+
+cross_references:
+  conventions: conventions/drchrono-conventions.yml
+  errors: errors/drchrono-problem-types.yml
+  scopes: scopes/drchrono-scopes.yml
+  fhir_scopes: scopes/drchrono-fhir-smart-scopes.yml
+  authentication: authentication/drchrono-authentication.yml
+  rate_limits: rate-limits/drchrono-rate-limits.yml
+  webhooks: asyncapi/drchrono-webhooks-asyncapi.yml
+  data_model: data-model/drchrono-data-model.yml
+  agentic_access: agentic-access/drchrono-agentic-access.yml

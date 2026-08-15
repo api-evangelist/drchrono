@@ -1,0 +1,126 @@
+generated: '2026-08-14'
+method: derived
+source: openapi/*.yml (4xx/5xx responses) enriched from the DrChrono API reference at https://app.drchrono.com/api-docs/
+name: drchrono API Error Catalog
+description: HTTP status semantics for the DrChrono EHR REST API v4 (Hunt Valley). DrChrono does not publish
+  an RFC 9457 problem+json envelope; validation failures return a plain application/json object keyed
+  by field name, and other failures return a short JSON or text message. The FHIR R4 surface returns an
+  OperationOutcome resource instead.
+format: custom-json
+rfc9457: false
+envelope:
+  content_type: application/json
+  validation_shape: '{"<field_name>": ["<validation message>", ...]}'
+  note: The REST API does not return a machine-readable error code registry; the HTTP status is the primary
+    signal. Endpoint-level 4xx meanings are documented in the request table of the API reference.
+  fhir_shape: FHIR R4 requests return an OperationOutcome resource (application/fhir+json) with issue[].severity,
+    issue[].code and issue[].diagnostics.
+redirects:
+- status: 302
+  note: Some endpoints answer 302. The original HTTP method and headers must be resent to the Location
+    URL; many HTTP clients handle this incorrectly by downgrading the method.
+problem_types:
+- status: 400
+  title: Bad Request
+  meaning: The request body or query parameters failed validation.
+  remediation: Correct the offending field(s) and resubmit. drchrono returns a JSON body keyed by field
+    name with a list of validation messages.
+  operations_declaring: 318
+- status: 401
+  title: Unauthorized
+  meaning: No access token was supplied, or the token is expired or revoked. drchrono access tokens expire
+    after 48 hours.
+  remediation: Refresh the access token with the OAuth 2.0 refresh_token grant against https://app.drchrono.com/o/token/
+    and retry.
+  operations_declaring: 322
+- status: 403
+  title: Forbidden
+  meaning: The token is valid but the application was not granted the required OAuth scope, or the authorizing
+    user lacks the required in-app permission in the DrChrono web app.
+  remediation: Re-authorize the application with the scope named in the endpoint reference, and have a
+    primary user grant the matching permission in the DrChrono practice settings.
+  operations_declaring: 322
+- status: 404
+  title: Not Found
+  meaning: The object does not exist, or exists outside the practice group the token can see.
+  remediation: Verify the id and that the authorizing doctor belongs to the same practice group.
+  operations_declaring: 317
+- status: 405
+  title: Method Not Allowed
+  meaning: The HTTP method is not supported on this endpoint. Most collection endpoints accept only GET
+    and POST; item endpoints accept GET, PUT, PATCH and DELETE.
+  remediation: Use one of the six documented request shapes for the endpoint.
+  operations_declaring: 298
+- status: 409
+  title: Conflict
+  meaning: The write conflicts with existing state. On POST /api/patients this is raised when the api_prevent_patient_duplicate
+    feature flag is enabled and a first name / last name / date of birth / gender match is detected ("Potential
+    duplicate patient(s) found.").
+  remediation: Resolve against the existing object, or resubmit with allow_duplicates set to true where
+    the endpoint documents that override.
+  operations_declaring: 7
+- status: 429
+  title: Too Many Requests
+  meaning: The API application exceeded its hourly rate limit (500 calls/hour by default), or tripped
+    the 10-calls-per-second burst throttle.
+  remediation: Back off until the top of the next hour; the hourly window is fixed, not rolling. Email
+    api@drchrono.com to request a higher limit.
+  operations_declaring: 0
+  note: Documented in the API reference but not declared in the OpenAPI responses.
+- status: 500
+  title: Internal Server Error
+  meaning: An unhandled error occurred inside the drchrono platform.
+  remediation: Retry with backoff. Persistent 500s should be reported to api@drchrono.com with the request
+    path and timestamp.
+  operations_declaring: 322
+request_matrix:
+- path: :endpoint
+  method: GET
+  side_effects: none
+  success: 200
+  failure:
+  - 403
+  response: Paginated list of resources the requester can access
+- path: :endpoint/:id
+  method: GET
+  side_effects: none
+  success: 200
+  failure:
+  - 403
+  - 404
+  response: Object with the requested id
+- path: :endpoint
+  method: POST
+  side_effects: create
+  success: 201
+  failure:
+  - 400
+  - 403
+  - 409
+  response: Object(s) created
+- path: :endpoint/:id
+  method: PUT
+  side_effects: replace
+  success: 204
+  failure:
+  - 400
+  - 403
+  - 409
+  response: Empty
+- path: :endpoint/:id
+  method: PATCH
+  side_effects: partial update
+  success: 204
+  failure:
+  - 400
+  - 403
+  - 409
+  response: Empty
+- path: :endpoint/:id
+  method: DELETE
+  side_effects: delete
+  success: 204
+  failure:
+  - 400
+  - 403
+  response: Empty

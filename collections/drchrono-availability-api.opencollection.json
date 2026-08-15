@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DrChrono EHR REST Administrative Availability API",
+    "version": "v4 - Hunt Valley"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/availability",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve availability slots for the given date and office, doctor, or exam room."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,101 @@
+generated: '2026-08-14'
+method: probed
+source: live GET probes of every apis.yml baseURL host, every OpenAPI servers[] host, the docs host and the FHIR hosts
+name: drchrono /.well-known/ Discovery Surface
+description: >-
+  Probe of the RFC 8615 discovery surface across every DrChrono host. The primary product hosts
+  (app.drchrono.com, www.drchrono.com) serve NOTHING at /.well-known/ — every path 404s. The entire
+  well-known surface DrChrono actually serves lives on the SMART on FHIR hosts, where a real SMART
+  configuration and a real OpenID Connect discovery document are published.
+
+hosts:
+  - host: https://app.drchrono.com
+    role: REST v4 API base and docs host
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/smart-configuration, status: 404}
+      - {path: /llms.txt, status: 404}
+    note: >-
+      Serves an OAuth 2.0 authorization server at /o/authorize/ and /o/token/ but publishes no
+      RFC 8414 metadata document for it. A client cannot discover the endpoints programmatically.
+
+  - host: https://www.drchrono.com
+    role: marketing site
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /llms.txt, status: 200, file: llms/drchrono-llms.txt, note: 'Rank Math SEO-generated llms.txt of marketing and blog pages; carries no API or developer content.'}
+      - {path: /sitemap.xml, status: 200}
+    note: >-
+      Most content paths on this host answered 403 to an unauthenticated probe on 2026-08-14
+      (a bot challenge, 4546-byte body) — /security/, /privacy-policy/, /terms-of-service/,
+      /partners/ and /api-development-terms-conditions/ all refused. /llms.txt and /sitemap.xml
+      were allowed through.
+
+  - host: https://drchrono-fhirpresentation.everhealthsoftware.com
+    role: SMART on FHIR R4 resource server (DrChrono's parent-brand EverHealth host)
+    documents:
+      - path: /fhir/drchrono/498711/r4/.well-known/smart-configuration
+        status: 200
+        content_type: application/json
+        file: well-known/drchrono-fhir-smart-configuration.json
+        note: Real SMART App Launch discovery document — 233 scopes, 20 SMART capabilities, PKCE S256.
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+
+  - host: https://drchrono-fhir.everhealthsoftware.com
+    role: SMART on FHIR authorization server
+    documents:
+      - path: /core/.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        file: well-known/drchrono-fhir-openid-configuration.json
+        note: OpenID Connect discovery for the SMART issuer https://drchrono-fhir.everhealthsoftware.com/core
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: Second OIDC document for the host-root issuer; the /core one is the SMART issuer and is the one saved.
+      - path: /.well-known/security.txt
+        status: 200
+        rejected: true
+        reason: >-
+          Body is an HTML application shell, not an RFC 9116 document. This host answers 200 with the
+          same HTML for arbitrary /.well-known/* paths, so a 200 here is not evidence of a served
+          document.
+      - path: /.well-known/agent-card.json
+        status: 200
+        rejected: true
+        reason: >-
+          Same SPA catch-all — 200 with an identical 2327-byte HTML shell. NOT an A2A Agent Card. No
+          agent card artifact was written; see a2a/ (absent by design).
+
+summary:
+  paths_probed: 22
+  real_documents_served: 3
+  security_txt: false
+  openid_configuration: true
+  oauth_authorization_server: false
+  api_catalog: false
+  ai_plugin: false
+  agent_card: false
+  llms_txt: true
+
+findings:
+  - >-
+    DrChrono publishes no security.txt on any host. There is no machine-readable vulnerability
+    disclosure contact.
+  - >-
+    The REST v4 OAuth 2.0 server at app.drchrono.com is undiscoverable — no RFC 8414
+    oauth-authorization-server document and no OIDC document. Its endpoints are only in prose.
+  - >-
+    The only well-known documents DrChrono serves are on the FHIR surface, and both are genuine and
+    complete.
+  - >-
+    Two 200s on drchrono-fhir.everhealthsoftware.com were rejected as SPA catch-all HTML, including
+    an /.well-known/agent-card.json that would otherwise have been recorded as an A2A agent card.

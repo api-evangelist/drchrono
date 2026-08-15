@@ -1,0 +1,85 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enrichment overlay for DrChrono EHR REST Administrative Billing API
+  version: 1.0.0
+extends: drchrono-billing-api-openapi.yml
+x-provenance:
+  generated: '2026-08-14'
+  method: generated
+  source: openapi/drchrono-billing-api-openapi.yml + https://app.drchrono.com/api-docs/
+  note: Captures API Evangelist enrichments only. The original OpenAPI is never mutated; apply this overlay to produce
+    the enriched view.
+actions:
+- target: $.info
+  description: Attach machine-readable contact and licensing that the published DrChrono spec omits.
+  update:
+    contact:
+      name: DrChrono API Support
+      email: api@drchrono.com
+      url: https://app.drchrono.com/api-docs/
+    termsOfService: https://app.drchrono.com/api-terms/
+- target: $.info
+  description: Cross-reference the enrichment artifacts derived from this contract.
+  update:
+    x-api-evangelist:
+      source: https://app.drchrono.com/openapi-schema
+      harvested: '2026-08-14'
+      artifacts:
+        conventions: conventions/drchrono-conventions.yml
+        errors: errors/drchrono-problem-types.yml
+        lifecycle: lifecycle/drchrono-lifecycle.yml
+        changelog: changelog/drchrono-changelog.yml
+        conformance: conformance/drchrono-conformance.yml
+        data_model: data-model/drchrono-data-model.yml
+        scopes: scopes/drchrono-scopes.yml
+        authentication: authentication/drchrono-authentication.yml
+        rate_limits: rate-limits/drchrono-rate-limits.yml
+        webhooks: asyncapi/drchrono-webhooks-asyncapi.yml
+        skills: skills/_index.yml
+- target: $.info
+  description: Record the documented rate limits, which the contract itself does not express.
+  update:
+    x-rate-limits:
+      hourly: 500
+      window: fixed hour, resets at the top of the hour
+      burst: 10 requests per second
+      status: 429
+      response_headers: null
+      increase: api@drchrono.com
+      source: https://app.drchrono.com/api-docs/
+- target: $.info
+  description: Record the documented pagination contract, including the envelope divergence between the reference
+    and the spec.
+  update:
+    x-pagination:
+      style: page
+      parameter: page_size
+      default: 250
+      maximum: 250
+      documented_envelope:
+      - previous
+      - results
+      - next
+      spec_envelope:
+      - previous
+      - data
+      - next
+      exceptions:
+      - path: /api/appointments
+        maximum: 20
+      - parameter: verbose=true
+        maximum: 50
+- target: $.info
+  description: Record the absence of an idempotency mechanism so agents do not assume safe retries on write operations.
+  update:
+    x-idempotency:
+      supported: false
+      note: No idempotency key or replay window is published. Retrying a POST creates a second object. The only
+        guard is api_prevent_patient_duplicate on POST /api/patients, which returns 409 on a first-name/last-name/DOB/gender
+        match.
+- target: $.paths.*.*[?(@.deprecated != true)]
+  description: 'No-op marker: DrChrono marks no operation deprecated in this contract, and field-level deprecation
+    (Patient.default_pharmacy) is announced only in prose. Recorded so consumers know deprecation is not machine-readable
+    here.'
+  update:
+    x-deprecation-signal: prose-only

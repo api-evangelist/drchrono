@@ -1,0 +1,2151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DrChrono EHR REST Administrative Practice Management API",
+    "version": "v4 - Hunt Valley"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Practice Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "doctor_work_schedule_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/doctor_work_schedule/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a work schedule for the doctor (beta)"
+        },
+        {
+          "info": {
+            "name": "doctor_work_schedule_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/doctor_work_schedule/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing doctor's entire work schedule"
+        },
+        {
+          "info": {
+            "name": "doctor_work_schedule_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/doctor_work_schedule/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing doctor's work schedule"
+        },
+        {
+          "info": {
+            "name": "messages_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/messages",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "responsible_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "received_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search messages in doctor's message center"
+        },
+        {
+          "info": {
+            "name": "messages_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/messages",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "responsible_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "received_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create messages in doctor's message center"
+        },
+        {
+          "info": {
+            "name": "task_categories_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/task_categories",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search task categories"
+        },
+        {
+          "info": {
+            "name": "task_categories_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/task_categories",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a task category"
+        },
+        {
+          "info": {
+            "name": "offices_add_exam_room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/offices/:id/add_exam_room",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add an exam room to the office"
+        },
+        {
+          "info": {
+            "name": "inventory_vaccines_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/inventory_vaccines/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cvx_code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing vaccine inventory"
+        },
+        {
+          "info": {
+            "name": "offices_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/offices",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search offices"
+        },
+        {
+          "info": {
+            "name": "task_statuses_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/task_statuses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing task status"
+        },
+        {
+          "info": {
+            "name": "task_statuses_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/task_statuses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task status"
+        },
+        {
+          "info": {
+            "name": "task_statuses_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/task_statuses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task status"
+        },
+        {
+          "info": {
+            "name": "office_work_schedule_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/office_work_schedule",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the work schedule for the authed doctor's primary office (beta)"
+        },
+        {
+          "info": {
+            "name": "task_templates_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/task_templates",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search task templates"
+        },
+        {
+          "info": {
+            "name": "task_templates_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/task_templates",
+            "params": [
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a task template"
+        },
+        {
+          "info": {
+            "name": "office_work_schedule_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/office_work_schedule/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a work schedule (beta)"
+        },
+        {
+          "info": {
+            "name": "office_work_schedule_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/office_work_schedule/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing office's entire work schedule"
+        },
+        {
+          "info": {
+            "name": "office_work_schedule_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/office_work_schedule/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing office's work schedule"
+        },
+        {
+          "info": {
+            "name": "inventory_categories_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/inventory_categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing inventory category"
+        },
+        {
+          "info": {
+            "name": "tasks_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_unknown",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_range",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing task"
+        },
+        {
+          "info": {
+            "name": "tasks_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_unknown",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_range",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task"
+        },
+        {
+          "info": {
+            "name": "tasks_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_unknown",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_range",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task"
+        },
+        {
+          "info": {
+            "name": "doctor_work_schedule_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/doctor_work_schedule",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the work schedule for the authed doctor's primary office (beta)"
+        },
+        {
+          "info": {
+            "name": "inventory_categories_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/inventory_categories",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search inventory categories"
+        },
+        {
+          "info": {
+            "name": "task_statuses_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/task_statuses",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search task statuses"
+        },
+        {
+          "info": {
+            "name": "task_statuses_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/task_statuses",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a task status"
+        },
+        {
+          "info": {
+            "name": "task_templates_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/task_templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing task template"
+        },
+        {
+          "info": {
+            "name": "task_templates_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/task_templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task template"
+        },
+        {
+          "info": {
+            "name": "task_templates_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/task_templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task template"
+        },
+        {
+          "info": {
+            "name": "task_notes_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/task_notes",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "task",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search task notes"
+        },
+        {
+          "info": {
+            "name": "task_notes_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/task_notes",
+            "params": [
+              {
+                "name": "task",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a task note"
+        },
+        {
+          "info": {
+            "name": "tasks_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/tasks",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_unknown",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_range",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search tasks"
+        },
+        {
+          "info": {
+            "name": "tasks_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/tasks",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_unknown",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assignee_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "due_at_range",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a task"
+        },
+        {
+          "info": {
+            "name": "inventory_vaccines_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/inventory_vaccines",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cvx_code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search vaccine inventories"
+        },
+        {
+          "info": {
+            "name": "inventory_vaccines_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/inventory_vaccines",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cvx_code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create vaccine inventory"
+        },
+        {
+          "info": {
+            "name": "task_categories_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/task_categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing task category"
+        },
+        {
+          "info": {
+            "name": "task_categories_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/task_categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task category"
+        },
+        {
+          "info": {
+            "name": "task_categories_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/task_categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task category"
+        },
+        {
+          "info": {
+            "name": "task_notes_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/task_notes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "task",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing task note"
+        },
+        {
+          "info": {
+            "name": "task_notes_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/task_notes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "task",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task note"
+        },
+        {
+          "info": {
+            "name": "task_notes_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/task_notes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "task",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing task note"
+        },
+        {
+          "info": {
+            "name": "messages_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/messages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "responsible_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "received_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing message in doctor's message center"
+        },
+        {
+          "info": {
+            "name": "messages_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/messages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "responsible_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "received_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing message in doctor's message center"
+        },
+        {
+          "info": {
+            "name": "messages_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/messages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "responsible_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "received_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing message in doctor's message center"
+        },
+        {
+          "info": {
+            "name": "messages_delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.drchrono.com/api/messages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "responsible_user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "received_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete an existing message in doctor's message center"
+        },
+        {
+          "info": {
+            "name": "offices_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/offices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing office"
+        },
+        {
+          "info": {
+            "name": "offices_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/offices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing office"
+        },
+        {
+          "info": {
+            "name": "offices_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/offices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing office"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

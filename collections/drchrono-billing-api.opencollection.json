@@ -1,0 +1,2042 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DrChrono EHR REST Administrative Billing API",
+    "version": "v4 - Hunt Valley"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "daysheet_charges_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/day_sheet_charges",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "charges_date_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "claim_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "examroom_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pg_mode",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve daysheet charges report for a given date range"
+        },
+        {
+          "info": {
+            "name": "eligibility_checks_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/eligibility_checks",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query_date_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment_date_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search past eligibility checks for patient"
+        },
+        {
+          "info": {
+            "name": "patient_authorizations_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/patient_authorizations",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve or search patient authorizations"
+        },
+        {
+          "info": {
+            "name": "custom_insurance_plan_names_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/custom_insurance_plan_names/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing custom insurance plan name"
+        },
+        {
+          "info": {
+            "name": "line_items_list_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/line_items_list",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID token for the batch of patients.  This is returned in the response of the create endpoint.\n"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve the list of billing line items"
+        },
+        {
+          "info": {
+            "name": "line_items_list_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/line_items_list",
+            "params": [
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Order results by a specific field. Valid options include [id, updated_at]. Default: id."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date_range",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a billing line items list request"
+        },
+        {
+          "info": {
+            "name": "day_sheet_patient_payments_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/day_sheet_patient_payments",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "charges_date_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "claim_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "examroom_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "legacy",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve daysheet cash report for a given date range"
+        },
+        {
+          "info": {
+            "name": "eligibility_checks_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/eligibility_checks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query_date_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment_date_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing past eligibility check"
+        },
+        {
+          "info": {
+            "name": "comm_logs_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/comm_logs",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search communicatioin (phone call) logs"
+        },
+        {
+          "info": {
+            "name": "comm_logs_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/comm_logs",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create communication (phone call) logs"
+        },
+        {
+          "info": {
+            "name": "daysheet_credits_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/day_sheet_credits",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "credits_date_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "claim_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "examroom_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pg_mode",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve daysheet credits/adjustments report for a given date range"
+        },
+        {
+          "info": {
+            "name": "transactions_list_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/transactions_list",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID token for the batch of transactions.  This is returned in the response of the `create` endpoint.\n"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search transactions in batches. Results returned in order of ID or updated_at."
+        },
+        {
+          "info": {
+            "name": "transactions_list_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/transactions_list",
+            "params": [
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Order results by a specific field. Valid options include [id, updated_at]. Default: id."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page. Value between 1 and 1000."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Number of page to return. Value between 1 and max number of pages in result set."
+              },
+              {
+                "name": "line_item",
+                "value": "",
+                "type": "query",
+                "description": "Line item ID"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query",
+                "description": "Posted date"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query",
+                "description": "appointment"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "since"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query",
+                "description": "doctor"
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "When True includes full details"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create transactions list request.  Use the UUID returned in the response to retrieve the batch of records. Results returned in order of id or updated_at.\n"
+        },
+        {
+          "info": {
+            "name": "patient_payments_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/patient_payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing patient payment"
+        },
+        {
+          "info": {
+            "name": "patient_payments_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/patient_payments",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search patient payments"
+        },
+        {
+          "info": {
+            "name": "patient_payments_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/patient_payments",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create patient payment"
+        },
+        {
+          "info": {
+            "name": "clinical_note_field_values_list_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/clinical_note_field_values_list",
+            "params": [
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Order results by a specific field. Valid options include [id, updated_at]. Default: id."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clinical_note_template",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create clinical note field value list request.  Use the UUID returned in the response to retrieve the batch of records. Results returned in order of ID.\n"
+        },
+        {
+          "info": {
+            "name": "billing_profiles_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/billing_profiles",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search billing profiles"
+        },
+        {
+          "info": {
+            "name": "billing_profiles_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/billing_profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing billing profiles"
+        },
+        {
+          "info": {
+            "name": "line_item_deletions_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/line_item_deletions",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search billing line item deletions. When a billing line item is deleted, a record of its original ID and the appointment it was attached to will be logged and is accessible from this resource.\n"
+        },
+        {
+          "info": {
+            "name": "transactions_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/transactions",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "line_item",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search insurance transactions associated with billing line items"
+        },
+        {
+          "info": {
+            "name": "custom_insurance_plan_names_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/custom_insurance_plan_names",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search custom insurance plan names"
+        },
+        {
+          "info": {
+            "name": "daysheet_totals_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/day_sheet_totals",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "charges_date_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "credits_date_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sub_group_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tertiary_group_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cash_view_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "examroom_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pg_mode",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve daysheet totals report for a given date range"
+        },
+        {
+          "info": {
+            "name": "transactions_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "line_item",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing insurance transaction"
+        },
+        {
+          "info": {
+            "name": "procedures_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/procedures",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mu_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mu_date_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "eligibility_checks_list_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/eligibility_checks_list",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID token for the batch of eligibility checks.  This is returned in the response of the `create` endpoint.\n"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search eligibility checks in batches. Results returned in order of ID or updated_at."
+        },
+        {
+          "info": {
+            "name": "procedures_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/procedures/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mu_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mu_date_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "line_items_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/line_items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date_range",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing billing line item"
+        },
+        {
+          "info": {
+            "name": "line_items_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/line_items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "line_items_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/line_items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "line_items_delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.drchrono.com/api/line_items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "patient_payment_log_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/patient_payment_log",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search patient payment logs"
+        },
+        {
+          "info": {
+            "name": "patient_payment_log_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/patient_payment_log/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing patient payment log"
+        },
+        {
+          "info": {
+            "name": "comm_logs_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/comm_logs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve an existing communication (phone call) logs"
+        },
+        {
+          "info": {
+            "name": "comm_logs_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.drchrono.com/api/comm_logs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing communication (phone call) logs"
+        },
+        {
+          "info": {
+            "name": "comm_logs_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.drchrono.com/api/comm_logs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing communication (phone call) logs"
+        },
+        {
+          "info": {
+            "name": "line_items_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.drchrono.com/api/line_items",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve or search billing line items"
+        },
+        {
+          "info": {
+            "name": "line_items_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.drchrono.com/api/line_items",
+            "params": [
+              {
+                "name": "posted_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "doctor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appointment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "use_fee_schedule_defaults",
+                "value": "",
+                "type": "query",
+                "description": "When true, resolves price and modifiers from the fee schedule before creating the line item. Only applies to CPT (C) and HCPCS (H) procedure types. Caller-supplied price and modifiers take precedence over fee schedule values."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://app.drchrono.com/o/authorize/",
+              "accessTokenUrl": "https://app.drchrono.com/o/token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create billing line item for appointments"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

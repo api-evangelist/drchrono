@@ -1,148 +1,188 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/drchrono-rest-api-openapi.yml
+generated: '2026-08-14'
+method: searched
+source: https://app.drchrono.com/api-docs/
+docs: https://app.drchrono.com/api-docs/
+name: drchrono REST v4 OAuth Scopes
+description: The 22 OAuth 2.0 scopes DrChrono declares on the drchrono_oauth2 security scheme of the OpenAPI it
+  serves at https://app.drchrono.com/openapi-schema, with the scope-model narrative from the Authorization section
+  of its API reference. Scopes take the form BASE_SCOPE:[read|write] over the bases user, calendar, patients, patients:summary,
+  billing, clinical and labs, plus messages, tasks, settings and billing:patient-payment.
+scope_count: 23
+default_behaviour: Omitting the scope parameter on the authorize call requests ALL scopes. DrChrono advises requesting
+  only the scopes an application needs.
+permission_gate: An OAuth scope is necessary but not sufficient. Each endpoint also requires an in-app permission
+  granted by a primary user inside the DrChrono web app; a correctly scoped token returns 403 without it. The API
+  reference names the required scope AND permission per endpoint.
+granularity_note: patients:summary is deliberately narrower than patients — it exposes only name, chart_id, age
+  and gender. DrChrono gives the example of a birthday-email application that should request patients:summary:read
+  rather than patients:read. Prefer the summary scope wherever identity is all you need; it is the minimum-necessary
+  posture the HIPAA obligations in the API terms call for.
+separate_fhir_vocabulary: The SMART on FHIR R4 surface uses an entirely different scope vocabulary (233 SMART scopes)
+  against a different authorization server. See scopes/drchrono-fhir-smart-scopes.yml.
 schemes:
 - name: drchrono_oauth2
-  source: openapi/drchrono-rest-api-openapi.yml
+  source: openapi/_original/drchrono-rest-api-openapi-schema.json
   flows:
   - flow: authorizationCode
     authorizationUrl: https://app.drchrono.com/o/authorize/
     tokenUrl: https://app.drchrono.com/o/token/
+  revocationUrl: https://app.drchrono.com/o/revoke_token
 scopes:
 - scope: billing
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: billing:patient-payment:read
   description: View patient payment information
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: billing:patient-payment:write
   description: Modify patient payment information
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: billing:read
   description: View billing information.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: billing:write
   description: Modify billing information.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: calendar:read
   description: View your appointments.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: calendar:write
   description: Schedule appointments and modify the data associated with them.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: clinical:read
   description: View clinical information, such as vitals, clinical notes, medications and diagnoses.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: clinical:write
-  description: Create and modify clinical information, such as vitals, clinical notes, medications
-    and diagnoses.
+  description: Create and modify clinical information, such as vitals, clinical notes, medications and diagnoses.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: labs:read
   description: View patient lab orders and results.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: labs:write
   description: Create and modify patient lab orders and results.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: messages:read
   description: View messages in your message center.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: messages:write
   description: Create and modify messages in your message center.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: patients:read
   description: View detailed patient information.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: patients:summary:read
-  description: View summary information about your patients. This includes patients' name, chart_id,
-    age, and gender.
+  description: View summary information about your patients. This includes patients' name, chart_id, age, and gender.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: patients:summary:write
   description: Create new patients and set their name, chart_id, age, and gender.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: patients:write
   description: Create patients and modify detailed patient information.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: settings:read
   description: View resources that requires Settings permission, such as custom fields.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: settings:write
   description: Create resources that requires Settings permission, such as custom fields.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: tasks:read
   description: View tasks in your tasks center
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: tasks:write
   description: Create and modify tasks in your tasks center
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: user:read
   description: View your basic information.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json
 - scope: user:write
   description: Edit select account information, such as creating new exam rooms.
   flows:
   - authorizationCode
   sources:
-  - openapi/drchrono-rest-api-openapi.yml
+  - https://app.drchrono.com/api-docs/
+  - openapi/_original/drchrono-rest-api-openapi-schema.json

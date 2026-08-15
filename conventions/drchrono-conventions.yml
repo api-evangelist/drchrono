@@ -1,0 +1,178 @@
+generated: '2026-08-14'
+method: searched
+source: https://app.drchrono.com/api-docs/
+name: drchrono API Conventions
+description: >-
+  Cross-cutting runtime semantics for the DrChrono EHR REST API v4 (Hunt Valley), read from the
+  reference DrChrono serves at https://app.drchrono.com/api-docs/ and cross-checked against the
+  OpenAPI it publishes at https://app.drchrono.com/openapi-schema. Covers the request/response
+  matrix, pagination, the verbose parameter, versioning, rate-limit signalling, the error envelope,
+  webhook delivery semantics, and the absence of an idempotency mechanism.
+
+base_url: https://app.drchrono.com
+docs: https://app.drchrono.com/api-docs/
+
+authentication:
+  style: oauth2
+  flow: authorization_code
+  header: 'Authorization: Bearer <access_token>'
+  authorization_url: https://app.drchrono.com/o/authorize/
+  token_url: https://app.drchrono.com/o/token/
+  access_token_lifetime: 48 hours
+  refresh: refresh_token grant against the same token endpoint
+  scope_default: >-
+    Omitting the scope parameter on the authorize call requests ALL scopes. DrChrono's own
+    documentation advises requesting only the scopes an application needs.
+  dual_gate: >-
+    Access requires BOTH an OAuth scope granted by the authorizing user AND an in-app permission
+    granted by a primary user inside the DrChrono web app. A token carrying the right scope still
+    receives 403 when the underlying user permission is not set.
+  see_also: authentication/drchrono-authentication.yml
+
+request_matrix:
+  - path: ':endpoint'
+    method: GET
+    side_effects: none
+    success: 200
+    failure: [403]
+  - path: ':endpoint/:id'
+    method: GET
+    side_effects: none
+    success: 200
+    failure: [403, 404]
+  - path: ':endpoint'
+    method: POST
+    side_effects: create
+    success: 201
+    failure: [400, 403, 409]
+  - path: ':endpoint/:id'
+    method: PUT
+    side_effects: replace entire object
+    success: 204
+    failure: [400, 403, 409]
+  - path: ':endpoint/:id'
+    method: PATCH
+    side_effects: update included values only
+    success: 204
+    failure: [400, 403, 409]
+  - path: ':endpoint/:id'
+    method: DELETE
+    side_effects: delete
+    success: 204
+    failure: [400, 403]
+
+pagination:
+  style: page
+  documented_envelope: [previous, results, next]
+  spec_envelope: [previous, data, next]
+  envelope_note: >-
+    The narrative reference documents the list envelope as previous/results/next; the published
+    OpenAPI declares previous/data/next for the same responses. Both keys appear in DrChrono's own
+    contract — clients should tolerate either.
+  request_parameter: page_size
+  cursor: absolute next/previous URLs returned in the body
+  default_page_size: 250
+  max_page_size: 250
+  exceptions:
+    - path: /api/appointments
+      max_page_size: 20
+    - parameter: verbose=true
+      effect: reduces both default and maximum page size to 50
+
+field_selection:
+  parameter: verbose
+  values: ['true']
+  behaviour: >-
+    Some endpoints omit expensive fields from GET responses unless verbose=true is passed. Passing it
+    includes those fields and lowers the page size ceiling to 50. There is no sparse-fieldset or
+    field-expansion parameter beyond this switch.
+
+versioning:
+  scheme: named major versions
+  current: v4 (Hunt Valley)
+  header: X-DRC-API-Version
+  header_note: >-
+    Optional request header that selects the API version for a single call instead of configuring it
+    on the API application. Accepts values such as v4.
+  in_path: false
+  see_also: lifecycle/drchrono-lifecycle.yml
+
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    DrChrono publishes no idempotency key, no request-replay window and no client-supplied request
+    identifier. Retrying a POST creates a second object. The only near-equivalent is the
+    api_prevent_patient_duplicate feature flag on POST /api/patients, which rejects a create with 409
+    when first name, last name, date of birth and gender match an existing patient — a duplicate
+    guard scoped to one resource, not a general idempotency mechanism. Recorded as an absence, not a
+    gap we filled.
+
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation-id header is documented on the REST API. Webhook deliveries DO carry
+    a delivery identifier (X-drchrono-delivery), which is the only first-party trace handle DrChrono
+    publishes.
+
+rate_limiting:
+  hourly_limit: 500
+  window: fixed hour, resets at the top of the hour (not rolling)
+  burst: 10 requests per second throttles the client
+  status_on_exhaustion: 429
+  response_headers: []
+  header_note: >-
+    DrChrono documents no X-RateLimit-* or RateLimit-* response headers and no Retry-After. A client
+    cannot read remaining quota from a response; it must count its own calls and back off to the top
+    of the next hour on 429.
+  increase: email api@drchrono.com
+  see_also: rate-limits/drchrono-rate-limits.yml
+
+error_envelope:
+  content_type: application/json
+  rfc9457: false
+  validation_shape: '{"<field_name>": ["<validation message>", ...]}'
+  fhir_shape: OperationOutcome (application/fhir+json) on the SMART on FHIR R4 surface
+  see_also: errors/drchrono-problem-types.yml
+
+redirects:
+  status: 302
+  note: >-
+    Some endpoints answer 302. DrChrono warns that most HTTP libraries follow it incorrectly by
+    changing the method or dropping headers; the original method and headers must be replayed
+    against the Location URL.
+
+content_types:
+  request: [application/json, application/x-www-form-urlencoded, multipart/form-data]
+  response: [application/json, application/xml]
+
+data_types:
+  date: ISO 8601 date, e.g. '2021-02-14'
+  date_range: start/end separated by a slash, e.g. '2021-02-17/2021-02-24'
+  time: ISO 8601 time, e.g. '12:34:56'
+  timestamp: ISO 8601 timestamp with no timezone, e.g. '2021-02-14T13:40:39'
+  decimal: string truncated to two decimal places; accepted as int, float or string, always returned as string
+  color: CSS color, '#ABCDEF' or 'rgb(12, 34, 56)'
+  file: multipart/form-data upload, or base64-encoded within JSON
+
+endpoint_levels:
+  description: >-
+    DrChrono classifies every endpoint as a Level 1 or Level 2 API call in its API terms. The level
+    is a commercial classification attached to the endpoint, subject to change at DrChrono's
+    discretion, and is published in the API reference.
+  level_1_examples: [/api/patients, /api/appointments, /api/doctors, /api/documents, /api/medications, /api/problems, /api/users]
+  level_2_examples: [/api/clinical_notes, /api/lab_orders, /api/line_items, /api/patient_payments, /api/eligibility_checks, /api/tasks, /api/transactions]
+  source: https://app.drchrono.com/api-docs/
+
+events:
+  webhooks: true
+  see_also: asyncapi/drchrono-webhooks-asyncapi.yml
+
+fhir_surface:
+  base_url: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/{practice_id}/r4
+  conventions_differ: >-
+    The SMART on FHIR R4 surface is a separate contract with its own conventions — FHIR search
+    parameters instead of page_size, Bundle paging instead of previous/next envelopes,
+    OperationOutcome instead of the field-keyed error object, SMART scopes instead of DrChrono
+    scopes, and its own OAuth 2.0 authorization server. Do not carry REST conventions across.
+  see_also: fhir/drchrono-fhir.yml
