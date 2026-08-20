@@ -43,6 +43,26 @@ tags:
   - SMART on FHIR
   - USCDI
   - Interoperability
+  - Webhook
+  - Authentication
+  - ONC Certified
+  - Telehealth
+  - Revenue Cycle Management
+tags_raw:
+  - EHR
+  - Electronic Health Records
+  - Healthcare
+  - Medical Records
+  - Practice Management
+  - HIPAA
+  - Appointments
+  - Billing
+  - Prescriptions
+  - Lab Integration
+  - FHIR
+  - SMART on FHIR
+  - USCDI
+  - Interoperability
   - Webhooks
   - OAuth 2.0
   - ONC Certified
