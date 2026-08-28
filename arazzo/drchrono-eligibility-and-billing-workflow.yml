@@ -10,8 +10,11 @@ info:
     Every step inlines its request so the flow is self-contained.
   version: 1.0.0
 sourceDescriptions:
-- name: drchronoApi
-  url: ../openapi/drchrono-rest-api-openapi.yml
+- name: billingApi
+  url: ../openapi/drchrono-billing-api-openapi.yml
+  type: openapi
+- name: clinicalApi
+  url: ../openapi/drchrono-clinical-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: eligibility-and-billing
