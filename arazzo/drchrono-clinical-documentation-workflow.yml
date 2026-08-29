@@ -9,6 +9,17 @@ info:
     visit. This is the core charting step a provider completes during or after a
     patient encounter. Every step inlines its request so the flow is self-contained.
   version: 1.0.0
+  x-realizes-capability-ids:
+  - BC-2830
+  x-capability-derivation:
+    method: 'deterministic join: sourceDescriptions -> per-tag OpenAPI -> tag/capability edge. No classification at this step.'
+    min_confidence: 0.7
+    sources:
+    - capability_id: BC-2830
+      capability_name: Clinical Documentation Management
+      spec: drchrono-clinical-api-openapi.yml
+      confidence: 0.78
+    model: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities, CC BY 4.0
 sourceDescriptions:
 - name: clinicalApi
   url: ../openapi/drchrono-clinical-api-openapi.yml
