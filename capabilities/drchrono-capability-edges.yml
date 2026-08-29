@@ -19,19 +19,19 @@ edges:
   capability_id_l1: BC-2870
   capability_name: Healthcare Revenue Cycle Management
   confidence: 0.9
-  evidence: 'GET /api/eligibility_checks; GET /api/patient_authorizations; GET /api/day_sheet_patient_payments;
-    schemas: BillingLineItem, LineItemTransaction, CustomInsurancePlanName, Coverage, BillingProfile'
-  reason: Operations cover charge line items, insurance plans/coverage, eligibility checks, authorizations,
-    day-sheet charges/credits and patient payments — provider-side revenue cycle. Spans several sub-capabilities
-    (charge capture, eligibility, cash posting), so mapped at L1.
+  evidence: GET /api/eligibility_checks, GET /api/patient_authorizations, POST /api/line_items_list, GET
+    /api/day_sheet_patient_payments; schemas BillingLineItem, Coverage, CashPayment, LineItemTransaction
+  reason: Provider-side billing surface spanning charge line items, payer eligibility/authorisation and
+    patient payments — squarely healthcare revenue cycle. Spans several sub-capabilities (charge capture,
+    eligibility, cash posting), so L1 only.
 - tag: Clinical
   spec_file: drchrono-clinical-api-openapi.yml
   capability_id: BC-2830
   capability_id_l1: BC-2830
   capability_name: Clinical Documentation Management
-  confidence: 0.78
-  evidence: 'POST /api/clinical_notes_list  clinical_notes_list_create; PUT /api/lab_orders/{id}  lab_orders_update;
-    schemas: ClinicalNote, SoapNoteLineItemFieldType, PatientVaccineRecord, SignedConsentForm'
-  reason: Surface is dominated by clinician documentation artefacts — clinical notes, SOAP note field
-    types, lab orders, consent forms, vitals and vaccine records — i.e. authoring and order entry in the
-    active patient record. Breadth across notes, orders and results keeps this at L1.
+  confidence: 0.82
+  evidence: POST /api/clinical_notes_list, PUT /api/lab_orders/{id}, POST /api/signed_consent_forms; schemas
+    ClinicalNote, LabTest, PatientVaccineRecord, SoapNoteLineItemFieldType
+  reason: Operations author and maintain the active clinical record — clinical notes, orders, consent
+    forms, vitals/vaccine records — which is clinical documentation management. Breadth spans notes, order
+    entry and results, so L1 only.
