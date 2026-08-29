@@ -1,12 +1,8 @@
 {
   "provider": "drchrono",
   "sources": [
-    "drchrono-administrative-api-openapi.yml",
-    "drchrono-audit-api-openapi.yml",
-    "drchrono-availability-api-openapi.yml",
-    "drchrono-billing-api-openapi.yml",
-    "drchrono-clinical-api-openapi.yml",
-    "drchrono-practice-management-api-openapi.yml"
+    "_original/drchrono-rest-api-openapi-schema.json",
+    "_original/drchrono-rest-api-openapi.yml"
   ],
   "outputs": [
     "drchrono-administrative-api-openapi.yml",
@@ -18,7 +14,30 @@
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "drchrono-rest-api-openapi-schema.json: info.title missing"
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "drchrono-rest-api-openapi-schema.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "drchrono-rest-api-openapi-schema.json: tagged paths GET /api/availability -> Availability",
+    "drchrono-rest-api-openapi-schema.json: declared missing tag: Availability",
+    "drchrono-rest-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "drchrono-rest-api-openapi.yml: tagged paths GET /api/availability -> Availability",
+    "drchrono-rest-api-openapi.yml: declared missing tag: Availability",
+    "tag 'Administrative' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied",
+    "tag 'Audit' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied",
+    "tag 'Availability' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied",
+    "tag 'Billing' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied",
+    "tag 'Clinical' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied",
+    "tag 'Practice Management' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "drchrono-administrative-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "drchrono-audit-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "drchrono-availability-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "drchrono-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "drchrono-clinical-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "drchrono-practice-management-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,11 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
+  title: Drchrono Practice Management API
   version: v4 - Hunt Valley
-  description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
   x-logo:
     url: https://www.drchrono.com/site_media/images/logos/drchrono-black-wpadding.png
     altText: DrChrono Logo
-  title: DrChrono EHR REST Administrative Practice Management API
+  description: 'Operations tagged Practice Management across 2 of this provider''s published API definitions: drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.drchrono.com
 tags:
@@ -139,6 +139,8 @@ paths:
         - user:write
       operationId: doctor_work_schedule_read
       description: Retrieve a work schedule for the doctor (beta)
+    servers:
+    - url: https://app.drchrono.com
   /api/messages:
     post:
       responses:
@@ -359,6 +361,8 @@ paths:
         - messages:write
       operationId: messages_list
       description: Retrieve or search messages in doctor's message center
+    servers:
+    - url: https://app.drchrono.com
   /api/task_categories:
     post:
       responses:
@@ -481,6 +485,8 @@ paths:
         - tasks:write
       operationId: task_categories_list
       description: Retrieve or search task categories
+    servers:
+    - url: https://app.drchrono.com
   /api/offices/{id}/add_exam_room:
     post:
       responses:
@@ -534,6 +540,8 @@ paths:
         - user:write
       operationId: offices_add_exam_room
       description: Add an exam room to the office
+    servers:
+    - url: https://app.drchrono.com
   /api/inventory_vaccines/{id}:
     get:
       responses:
@@ -612,6 +620,8 @@ paths:
         - clinical:write
       operationId: inventory_vaccines_read
       description: Retrieve an existing vaccine inventory
+    servers:
+    - url: https://app.drchrono.com
   /api/offices:
     get:
       responses:
@@ -689,6 +699,8 @@ paths:
         - user:write
       operationId: offices_list
       description: Retrieve or search offices
+    servers:
+    - url: https://app.drchrono.com
   /api/task_statuses/{id}:
     put:
       responses:
@@ -840,6 +852,8 @@ paths:
         - tasks:write
       operationId: task_statuses_read
       description: Retrieve an existing task status
+    servers:
+    - url: https://app.drchrono.com
   /api/office_work_schedule:
     get:
       responses:
@@ -875,6 +889,8 @@ paths:
       - drchrono_oauth2: []
       operationId: office_work_schedule_list
       description: Get the work schedule for the authed doctor's primary office (beta)
+    servers:
+    - url: https://app.drchrono.com
   /api/task_templates:
     post:
       responses:
@@ -1061,6 +1077,8 @@ paths:
         - tasks:write
       operationId: task_templates_list
       description: Retrieve or search task templates
+    servers:
+    - url: https://app.drchrono.com
   /api/office_work_schedule/{id}:
     put:
       responses:
@@ -1188,6 +1206,8 @@ paths:
         - user:write
       operationId: office_work_schedule_read
       description: Retrieve a work schedule (beta)
+    servers:
+    - url: https://app.drchrono.com
   /api/inventory_categories/{id}:
     get:
       responses:
@@ -1250,6 +1270,8 @@ paths:
         - clinical:write
       operationId: inventory_categories_read
       description: Retrieve an existing inventory category
+    servers:
+    - url: https://app.drchrono.com
   /api/tasks/{id}:
     put:
       responses:
@@ -1593,6 +1615,8 @@ paths:
         - tasks:write
       operationId: tasks_read
       description: Retrieve an existing task
+    servers:
+    - url: https://app.drchrono.com
   /api/doctor_work_schedule:
     get:
       responses:
@@ -1628,6 +1652,8 @@ paths:
       - drchrono_oauth2: []
       operationId: doctor_work_schedule_list
       description: Get the work schedule for the authed doctor's primary office (beta)
+    servers:
+    - url: https://app.drchrono.com
   /api/inventory_categories:
     get:
       responses:
@@ -1714,6 +1740,8 @@ paths:
         - clinical:write
       operationId: inventory_categories_list
       description: Retrieve or search inventory categories
+    servers:
+    - url: https://app.drchrono.com
   /api/task_statuses:
     post:
       responses:
@@ -1836,6 +1864,8 @@ paths:
         - tasks:write
       operationId: task_statuses_list
       description: Retrieve or search task statuses
+    servers:
+    - url: https://app.drchrono.com
   /api/task_templates/{id}:
     put:
       responses:
@@ -2083,6 +2113,569 @@ paths:
         - tasks:write
       operationId: task_templates_read
       description: Retrieve an existing task template
+    servers:
+    - url: https://app.drchrono.com
+  /api/message_threads/{id}:
+    patch:
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                update_success:
+                  value:
+                    assigned_groups:
+                    - 301
+                    - 302
+                    archived: false
+                    first_message: 100001
+                    patient: 45678
+                    doctor: 98765
+                    last_message: 100005
+                    practice_group: 5001
+                    created_at: '2026-04-15T10:30:00Z'
+                    updated_at: '2026-04-28T14:25:00Z'
+                    assigned_user_profiles:
+                    - 201
+                    message_count: 5
+                    unread_count: 2
+                    last_message_at: '2026-04-28T14:22:00Z'
+                    owners:
+                    - 98765
+                    starred: true
+                    message_type: MC
+                    id: 12345
+                    subject: Lab Results Follow-up
+                  summary: Successfully updated thread
+                cleared_assignments_response:
+                  value:
+                    assigned_groups: []
+                    archived: false
+                    first_message: 100010
+                    patient: 45679
+                    doctor: 98765
+                    last_message: 100012
+                    practice_group: 5001
+                    created_at: '2026-04-20T09:15:00Z'
+                    updated_at: '2026-04-29T10:45:00Z'
+                    assigned_user_profiles: []
+                    message_count: 3
+                    unread_count: 0
+                    last_message_at: '2026-04-27T16:45:00Z'
+                    owners:
+                    - 98765
+                    starred: false
+                    message_type: MC
+                    id: 12346
+                    subject: Prescription Refill Request
+                  summary: Thread with all assignments cleared
+                reassigned_response:
+                  value:
+                    assigned_groups:
+                    - 302
+                    archived: false
+                    first_message: 100001
+                    patient: 45678
+                    doctor: 98765
+                    last_message: 100005
+                    practice_group: 5001
+                    created_at: '2026-04-15T10:30:00Z'
+                    updated_at: '2026-04-29T10:30:00Z'
+                    assigned_user_profiles:
+                    - 203
+                    message_count: 5
+                    unread_count: 2
+                    last_message_at: '2026-04-28T14:22:00Z'
+                    owners:
+                    - 98765
+                    starred: true
+                    message_type: MC
+                    id: 12345
+                    subject: Lab Results Follow-up
+                  summary: Thread reassigned to different users and groups
+                starred_response:
+                  value:
+                    assigned_groups: []
+                    archived: false
+                    first_message: 100010
+                    patient: 45679
+                    doctor: 98765
+                    last_message: 100012
+                    practice_group: 5001
+                    created_at: '2026-04-20T09:15:00Z'
+                    updated_at: '2026-04-29T10:00:00Z'
+                    assigned_user_profiles:
+                    - 201
+                    message_count: 3
+                    unread_count: 0
+                    last_message_at: '2026-04-27T16:45:00Z'
+                    owners:
+                    - 98765
+                    starred: true
+                    message_type: MC
+                    id: 12346
+                    subject: Prescription Refill Request
+                  summary: Thread starred successfully
+                archived_response:
+                  value:
+                    assigned_groups: []
+                    archived: true
+                    first_message: 100020
+                    patient: 45680
+                    doctor: 98765
+                    last_message: 100020
+                    practice_group: 5001
+                    created_at: '2026-04-28T08:00:00Z'
+                    updated_at: '2026-04-29T10:15:00Z'
+                    assigned_user_profiles: []
+                    message_count: 1
+                    unread_count: 0
+                    last_message_at: '2026-04-28T08:00:00Z'
+                    owners:
+                    - 98765
+                    starred: false
+                    message_type: GP
+                    id: 12350
+                    subject: Appointment Confirmation Required
+                  summary: Thread archived successfully
+              schema:
+                $ref: '#/components/schemas/DoctorMessageThread'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: practice_group
+        required: false
+        description: ''
+        name: practice_group
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: message_type
+        required: false
+        description: ''
+        name: message_type
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: archived
+        required: false
+        description: ''
+        name: archived
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: starred
+        required: false
+        description: ''
+        name: starred
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: unread_count
+        required: false
+        description: ''
+        name: unread_count
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: updated_since
+        required: false
+        description: ''
+        name: updated_since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - message-center
+      requestBody:
+        content:
+          application/json:
+            examples:
+              archive_and_unstar:
+                value:
+                  assigned_groups: []
+                  archived: true
+                  starred: false
+                  assigned_user_profiles: []
+                summary: Archive and unstar a completed thread
+              assign_users:
+                value:
+                  assigned_groups:
+                  - 301
+                  assigned_user_profiles:
+                  - 201
+                  - 202
+                summary: Assign users and groups to a thread
+              star_thread:
+                value:
+                  starred: true
+                summary: Star a thread
+              combined_update:
+                value:
+                  assigned_groups:
+                  - 301
+                  - 302
+                  starred: true
+                  archived: false
+                  assigned_user_profiles:
+                  - 201
+                summary: Update multiple fields at once
+              reassign_to_different_group:
+                value:
+                  assigned_groups:
+                  - 302
+                  assigned_user_profiles:
+                  - 203
+                summary: Reassign to a different group
+              clear_assignments:
+                value:
+                  assigned_groups: []
+                  assigned_user_profiles: []
+                summary: Clear all user and group assignments
+              archive_thread:
+                value:
+                  archived: true
+                summary: Archive a thread
+              unarchive_thread:
+                value:
+                  archived: false
+                summary: Unarchive a thread
+              unstar_thread:
+                value:
+                  starred: false
+                summary: Unstar a thread
+            schema:
+              type: object
+              properties:
+                assigned_groups:
+                  items:
+                    type: integer
+                  type: array
+                  description: Array of user group IDs to assign to this thread
+                  title: Assigned groups
+                archived:
+                  type: boolean
+                  description: Whether the thread is archived
+                  title: Archived
+                starred:
+                  type: boolean
+                  description: Whether the thread is starred
+                  title: Starred
+                assigned_user_profiles:
+                  items:
+                    type: integer
+                  type: array
+                  description: Array of user profile IDs to assign to this thread
+                  title: Assigned user profiles
+        required: false
+      x-practice-access: '"share_communications" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - messages:read
+        - messages:write
+      operationId: message_threads partial update (beta)
+      description: 'Partially update a message thread.
+
+
+        Only the following fields can be updated:
+
+        - `archived` (boolean): Mark thread as archived/unarchived
+
+        - `starred` (boolean): Mark thread as starred/unstarred
+
+        - `assigned_user_profiles` (array of integers): Assign user profiles to the thread
+
+        - `assigned_groups` (array of integers): Assign user groups to the thread
+
+
+        All other fields are read-only and will be ignored if provided.
+
+        '
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                read_thread_archived:
+                  value:
+                    assigned_groups: []
+                    archived: true
+                    first_message: 100015
+                    patient: 45678
+                    doctor: 98765
+                    last_message: 100017
+                    practice_group: 5001
+                    created_at: '2026-03-10T14:00:00Z'
+                    updated_at: '2026-03-12T11:30:00Z'
+                    assigned_user_profiles:
+                    - 203
+                    message_count: 3
+                    unread_count: 0
+                    last_message_at: '2026-03-12T11:30:00Z'
+                    owners:
+                    - 98765
+                    starred: false
+                    message_type: MC
+                    id: 12348
+                    subject: Insurance Question
+                  summary: Get archived thread
+                read_thread_no_unread:
+                  value:
+                    assigned_groups: []
+                    archived: false
+                    first_message: 100010
+                    patient: 45679
+                    doctor: 98765
+                    last_message: 100012
+                    practice_group: 5001
+                    created_at: '2026-04-20T09:15:00Z'
+                    updated_at: '2026-04-27T16:45:00Z'
+                    assigned_user_profiles:
+                    - 201
+                    message_count: 3
+                    unread_count: 0
+                    last_message_at: '2026-04-27T16:45:00Z'
+                    owners:
+                    - 98765
+                    starred: false
+                    message_type: MC
+                    id: 12346
+                    subject: Prescription Refill Request
+                  summary: Get thread with no unread messages
+                read_thread:
+                  value:
+                    assigned_groups:
+                    - 301
+                    archived: false
+                    first_message: 100001
+                    patient: 45678
+                    doctor: 98765
+                    last_message: 100005
+                    practice_group: 5001
+                    created_at: '2026-04-15T10:30:00Z'
+                    updated_at: '2026-04-28T14:22:00Z'
+                    assigned_user_profiles:
+                    - 201
+                    - 202
+                    message_count: 5
+                    unread_count: 2
+                    last_message_at: '2026-04-28T14:22:00Z'
+                    owners:
+                    - 98765
+                    starred: true
+                    message_type: MC
+                    id: 12345
+                    subject: Lab Results Follow-up
+                  summary: Get a single message thread
+                read_thread_internal_fax:
+                  value:
+                    assigned_groups:
+                    - 301
+                    - 302
+                    archived: false
+                    first_message: 100030
+                    patient: 45682
+                    doctor: 98765
+                    last_message: 100030
+                    practice_group: 5001
+                    created_at: '2026-04-26T13:45:00Z'
+                    updated_at: '2026-04-26T13:45:00Z'
+                    assigned_user_profiles:
+                    - 201
+                    - 202
+                    - 203
+                    message_count: 1
+                    unread_count: 0
+                    last_message_at: '2026-04-26T13:45:00Z'
+                    owners:
+                    - 98765
+                    starred: false
+                    message_type: IF
+                    id: 12352
+                    subject: Patient Records Transfer
+                  summary: Get internal fax thread
+                read_thread_general_patient:
+                  value:
+                    assigned_groups: []
+                    archived: false
+                    first_message: 100020
+                    patient: 45680
+                    doctor: 98765
+                    last_message: 100020
+                    practice_group: 5001
+                    created_at: '2026-04-28T08:00:00Z'
+                    updated_at: '2026-04-28T08:00:00Z'
+                    assigned_user_profiles: []
+                    message_count: 1
+                    unread_count: 1
+                    last_message_at: '2026-04-28T08:00:00Z'
+                    owners:
+                    - 98765
+                    starred: false
+                    message_type: GP
+                    id: 12350
+                    subject: Appointment Confirmation Required
+                  summary: Get general patient message thread
+              schema:
+                $ref: '#/components/schemas/DoctorMessageThread'
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: integer
+          description: ''
+          title: ''
+        required: true
+        name: id
+        in: path
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: ''
+        name: doctor
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: practice_group
+        required: false
+        description: ''
+        name: practice_group
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: message_type
+        required: false
+        description: ''
+        name: message_type
+        in: query
+      - schema:
+          type: boolean
+          description: ''
+          title: archived
+        required: false
+        description: ''
+        name: archived
+        in: query
+      - schema:
+          type: boolean
+          description: ''
+          title: starred
+        required: false
+        description: ''
+        name: starred
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: unread_count
+        required: false
+        description: ''
+        name: unread_count
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: updated_since
+        required: false
+        description: ''
+        name: updated_since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - message-center
+      x-practice-access: '"share_communications" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - messages:read
+        - messages:write
+      operationId: message_threads read (beta)
+      description: 'Retrieve a single message thread by ID (beta)
+
+
+        Work to support message threads is currently in development. This is not ready for full use.
+
+        '
+    servers:
+    - url: https://app.drchrono.com
   /api/task_notes:
     post:
       responses:
@@ -2221,6 +2814,8 @@ paths:
         - tasks:write
       operationId: task_notes_list
       description: Retrieve or search task notes
+    servers:
+    - url: https://app.drchrono.com
   /api/tasks:
     post:
       responses:
@@ -2471,6 +3066,8 @@ paths:
         - tasks:write
       operationId: tasks_list
       description: Retrieve or search tasks
+    servers:
+    - url: https://app.drchrono.com
   /api/inventory_vaccines:
     post:
       responses:
@@ -2643,6 +3240,8 @@ paths:
         - clinical:write
       operationId: inventory_vaccines_list
       description: Retrieve or search vaccine inventories
+    servers:
+    - url: https://app.drchrono.com
   /api/task_categories/{id}:
     put:
       responses:
@@ -2794,6 +3393,8 @@ paths:
         - tasks:write
       operationId: task_categories_read
       description: Retrieve an existing task category
+    servers:
+    - url: https://app.drchrono.com
   /api/task_notes/{id}:
     put:
       responses:
@@ -2969,6 +3570,8 @@ paths:
         - tasks:write
       operationId: task_notes_read
       description: Retrieve an existing task note
+    servers:
+    - url: https://app.drchrono.com
   /api/messages/{id}:
     put:
       responses:
@@ -3365,6 +3968,8 @@ paths:
         - messages:write
       operationId: messages_delete
       description: Delete an existing message in doctor's message center
+    servers:
+    - url: https://app.drchrono.com
   /api/offices/{id}:
     put:
       responses:
@@ -3516,6 +4121,381 @@ paths:
         - user:write
       operationId: offices_read
       description: Retrieve an existing office
+    servers:
+    - url: https://app.drchrono.com
+  /api/message_threads:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                filter_unread:
+                  description: GET /api/message_threads?unread_count=1
+                  value:
+                    previous: null
+                    data:
+                    - assigned_groups:
+                      - 301
+                      archived: false
+                      first_message: 100001
+                      patient: 45678
+                      doctor: 98765
+                      last_message: 100005
+                      practice_group: 5001
+                      created_at: '2026-04-15T10:30:00Z'
+                      updated_at: '2026-04-28T14:22:00Z'
+                      assigned_user_profiles:
+                      - 201
+                      - 202
+                      message_count: 5
+                      unread_count: 2
+                      last_message_at: '2026-04-28T14:22:00Z'
+                      owners:
+                      - 98765
+                      starred: true
+                      message_type: MC
+                      id: 12345
+                      subject: Lab Results Follow-up
+                    - assigned_groups: []
+                      archived: false
+                      first_message: 100020
+                      patient: 45680
+                      doctor: 98765
+                      last_message: 100020
+                      practice_group: 5001
+                      created_at: '2026-04-28T08:00:00Z'
+                      updated_at: '2026-04-28T08:00:00Z'
+                      assigned_user_profiles: []
+                      message_count: 1
+                      unread_count: 1
+                      last_message_at: '2026-04-28T08:00:00Z'
+                      owners:
+                      - 98765
+                      starred: false
+                      message_type: GP
+                      id: 12350
+                      subject: Appointment Confirmation Required
+                    next: null
+                  summary: Filter threads with unread messages
+                filter_by_date_range:
+                  description: GET /api/message_threads?updated_since=2026-04-25T00:00:00Z
+                  value:
+                    previous: null
+                    data:
+                    - assigned_groups:
+                      - 301
+                      archived: false
+                      first_message: 100001
+                      patient: 45678
+                      doctor: 98765
+                      last_message: 100005
+                      practice_group: 5001
+                      created_at: '2026-04-15T10:30:00Z'
+                      updated_at: '2026-04-28T14:22:00Z'
+                      assigned_user_profiles:
+                      - 201
+                      - 202
+                      message_count: 5
+                      unread_count: 2
+                      last_message_at: '2026-04-28T14:22:00Z'
+                      owners:
+                      - 98765
+                      starred: true
+                      message_type: MC
+                      id: 12345
+                      subject: Lab Results Follow-up
+                    - assigned_groups: []
+                      archived: false
+                      first_message: 100010
+                      patient: 45679
+                      doctor: 98765
+                      last_message: 100012
+                      practice_group: 5001
+                      created_at: '2026-04-20T09:15:00Z'
+                      updated_at: '2026-04-27T16:45:00Z'
+                      assigned_user_profiles:
+                      - 201
+                      message_count: 3
+                      unread_count: 0
+                      last_message_at: '2026-04-27T16:45:00Z'
+                      owners:
+                      - 98765
+                      starred: false
+                      message_type: MC
+                      id: 12346
+                      subject: Prescription Refill Request
+                    next: null
+                  summary: Filter threads updated since specific date
+                filter_starred_archived:
+                  description: GET /api/message_threads?starred=true&archived=true
+                  value:
+                    previous: null
+                    data:
+                    - assigned_groups:
+                      - 301
+                      archived: true
+                      first_message: 100025
+                      patient: 45681
+                      doctor: 98765
+                      last_message: 100028
+                      practice_group: 5001
+                      created_at: '2026-01-15T10:00:00Z'
+                      updated_at: '2026-01-20T15:30:00Z'
+                      assigned_user_profiles:
+                      - 201
+                      message_count: 4
+                      unread_count: 0
+                      last_message_at: '2026-01-20T15:30:00Z'
+                      owners:
+                      - 98765
+                      starred: true
+                      message_type: MC
+                      id: 12351
+                      subject: Important Patient History Notes
+                    next: null
+                  summary: Filter starred and archived threads
+                list_threads:
+                  value:
+                    previous: null
+                    data:
+                    - assigned_groups:
+                      - 301
+                      archived: false
+                      first_message: 100001
+                      patient: 45678
+                      doctor: 98765
+                      last_message: 100005
+                      practice_group: 5001
+                      created_at: '2026-04-15T10:30:00Z'
+                      updated_at: '2026-04-28T14:22:00Z'
+                      assigned_user_profiles:
+                      - 201
+                      - 202
+                      message_count: 5
+                      unread_count: 2
+                      last_message_at: '2026-04-28T14:22:00Z'
+                      owners:
+                      - 98765
+                      starred: true
+                      message_type: MC
+                      id: 12345
+                      subject: Lab Results Follow-up
+                    - assigned_groups: []
+                      archived: false
+                      first_message: 100010
+                      patient: 45679
+                      doctor: 98765
+                      last_message: 100012
+                      practice_group: 5001
+                      created_at: '2026-04-20T09:15:00Z'
+                      updated_at: '2026-04-27T16:45:00Z'
+                      assigned_user_profiles:
+                      - 201
+                      message_count: 3
+                      unread_count: 0
+                      last_message_at: '2026-04-27T16:45:00Z'
+                      owners:
+                      - 98765
+                      starred: false
+                      message_type: MC
+                      id: 12346
+                      subject: Prescription Refill Request
+                    next: https://drchrono.com/api/message_threads?cursor=cD0yMDI2LTA0
+                  summary: List message threads
+                filter_by_patient:
+                  description: GET /api/message_threads?patient=45678
+                  value:
+                    previous: null
+                    data:
+                    - assigned_groups:
+                      - 301
+                      archived: false
+                      first_message: 100001
+                      patient: 45678
+                      doctor: 98765
+                      last_message: 100005
+                      practice_group: 5001
+                      created_at: '2026-04-15T10:30:00Z'
+                      updated_at: '2026-04-28T14:22:00Z'
+                      assigned_user_profiles:
+                      - 201
+                      - 202
+                      message_count: 5
+                      unread_count: 2
+                      last_message_at: '2026-04-28T14:22:00Z'
+                      owners:
+                      - 98765
+                      starred: true
+                      message_type: MC
+                      id: 12345
+                      subject: Lab Results Follow-up
+                    - assigned_groups: []
+                      archived: true
+                      first_message: 100015
+                      patient: 45678
+                      doctor: 98765
+                      last_message: 100017
+                      practice_group: 5001
+                      created_at: '2026-03-10T14:00:00Z'
+                      updated_at: '2026-03-12T11:30:00Z'
+                      assigned_user_profiles:
+                      - 203
+                      message_count: 3
+                      unread_count: 0
+                      last_message_at: '2026-03-12T11:30:00Z'
+                      owners:
+                      - 98765
+                      starred: false
+                      message_type: MC
+                      id: 12348
+                      subject: Insurance Question
+                    next: null
+                  summary: Filter threads by patient
+              schema:
+                title: ''
+                type: object
+                description: Paginated Result
+                properties:
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    description: Previous paginated page
+                    title: previous
+                  data:
+                    items:
+                      $ref: '#/components/schemas/DoctorMessageThread'
+                    type: array
+                    description: result data
+                    title: data
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    description: Next Paginated page
+                    title: next
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: string
+          description: The pagination cursor value.
+          title: Cursor
+        required: false
+        name: cursor
+        in: query
+      - schema:
+          type: integer
+          description: Number of results to return per page.
+          title: Page size
+        required: false
+        name: page_size
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: doctor
+        required: false
+        description: Filter by doctor ID
+        name: doctor
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: practice_group
+        required: false
+        description: Filter by practice group ID
+        name: practice_group
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: Filter by patient ID
+        name: patient
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: message_type
+        required: false
+        description: Filter by message type (e.g., "GP", "GC", "MC", "IF", "OF", etc.)
+        name: message_type
+        in: query
+      - schema:
+          type: boolean
+          description: ''
+          title: archived
+        required: false
+        description: Filter by archived status (true/false)
+        name: archived
+        in: query
+      - schema:
+          type: boolean
+          description: ''
+          title: starred
+        required: false
+        description: Filter by starred status (true/false)
+        name: starred
+        in: query
+      - schema:
+          type: integer
+          description: ''
+          title: unread_count
+        required: false
+        description: Filter threads with unread messages (pass any positive integer to get threads with unread_count > 0)
+        name: unread_count
+        in: query
+      - schema:
+          type: string
+          description: ''
+          title: updated_since
+        required: false
+        description: Filter by threads updated since this datetime (ISO 8601 format)
+        name: updated_since
+        in: query
+      tags:
+      - Practice Management
+      x-permissions:
+      - message-center
+      x-practice-access: '"share_communications" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - messages:read
+        - messages:write
+      operationId: message_threads list (beta)
+      description: 'Retrieve or search message threads in doctor''s message center. (beta)
+
+
+        Message threads are grouped conversations that aggregate related messages by subject and patient.
+
+        Use this endpoint to display an inbox-style view of conversations.
+
+
+        Work to support message threads is currently in development. This is not ready for full use.
+
+        '
+    servers:
+    - url: https://app.drchrono.com
 components:
   schemas:
     TaskTemplate:
@@ -3589,6 +4569,797 @@ components:
           description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
           title: Default priority
       x-verbose-required: []
+    InventoryCategory:
+      required: []
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: If the category is archived or not
+          title: Archived
+        name:
+          type: string
+          description: Name of the inventory category
+          title: Name
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        category_type:
+          enum:
+          - vaccine
+          - product
+          - service
+          type: string
+          description: Can be one of `"vaccine"`, `"product"` or `"service"`
+          title: Category type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    TaskCategory:
+      required:
+      - name
+      - practice_group
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        is_global:
+          readOnly: true
+          type: string
+          description: Indicates that the category is a system wide (pre-defined) category
+          title: Is global
+        name:
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    Task:
+      required:
+      - title
+      - status
+      type: object
+      properties:
+        category:
+          type: integer
+          description: ''
+          title: Category
+        due_date:
+          title: TaskReminder
+          type: object
+          description: When the task is due
+          properties:
+            time:
+              type: string
+              description: Due date time
+              title: Time
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        associated_items:
+          items:
+            title: AssociatedTaskItem
+            type: object
+            description: ''
+            properties:
+              task:
+                type: integer
+                description: ''
+                title: Task
+              type:
+                enum:
+                - Document
+                - Message
+                - Message Thread
+                - Lab result
+                - Lab order
+                - Patient
+                - Appointment
+                - Lab document
+                - Communication
+                type: string
+                description: Can be one of `"Appointment"`, `"Patient"`, `"Message"`, `"Message Thread"`, `"Document"`, `"Lab order"`
+                title: Type
+              value:
+                type: integer
+                description: ID of the specified type object
+                title: Value
+          type: array
+          description: Associated task items
+          title: Associated items
+        assigned_by:
+          readOnly: true
+          type: string
+          description: ID of `/api/users/` who assigned the task
+          title: Assigned by
+        assignee_user:
+          type: string
+          description: Either `assignee_user` or `assignee_group` should be set
+          title: Assignee user
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        assignee_group:
+          type: integer
+          description: Either `assignee_user` or `assignee_group` should be set
+          title: Assignee group
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of `/api/users` who created the task
+          title: Created by
+        priority:
+          enum:
+          - '10'
+          - '20'
+          - '30'
+          - '40'
+          type: string
+          description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
+          title: Priority
+        status:
+          type: integer
+          description: ''
+          title: Status
+        notes:
+          items:
+            title: TaskNote
+            type: object
+            description: Task note object
+            properties:
+              archived:
+                type: boolean
+                description: ''
+                title: Archived
+              task:
+                type: integer
+                description: ID of `/api/tasks`
+                title: Task
+              text:
+                type: string
+                description: ''
+                title: Text
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              updated_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Updated at
+              created_by:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created by
+              id:
+                readOnly: true
+                type: integer
+                description: ''
+                title: ID
+          type: array
+          description: Additional notes of the task
+          title: Notes
+        title:
+          type: string
+          description: ''
+          title: Title
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required:
+      - notes
+      - associated_items
+    DoctorMessage:
+      required:
+      - doctor
+      - title
+      type: object
+      properties:
+        type_description:
+          readOnly: true
+          type: string
+          description: Type Description
+          title: Type description
+        patient_middle_name:
+          readOnly: true
+          type: string
+          description: Patient Middle Name
+          title: Patient middle name
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        owner:
+          type: string
+          description: ID of `/api/users` who owns the message, who may be the doctor themselves or one of their staff members
+          title: Owner
+        responsible_user_first_name:
+          readOnly: true
+          type: string
+          description: Responsible User First Name
+          title: Responsible user first name
+        received_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Received at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        doctor_last_name:
+          readOnly: true
+          type: string
+          description: Doctor Last Name
+          title: Doctor last name
+        owner_first_name:
+          readOnly: true
+          type: string
+          description: Owner First Name
+          title: Owner first name
+        archived:
+          readOnly: true
+          type: boolean
+          description: If true, indicates that the message has been soft-deleted
+          title: Archived
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        owner_last_name:
+          readOnly: true
+          type: string
+          description: Owner Last Name
+          title: Owner last name
+        patient_first_name:
+          readOnly: true
+          type: string
+          description: Patient First Name
+          title: Patient first name
+        attachment:
+          type: string
+          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
+          title: Attachment
+        outgoing_fax_recipient_fax_number:
+          readOnly: true
+          type: string
+          description: Outgoing fax recipient fax number
+          title: Outgoing fax recipient fax number
+        responsible_user_last_name:
+          readOnly: true
+          type: string
+          description: Responsible User Last Name
+          title: Responsible user last name
+        type:
+          enum:
+          - GP
+          - GC
+          - GT
+          - GZ
+          - IF
+          - OF
+          - IL
+          - IR
+          - OR
+          - IE
+          - CE
+          - CH
+          - OA
+          - PO
+          - PI
+          - PM
+          - OO
+          - OD
+          - ID
+          - DL
+          - CN
+          type: string
+          description: '
+
+            Value | Description
+
+            ----- | -----------
+
+            `"GP"` | Generated PDF
+
+            `"GC"` | Generated CSV
+
+            `"GZ"` | Generated ZIP
+
+            `"IF"` | Incoming Fax
+
+            `"OF"` | Outgoing Fax
+
+            `"IL"` | Incoming Labs
+
+            `"IR"` | Inbound Referrals
+
+            `"OR"` | Outbound Referrals
+
+            `"IE"` | Incoming eRx
+
+            `"OA"` | Online Appointments
+
+            `"PO"` | Patient Onboarding
+
+            `"PI"` | Patient Incoming Message
+
+            `"PM"` | Patient Outgoing Message
+
+            `"OO"` | Demo Meeting Message
+
+            `"OD"` | Outbound Direct Message
+
+            `"ID"` | Inbound Direct Message
+
+            '
+          title: Type
+        patient_last_name:
+          readOnly: true
+          type: string
+          description: Patient Last Name
+          title: Patient last name
+        patient:
+          type: integer
+          description: ID of patient that the message concerns, if applicable
+          title: Patient
+        doctor_first_name:
+          readOnly: true
+          type: string
+          description: Doctor First Name
+          title: Doctor first name
+        read:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Read
+        responsible_user:
+          type: string
+          description: ID of `/api/users` who has been assigned to process the message, who may be the doctor themselves or one of their staff members
+          title: Responsible user
+        workflow_step:
+          readOnly: true
+          type: string
+          description: Used by doctors and their staff to keep track of what step of processing the message is in
+          title: Workflow step
+        outgoing_fax_recipient_name:
+          readOnly: true
+          type: string
+          description: Outgoing fax recipient name
+          title: Outgoing fax recipient name
+        doctor_middle_name:
+          readOnly: true
+          type: string
+          description: Doctor Middle Name
+          title: Doctor middle name
+        message_notes:
+          items:
+            title: MessageNote
+            type: object
+            description: Additional note
+            properties:
+              text:
+                type: string
+                description: Content of the note
+                title: Text
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              created_by:
+                readOnly: true
+                type: string
+                description: ID of `/api/users` who created the note
+                title: Created by
+          type: array
+          description: Array of notes attached to the message
+          title: Message notes
+        title:
+          type: string
+          description: ''
+          title: Title
+        starred:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Starred
+      x-verbose-required: []
+    WorkDay:
+      type: object
+      properties:
+        iso_weekday:
+          type: string
+          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+          title: ISO weekday
+        enabled:
+          type: boolean
+          description: whether the work day is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work day
+          title: ID
+        work_hours:
+          items:
+            $ref: '#/components/schemas/WorkHours'
+          type: array
+          description: work hours of the work day
+          title: Work hours
+    TaskNote:
+      required:
+      - task
+      - text
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: If the task note is archived or not
+          title: Archived
+        task:
+          type: integer
+          description: ID of task this note is related with
+          title: Task
+        text:
+          type: string
+          description: Content of the task note
+          title: Text
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of the `/api/users` who created the note
+          title: Created by
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    InventoryVaccine:
+      required:
+      - doctor
+      - name
+      - manufacturer_code
+      type: object
+      properties:
+        category:
+          type: integer
+          description: ID of `/api/inventory_categories`
+          title: Category
+        lot_number:
+          type: string
+          description: ''
+          title: Lot number
+        manufacturer_code:
+          type: string
+          description: ''
+          title: Manufacturer code
+        name:
+          type: string
+          description: ''
+          title: Name
+        original_quantity:
+          type: integer
+          description: Default to zero
+          title: Original quantity
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        status:
+          enum:
+          - active
+          - inactive
+          - archived
+          - voided
+          type: string
+          description: Status of vaccine, could be one of `active`, `inactive`, `archived`, `voided`, default to `active`
+          title: Status
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        price_with_tax:
+          type: number
+          description: ''
+          title: Price with tax
+        expiry:
+          type: string
+          description: When will the vaccine expire
+          title: Expiry
+        note:
+          type: string
+          description: ''
+          title: Note
+        sales_tax_applicable:
+          type: boolean
+          description: Is sales tax applicable to this service/product? Default to false
+          title: Sales tax applicable
+        cost:
+          type: number
+          description: Base cost for consumables.
+          title: Cost
+        price:
+          type: number
+          description: ''
+          title: Price
+        vaccination_type:
+          type: string
+          description: Default to `"standard vaccine"`
+          title: Vaccination type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        manufacturer:
+          type: string
+          description: ''
+          title: Manufacturer
+        current_quantity:
+          readOnly: true
+          type: integer
+          description: This field can onlyu be changed by creating new patient vaccine record. Current quantity of an inventory vaccine is calculated by subtract number of records pointing to this inventory from the original quantity value.
+          title: Current quantity
+        cvx_code:
+          type: string
+          description: ''
+          title: Cvx code
+      x-verbose-required: []
+    DoctorMessageThread:
+      type: object
+      properties:
+        assigned_groups:
+          items:
+            type: integer
+          type: array
+          description: Array of user group IDs assigned to this thread
+          title: Assigned groups
+        archived:
+          type: boolean
+          description: Whether the thread is archived
+          title: Archived
+        first_message:
+          readOnly: true
+          type: integer
+          description: ID of the first message in the thread
+          title: First message
+        patient:
+          readOnly: true
+          type: integer
+          description: ID of the patient associated with this thread (if patient-facing)
+          title: Patient
+        doctor:
+          readOnly: true
+          type: integer
+          description: ID of the doctor who owns this thread
+          title: Doctor
+        last_message:
+          readOnly: true
+          type: integer
+          description: ID of the most recent message in the thread
+          title: Last message
+        practice_group:
+          readOnly: true
+          type: integer
+          description: ID of the practice group for access control
+          title: Practice group
+        created_at:
+          readOnly: true
+          title: Created at
+          type: string
+          description: Timestamp when the thread was created
+          format: date-time
+        updated_at:
+          readOnly: true
+          title: Updated at
+          type: string
+          description: Timestamp when the thread was last updated
+          format: date-time
+        assigned_user_profiles:
+          items:
+            type: integer
+          type: array
+          description: Array of user profile IDs assigned to this thread
+          title: Assigned user profiles
+        message_count:
+          readOnly: true
+          type: integer
+          description: Total number of messages in this thread
+          title: Message count
+        unread_count:
+          readOnly: true
+          type: integer
+          description: Number of unread messages in this thread
+          title: Unread count
+        last_message_at:
+          readOnly: true
+          title: Last message at
+          type: string
+          description: Timestamp of the last message - used for sorting
+          format: date-time
+        owners:
+          items:
+            type: integer
+          readOnly: true
+          type: array
+          description: Array of user profile IDs who own this thread
+          title: Owners
+        starred:
+          type: boolean
+          description: Whether the thread is starred
+          title: Starred
+        message_type:
+          readOnly: true
+          type: string
+          description: Type of messages in this thread. See `/api/messages` for message type descriptions
+          title: Message type
+        id:
+          readOnly: true
+          type: integer
+          description: Unique identifier for the message thread
+          title: ID
+        subject:
+          readOnly: true
+          type: string
+          description: Thread subject - locked to first message subject
+          title: Subject
+    TaskStatus:
+      required:
+      - name
+      - practice_group
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        name:
+          type: string
+          description: ''
+          title: Name
+        status_category:
+          enum:
+          - O
+          - P
+          - H
+          - C
+          type: string
+          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
+          title: Status category
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        task_category:
+          type: integer
+          description: ID of `/api/task_categories`
+          title: Task category
+      x-verbose-required: []
+    WorkHours:
+      type: object
+      properties:
+        start_time:
+          type: string
+          description: start time of the work hour
+          title: Start time
+        enabled:
+          type: boolean
+          description: whether the work hour is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work hour
+          title: ID
+        end_time:
+          type: string
+          description: end time of the work hour
+          title: End time
+    WorkSchedule:
+      type: object
+      properties:
+        work_days:
+          items:
+            $ref: '#/components/schemas/WorkDay'
+          type: array
+          description: work days of the work schedule
+          title: Work days
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID for the work schedule
+          title: ID
+        office:
+          type: integer
+          description: ID of office for work schedule
+          title: Office
+        doctor:
+          type: integer
+          description: ID of doctor for work schedule
+          title: Office
     Office:
       required: []
       type: object
@@ -4009,7 +5780,7 @@ components:
           title: Online scheduling
       x-verbose-required:
       - online_timeslots
-    Task:
+    Task_2:
       required:
       - title
       - status
@@ -4156,551 +5927,6 @@ components:
       x-verbose-required:
       - notes
       - associated_items
-    TaskNote:
-      required:
-      - task
-      - text
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: If the task note is archived or not
-          title: Archived
-        task:
-          type: integer
-          description: ID of task this note is related with
-          title: Task
-        text:
-          type: string
-          description: Content of the task note
-          title: Text
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        created_by:
-          readOnly: true
-          type: string
-          description: ID of the `/api/users` who created the note
-          title: Created by
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    WorkHours:
-      type: object
-      properties:
-        start_time:
-          type: string
-          description: start time of the work hour
-          title: Start time
-        enabled:
-          type: boolean
-          description: whether the work hour is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work hour
-          title: ID
-        end_time:
-          type: string
-          description: end time of the work hour
-          title: End time
-    TaskCategory:
-      required:
-      - name
-      - practice_group
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        is_global:
-          readOnly: true
-          type: string
-          description: Indicates that the category is a system wide (pre-defined) category
-          title: Is global
-        name:
-          type: string
-          description: ''
-          title: Name
-        practice_group:
-          type: integer
-          description: ''
-          title: Practice group
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    TaskStatus:
-      required:
-      - name
-      - practice_group
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        name:
-          type: string
-          description: ''
-          title: Name
-        status_category:
-          enum:
-          - O
-          - P
-          - H
-          - C
-          type: string
-          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
-          title: Status category
-        practice_group:
-          type: integer
-          description: ''
-          title: Practice group
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        task_category:
-          type: integer
-          description: ID of `/api/task_categories`
-          title: Task category
-      x-verbose-required: []
-    DoctorMessage:
-      required:
-      - doctor
-      - title
-      type: object
-      properties:
-        type_description:
-          readOnly: true
-          type: string
-          description: Type Description
-          title: Type description
-        patient_middle_name:
-          readOnly: true
-          type: string
-          description: Patient Middle Name
-          title: Patient middle name
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        owner:
-          type: string
-          description: ID of `/api/users` who owns the message, who may be the doctor themselves or one of their staff members
-          title: Owner
-        responsible_user_first_name:
-          readOnly: true
-          type: string
-          description: Responsible User First Name
-          title: Responsible user first name
-        received_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Received at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        doctor_last_name:
-          readOnly: true
-          type: string
-          description: Doctor Last Name
-          title: Doctor last name
-        owner_first_name:
-          readOnly: true
-          type: string
-          description: Owner First Name
-          title: Owner first name
-        archived:
-          readOnly: true
-          type: boolean
-          description: If true, indicates that the message has been soft-deleted
-          title: Archived
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        owner_last_name:
-          readOnly: true
-          type: string
-          description: Owner Last Name
-          title: Owner last name
-        patient_first_name:
-          readOnly: true
-          type: string
-          description: Patient First Name
-          title: Patient first name
-        attachment:
-          type: string
-          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
-          title: Attachment
-        outgoing_fax_recipient_fax_number:
-          readOnly: true
-          type: string
-          description: Outgoing fax recipient fax number
-          title: Outgoing fax recipient fax number
-        responsible_user_last_name:
-          readOnly: true
-          type: string
-          description: Responsible User Last Name
-          title: Responsible user last name
-        type:
-          enum:
-          - GP
-          - GC
-          - GT
-          - GZ
-          - IF
-          - OF
-          - IL
-          - IR
-          - OR
-          - IE
-          - CE
-          - CH
-          - OA
-          - PO
-          - PI
-          - PM
-          - OO
-          - OD
-          - ID
-          - DL
-          - CN
-          type: string
-          description: '
-
-            Value | Description
-
-            ----- | -----------
-
-            `"GP"` | Generated PDF
-
-            `"GC"` | Generated CSV
-
-            `"GZ"` | Generated ZIP
-
-            `"IF"` | Incoming Fax
-
-            `"OF"` | Outgoing Fax
-
-            `"IL"` | Incoming Labs
-
-            `"IR"` | Inbound Referrals
-
-            `"OR"` | Outbound Referrals
-
-            `"IE"` | Incoming eRx
-
-            `"OA"` | Online Appointments
-
-            `"PO"` | Patient Onboarding
-
-            `"PI"` | Patient Incoming Message
-
-            `"PM"` | Patient Outgoing Message
-
-            `"OO"` | Demo Meeting Message
-
-            `"OD"` | Outbound Direct Message
-
-            `"ID"` | Inbound Direct Message
-
-            '
-          title: Type
-        patient_last_name:
-          readOnly: true
-          type: string
-          description: Patient Last Name
-          title: Patient last name
-        patient:
-          type: integer
-          description: ID of patient that the message concerns, if applicable
-          title: Patient
-        doctor_first_name:
-          readOnly: true
-          type: string
-          description: Doctor First Name
-          title: Doctor first name
-        read:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Read
-        responsible_user:
-          type: string
-          description: ID of `/api/users` who has been assigned to process the message, who may be the doctor themselves or one of their staff members
-          title: Responsible user
-        workflow_step:
-          readOnly: true
-          type: string
-          description: Used by doctors and their staff to keep track of what step of processing the message is in
-          title: Workflow step
-        outgoing_fax_recipient_name:
-          readOnly: true
-          type: string
-          description: Outgoing fax recipient name
-          title: Outgoing fax recipient name
-        doctor_middle_name:
-          readOnly: true
-          type: string
-          description: Doctor Middle Name
-          title: Doctor middle name
-        message_notes:
-          items:
-            title: MessageNote
-            type: object
-            description: Additional note
-            properties:
-              text:
-                type: string
-                description: Content of the note
-                title: Text
-              created_at:
-                readOnly: true
-                type: string
-                description: ''
-                title: Created at
-              created_by:
-                readOnly: true
-                type: string
-                description: ID of `/api/users` who created the note
-                title: Created by
-          type: array
-          description: Array of notes attached to the message
-          title: Message notes
-        title:
-          type: string
-          description: ''
-          title: Title
-        starred:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Starred
-      x-verbose-required: []
-    WorkSchedule:
-      type: object
-      properties:
-        work_days:
-          items:
-            $ref: '#/components/schemas/WorkDay'
-          type: array
-          description: work days of the work schedule
-          title: Work days
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID for the work schedule
-          title: ID
-        office:
-          type: integer
-          description: ID of office for work schedule
-          title: Office
-        doctor:
-          type: integer
-          description: ID of doctor for work schedule
-          title: Office
-    WorkDay:
-      type: object
-      properties:
-        iso_weekday:
-          type: string
-          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-          title: ISO weekday
-        enabled:
-          type: boolean
-          description: whether the work day is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work day
-          title: ID
-        work_hours:
-          items:
-            $ref: '#/components/schemas/WorkHours'
-          type: array
-          description: work hours of the work day
-          title: Work hours
-    InventoryCategory:
-      required: []
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: If the category is archived or not
-          title: Archived
-        name:
-          type: string
-          description: Name of the inventory category
-          title: Name
-        doctor:
-          readOnly: true
-          type: string
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        category_type:
-          enum:
-          - vaccine
-          - product
-          - service
-          type: string
-          description: Can be one of `"vaccine"`, `"product"` or `"service"`
-          title: Category type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    InventoryVaccine:
-      required:
-      - doctor
-      - name
-      - manufacturer_code
-      type: object
-      properties:
-        category:
-          type: integer
-          description: ID of `/api/inventory_categories`
-          title: Category
-        lot_number:
-          type: string
-          description: ''
-          title: Lot number
-        manufacturer_code:
-          type: string
-          description: ''
-          title: Manufacturer code
-        name:
-          type: string
-          description: ''
-          title: Name
-        original_quantity:
-          type: integer
-          description: Default to zero
-          title: Original quantity
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        status:
-          enum:
-          - active
-          - inactive
-          - archived
-          - voided
-          type: string
-          description: Status of vaccine, could be one of `active`, `inactive`, `archived`, `voided`, default to `active`
-          title: Status
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        price_with_tax:
-          type: number
-          description: ''
-          title: Price with tax
-        expiry:
-          type: string
-          description: When will the vaccine expire
-          title: Expiry
-        note:
-          type: string
-          description: ''
-          title: Note
-        sales_tax_applicable:
-          type: boolean
-          description: Is sales tax applicable to this service/product? Default to false
-          title: Sales tax applicable
-        cost:
-          type: number
-          description: Base cost for consumables.
-          title: Cost
-        price:
-          type: number
-          description: ''
-          title: Price
-        vaccination_type:
-          type: string
-          description: Default to `"standard vaccine"`
-          title: Vaccination type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        manufacturer:
-          type: string
-          description: ''
-          title: Manufacturer
-        current_quantity:
-          readOnly: true
-          type: integer
-          description: This field can onlyu be changed by creating new patient vaccine record. Current quantity of an inventory vaccine is calculated by subtract number of records pointing to this inventory from the original quantity value.
-          title: Current quantity
-        cvx_code:
-          type: string
-          description: ''
-          title: Cvx code
-      x-verbose-required: []
   securitySchemes:
     drchrono_oauth2:
       type: oauth2
@@ -4732,3 +5958,6 @@ components:
             clinical:read: View clinical information, such as vitals, clinical notes, medications and diagnoses.
           tokenUrl: https://app.drchrono.com/o/token/
           authorizationUrl: https://app.drchrono.com/o/authorize/
+x-refined-from:
+- drchrono-rest-api-openapi-schema.json
+- drchrono-rest-api-openapi.yml

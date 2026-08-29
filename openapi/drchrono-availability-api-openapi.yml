@@ -1,11 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
+  title: Drchrono Availability API
   version: v4 - Hunt Valley
-  description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
   x-logo:
     url: https://www.drchrono.com/site_media/images/logos/drchrono-black-wpadding.png
     altText: DrChrono Logo
-  title: DrChrono EHR REST Administrative Availability API
+  description: 'Operations tagged Availability across 2 of this provider''s published API definitions: drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.drchrono.com
 tags:
@@ -13,51 +13,178 @@ tags:
 paths:
   /api/availability:
     get:
-      description: Retrieve availability slots for the given date and office, doctor, or exam room.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Availability for a date range
+                  properties:
+                    dates:
+                      items:
+                        type: object
+                        properties:
+                          date:
+                            type: string
+                            description: Date in YYYY-MM-DD format
+                          open_slots:
+                            items:
+                              type: object
+                              properties:
+                                start:
+                                  type: string
+                                  description: Start time (e.g., "09:00")
+                                end:
+                                  type: string
+                                  description: End time (e.g., "17:00")
+                                availability:
+                                  items:
+                                    type: object
+                                    properties:
+                                      start:
+                                        type: string
+                                        description: Slot start time (e.g., "09:00")
+                                      end:
+                                        type: string
+                                        description: Slot end time (e.g., "09:30")
+                                  type: array
+                                  description: List of available slots within the range
+                            type: array
+                      type: array
+                    office:
+                      type: integer
+                      description: Office ID
+                    doctor:
+                      type: integer
+                      description: Doctor ID
+                    exam_room:
+                      type: integer
+                      description: Exam room ID
+                    date_range:
+                      items:
+                        type: string
+                      type: array
+                      description: Array of two date strings [start, end]
+                    duration:
+                      type: integer
+                      description: Slot duration in minutes
+                - type: object
+                  description: Availability for a single date
+                  properties:
+                    office:
+                      type: integer
+                      description: Office ID
+                    doctor:
+                      type: integer
+                      description: Doctor ID
+                    open_slots:
+                      items:
+                        type: object
+                        properties:
+                          start:
+                            type: string
+                            description: Start time (e.g., "09:00")
+                          end:
+                            type: string
+                            description: End time (e.g., "17:00")
+                          availability:
+                            items:
+                              type: object
+                              properties:
+                                start:
+                                  type: string
+                                  description: Slot start time (e.g., "09:00")
+                                end:
+                                  type: string
+                                  description: Slot end time (e.g., "09:30")
+                            type: array
+                            description: List of available slots within the range
+                      type: array
+                    exam_room:
+                      type: integer
+                      description: Exam room ID
+                    duration:
+                      type: integer
+                      description: Slot duration in minutes
+                    date:
+                      type: string
+                      description: Date in YYYY-MM-DD format
+          description: OK
+        '405':
+          content: {}
+          description: Method Not Allowed
+        '404':
+          content: {}
+          description: Not Found
+        '403':
+          content: {}
+          description: Permission Denied
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content: {}
+          description: Bad Request
+        '500':
+          content: {}
+          description: Internal Server Error
+      description: "Retrieve availability slots for the given date and office, doctor, or exam room.\n\nIf the `exam_room` parameter is not specified, the response will include availability for all exam rooms in the payload, grouped by exam room.\n\n**Example 1: Get availability for a single date**\n\nRequest:\n\n```http\nGET /api/availability?date=2026-01-29&office=338939&duration=30\n```\n\nResponse:\n\n```json\n{\n  \"duration\": 30,\n  \"date\": \"2026-01-29\",\n  \"open_slots\": [\n    {\n      \"start\": \"09:00\",\n      \"end\": \"17:00\",\n      \"availability\": [\n        { \"start\": \"09:00\", \"end\": \"09:30\" },\n        { \"start\": \"09:30\", \"end\": \"10:00\" },\n        { \"start\": \"10:00\", \"end\": \"10:30\" }\n      ]\n    }\n  ],\n  \"office\": 338939\n}\n```\n\n**Example 2: Get availability for a date range**\n\nRequest:\n\n```http\nGET /api/availability?date_range=2026-01-29/2026-01-30&office=338939&duration=30\n```\n\nResponse:\n\n```json\n{\n  \"date_range\": [\"2026-01-29\", \"2026-01-30\"],\n  \"duration\": 30,\n  \"office\": 338939,\n  \"dates\": [\n    {\n      \"date\": \"2026-01-29\",\n      \"open_slots\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"17:00\",\n          \"availability\": [\n            { \"start\": \"09:00\", \"end\": \"09:30\" },\n            { \"start\": \"09:30\", \"end\": \"10:00\" }\n          ]\n        }\n      ]\n    },\n    {\n      \"date\": \"2026-01-30\",\n      \"open_slots\": []\n    }\n  ]\n}\n```\n\n**Example: Get availability for a specific exam room**\n\nRequest:\n\n```http\nGET /api/availability?date=2026-01-29&office=338939&duration=30&exam_room=2\n```\n\nResponse:\n\n```json\n{\n  \"duration\": 30,\n  \"date\": \"2026-01-29\",\n  \"open_slots\": [\n    {\n      \"start\": \"09:00\",\n      \"end\": \"17:00\",\n      \"availability\": [\n        { \"start\": \"09:00\", \"end\": \"09:30\" },\n        { \"start\": \"09:30\", \"end\": \"10:00\" },\n        { \"start\": \"10:00\", \"end\": \"10:30\" }\n      ]\n    }\n  ],\n  \"office\": 338939,\n  \"exam_room\": 2\n}\n```\n"
       parameters:
       - schema:
           type: integer
-          description: ''
+          description: Office ID.
           title: office
         required: false
-        description: ''
+        description: Office ID to filter availability.
         name: office
         in: query
       - schema:
           type: integer
-          description: ''
+          description: Doctor ID.
           title: doctor
         required: false
-        description: ''
+        description: Doctor ID to filter availability.
         name: doctor
         in: query
       - schema:
           type: string
-          description: ''
+          description: Date string.
           title: date
         required: false
-        description: ''
+        description: Date for which to retrieve availability (YYYY-MM-DD).
         name: date
         in: query
       - schema:
           type: string
-          description: ''
+          description: Date range string.
           title: date_range
         required: false
-        description: ''
+        description: Date range for which to retrieve availability (YYYY-MM-DD/YYYY-MM-DD).
         name: date_range
         in: query
       - schema:
           type: integer
-          description: ''
+          description: Duration in minutes.
           title: duration
         required: false
-        description: ''
+        description: Duration of the appointment in minutes.
         name: duration
+        in: query
+      - schema:
+          type: integer
+          description: Exam room ID.
+          title: exam_room
+        required: false
+        description: Exam room ID to filter availability. If not specified, availability for all exam rooms will be included.
+        name: exam_room
         in: query
       operationId: availability
       tags:
       - Availability
+    servers:
+    - url: https://app.drchrono.com
 components:
   securitySchemes:
     drchrono_oauth2:
@@ -90,3 +217,6 @@ components:
             clinical:read: View clinical information, such as vitals, clinical notes, medications and diagnoses.
           tokenUrl: https://app.drchrono.com/o/token/
           authorizationUrl: https://app.drchrono.com/o/authorize/
+x-refined-from:
+- drchrono-rest-api-openapi-schema.json
+- drchrono-rest-api-openapi.yml

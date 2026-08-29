@@ -1,11 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
+  title: Drchrono Clinical API
   version: v4 - Hunt Valley
-  description: RESTful API for the drchrono EHR platform providing access to patient records, clinical encounters, appointments, prescriptions, billing, lab orders, and practice administration with OAuth 2.0 authentication and HIPAA-compliant data exchange.
   x-logo:
     url: https://www.drchrono.com/site_media/images/logos/drchrono-black-wpadding.png
     altText: DrChrono Logo
-  title: DrChrono EHR REST Administrative Clinical API
+  description: 'Operations tagged Clinical across 2 of this provider''s published API definitions: drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.drchrono.com
 tags:
@@ -154,6 +154,8 @@ paths:
         - billing:write
       operationId: claim_billing_notes_list
       description: Retrieve or search billing notes
+    servers:
+    - url: https://app.drchrono.com
   /api/signed_consent_forms:
     post:
       responses:
@@ -405,6 +407,8 @@ paths:
         - patients:read
         - patients:write
       operationId: signed_consent_forms_list
+    servers:
+    - url: https://app.drchrono.com
   /api/custom_appointment_fields:
     post:
       responses:
@@ -535,6 +539,8 @@ paths:
         - settings:write
       operationId: custom_appointment_fields_list
       description: Retrieve or search custom appointment fields
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_orders/{id}:
     put:
       responses:
@@ -767,6 +773,8 @@ paths:
         - labs:write
       operationId: lab_orders_delete
       description: Delete an existing lab order
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_notes_list:
     post:
       responses:
@@ -976,6 +984,8 @@ paths:
         - clinical:read
       operationId: clinical_notes_list_list
       description: Retrieve or search clinical notes in batches. Results returned in order of ID.
+    servers:
+    - url: https://app.drchrono.com
   /api/custom_vitals/{id}:
     get:
       responses:
@@ -1033,6 +1043,8 @@ paths:
         - settings:write
       operationId: custom_vitals_read
       description: Retrieve an existing custom vital type
+    servers:
+    - url: https://app.drchrono.com
   /api/sublabs/{id}:
     put:
       responses:
@@ -1201,6 +1213,8 @@ paths:
         - labs:write
       operationId: sublabs_delete
       description: Delete an existing sub vendor
+    servers:
+    - url: https://app.drchrono.com
   /api/patients/{id}/qrda1:
     get:
       responses:
@@ -1337,6 +1351,8 @@ paths:
         - patients:write
       operationId: patients_qrda1
       description: Retrieve patient QRDA1
+    servers:
+    - url: https://app.drchrono.com
   /api/problems:
     post:
       responses:
@@ -1477,6 +1493,8 @@ paths:
         - clinical:write
       operationId: problems_list
       description: Retrieve or search patient problems
+    servers:
+    - url: https://app.drchrono.com
   /api/staff:
     get:
       responses:
@@ -1551,6 +1569,8 @@ paths:
       security:
       - drchrono_oauth2: []
       operationId: staff_list
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_messages/{id}:
     put:
       responses:
@@ -1746,6 +1766,14 @@ paths:
         description: ''
         name: doctor
         in: query
+      - schema:
+          type: integer
+          description: Filter by thread ID to get messages in the same thread
+          title: thread
+        required: false
+        description: Filter messages by message thread
+        name: thread
+        in: query
       tags:
       - Clinical
       x-permissions:
@@ -1759,184 +1787,8 @@ paths:
         - messages:read
         - messages:write
       operationId: patient_messages_read
-  /api/yellow_notepad:
-    post:
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/YellowNotepad'
-          description: Success - content created/updated
-        '405':
-          content: {}
-          description: Method not allowed
-        '404':
-          content: {}
-          description: Not Found - invalid appointment_id or template_id, or not visible to user
-        '403':
-          content: {}
-          description: Forbidden - insufficient permissions, suspended account, or light suspended account attempting write
-        '500':
-          content: {}
-          description: Internal Server Error
-        '401':
-          content: {}
-          description: Unauthorized
-        '400':
-          content:
-            application/json:
-              examples:
-                invalid_params:
-                  value:
-                  - template_id must be an integer
-                  summary: Invalid parameter types
-                missing_content:
-                  value:
-                    content:
-                    - This field is required.
-                  summary: Missing content field
-                missing_params:
-                  value:
-                  - both appointment_id and template_id must be specified
-                  summary: Missing required parameters
-          description: Bad Request - missing/invalid parameters or content field
-        '409':
-          content:
-            application/json:
-              examples:
-                locked_note:
-                  value:
-                    detail: Cannot modify a locked clinical note.
-                  summary: Clinical note is locked
-          description: Conflict - the associated clinical note is locked and cannot be modified
-      parameters:
-      - schema:
-          type: integer
-          description: ID of the appointment. Must be visible to the authenticated user.
-          title: Appointment ID
-        required: true
-        name: appointment_id
-        in: query
-      - schema:
-          type: integer
-          description: ID of the clinical note template. Must belong to the authenticated user.
-          title: Template ID
-        required: true
-        name: template_id
-        in: query
-      tags:
-      - Clinical
-      x-permissions:
-      - clinical-notes
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-              - content
-              type: object
-              properties:
-                content:
-                  type: string
-                  description: The yellow notepad content. Can be empty string.
-        required: true
-      x-practice-access: '"share_patients" need to be set for data access among practice'
-      security:
-      - drchrono_oauth2:
-        - clinical:read
-        - clinical:write
-      operationId: yellow_notepad_create
-      description: 'Create or update yellow notepad content for a specific appointment and template combination.
-
-
-        This endpoint has different behavior based on the template''s workflow_key:
-
-
-        Regular templates (workflow_key != ''hp_meds_allergies''):
-
-        - Automatically includes this template in the note
-
-        - Content is appointment-specific
-
-
-        Medications/Allergies templates (workflow_key == ''hp_meds_allergies''):
-
-        - Content is patient-level (shared across appointments)
-
-
-        Both appointment_id and template_id must be provided as query parameters.
-
-        Content is normalized to use consistent newline characters.
-
-        '
-    get:
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/YellowNotepad'
-          description: Success - returns yellow notepad content
-        '405':
-          content: {}
-          description: Method not allowed
-        '404':
-          content: {}
-          description: Not Found - invalid appointment_id or template_id, or not visible to user
-        '403':
-          content: {}
-          description: Forbidden - insufficient permissions or suspended account
-        '401':
-          content: {}
-          description: Unauthorized
-        '400':
-          content:
-            application/json:
-              examples:
-                invalid_params:
-                  value:
-                  - appointment_id must be an integer
-                  summary: Invalid parameter types
-                missing_params:
-                  value:
-                  - both appointment_id and template_id must be specified
-                  summary: Missing required parameters
-          description: Bad Request - missing or invalid query parameters
-        '500':
-          content: {}
-          description: Internal Server Error
-      parameters:
-      - schema:
-          type: integer
-          description: ID of the appointment. Must be visible to the authenticated user.
-          title: Appointment ID
-        required: true
-        name: appointment_id
-        in: query
-      - schema:
-          type: integer
-          description: ID of the clinical note template. Must belong to the authenticated user.
-          title: Template ID
-        required: true
-        name: template_id
-        in: query
-      tags:
-      - Clinical
-      x-permissions:
-      - clinical-notes
-      x-practice-access: '"share_patients" need to be set for data access among practice'
-      security:
-      - drchrono_oauth2:
-        - clinical:read
-        - clinical:write
-      operationId: yellow_notepad_retrieve
-      description: 'Retrieve yellow notepad content for a specific appointment and template combination.
-
-
-        Both appointment_id and template_id must be provided as query parameters.
-
-        '
+    servers:
+    - url: https://app.drchrono.com
   /api/medications:
     post:
       responses:
@@ -2077,6 +1929,8 @@ paths:
         - clinical:write
       operationId: medications_list
       description: Retrieve or search patient medications
+    servers:
+    - url: https://app.drchrono.com
   /api/custom_demographics:
     post:
       responses:
@@ -2207,6 +2061,8 @@ paths:
         - settings:write
       operationId: custom_demographics_list
       description: Retrieve or search custom demographics fields
+    servers:
+    - url: https://app.drchrono.com
   /api/appointments_list:
     post:
       responses:
@@ -2460,6 +2316,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: appointments_list_list
+    servers:
+    - url: https://app.drchrono.com
   /api/appointment_profiles:
     post:
       responses:
@@ -2590,6 +2448,8 @@ paths:
         - settings:write
       operationId: appointment_profiles_list
       description: Retrieve or search appointment profiles for a doctor's calendar
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_communications:
     post:
       responses:
@@ -2730,6 +2590,8 @@ paths:
         - clinical:write
       operationId: patient_communications_list
       description: Retrieve or search patient communications for CQM
+    servers:
+    - url: https://app.drchrono.com
   /api/appointment_profiles/{id}:
     put:
       responses:
@@ -2946,6 +2808,8 @@ paths:
         - settings:write
       operationId: appointment_profiles_delete
       description: Delete an existing appointment profile
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_note_field_values/{id}:
     put:
       responses:
@@ -3196,6 +3060,8 @@ paths:
         - clinical:write
       operationId: clinical_note_field_values_read
       description: Retrieve an existing clinical note field value
+    servers:
+    - url: https://app.drchrono.com
   /api/fee_schedules_v2:
     get:
       responses:
@@ -3315,6 +3181,8 @@ paths:
         - billing:read
         - billing:write
       operationId: fee_schedules_v2_list
+    servers:
+    - url: https://app.drchrono.com
   /api/care_team_members:
     get:
       responses:
@@ -3408,6 +3276,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: care_team_members_list
+    servers:
+    - url: https://app.drchrono.com
   /api/consent_forms/{id}/unapply_from_appointment:
     post:
       responses:
@@ -3459,6 +3329,8 @@ paths:
         - patients:write
       operationId: consent_forms_unapply_from_appointment
       description: Unassign (unapply) a consent form from appointment
+    servers:
+    - url: https://app.drchrono.com
   /api/consent_forms/{id}/apply_to_appointment:
     post:
       responses:
@@ -3510,6 +3382,8 @@ paths:
         - patients:write
       operationId: consent_forms_apply_to_appointment
       description: Assign (apply) a consent form to appointment
+    servers:
+    - url: https://app.drchrono.com
   /api/consent_forms:
     post:
       responses:
@@ -3634,6 +3508,8 @@ paths:
         - patients:write
       operationId: consent_forms_list
       description: Retrieve or search patient consent forms
+    servers:
+    - url: https://app.drchrono.com
   /api/reminder_profiles/{id}:
     put:
       responses:
@@ -3838,6 +3714,8 @@ paths:
         - calendar:write
       operationId: reminder_profiles_delete
       description: Delete an existing reminder profile
+    servers:
+    - url: https://app.drchrono.com
   /api/patients_list:
     post:
       responses:
@@ -4069,6 +3947,8 @@ paths:
       description: 'Retrieve or search patients in batches. This resource returns identical data to `GET /api/patients` but uses an asynchronous batch-based approach to data delivery. This is an efficient choice for large historical record loading use cases. Retrieve the results/status of a previously created patient_list request using the UUID returned in the response. Results are ordered by patient ID number.
 
         '
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_interventions:
     post:
       responses:
@@ -4209,6 +4089,8 @@ paths:
         - clinical:write
       operationId: patient_interventions_list
       description: Retrieve or search patient interventions for CQM
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_messages:
     post:
       responses:
@@ -4369,6 +4251,8 @@ paths:
         - messages:read
         - messages:write
       operationId: patient_messages_list
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_physical_exams/{id}:
     put:
       responses:
@@ -4547,6 +4431,8 @@ paths:
         - clinical:write
       operationId: patient_physical_exams_read
       description: Retrieve an existing patient physical exam for CQM
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_note_field_values:
     post:
       responses:
@@ -4735,6 +4621,8 @@ paths:
         - clinical:write
       operationId: clinical_note_field_values_list
       description: Retrieve or search clinical note field values
+    servers:
+    - url: https://app.drchrono.com
   /api/patients:
     post:
       responses:
@@ -5035,6 +4923,8 @@ paths:
         - patients:write
       operationId: patients_list
       description: Retrieve or search patients
+    servers:
+    - url: https://app.drchrono.com
   /api/implantable_devices/{id}:
     get:
       responses:
@@ -5113,6 +5003,8 @@ paths:
         - clinical:write
       operationId: implantable_devices_read
       description: Retrieve an existing implantable device
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_communications/{id}:
     put:
       responses:
@@ -5291,6 +5183,8 @@ paths:
         - clinical:write
       operationId: patient_communications_read
       description: Retrieve an existing patient communication for CQM
+    servers:
+    - url: https://app.drchrono.com
   /api/prescription_messages/{id}:
     get:
       responses:
@@ -5369,6 +5263,8 @@ paths:
         - clinical:write
       operationId: prescription_messages_read
       description: Retrieve an existing prescription message
+    servers:
+    - url: https://app.drchrono.com
   /api/implantable_devices:
     get:
       responses:
@@ -5471,6 +5367,8 @@ paths:
         - clinical:write
       operationId: implantable_devices_list
       description: Retrieve or search implantable devices
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_risk_assessments:
     post:
       responses:
@@ -5609,6 +5507,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: patient_risk_assessments_list
+    servers:
+    - url: https://app.drchrono.com
   /api/patients_summary:
     post:
       responses:
@@ -5811,6 +5711,8 @@ paths:
         - patients:summary:read
         - patients:summary:write
       operationId: patients_summary_list
+    servers:
+    - url: https://app.drchrono.com
   /api/documents/{id}:
     put:
       responses:
@@ -6079,6 +5981,8 @@ paths:
         - patients:write
       operationId: documents_delete
       description: Delete an existing appointment template
+    servers:
+    - url: https://app.drchrono.com
   /api/patients/{id}/onpatient_access:
     post:
       responses:
@@ -6476,6 +6380,8 @@ paths:
         - patients:write
       operationId: patients_onpatient_access_delete
       description: Revoke sent onpatient invites
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_results/{id}:
     put:
       responses:
@@ -6708,6 +6614,8 @@ paths:
         - labs:write
       operationId: lab_results_delete
       description: Delete an existing lab result
+    servers:
+    - url: https://app.drchrono.com
   /api/medications/{id}:
     put:
       responses:
@@ -6886,6 +6794,8 @@ paths:
         - clinical:write
       operationId: medications_read
       description: Retrieve an existing patient medications
+    servers:
+    - url: https://app.drchrono.com
   /api/medications/{id}/append_to_pharmacy_note:
     patch:
       responses:
@@ -6945,6 +6855,8 @@ paths:
         - clinical:write
       operationId: medications_append_to_pharmacy_note
       description: Append a message to the "pharmacy_note" section of the prescription, in a new paragraph
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_vaccine_records/{id}:
     put:
       responses:
@@ -7171,6 +7083,8 @@ paths:
         - clinical:write
       operationId: patient_vaccine_records_read
       description: Retrieve an existing patient vaccine records
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_flag_types/{id}:
     put:
       responses:
@@ -7334,6 +7248,8 @@ paths:
         - settings:write
       operationId: patient_flag_types_read
       description: Retrieve an existing patient flag type
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_note_field_types/{id}:
     patch:
       responses:
@@ -7453,6 +7369,8 @@ paths:
         - clinical:write
       operationId: clinical_note_field_types_read
       description: Retrieve an existing clinial note field type
+    servers:
+    - url: https://app.drchrono.com
   /api/fee_schedules:
     get:
       responses:
@@ -7563,6 +7481,8 @@ paths:
         - billing:read
         - billing:write
       operationId: fee_schedules_list
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_risk_assessments/{id}:
     put:
       responses:
@@ -7738,6 +7658,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: patient_risk_assessments_read
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_documents/{id}:
     put:
       responses:
@@ -7970,6 +7892,8 @@ paths:
         - labs:write
       operationId: lab_documents_delete
       description: Delete an existing lab order document
+    servers:
+    - url: https://app.drchrono.com
   /api/appointment_templates/{id}:
     put:
       responses:
@@ -8250,6 +8174,8 @@ paths:
         - settings:write
       operationId: appointment_templates_delete
       description: Delete an existing appointment template
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_interventions/{id}:
     put:
       responses:
@@ -8428,6 +8354,8 @@ paths:
         - clinical:write
       operationId: patient_interventions_read
       description: Retrieve an existing patient intervention for CQM
+    servers:
+    - url: https://app.drchrono.com
   /api/allergies/{id}:
     put:
       responses:
@@ -8606,6 +8534,8 @@ paths:
         - clinical:write
       operationId: allergies_read
       description: Retrieve an existing patient allergy
+    servers:
+    - url: https://app.drchrono.com
   /api/patients/{id}/ccda:
     get:
       responses:
@@ -8742,6 +8672,8 @@ paths:
         - patients:write
       operationId: patients_ccda
       description: Retrieve patient CCDA
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_orders_summary:
     get:
       responses:
@@ -8835,6 +8767,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: lab_orders_summary_list
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_note_field_values_list:
     get:
       responses:
@@ -8919,6 +8853,8 @@ paths:
         - clinical:read
       operationId: clinical_note_field_values_list_list
       description: Retrieve or search clinical note values (soap notes) in batches. Results returned in order of ID or by updated_at.
+    servers:
+    - url: https://app.drchrono.com
   /api/care_plans/{id}:
     get:
       responses:
@@ -8989,6 +8925,8 @@ paths:
         - clinical:write
       operationId: care_plans_read
       description: Retrieve an existing care plan
+    servers:
+    - url: https://app.drchrono.com
   /api/fee_schedules/{id}:
     get:
       responses:
@@ -9075,6 +9013,8 @@ paths:
         - billing:read
         - billing:write
       operationId: fee_schedules_read
+    servers:
+    - url: https://app.drchrono.com
   /api/appointments/{id}:
     put:
       responses:
@@ -9256,6 +9196,8 @@ paths:
         - clinical:write
       operationId: appointments_delete
       description: Delete an existing appointment or break
+    servers:
+    - url: https://app.drchrono.com
   /api/telehealth_appointments:
     post:
       responses:
@@ -9400,6 +9342,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: telehealth_appointments_list
+    servers:
+    - url: https://app.drchrono.com
   /api/care_plans:
     get:
       responses:
@@ -9494,6 +9438,8 @@ paths:
         - clinical:write
       operationId: care_plans_list
       description: Retrieve or search care plans
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_physical_exams:
     post:
       responses:
@@ -9634,6 +9580,8 @@ paths:
         - clinical:write
       operationId: patient_physical_exams_list
       description: Retrieve or search patient physical exams for CQM
+    servers:
+    - url: https://app.drchrono.com
   /api/signed_consent_forms/{id}:
     get:
       responses:
@@ -9681,6 +9629,8 @@ paths:
         - patients:read
         - patients:write
       operationId: signed_consent_forms_read
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_note_templates/{id}:
     get:
       responses:
@@ -9735,6 +9685,8 @@ paths:
         - clinical:write
       operationId: clinical_note_templates_read
       description: Retrieve an existing clinical note tempalte
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_results:
     post:
       responses:
@@ -9884,6 +9836,8 @@ paths:
         - labs:write
       operationId: lab_results_list
       description: Retrieve or search lab results
+    servers:
+    - url: https://app.drchrono.com
   /api/problems/{id}:
     put:
       responses:
@@ -10062,6 +10016,8 @@ paths:
         - clinical:write
       operationId: problems_read
       description: Retrieve an existing patient problems
+    servers:
+    - url: https://app.drchrono.com
   /api/amendments:
     post:
       responses:
@@ -10218,6 +10174,8 @@ paths:
         - clinical:write
       operationId: amendments_list
       description: Retrieve or search patient amendments. You can only interact with amendments created by your API application
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_orders:
     post:
       responses:
@@ -10342,6 +10300,14 @@ paths:
         name: page_size
         in: query
       - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
           type: string
           description: ''
           title: since
@@ -10367,6 +10333,8 @@ paths:
         - labs:write
       operationId: lab_orders_list
       description: Retrieve or search lab orders
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_flag_types:
     post:
       responses:
@@ -10497,6 +10465,83 @@ paths:
         - settings:write
       operationId: patient_flag_types_list
       description: Retrieve or search patient flag types
+    servers:
+    - url: https://app.drchrono.com
+  /api/recurring_appointment_instances:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Appointment'
+                type: array
+          description: ''
+        '400':
+          description: base_recurring_appointment is required or invalid.
+      parameters:
+      - schema:
+          type: integer
+          description: ID of the base recurring appointment.
+          title: Base recurring appointment
+        required: true
+        name: base_recurring_appointment
+        in: query
+      - schema:
+          format: date
+          type: string
+          description: Start of date range (YYYY-MM-DD). Defaults to the first appointment in the series.
+          title: Start date
+        required: false
+        name: start_date
+        in: query
+      - schema:
+          format: date
+          type: string
+          description: End of date range (YYYY-MM-DD). Defaults to 1 year from start_date.
+          title: End date
+        required: false
+        name: end_date
+        in: query
+      - schema:
+          type: string
+          description: Comma-separated list of fields to include in the response.
+          title: Fields
+        required: false
+        name: fields
+        in: query
+      - schema:
+          type: boolean
+          description: Include expensive fields (reminders, vitals, clinical_note, custom_fields, custom_vitals, status_transitions).
+          title: Verbose
+        required: false
+        name: verbose
+        in: query
+      tags:
+      - Clinical
+      x-permissions:
+      - scheduling
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - calendar:read
+        - clinical:read
+      operationId: recurring_appointment_instances_list
+      description: 'List all instances (materialized and virtual) within a recurring
+
+        appointment series.
+
+
+        Returns the same appointment response format as `/api/appointments`.
+
+        Materialized instances have a real `id`; virtual instances have
+
+        `id: null`. The `recurrence_instance_key` field is included when
+
+        the `consistent_recurrence_id` feature flag is enabled.'
+    servers:
+    - url: https://app.drchrono.com
   /api/custom_appointment_fields/{id}:
     put:
       responses:
@@ -10660,6 +10705,8 @@ paths:
         - settings:write
       operationId: custom_appointment_fields_read
       description: Retrieve an existing custom appointment field
+    servers:
+    - url: https://app.drchrono.com
   /api/eobs:
     post:
       responses:
@@ -10786,6 +10833,8 @@ paths:
         - billing:write
       operationId: eobs_list
       description: Retrieve or search EOB objects
+    servers:
+    - url: https://app.drchrono.com
   /api/insurances:
     get:
       responses:
@@ -10870,6 +10919,8 @@ paths:
         - user:read
         - user:write
       operationId: insurances_list
+    servers:
+    - url: https://app.drchrono.com
   /api/telehealth_appointment_history:
     post:
       responses:
@@ -10998,6 +11049,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: telehealth_appointment_history_list
+    servers:
+    - url: https://app.drchrono.com
   /api/patients_summary/{id}:
     put:
       responses:
@@ -11358,6 +11411,8 @@ paths:
         - patients:summary:read
         - patients:summary:write
       operationId: patients_summary_delete
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_documents:
     post:
       responses:
@@ -11482,6 +11537,14 @@ paths:
         name: page_size
         in: query
       - schema:
+          type: integer
+          description: ''
+          title: patient
+        required: false
+        description: ''
+        name: patient
+        in: query
+      - schema:
           type: string
           description: ''
           title: since
@@ -11507,6 +11570,8 @@ paths:
         - labs:write
       operationId: lab_documents_list
       description: Retrieve or search lab order documents
+    servers:
+    - url: https://app.drchrono.com
   /api/consent_forms/{id}:
     put:
       responses:
@@ -11661,6 +11726,8 @@ paths:
         - patients:write
       operationId: consent_forms_read
       description: Retrieve an existing patient consent form
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_tests/{id}:
     put:
       responses:
@@ -11893,6 +11960,8 @@ paths:
         - labs:write
       operationId: lab_tests_delete
       description: Delete an existing lab test
+    servers:
+    - url: https://app.drchrono.com
   /api/prescription_messages_list:
     post:
       responses:
@@ -12081,6 +12150,8 @@ paths:
         - clinical:read
       operationId: prescription_messages_list_list
       description: Retrieve or search prescription messages in batches. Results returned in order of ID or updated_at.
+    servers:
+    - url: https://app.drchrono.com
   /api/patients/{id}:
     put:
       responses:
@@ -12605,6 +12676,8 @@ paths:
         - patients:write
       operationId: patients_delete
       description: Delete an existing patient
+    servers:
+    - url: https://app.drchrono.com
   /api/patients/{id}/ccda_async:
     get:
       responses:
@@ -12749,6 +12822,8 @@ paths:
         - patients:write
       operationId: patients_ccda_async
       description: Retrieve patient CCDA async.
+    servers:
+    - url: https://app.drchrono.com
   /api/custom_vitals:
     get:
       responses:
@@ -12830,6 +12905,8 @@ paths:
         - settings:write
       operationId: custom_vitals_list
       description: Retrieve or search custom vital types
+    servers:
+    - url: https://app.drchrono.com
   /api/schedule_blocks:
     post:
       responses:
@@ -12992,6 +13069,8 @@ paths:
         - calendar:read
         - calendar:write
       operationId: schedule_blocks_list
+    servers:
+    - url: https://app.drchrono.com
   /api/care_team_members/{id}:
     get:
       responses:
@@ -13061,6 +13140,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: care_team_members_read
+    servers:
+    - url: https://app.drchrono.com
   /api/claim_billing_notes/{id}:
     get:
       responses:
@@ -13124,6 +13205,8 @@ paths:
         - billing:write
       operationId: claim_billing_notes_read
       description: Retrieve an existing billing note
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_lab_results/{id}:
     put:
       responses:
@@ -13428,6 +13511,8 @@ paths:
         - patients:read
         - patients:write
       operationId: patient_lab_results_delete
+    servers:
+    - url: https://app.drchrono.com
   /api/amendments/{id}:
     put:
       responses:
@@ -13696,6 +13781,8 @@ paths:
         - clinical:write
       operationId: amendments_delete
       description: Delete an existing patient amendment, you can only interact with amendments created by your API application
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_tests:
     post:
       responses:
@@ -13845,6 +13932,8 @@ paths:
         - labs:write
       operationId: lab_tests_list
       description: Retrieve or search lab tests
+    servers:
+    - url: https://app.drchrono.com
   /api/appointments_list/{id}:
     put:
       responses:
@@ -14255,6 +14344,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: appointments_list_delete
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_lab_results:
     post:
       responses:
@@ -14429,6 +14520,8 @@ paths:
         - patients:read
         - patients:write
       operationId: patient_lab_results_list
+    servers:
+    - url: https://app.drchrono.com
   /api/fee_schedules_v2/{id}:
     get:
       responses:
@@ -14475,6 +14568,8 @@ paths:
         - billing:read
         - billing:write
       operationId: fee_schedules_v2_read
+    servers:
+    - url: https://app.drchrono.com
   /api/insurances/{id}:
     get:
       responses:
@@ -14535,6 +14630,8 @@ paths:
         - user:read
         - user:write
       operationId: insurances_read
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_notes:
     get:
       responses:
@@ -14660,6 +14757,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: clinical_notes_list
+    servers:
+    - url: https://app.drchrono.com
   /api/eligibility_checks_list:
     post:
       responses:
@@ -14786,6 +14885,8 @@ paths:
       description: 'Create eligibility checks list request.  Use the UUID returned in the response to retrieve the batch of records. Results returned in order of id or updated_at.
 
         '
+    servers:
+    - url: https://app.drchrono.com
   /api/telehealth_appointment_history/{id}:
     get:
       responses:
@@ -14842,6 +14943,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: telehealth_appointment_history_read
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_notes/{id}:
     get:
       responses:
@@ -14935,6 +15038,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: clinical_notes_read
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_note_field_types:
     get:
       responses:
@@ -15021,6 +15126,8 @@ paths:
         - clinical:write
       operationId: clinical_note_field_types_list
       description: Retrieve or search clinical note field types
+    servers:
+    - url: https://app.drchrono.com
   /api/documents:
     post:
       responses:
@@ -15177,6 +15284,8 @@ paths:
         - patients:write
       operationId: documents_list
       description: Retrieve or search documents
+    servers:
+    - url: https://app.drchrono.com
   /api/staff/{id}:
     get:
       responses:
@@ -15227,6 +15336,8 @@ paths:
       security:
       - drchrono_oauth2: []
       operationId: staff_read
+    servers:
+    - url: https://app.drchrono.com
   /api/schedule_blocks/{id}:
     put:
       responses:
@@ -15435,6 +15546,8 @@ paths:
         - calendar:read
         - calendar:write
       operationId: schedule_blocks_delete
+    servers:
+    - url: https://app.drchrono.com
   /api/lab_orders_summary/{id}:
     get:
       responses:
@@ -15504,6 +15617,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: lab_orders_summary_read
+    servers:
+    - url: https://app.drchrono.com
   /api/custom_demographics/{id}:
     put:
       responses:
@@ -15667,6 +15782,8 @@ paths:
         - settings:write
       operationId: custom_demographics_read
       description: Retrieve an existing custom demographics field
+    servers:
+    - url: https://app.drchrono.com
   /api/eobs/{id}:
     get:
       responses:
@@ -15722,6 +15839,8 @@ paths:
         - billing:write
       operationId: eobs_read
       description: Retrieve an existing EOB object
+    servers:
+    - url: https://app.drchrono.com
   /api/allergies:
     post:
       responses:
@@ -15862,6 +15981,8 @@ paths:
         - clinical:write
       operationId: allergies_list
       description: Retrieve or search patient allergies
+    servers:
+    - url: https://app.drchrono.com
   /api/appointments:
     post:
       responses:
@@ -15912,24 +16033,103 @@ paths:
           content:
             application/json:
               schema:
-                title: ''
-                type: object
-                description: Paginated Result
-                properties:
-                  previous:
-                    type: string
-                    description: Previous paginated page
-                    title: previous
-                  data:
-                    items:
-                      $ref: '#/components/schemas/Appointment'
-                    type: array
-                    description: result data
-                    title: data
-                  next:
-                    type: string
-                    description: Next Paginated page
-                    title: next
+                oneOf:
+                - required:
+                  - dates
+                  - duration
+                  - date_range
+                  type: object
+                  properties:
+                    dates:
+                      items:
+                        required:
+                        - date
+                        - open_slots
+                        type: object
+                        properties:
+                          date:
+                            type: string
+                            description: Date in YYYY-MM-DD format.
+                            format: date
+                          open_slots:
+                            items:
+                              required:
+                              - start
+                              - end
+                              - availability
+                              type: object
+                              properties:
+                                start:
+                                  type: string
+                                  description: Slot start time (HH:MM format)
+                                end:
+                                  type: string
+                                  description: Slot end time (HH:MM format)
+                                availability:
+                                  type: integer
+                                  description: Number of available slots (or adjust type to match implementation)
+                            type: array
+                            description: List of available time slots.
+                      type: array
+                      description: List of dates and their open slots.
+                    office:
+                      type: integer
+                      description: Office ID (if specified).
+                    doctor:
+                      type: integer
+                      description: Doctor ID (if specified).
+                    exam_room:
+                      type: integer
+                      description: Exam room ID (if specified).
+                    date_range:
+                      items:
+                        type: string
+                        format: date
+                      type: array
+                      description: Start and end date of the range.
+                    duration:
+                      type: integer
+                      description: Duration of each slot in minutes.
+                  title: AvailabilityDateRangeResponse
+                - type: object
+                  properties:
+                    office:
+                      type: integer
+                      description: Office ID (if specified).
+                    doctor:
+                      type: integer
+                      description: Doctor ID (if specified).
+                    open_slots:
+                      items:
+                        required:
+                        - start
+                        - end
+                        - availability
+                        type: object
+                        properties:
+                          start:
+                            type: string
+                            description: Slot start time (HH:MM format)
+                          end:
+                            type: string
+                            description: Slot end time (HH:MM format)
+                          availability:
+                            type: integer
+                            description: Number of available slots (or adjust type to match implementation)
+                      type: array
+                      description: List of available time slots.
+                    exam_room:
+                      type: integer
+                      description: Exam room ID (if specified).
+                    duration:
+                      type: integer
+                      description: Duration of each slot in minutes.
+                    date:
+                      type: string
+                      description: Date in YYYY-MM-DD format.
+                      format: date
+                  title: AvailabilitySingleDateResponse
+                description: Availability response structure for single date or date range.
           description: OK
         '403':
           content: {}
@@ -16062,6 +16262,8 @@ paths:
         - clinical:write
       operationId: appointments_list
       description: "Retrieve or search appointment or breaks.\n<b>Note:</b> Either `since`, `occurred_since`, `date` or `date_range` parameter must be specified.\n          results returned in order of scheduled date.\n            "
+    servers:
+    - url: https://app.drchrono.com
   /api/clinical_note_templates:
     get:
       responses:
@@ -16140,6 +16342,8 @@ paths:
         - clinical:write
       operationId: clinical_note_templates_list
       description: Retrieve or search clinical note templates
+    servers:
+    - url: https://app.drchrono.com
   /api/reminder_profiles:
     post:
       responses:
@@ -16264,6 +16468,8 @@ paths:
         - calendar:write
       operationId: reminder_profiles_list
       description: Retrieve or search reminder profiles
+    servers:
+    - url: https://app.drchrono.com
   /api/appointment_templates:
     post:
       responses:
@@ -16444,6 +16650,8 @@ paths:
         - settings:write
       operationId: appointment_templates_list
       description: Retrieve or search appointment templates for a doctor's calendar
+    servers:
+    - url: https://app.drchrono.com
   /api/patient_vaccine_records:
     post:
       responses:
@@ -16616,6 +16824,8 @@ paths:
         - clinical:write
       operationId: patient_vaccine_records_list
       description: Retrieve or search patient vaccine records
+    servers:
+    - url: https://app.drchrono.com
   /api/telehealth_appointments/{id}:
     put:
       responses:
@@ -16800,6 +17010,8 @@ paths:
         - clinical:read
         - clinical:write
       operationId: telehealth_appointments_read
+    servers:
+    - url: https://app.drchrono.com
   /api/prescription_messages:
     get:
       responses:
@@ -16910,6 +17122,8 @@ paths:
         - clinical:write
       operationId: prescription_messages_list
       description: Retrieve or search prescription messages
+    servers:
+    - url: https://app.drchrono.com
   /api/sublabs:
     post:
       responses:
@@ -17026,186 +17240,190 @@ paths:
         - labs:write
       operationId: sublabs_list
       description: Retrieve or search sub vendors
+    servers:
+    - url: https://app.drchrono.com
+  /api/yellow_notepad:
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YellowNotepad'
+          description: Success - content created/updated
+        '405':
+          content: {}
+          description: Method not allowed
+        '404':
+          content: {}
+          description: Not Found - invalid appointment_id or template_id, or not visible to user
+        '403':
+          content: {}
+          description: Forbidden - insufficient permissions, suspended account, or light suspended account attempting write
+        '500':
+          content: {}
+          description: Internal Server Error
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content:
+            application/json:
+              examples:
+                invalid_params:
+                  value:
+                  - template_id must be an integer
+                  summary: Invalid parameter types
+                missing_content:
+                  value:
+                    content:
+                    - This field is required.
+                  summary: Missing content field
+                missing_params:
+                  value:
+                  - both appointment_id and template_id must be specified
+                  summary: Missing required parameters
+          description: Bad Request - missing/invalid parameters or content field
+        '409':
+          content:
+            application/json:
+              examples:
+                locked_note:
+                  value:
+                    detail: Cannot modify a locked clinical note.
+                  summary: Clinical note is locked
+          description: Conflict - the associated clinical note is locked and cannot be modified
+      parameters:
+      - schema:
+          type: integer
+          description: ID of the appointment. Must be visible to the authenticated user.
+          title: Appointment ID
+        required: true
+        name: appointment_id
+        in: query
+      - schema:
+          type: integer
+          description: ID of the clinical note template. Must belong to the authenticated user.
+          title: Template ID
+        required: true
+        name: template_id
+        in: query
+      tags:
+      - Clinical
+      x-permissions:
+      - clinical-notes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - content
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: The yellow notepad content. Can be empty string.
+        required: true
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - clinical:read
+        - clinical:write
+      operationId: yellow_notepad_create
+      description: 'Create or update yellow notepad content for a specific appointment and template combination.
+
+
+        This endpoint has different behavior based on the template''s workflow_key:
+
+
+        Regular templates (workflow_key != ''hp_meds_allergies''):
+
+        - Automatically includes this template in the note
+
+        - Content is appointment-specific
+
+
+        Medications/Allergies templates (workflow_key == ''hp_meds_allergies''):
+
+        - Content is patient-level (shared across appointments)
+
+
+        Both appointment_id and template_id must be provided as query parameters.
+
+        Content is normalized to use consistent newline characters.
+
+        '
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YellowNotepad'
+          description: Success - returns yellow notepad content
+        '405':
+          content: {}
+          description: Method not allowed
+        '404':
+          content: {}
+          description: Not Found - invalid appointment_id or template_id, or not visible to user
+        '403':
+          content: {}
+          description: Forbidden - insufficient permissions or suspended account
+        '401':
+          content: {}
+          description: Unauthorized
+        '400':
+          content:
+            application/json:
+              examples:
+                invalid_params:
+                  value:
+                  - appointment_id must be an integer
+                  summary: Invalid parameter types
+                missing_params:
+                  value:
+                  - both appointment_id and template_id must be specified
+                  summary: Missing required parameters
+          description: Bad Request - missing or invalid query parameters
+        '500':
+          content: {}
+          description: Internal Server Error
+      parameters:
+      - schema:
+          type: integer
+          description: ID of the appointment. Must be visible to the authenticated user.
+          title: Appointment ID
+        required: true
+        name: appointment_id
+        in: query
+      - schema:
+          type: integer
+          description: ID of the clinical note template. Must belong to the authenticated user.
+          title: Template ID
+        required: true
+        name: template_id
+        in: query
+      tags:
+      - Clinical
+      x-permissions:
+      - clinical-notes
+      x-practice-access: '"share_patients" need to be set for data access among practice'
+      security:
+      - drchrono_oauth2:
+        - clinical:read
+        - clinical:write
+      operationId: yellow_notepad_retrieve
+      description: 'Retrieve yellow notepad content for a specific appointment and template combination.
+
+
+        Both appointment_id and template_id must be provided as query parameters.
+
+        '
+    servers:
+    - url: https://app.drchrono.com
 components:
   schemas:
-    SoapNoteCustomReport:
-      required: []
-      type: object
-      properties:
-        archived:
-          readOnly: true
-          type: boolean
-          description: Indicates that the doctor has soft-deleted this template, and will not use it for future appointments
-          title: Archived
-        workflow_key:
-          readOnly: true
-          type: string
-          description: Identifier for this template. If it's a workflow form, it will be one of `"hp_cc_history_present_illness"`, `"hp_med_fam_social_history"`, `"hp_review_of_systems"`, `"hp_physical_exam"`, `"hp_assessment"`, `"hp_plan"`, `"hp_meds_allergies"`, `"soap_subjective"`, `"soap_objective"`, `"soap_assessment"`, `"soap_plan"`, `"onpatient_additional_info"`, or `"onpatient_reasons_for_visit"`. Otherwise, it will be `"custom_{id}".`
-          title: Workflow Key
-        name:
-          type: string
-          description: ''
-          title: Name
-        doctor:
-          readOnly: true
-          type: string
-          description: ''
-          title: Doctor
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        is_persistent:
-          type: boolean
-          description: If this is true, this report will be the same across all notes
-          title: Is persistent
-        clinical_note_fields:
-          items:
-            title: Clinical Note Field
-            type: object
-            description: Array of field objects
-            properties:
-              archived:
-                type: boolean
-                description: Indicates that the field has been soft-deleted by the doctor
-                title: Archived
-              name:
-                type: string
-                description: ''
-                title: Name
-              data_type:
-                type: string
-                description: One of `""`, `"Checkbox"`, `"NullCheckbox"`, `"String"`, `"TwoStrings"`, `"FreeDraw"`, `"Photo"`, `"Header"`, `"Subheader"`
-                title: Data Type
-              required:
-                type: boolean
-                description: Indicates that a note should not be locked unless a value is provided for this field
-                title: Required
-              allowed_values:
-                items:
-                  type: string
-                  description: ''
-                  title: ''
-                type: array
-                description: ''
-                title: Allowed Values
-              clinical_note_template:
-                type: integer
-                description: ''
-                title: Clinical Note Template
-          type: array
-          description: clinical note fields
-          title: Clinical Note Fields
-        is_onpatient:
-          type: boolean
-          description: ''
-          title: Is onpatient
-        order:
-          title: SoapNoteCustomReport
-          type: object
-          description: Order of templates
-          properties:
-            on_complete_note:
-              type: integer
-              description: Order of the template on complete notes
-              title: On complete note
-            on_ipad:
-              type: integer
-              description: Order of the template on iPad
-              title: On ipad
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required:
-      - clinical_note_fields
-    AppointmentProfile:
-      x-verbose-required: []
-      required:
-      - name
-      - color
-      - online_scheduling
-      type: object
-      description: Appointment profiles are for common kinds of appointments a doctor might have, such as "physical exam", which have a standard duration and should show up as the same color on the calendar.
-      properties:
-        archived:
-          readOnly: true
-          type: boolean
-          description: Indicates that the object has been soft-deleted and should not be used
-          title: Archived
-        name:
-          type: string
-          description: ''
-          title: Name
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        color:
-          type: string
-          description: ''
-          title: Color
-        reason:
-          type: string
-          description: ''
-          title: Reason
-        sort_order:
-          type: integer
-          description: Override the usual ordering ordering of appointments in the patient's appointments page. Lower values are shown at the top
-          title: Sort order
-        duration:
-          type: integer
-          description: Length of an appointment in minutes
-          title: Duration
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        online_scheduling:
-          type: boolean
-          description: Whether this profile should be available for online scheduling
-          title: Online scheduling
-    PatientAmendment:
-      required:
-      - patient
-      - doctor
-      - amendment_name
-      - amendment_file
-      type: object
-      properties:
-        amendment_name:
-          type: string
-          description: ''
-          title: Amendment name
-        appointment:
-          type: integer
-          description: ID of the appointment to which the amendment applies, if any. If present, the `amendment_file` will be appended to the clinical note for this appointment.
-          title: Appointment
-        doctor:
-          type: integer
-          description: ID of the doctor who owns the amendment
-          title: Doctor
-        comments:
-          type: string
-          description: ''
-          title: Comments
-        amendment_file:
-          type: string
-          description: A PDF file containing the amended information for the patient's record
-          title: Amendment file
-        patient:
-          type: integer
-          description: ID of the patient to whom the amendment applies
-          title: Patient
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
     ReminderProfile:
       required:
       - doctor
@@ -19905,6 +20123,317 @@ components:
       - secondary_insurance
       - tertiary_insurance
       - workers_comp_insurance
+    SoapNoteLineItemFieldType:
+      required: []
+      type: object
+      properties:
+        comment:
+          type: string
+          description: Comment
+          title: Comment
+        archived:
+          type: boolean
+          description: Indicates that the field has been soft-deleted by the doctor and will not be used in future notes
+          title: Archived
+        clinical_note_template:
+          readOnly: true
+          type: string
+          description: ID of the `/api/clinical_note_templates` object that the field belongs to
+          title: Clinical note template
+        data_type:
+          type: string
+          description: One of `""`, `"Checkbox"`, `"NullCheckbox"`, `"String"`, `"TwoStrings"`, `"FreeDraw"`, `"Photo"`, `"Header"`, `"Subheader"`
+          title: Data type
+        required:
+          type: boolean
+          description: Indicates that a note should not be locked unless a value is provided for this field
+          title: Required
+        allowed_values:
+          items:
+            type: string
+            description: Value option
+            title: ''
+          type: array
+          description: Value options the field type relies on if applicable, otherwise it will be an empty array
+          title: Allowed values
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        name:
+          type: string
+          description: ''
+          title: Name
+      x-verbose-required: []
+    PatientIntervention:
+      required:
+      - doctor
+      - patient
+      type: object
+      properties:
+        value_name:
+          readOnly: true
+          type: string
+          description: Description of value
+          title: Value name
+        value_code_system:
+          type: string
+          description: Can be `SNOMEDCT`, `ICD10CM`, `LOINC`
+          title: Value code system
+        code:
+          type: string
+          description: Code from different code system
+          title: Code
+        appointment:
+          readOnly: true
+          type: string
+          description: ''
+          title: Appointment
+        name:
+          readOnly: true
+          type: string
+          description: Description of intervention
+          title: Name
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        effective_time:
+          type: string
+          description: ''
+          title: Effective time
+        value_code:
+          type: string
+          description: Code from different code system represent intervention value
+          title: Value code
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        code_system:
+          type: string
+          description: Can be `SNOMEDCT`, `HCPCS`, `CPT`, `ICD10CM`
+          title: Code system
+      x-verbose-required: []
+    LabVendorLocation:
+      required:
+      - name
+      - facility_code
+      type: object
+      properties:
+        vendor_name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Vendor name
+        facility_code:
+          type: string
+          description: Used for identifying the lab in orders and results
+          title: Facility code
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        name:
+          type: string
+          description: ''
+          title: Name
+      x-verbose-required: []
+    CustomVitalType:
+      required: []
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates that the object has been soft-deleted and should not be used
+          title: Archived
+        description:
+          type: string
+          description: ''
+          title: Description
+        data_type:
+          enum:
+          - text
+          - number
+          - single_sel
+          type: string
+          description: One of `text`, `number`, or `single_sel`
+          title: Data type
+        doctor:
+          readOnly: true
+          type: string
+          description: ID of the doctor who created the custom vital
+          title: Doctor
+        is_fraction_field:
+          type: boolean
+          description: ''
+          title: Is fraction field
+        fraction_delimiter:
+          type: string
+          description: If `is_fraction_field` is true, this is the character separating the numerator and denominator
+          title: Fraction delimiter
+        allowed_values:
+          items:
+            type: string
+            description: ''
+            title: ''
+          type: array
+          description: If `data_type` is `single_sel`, this is the array of values in the select's dropdown.
+          title: Allowed values
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        unit:
+          type: string
+          description: ''
+          title: Unit
+        name:
+          type: string
+          description: ''
+          title: Name
+      x-verbose-required: []
+    SignedConsentFormUpdate:
+      type: object
+      properties:
+        appointment:
+          type: integer
+          description: ID of the appointment that the consent form is signed for
+          title: Appointment
+        archived:
+          type: boolean
+          description: Indicates that the consent form has been archived and should not be used
+          title: Archived
+        consent_form:
+          type: integer
+          description: ID of the consent form that is signed
+          title: Consent form
+        patient:
+          type: integer
+          description: ID of the patient who signed the consent form
+          title: Patient
+        signature_file:
+          format: binary
+          type: string
+          description: File with the signature of the patient
+          title: Signature file
+      x-verbose-required: []
+    PatientAmendment:
+      required:
+      - patient
+      - doctor
+      - amendment_name
+      - amendment_file
+      type: object
+      properties:
+        amendment_name:
+          type: string
+          description: ''
+          title: Amendment name
+        appointment:
+          type: integer
+          description: ID of the appointment to which the amendment applies, if any. If present, the `amendment_file` will be appended to the clinical note for this appointment.
+          title: Appointment
+        doctor:
+          type: integer
+          description: ID of the doctor who owns the amendment
+          title: Doctor
+        comments:
+          type: string
+          description: ''
+          title: Comments
+        amendment_file:
+          type: string
+          description: A PDF file containing the amended information for the patient's record
+          title: Amendment file
+        patient:
+          type: integer
+          description: ID of the patient to whom the amendment applies
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    Staff:
+      required: []
+      type: object
+      properties:
+        username:
+          readOnly: true
+          type: string
+          description: ''
+          title: Username
+        first_name:
+          readOnly: true
+          type: string
+          description: ''
+          title: First name
+        last_name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Last name
+        user_id:
+          readOnly: true
+          type: string
+          description: ''
+          title: User id
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        home_phone:
+          readOnly: true
+          type: string
+          description: ''
+          title: Home phone
+        active:
+          readOnly: true
+          type: string
+          description: ''
+          title: Active
+        cell_phone:
+          readOnly: true
+          type: string
+          description: ''
+          title: Cell phone
+        email:
+          readOnly: true
+          type: string
+          description: An account registration email will be sent to this address.
+          title: Email
+      x-verbose-required: []
     LabTest:
       required:
       - lab_order
@@ -19965,6 +20494,887 @@ components:
           type: string
           description: Name for the test
           title: Name
+      x-verbose-required: []
+    Insurance:
+      required: []
+      type: object
+      properties:
+        payer_name:
+          type: string
+          description: ''
+          title: payer_name
+        state:
+          type: string
+          description: ''
+          title: state
+        payer_id:
+          type: string
+          description: ''
+          title: payer_id
+    PatientFlagType:
+      required:
+      - doctor
+      - name
+      type: object
+      properties:
+        archived:
+          readOnly: true
+          type: boolean
+          description: Indicates the flag type is soft-deleted and should not be used
+          title: Archived
+        name:
+          type: string
+          description: Name of the patient flag type
+          title: Name
+        doctor:
+          type: integer
+          description: Doctor who owns the flag type
+          title: Doctor
+        color:
+          type: string
+          description: ''
+          title: Color
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        priority:
+          type: integer
+          description: Priority of the flag type
+          title: Priority
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    ClaimBillingNotes:
+      required:
+      - appointment
+      type: object
+      properties:
+        text:
+          type: string
+          description: ''
+          title: Text
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        appointment:
+          type: integer
+          description: ''
+          title: Appointment
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of `/users` when created the note
+          title: Created by
+      x-verbose-required: []
+    AppointmentTemplate:
+      x-verbose-required:
+      - open_slots
+      required:
+      - office
+      - exam_room
+      - scheduled_time
+      - profile
+      type: object
+      description: Appointment templates are blocks of time during which a doctor usually sees appointments with the same profile. These may have a longer duration then the corresponding profile, in which case they may allow multiple appointments to be booked during that period.
+      properties:
+        profile:
+          type: integer
+          description: ID of the appointment profile to default to
+          title: Profile
+        scheduled_time:
+          type: string
+          description: ''
+          title: Scheduled time
+        archived:
+          readOnly: true
+          type: boolean
+          description: Indicats that the object has been soft-deleted and should not be used
+          title: Archived
+        week_days:
+          items:
+            type: integer
+            description: ''
+            title: ''
+          type: array
+          description: Array of integers that indicate week days (`0` = Monday, ..., `6` = Sunday)
+          title: Week days
+        office:
+          type: integer
+          description: ''
+          title: Office
+        open_slots:
+          items:
+            title: Open Slot
+            type: object
+            description: ''
+            properties:
+              start:
+                type: string
+                description: ''
+                title: Start
+              end:
+                type: string
+                description: ''
+                title: End
+          type: array
+          description: Array of time intervals during which the template is available. Only computed if the available and verbose query parameters are passed. Note that only slots long enough to fit an appointment with the corresponding profile are included.
+          title: Open Slots
+        date_end:
+          type: string
+          description: ''
+          title: Date end
+        date_start:
+          type: string
+          description: ''
+          title: Date start
+        exam_room:
+          type: integer
+          description: '**1-based** index for the exam room'
+          title: Exam room
+        duration:
+          type: integer
+          description: Length of an appointment in minutes
+          title: Duration
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+    CustomPatientFieldType:
+      required:
+      - doctor
+      - name
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates that the object has been soft-deleted, and should not be used
+          title: Archived
+        description:
+          type: string
+          description: ''
+          title: Description
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        template_name:
+          type: string
+          description: Custom Patient Demographics with `template_name` set can be inserted into clinical notes via Form Builder. Only letters (a-z or A-Z), numbers (0-9) or underscore(_) are allowed for template name.
+          title: Template name
+        allowed_values:
+          type: string
+          description: Allowed values if needed. Values must be separated by comma `,`
+          title: Allowed values
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        name:
+          type: string
+          description: ''
+          title: Name
+      x-verbose-required: []
+    PatientVaccineRecord:
+      required:
+      - patient
+      - cvx_code
+      - name
+      type: object
+      properties:
+        lot_number:
+          type: string
+          description: Lot/batch number of the vaccine dose
+        site:
+          type: string
+          description: ''
+          title: Site
+        ordering_doctor:
+          type: integer
+          description: ''
+          title: Ordering doctor
+        doses:
+          items:
+            title: VaccineDose
+            type: object
+            description: Vaccine dose ID
+            properties:
+              min_age_months:
+                type: integer
+                description: ''
+                title: Min age months
+              id:
+                readOnly: true
+                type: integer
+                description: ''
+                title: ID
+              max_age_months:
+                type: integer
+                description: ''
+                title: Max age months
+              title:
+                type: string
+                description: ''
+                title: Title
+          type: array
+          description: Vaccine dose IDs received in consent form signed hook
+          title: Doses
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        next_dose_date:
+          type: string
+          description: Date for next dose of vaccine
+          title: Date for next dose
+        cpt_code:
+          type: string
+          description: Vaccine cpt code
+          title: Cpt code
+        completion_status:
+          enum:
+          - CP
+          - RE
+          - NA
+          - PA
+          type: string
+          description: Vaccination status, can be `CP`(Complete), `RE`(Refused), `NA`(Not administered), `PA`(Partially administered)
+          title: Vaccination Status
+        administered_at:
+          type: integer
+          description: ID of `/api/offices` where the administration happened
+          title: Administered at
+        comments:
+          type: string
+          description: ''
+          title: Comments
+        funding_eligibility:
+          enum:
+          - V01
+          - V02
+          - V03
+          - V04
+          - V05
+          - V07
+          type: string
+          description: The funding program that should pay for a given immunization
+          title: Funding Eligibility
+        units:
+          type: string
+          description: ''
+          title: Units
+        entered_by:
+          readOnly: true
+          type: string
+          description: ID of user who created the record
+          title: Entered by
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        administration_start:
+          type: string
+          description: Datetime when the administration starts
+          title: Administration start
+        record_source:
+          enum:
+          - '00'
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+          - '07'
+          - 08
+          type: string
+          description: ''
+          title: Record Type
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        consent_form:
+          type: integer
+          description: Consent form related with vaccine record
+          title: Consent form
+        manufacturer:
+          type: string
+          description: Manufacturer of the vaccine
+        administered_by:
+          type: string
+          description: ID of `/api/users` who performs the administration
+          title: Administered by
+        name:
+          type: string
+          description: ''
+          title: Name
+        vis:
+          readOnly: true
+          type: string
+          description: Related vaccine information statement
+          title: Vis
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        observed_immunity:
+          enum:
+          - '398102009'
+          - '409498004'
+          - '397428000'
+          - '18624000'
+          - '91428005'
+          - '271511000'
+          - '240532009'
+          - '6142004'
+          - '52947006'
+          - '14189004'
+          - '23511006'
+          - '36989005'
+          - '27836007'
+          - '16814004'
+          - '14168008'
+          - '36653000'
+          - '76902006'
+          - '66071002'
+          - '4834000'
+          - '111852003'
+          - '38907003'
+          - '40468003'
+          - '16541001'
+          type: string
+          description: ''
+          title: Observed Immunity
+        amount:
+          type: number
+          description: Amount of vaccine administered
+          title: Amount
+        vaccine_inventory:
+          type: integer
+          description: ID of `/api/vaccine_inventories` the vaccine is from
+          title: Vaccine inventory
+        route:
+          type: string
+          description: ''
+          title: Route
+        cvx_code:
+          type: string
+          description: Vaccine cvx code
+          title: Cvx code
+      x-verbose-required: []
+    SignedConsentForm:
+      required:
+      - patient
+      - appointment
+      - consent_form
+      type: object
+      properties:
+        date_signed:
+          readOnly: true
+          type: string
+          description: Date when the consent form is signed.  Automatically set when the record is created
+          title: Date signed
+        archived:
+          type: boolean
+          description: Indicates that the consent form has been archived and should not be used
+          title: Archived
+        appointment:
+          type: integer
+          description: ID of the appointment that the consent form is signed for
+          title: Appointment
+        signature_file:
+          format: binary
+          type: string
+          description: File with the signature of the patient
+          title: Signature file
+        updated_at:
+          readOnly: true
+          type: string
+          description: Date and time when the signature was last updated
+          title: Updated at
+        patient:
+          type: integer
+          description: ID of the patient who signed the consent form
+          title: Patient
+        consent_form:
+          type: integer
+          description: ID of the consent form that is signed
+          title: Consent form
+        id:
+          readOnly: true
+          type: integer
+          description: ID consent form signature
+          title: ID
+      x-verbose-required: []
+    TelemedicineAppointmentEventLog:
+      required: []
+      type: object
+      properties:
+        timestamp:
+          readOnly: true
+          type: string
+          description: ''
+          title: Timestamp
+        description:
+          readOnly: true
+          type: string
+          description: ''
+          title: Description
+        event_type:
+          readOnly: true
+          type: string
+          description: ''
+          title: Event type
+      x-verbose-required: []
+    TelemedicineAppointment:
+      x-verbose-required: []
+      required:
+      - appointment
+      type: object
+      description: The Telehealth Appointment endpoint is an extension of the existing Appointment endpoint.
+      properties:
+        sent_patient_email:
+          description: Whether a confirmation email was sent to the Patient or not
+        appointment:
+          type: integer
+          description: The Appointment related to the Telehealth Appointment, analagous to the /api/appointments resource id
+          title: Appointment
+        created_at:
+          readOnly: true
+          type: string
+          description: UTC Timestamp for when the Telehealth Appointment was created
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: UTC Timestamp for when the Telehealth Appointment was updated
+          title: Updated at
+        overlapping_duration:
+          type: string
+          description: The duration that counts only if patient and doctor are in the video room
+          title: Overlapping duration
+        duration:
+          readOnly: true
+          type: integer
+          description: Length of an appointment in minutes
+          title: Duration
+        telehealth_url:
+          readOnly: true
+          type: string
+          description: URL used to access Telehealth Appointment
+          title: Telehealth url
+    ClinicalNote:
+      required: []
+      type: object
+      properties:
+        patient:
+          readOnly: true
+          type: string
+          description: ''
+          title: Patient
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        clinical_note_sections:
+          items:
+            title: Clinical Note Section
+            type: object
+            description: ''
+            properties:
+              values:
+                items:
+                  title: Value
+                  type: object
+                  description: ''
+                  properties:
+                    clinical_note_field:
+                      type: integer
+                      description: ''
+                      title: Clinical Note Field
+                    id:
+                      type: integer
+                      description: ''
+                      title: Id
+                    value:
+                      type: string
+                      description: ''
+                      title: ''
+                type: array
+                description: ''
+                title: Values
+              clinical_note_template:
+                type: integer
+                description: ''
+                title: Clinical Note Template
+              name:
+                type: string
+                description: ''
+                title: Name
+          type: array
+          description: ''
+          title: Clinical Note Sections
+        appointment:
+          readOnly: true
+          type: string
+          description: ''
+          title: Appointment
+        signee:
+          title: ClinicalNote
+          type: object
+          description: ''
+          properties:
+            locked_by:
+              readOnly: true
+              type: string
+              description: ''
+              title: Locked by
+            supervisor_locked_by:
+              readOnly: true
+              type: string
+              description: ''
+              title: Supervisor locked by
+      x-verbose-required: []
+    PatientProblem:
+      required:
+      - doctor
+      - patient
+      type: object
+      properties:
+        category:
+          readOnly: true
+          type: string
+          description: The category of the problem. Either `problem-list-item` or `health-concern`
+          title: Category
+        icd_code:
+          type: string
+          description: ICD9 or ICD10 code for the problem
+          title: Icd code
+        icd_version:
+          enum:
+          - '9'
+          - '10'
+          type: string
+          description: Either `9` or `10`. If omitted in writing, default to 10.
+          title: Icd version
+        appointment:
+          type: integer
+          description: ''
+          title: Appointment
+        description:
+          type: string
+          description: ''
+          title: Description
+        info_url:
+          readOnly: true
+          type: string
+          description: External URL with more information about the problem, intended for patient education
+          title: Info url
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        notes:
+          type: string
+          description: Any additional notes by the provider
+          title: Notes
+        verification_status:
+          enum:
+          - ''
+          - unconfirmed
+          - provisional
+          - differential
+          - confirmed
+          - refuted
+          - entered-in-error
+          description: 'The verification status of the problem:
+
+            - `unconfirmed`
+
+            - `provisional`
+
+            - `differential`
+
+            - `confirmed`
+
+            - `refuted`
+
+            - `entered-in-error`
+
+            '
+        status:
+          enum:
+          - active
+          - inactive
+          - resolved
+          type: string
+          description: Either `active`, `inactive` or `resolved`. If omitted in writing, default to `active`
+          title: Status
+        snomed_ct_code:
+          type: string
+          description: SnoMED code for the problem
+          title: SnoMED CT code
+        abatement_date:
+          readOnly: true
+          title: Abatement Date
+          type: string
+          description: The problem's resolution date.
+          format: date
+        date_onset:
+          type: string
+          description: ''
+          title: Date onset
+        date_diagnosis:
+          type: string
+          description: ''
+          title: Date diagnosis
+        date_changed:
+          type: string
+          description: ''
+          title: Date changed
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        problem_type:
+          readOnly: true
+          enum:
+          - ''
+          - sdoh
+          - functional status
+          - disability status
+          - cognitive status
+          type: string
+          description: 'The type of problem:
+
+            - `sdoh`: Social Determinants of Health (SDOH).
+
+            - `functional status`: Functional Status.
+
+            - `disability status`: Disability Status.
+
+            - `cognitive status`: Cognitive Status.
+
+            '
+          title: Problem Type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        name:
+          type: string
+          description: Name of the problem
+          title: Name
+      x-verbose-required: []
+    LabOrder:
+      required:
+      - sublab
+      - doctor
+      - patient
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Equivalent to HL7''s ORC.5. Defaults to `"N"`.
+
+            Value | Notes
+
+            ----- | -----
+
+            `"N"` | not sent                                          |
+
+            `"Q"` | queued for processing                             |
+
+            `"A"` | `ABN (Advance Beneficiary Notice)` required       |
+
+            `"S"` | send                                              |
+
+            `"R"` | results received                                  |
+
+            `"E"` | error                                             |
+
+            '
+          title: Status
+        documents:
+          items:
+            type: string
+            description: ID of an associated lab document
+            title: ''
+          readOnly: true
+          type: array
+          description: Associated `/lab_documents` objects
+          title: Documents
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        timestamp:
+          readOnly: true
+          type: string
+          description: Time at which the order was submitted. Defaults to now
+          title: Timestamp
+        notes:
+          type: string
+          description: ''
+          title: Notes
+        accession_number:
+          type: string
+          description: For external use only
+          title: Accession number
+        requisition_id:
+          readOnly: true
+          type: string
+          description: The ID printed on the requisition PDF. Generally the same as id.
+          title: Requisition id
+        external_requisition_id:
+          type: string
+          description: Alternative requisition ID field for orders created outside of DrChrono.
+          title: External Requisition ID
+        priority:
+          enum:
+          - N
+          - S
+          type: string
+          description: '`"Normal"` or `"STAT"`. Default `"Normal"`'
+          title: Priority
+        icd10_codes:
+          items:
+            title: ICD10Code
+            type: object
+            description: ''
+            properties:
+              code:
+                type: string
+                description: The numeric ICD-10 code
+                title: Code
+              description:
+                readOnly: true
+                type: string
+                description: Short description  of the ICD-10 code
+                title: Description
+          type: array
+          description: ICD-10 codes of the conditions which the tests concerns.
+          title: Icd10 codes
+        sublab:
+          type: integer
+          description: ''
+          title: Sublab
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    CareTeamMember:
+      required: []
+      type: object
+      properties:
+        patient:
+          readOnly: true
+          type: string
+          description: ''
+          title: Patient
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        appointment:
+          readOnly: true
+          type: string
+          description: ''
+          title: Appointment
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        user:
+          readOnly: true
+          type: string
+          description: ''
+          title: User
+      x-verbose-required: []
+    PrescriptionMessage:
+      required: []
+      type: object
+      properties:
+        message_status:
+          readOnly: true
+          type: string
+          description: 'Message status for Incoming and Outgoing values. Success message for message_type are: `NewRx` : `Sent`, `RefillRequest` : `Received`, `RefillResponse` : `Sent`.'
+          title: Message status
+        patient:
+          type: integer
+          description: An optional field which refers to a patient.
+          title: Patient
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        message_type:
+          type: string
+          description: Possible values are `NewRx` for outgoing new prescriptions, `RefillRequest` for incoming refill requests, `RefillResponse` for outgoing refill responses, `Error` for incoming errors, `Status` and `Verify` for incoming status reports from Surescripts.
+          title: Message type
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        parent_message:
+          readOnly: true
+          type: string
+          description: Refers to the parent message, used for refill responses and incoming error/status reports.
+          title: Parent message
+        message_direction:
+          readOnly: true
+          enum:
+          - I
+          - O
+          type: string
+          description: Possible values are `Outgoing` and `Incoming`.
+          title: Message direction
+        pharmacy:
+          type: string
+          description: 'NCPDPID allocated #ID of the Pharmacy'
+          title: Pharmacy
+        json_data:
+          readOnly: true
+          type: string
+          description: Data sent along with `NewRx`, `RefillRequest`, and `RefillResponses` messages. The format varies, but most likely it will contain `BenefitsCoordination` section with insurance info and `MedicationPrescribed` with medication info. `Patient`, `Pharmacy`, and `Prescriber` are also usually present.
+          title: Json data
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
       x-verbose-required: []
     DoctorFeeSchedule:
       required: []
@@ -21409,256 +22819,275 @@ components:
           description: ''
           title: Base price
       x-verbose-required: []
-    PatientMessage:
+    ConsentForm:
       required:
+      - assign_by_default
       - doctor
-      - patient
-      - subject
+      - is_mandatory
+      - title
+      - uri
       type: object
       properties:
-        body:
+        archived:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Archived
+        is_mandatory:
+          type: boolean
+          description: If true, consent form must be signed prior to appointment check in
+          title: Is mandatory
+        uri:
           type: string
-          description: ''
-          title: Body
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        attachments:
-          items:
-            title: PatientMessageAttachment
-            type: object
-            description: ''
-            properties:
-              updated_at:
-                readOnly: true
-                type: string
-                description: ''
-                title: Updated at
-              created_at:
-                readOnly: true
-                type: string
-                description: ''
-                title: Created at
-              attachment:
-                type: string
-                description: ''
-                title: Attachment
-              doctor:
-                type: integer
-                description: ''
-                title: Doctor
-          type: array
-          description: ''
-          title: Attachments
+          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
+          title: Uri
         doctor:
           type: integer
           description: ''
           title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
         updated_at:
           readOnly: true
           type: string
           description: ''
           title: Updated at
-        message:
-          readOnly: true
-          type: string
-          description: ''
-          title: Message
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        subject:
-          type: string
-          description: ''
-          title: Subject
-      x-verbose-required: []
-    PatientIntervention:
-      required:
-      - doctor
-      - patient
-      type: object
-      properties:
-        value_name:
-          readOnly: true
-          type: string
-          description: Description of value
-          title: Value name
-        value_code_system:
-          type: string
-          description: Can be `SNOMEDCT`, `ICD10CM`, `LOINC`
-          title: Value code system
-        code:
-          type: string
-          description: Code from different code system
-          title: Code
-        appointment:
-          readOnly: true
-          type: string
-          description: ''
-          title: Appointment
-        name:
-          readOnly: true
-          type: string
-          description: Description of intervention
-          title: Name
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
         created_at:
           readOnly: true
           type: string
           description: ''
           title: Created at
-        effective_time:
+        title:
           type: string
           description: ''
-          title: Effective time
-        value_code:
-          type: string
-          description: Code from different code system represent intervention value
-          title: Value code
-        patient:
+          title: Title
+        assign_by_default:
+          type: boolean
+          description: If true, consent form will always be automatically assigned to appointments
+          title: Assign by default
+        order:
+          readOnly: true
           type: integer
-          description: ''
-          title: Patient
+          description: The order of consent forms that will show in management screen
+          title: Order
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
-        code_system:
-          type: string
-          description: Can be `SNOMEDCT`, `HCPCS`, `CPT`, `ICD10CM`
-          title: Code system
       x-verbose-required: []
-    Staff:
+    FeeSchedule:
       required: []
       type: object
       properties:
-        username:
-          readOnly: true
+        ineffective_date:
           type: string
-          description: ''
-          title: Username
-        first_name:
-          readOnly: true
-          type: string
-          description: ''
-          title: First name
-        last_name:
-          readOnly: true
-          type: string
-          description: ''
-          title: Last name
-        user_id:
-          readOnly: true
-          type: string
-          description: ''
-          title: User id
-        doctor:
-          readOnly: true
-          type: string
-          description: ''
-          title: Doctor
+          description: End date that this schedule is valid. If null, then it is applied until an end date is set
+          title: Ineffective date
+        assignees:
+          type: array
+          description: Schedule specific to these assignees, if null, then applies as default to all assignees without a more specific fee schedule.
+          title: Assignees
+        items:
+          type: array
+          description: Items that belong to this fee schedule (this field is only available for single requests)
+          title: Items
         created_at:
           readOnly: true
           type: string
           description: ''
           title: Created at
+        payer_id:
+          type: string
+          description: Fee Schedule pricing specific to this payer, if null, then applies as default to all payers without a more specific fee schedule.
+          title: Payer id
         updated_at:
           readOnly: true
           type: string
           description: ''
           title: Updated at
+        assignee_type:
+          enum:
+          - Individual
+          - Speciality
+          type: string
+          description: Type of assignee
+          title: Assignee Type
+        specialities:
+          type: array
+          description: Schedule specific to these specialities, if null, then applies as default to all specialities without a more specific fee schedule.
+          title: Specialities
+        effective_date:
+          type: string
+          description: Start date that this schedule is valid. If null, then since the beginning of time
+          title: Effective date
+        plan_name:
+          type: string
+          description: Name of insurance plan.
+          title: Plan name
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
-        home_phone:
-          readOnly: true
-          type: string
-          description: ''
-          title: Home phone
-        active:
-          readOnly: true
-          type: string
-          description: ''
-          title: Active
-        cell_phone:
-          readOnly: true
-          type: string
-          description: ''
-          title: Cell phone
-        email:
-          readOnly: true
-          type: string
-          description: An account registration email will be sent to this address.
-          title: Email
       x-verbose-required: []
-    CustomVitalType:
+    PatientLabResultSet:
+      required:
+      - ordering_doctor
+      - patient
+      type: object
+      properties:
+        doctor_signoff:
+          type: boolean
+          description: Check this box when the doctor has reviewed the lab result and taken appropriate action.
+          title: Doctor signoff
+        loinc_code:
+          type: string
+          description: ''
+          title: LOINC code
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        ordering_doctor:
+          type: integer
+          description: ''
+          title: Ordering doctor
+        lab_abnormal_flag:
+          enum:
+          - ''
+          - L
+          - H
+          - LL
+          - HH
+          - <
+          - '>'
+          - N
+          - A
+          - AA
+          - 'null'
+          - U
+          - D
+          - B
+          - W
+          - S
+          - R
+          - I
+          - MS
+          - VS
+          type: string
+          description: HL7 codified abnormal flag for the result.
+          title: Abnormal flag
+        lab_normal_range_units:
+          type: string
+          description: ''
+          title: Normal range units
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        lab_normal_range:
+          type: string
+          description: ''
+          title: Normal range
+        doctor_comments:
+          type: string
+          description: Comment from the doctor on lab result.
+          title: Comments
+        date_test_performed:
+          type: string
+          description: Date of lab test.
+          title: Date test performed
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        lab_result_value:
+          type: string
+          description: ''
+          title: Result value
+        lab_result_value_as_float:
+          type: number
+          description: ''
+          title: Lab result value as float
+        scanned_in_result:
+          readOnly: true
+          type: string
+          description: Scanned in PDF for this lab result (optional).
+          title: Scanned in result
+        title:
+          type: string
+          description: ''
+          title: Title
+        lab_order_status:
+          enum:
+          - ''
+          - Order Entered
+          - Discontinued
+          - In Progress
+          - Results Received
+          - Results Reviewed with Patient
+          - Paper Order
+          type: string
+          description: Status of the lab order.
+          title: Status
+        lab_imported_from_ccr:
+          readOnly: true
+          type: string
+          description: Imported CCR document that contains lab results.
+          title: Lab imported from ccr
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        lab_result_value_units:
+          type: string
+          description: ''
+          title: Result units
+      x-verbose-required: []
+    CustomAppointmentFieldType:
       required: []
       type: object
       properties:
         archived:
+          readOnly: true
           type: boolean
           description: Indicates that the object has been soft-deleted and should not be used
           title: Archived
-        description:
-          type: string
-          description: ''
-          title: Description
-        data_type:
-          enum:
-          - text
-          - number
-          - single_sel
-          type: string
-          description: One of `text`, `number`, or `single_sel`
-          title: Data type
         doctor:
           readOnly: true
           type: string
-          description: ID of the doctor who created the custom vital
-          title: Doctor
-        is_fraction_field:
-          type: boolean
           description: ''
-          title: Is fraction field
-        fraction_delimiter:
+          title: Doctor
+        created_at:
+          readOnly: true
           type: string
-          description: If `is_fraction_field` is true, this is the character separating the numerator and denominator
-          title: Fraction delimiter
-        allowed_values:
-          items:
-            type: string
-            description: ''
-            title: ''
-          type: array
-          description: If `data_type` is `single_sel`, this is the array of values in the select's dropdown.
-          title: Allowed values
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        order:
+          readOnly: true
+          type: integer
+          description: displayed order in patient's demographic page
+          title: Order
+        field_desc:
+          type: string
+          description: Description of the custom field
+          title: Field desc
+        field_name:
+          type: string
+          description: ''
+          title: Field name
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
-        unit:
-          type: string
-          description: ''
-          title: Unit
-        name:
-          type: string
-          description: ''
-          title: Name
       x-verbose-required: []
     EOBObject:
       required:
@@ -21729,26 +23158,501 @@ components:
           description: ''
           title: ID
       x-verbose-required: []
-    TelemedicineAppointmentEventLog:
-      required: []
+    PatientRiskAssessment:
+      required:
+      - doctor
+      - patient
       type: object
       properties:
-        timestamp:
+        value_name:
           readOnly: true
           type: string
           description: ''
-          title: Timestamp
+          title: Value name
+        value_code_system:
+          type: string
+          description: ''
+          title: Value code system
+        code:
+          type: string
+          description: ''
+          title: Code
+        appointment:
+          readOnly: true
+          type: string
+          description: ''
+          title: Appointment
+        name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Name
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        effective_time:
+          type: string
+          description: ''
+          title: Effective time
+        value_code:
+          type: string
+          description: ''
+          title: Value code
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        code_system:
+          type: string
+          description: ''
+          title: Code system
+      x-verbose-required: []
+    PatientCommunication:
+      required:
+      - doctor
+      - patient
+      type: object
+      properties:
+        value_name:
+          readOnly: true
+          type: string
+          description: Description of value
+          title: Value name
+        value_code_system:
+          type: string
+          description: Can be `SNOMEDCT`, `ICD10CM`, `LOINC`
+          title: Value code system
+        code:
+          type: string
+          description: Code from different code system
+          title: Code
+        appointment:
+          readOnly: true
+          type: string
+          description: ''
+          title: Appointment
+        name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Name
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        effective_time:
+          type: string
+          description: ''
+          title: Effective time
+        value_code:
+          type: string
+          description: Code from different code system represent communication value
+          title: Value code
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        code_system:
+          type: string
+          description: Can be `SNOMEDCT`, `LOINC`
+          title: Code system
+      x-verbose-required: []
+    CarePlan:
+      required: []
+      type: object
+      properties:
+        code:
+          readOnly: true
+          type: string
+          description: ''
+          title: Code
+        appointment:
+          readOnly: true
+          type: string
+          description: ''
+          title: Appointment
         description:
           readOnly: true
           type: string
           description: ''
           title: Description
-        event_type:
+        title:
           readOnly: true
           type: string
           description: ''
-          title: Event type
+          title: Title
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        plan_type:
+          readOnly: true
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          type: string
+          description: 'Can be one of the following: `1`(Goal), `2`(Patient education), `3`(Patient decision aid), `4`(Patient clinical instruction), `5`(Referral to other doctor), `6`(Health concerns)'
+          title: Plan type
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        scheduled_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: Scheduled date
+        patient:
+          readOnly: true
+          type: string
+          description: ''
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        code_system:
+          readOnly: true
+          type: string
+          description: ''
+          title: Code system
+        instructions:
+          readOnly: true
+          type: string
+          description: ''
+          title: Instructions
       x-verbose-required: []
+    PatientDrug:
+      required:
+      - doctor
+      - patient
+      type: object
+      properties:
+        dispense_quantity:
+          type: number
+          description: ''
+          title: Dispense quantity
+        prn:
+          type: boolean
+          description: If `True`, the medication should be taken when necessary
+          title: Prn
+        pharmacy_note:
+          type: string
+          description: ''
+          title: Pharmacy note
+        number_refills:
+          type: integer
+          description: ''
+          title: Number refills
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        dosage_quantity:
+          type: string
+          description: Please note, this used to be an decimal field, you can still pass decimal value to it. Or you can pass in some formatted string if needed.
+          title: Dosage quantity
+        doctor:
+          type: integer
+          description: Prescribing doctor ID
+          title: Doctor
+        date_started_taking:
+          type: string
+          description: ''
+          title: Date started taking
+        dosage_units:
+          type: string
+          description: ''
+          title: Dosage units
+        date_stopped_taking:
+          type: string
+          description: ''
+          title: Date stopped taking
+        order_status:
+          enum:
+          - ''
+          - Administered during visit
+          - Discontinued
+          - Electronic eRx Sent
+          - Faxed to Pharmacy
+          - Ordered
+          - Over the Counter
+          - Paper Rx
+          - Phoned into Pharmacy
+          - Prescribed by other Dr
+          - Prescription Printed
+          type: string
+          description: One of `""`, `"Ordered"`, `"Administered during visit"`, `"Electronic eRx Sent"`, `"Phoned into Pharmacy"`, `"Faxed to Pharmacy"`, `"Paper Rx"`, `"Prescription Printed"`, `"Discontinued"`, `"Prescribed by other Dr"` or `"Over the Counter"`. If omitted in writing, default to `""`
+          title: Order status
+        status:
+          enum:
+          - active
+          - inactive
+          type: string
+          description: If present, one of `"active"` or `"inactive"`. If omitted in writing, default to `"active"`
+          title: Status
+        appointment:
+          type: integer
+          description: Appointment ID corresponding to the initial prescription
+          title: Appointment
+        daw:
+          type: boolean
+          description: If true, the prescription should be dispensed as written and not substituted
+          title: Daw
+        rxnorm:
+          type: string
+          description: RxNorm code for the medication
+          title: Rxnorm
+        date_prescribed:
+          type: string
+          description: ''
+          title: Date prescribed
+        name:
+          type: string
+          description: ''
+          title: Name
+        ndc:
+          type: string
+          description: ''
+          title: Ndc
+        notes:
+          type: string
+          description: Any additional notes from the provider
+          title: Notes
+        frequency:
+          type: string
+          description: Frequency pf administration
+          title: Frequency
+        indication:
+          type: string
+          description: ''
+          title: Indication
+        signature_note:
+          type: string
+          description: ''
+          title: Signature note
+        route:
+          type: string
+          description: Route of administration
+          title: Route
+      x-verbose-required: []
+    ImplantableDevice:
+      required: []
+      type: object
+      properties:
+        status:
+          readOnly: true
+          enum:
+          - active
+          - inactive
+          type: string
+          description: One of `'active'` or `'inactive'`
+          title: Status
+        lot_number:
+          readOnly: true
+          type: string
+          description: ''
+          title: Device lot number
+        archived:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Archived
+        manufacturing_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: Manufacturing date
+        patient:
+          readOnly: true
+          type: string
+          description: ''
+          title: Patient
+        expiration_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: Expiration date
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        brand_name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Brand name
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        gmdn_pt_name:
+          readOnly: true
+          type: string
+          description: '"GMDN PT Name" or "SNOMED CT Description" mapped to the attribute in  the "GMDN PT Name"'
+          title: GMDN PT Name
+        version_or_model:
+          readOnly: true
+          type: string
+          description: ''
+          title: Version or model
+        serial_number:
+          readOnly: true
+          type: string
+          description: ''
+          title: Serial number
+        udi:
+          readOnly: true
+          type: string
+          description: ''
+          title: Unique Device Identifier
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        procedure:
+          readOnly: true
+          type: string
+          description: ID of `/api/procedures` object
+          title: Procedure
+        company_name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Company name
+      x-verbose-required: []
+    ScannedClinicalDocument:
+      required:
+      - doctor
+      - description
+      - date
+      - document
+      - patient
+      type: object
+      properties:
+        archived:
+          readOnly: true
+          type: boolean
+          description: '`DELETE` operation will set this field to `true`'
+          title: Archived
+        patient:
+          type: integer
+          description: ID of the patient the document concerns
+          title: Patient
+        description:
+          type: string
+          description: ''
+          title: Description
+        doctor:
+          type: integer
+          description: ID of the doctor who owns the document
+          title: Doctor
+        metatags:
+          type: string
+          description: Array of tags represented as string. This should be quoted--e.g. `'["a", "b"]'`--since this endpoint requires `multipart/form-data` encoding
+          title: Metatags
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        date:
+          type: string
+          description: ''
+          title: Date
+        document:
+          type: string
+          description: When creating, if you receive response as 201, but this field is `null`, please send a `GET` request with the created object's ID to retrieve the updated file URL
+          title: Document
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    AppointmentProfile:
+      x-verbose-required: []
+      required:
+      - name
+      - color
+      - online_scheduling
+      type: object
+      description: Appointment profiles are for common kinds of appointments a doctor might have, such as "physical exam", which have a standard duration and should show up as the same color on the calendar.
+      properties:
+        archived:
+          readOnly: true
+          type: boolean
+          description: Indicates that the object has been soft-deleted and should not be used
+          title: Archived
+        name:
+          type: string
+          description: ''
+          title: Name
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        color:
+          type: string
+          description: ''
+          title: Color
+        reason:
+          type: string
+          description: ''
+          title: Reason
+        sort_order:
+          type: integer
+          description: Override the usual ordering ordering of appointments in the patient's appointments page. Lower values are shown at the top
+          title: Sort order
+        duration:
+          type: integer
+          description: Length of an appointment in minutes
+          title: Duration
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        online_scheduling:
+          type: boolean
+          description: Whether this profile should be available for online scheduling
+          title: Online scheduling
     LabResult:
       required:
       - document
@@ -21903,6 +23807,356 @@ components:
           description: Unit used for the value
           title: Unit
       x-verbose-required: []
+    SoapNoteCustomReport:
+      required: []
+      type: object
+      properties:
+        archived:
+          readOnly: true
+          type: boolean
+          description: Indicates that the doctor has soft-deleted this template, and will not use it for future appointments
+          title: Archived
+        workflow_key:
+          readOnly: true
+          type: string
+          description: Identifier for this template. If it's a workflow form, it will be one of `"hp_cc_history_present_illness"`, `"hp_med_fam_social_history"`, `"hp_review_of_systems"`, `"hp_physical_exam"`, `"hp_assessment"`, `"hp_plan"`, `"hp_meds_allergies"`, `"soap_subjective"`, `"soap_objective"`, `"soap_assessment"`, `"soap_plan"`, `"onpatient_additional_info"`, or `"onpatient_reasons_for_visit"`. Otherwise, it will be `"custom_{id}".`
+          title: Workflow Key
+        name:
+          type: string
+          description: ''
+          title: Name
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        is_persistent:
+          type: boolean
+          description: If this is true, this report will be the same across all notes
+          title: Is persistent
+        clinical_note_fields:
+          items:
+            title: Clinical Note Field
+            type: object
+            description: Array of field objects
+            properties:
+              archived:
+                type: boolean
+                description: Indicates that the field has been soft-deleted by the doctor
+                title: Archived
+              name:
+                type: string
+                description: ''
+                title: Name
+              data_type:
+                type: string
+                description: One of `""`, `"Checkbox"`, `"NullCheckbox"`, `"String"`, `"TwoStrings"`, `"FreeDraw"`, `"Photo"`, `"Header"`, `"Subheader"`
+                title: Data Type
+              required:
+                type: boolean
+                description: Indicates that a note should not be locked unless a value is provided for this field
+                title: Required
+              allowed_values:
+                items:
+                  type: string
+                  description: ''
+                  title: ''
+                type: array
+                description: ''
+                title: Allowed Values
+              clinical_note_template:
+                type: integer
+                description: ''
+                title: Clinical Note Template
+          type: array
+          description: clinical note fields
+          title: Clinical Note Fields
+        is_onpatient:
+          type: boolean
+          description: ''
+          title: Is onpatient
+        order:
+          title: SoapNoteCustomReport
+          type: object
+          description: Order of templates
+          properties:
+            on_complete_note:
+              type: integer
+              description: Order of the template on complete notes
+              title: On complete note
+            on_ipad:
+              type: integer
+              description: Order of the template on iPad
+              title: On ipad
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required:
+      - clinical_note_fields
+    AsyncResourceError:
+      properties:
+        status:
+          type: string
+          description: Either "Error" or "Failed"
+          title: Status
+        uuid:
+          type: string
+          description: The UUID used to get the data for the asynchronous request
+          title: UUID
+        detail:
+          type: string
+          description: Instructions on what to do next
+          title: Detail
+    SoapNoteLineItemFieldValue:
+      x-verbose-required: []
+      required:
+      - appointment
+      - clinical_note_field
+      - value
+      type: object
+      description: Values entered by doctor when charting a particular appointment
+      properties:
+        clinical_note_field:
+          type: integer
+          description: ID of `/api/clinical_note_field_types` object that indicates type of the value
+          title: Clinical note field
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        value:
+          type: string
+          description: "Value of the field. Interpretation varies by field type.\n`clinical_note_field.data_type` | Value | Description\n------------------------------- | ----- | -----------\n`\"Header\"` | string | \n`\"SubHeader\"` | string |\n`\"String\"` | string | If field is single/multiple select field, make sure value presents in allowed values set.\n`\"TwoStrings\"` | string | String is seperated by `\"/\"`\n`\"NullCheckbox\"` | string | Can be `\"0\"`, `\"1\"`, `\"2\"`, `\"0\"`-`Not selected`, `\"1\"`-`No`, `\"2\"`-`Yes`\n`\"Checkbox\"` | string | Can be `\"True\"`, `\"False\"`\n"
+          title: Value
+        appointment:
+          type: integer
+          description: ID of appointment that the value applies to
+          title: Appointment
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+    PatientPhysicalExam:
+      required:
+      - doctor
+      - patient
+      type: object
+      properties:
+        value_name:
+          readOnly: true
+          type: string
+          description: Description of value
+          title: Value name
+        value_code_system:
+          type: string
+          description: Can be `SNOMEDCT`, `ICD10CM`, `LOINC`
+          title: Value code system
+        code:
+          type: string
+          description: Code from different code system
+          title: Code
+        appointment:
+          readOnly: true
+          type: string
+          description: ''
+          title: Appointment
+        name:
+          readOnly: true
+          type: string
+          description: Description of physical exam
+          title: Name
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        effective_time:
+          type: string
+          description: ''
+          title: Effective time
+        value_code:
+          type: string
+          description: Code from different code system represent physical exam value
+          title: Value code
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        code_system:
+          type: string
+          description: Can be `SNOMEDCT`, `LOINC`
+          title: Code system
+      x-verbose-required: []
+    ScheduleBlock:
+      example:
+        description: Lunch Break
+        office: 200
+        color: '#FF5733'
+        practice_group: 1
+        start_time: '2024-03-15T12:00:00'
+        exam_room: 1
+        series: null
+        end_time: '2024-03-15T13:00:00'
+        provider: 100
+        id: 12345
+        appointment_break: null
+      required:
+      - provider
+      - office
+      - start_time
+      - end_time
+      type: object
+      description: Schedule blocks are used to block off time on a provider's calendar, preventing appointments from being scheduled during those times. They can be associated with a specific provider, office, and exam room. Common use cases include blocking time for lunch breaks, meetings, administrative tasks, PTO, or other non-appointment activities.
+      properties:
+        description:
+          type: string
+          description: Description or reason for the schedule block (e.g., "Lunch Break", "Staff Meeting", "PTO")
+          title: Description
+        office:
+          type: integer
+          description: ID of the office where the schedule block is applied
+          title: Office
+        color:
+          type: string
+          description: Custom color associated with the schedule block for calendar display
+          title: Color
+        practice_group:
+          type: integer
+          description: ID of the practice group for the associated provider (doctor)
+          title: Practice group
+        start_time:
+          format: date-time
+          type: string
+          description: Start time of the schedule block in ISO 8601 format
+          title: Start time
+        exam_room:
+          type: integer
+          description: ID of the exam room where the schedule block is applied
+          title: Exam room
+        series:
+          type: integer
+          description: Series ID if the schedule block is part of a recurring series
+          title: Series
+        end_time:
+          format: date-time
+          type: string
+          description: End time of the schedule block in ISO 8601 format
+          title: End time
+        provider:
+          type: integer
+          description: ID of the provider or doctor who owns this schedule block
+          title: Provider
+        id:
+          readOnly: true
+          type: integer
+          description: Unique identifier for the schedule block
+          title: ID
+        appointment_break:
+          readOnly: true
+          type: integer
+          description: ID of an associated appointment break, if applicable
+          title: Appointment break
+    PatientMessage:
+      required:
+      - doctor
+      - patient
+      - subject
+      type: object
+      properties:
+        body:
+          type: string
+          description: ''
+          title: Body
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        attachments:
+          items:
+            title: PatientMessageAttachment
+            type: object
+            description: ''
+            properties:
+              updated_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Updated at
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              attachment:
+                type: string
+                description: ''
+                title: Attachment
+              doctor:
+                type: integer
+                description: ''
+                title: Doctor
+          type: array
+          description: ''
+          title: Attachments
+        thread:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+          description: ID of the DoctorMessageThread containing this message (OnPatient message threading)
+          title: Thread
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        message:
+          readOnly: true
+          type: string
+          description: ''
+          title: Message
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        subject:
+          type: string
+          description: ''
+          title: Subject
+      x-verbose-required: []
     PatientAllergy:
       required:
       - doctor
@@ -21986,1706 +24240,59 @@ components:
           title: ID
       x-verbose-required:
       - description
-    PatientPhysicalExam:
+    LabOrderDocument:
       required:
-      - doctor
-      - patient
-      type: object
-      properties:
-        value_name:
-          readOnly: true
-          type: string
-          description: Description of value
-          title: Value name
-        value_code_system:
-          type: string
-          description: Can be `SNOMEDCT`, `ICD10CM`, `LOINC`
-          title: Value code system
-        code:
-          type: string
-          description: Code from different code system
-          title: Code
-        appointment:
-          readOnly: true
-          type: string
-          description: ''
-          title: Appointment
-        name:
-          readOnly: true
-          type: string
-          description: Description of physical exam
-          title: Name
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        effective_time:
-          type: string
-          description: ''
-          title: Effective time
-        value_code:
-          type: string
-          description: Code from different code system represent physical exam value
-          title: Value code
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        code_system:
-          type: string
-          description: Can be `SNOMEDCT`, `LOINC`
-          title: Code system
-      x-verbose-required: []
-    CareTeamMember:
-      required: []
-      type: object
-      properties:
-        patient:
-          readOnly: true
-          type: string
-          description: ''
-          title: Patient
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        appointment:
-          readOnly: true
-          type: string
-          description: ''
-          title: Appointment
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        user:
-          readOnly: true
-          type: string
-          description: ''
-          title: User
-      x-verbose-required: []
-    SignedConsentFormUpdate:
-      type: object
-      properties:
-        appointment:
-          type: integer
-          description: ID of the appointment that the consent form is signed for
-          title: Appointment
-        archived:
-          type: boolean
-          description: Indicates that the consent form has been archived and should not be used
-          title: Archived
-        consent_form:
-          type: integer
-          description: ID of the consent form that is signed
-          title: Consent form
-        patient:
-          type: integer
-          description: ID of the patient who signed the consent form
-          title: Patient
-        signature_file:
-          format: binary
-          type: string
-          description: File with the signature of the patient
-          title: Signature file
-      x-verbose-required: []
-    ImplantableDevice:
-      required: []
-      type: object
-      properties:
-        status:
-          readOnly: true
-          enum:
-          - active
-          - inactive
-          type: string
-          description: One of `'active'` or `'inactive'`
-          title: Status
-        lot_number:
-          readOnly: true
-          type: string
-          description: ''
-          title: Device lot number
-        archived:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Archived
-        manufacturing_date:
-          readOnly: true
-          type: string
-          description: ''
-          title: Manufacturing date
-        patient:
-          readOnly: true
-          type: string
-          description: ''
-          title: Patient
-        expiration_date:
-          readOnly: true
-          type: string
-          description: ''
-          title: Expiration date
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        brand_name:
-          readOnly: true
-          type: string
-          description: ''
-          title: Brand name
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        gmdn_pt_name:
-          readOnly: true
-          type: string
-          description: '"GMDN PT Name" or "SNOMED CT Description" mapped to the attribute in  the "GMDN PT Name"'
-          title: GMDN PT Name
-        version_or_model:
-          readOnly: true
-          type: string
-          description: ''
-          title: Version or model
-        serial_number:
-          readOnly: true
-          type: string
-          description: ''
-          title: Serial number
-        udi:
-          readOnly: true
-          type: string
-          description: ''
-          title: Unique Device Identifier
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        procedure:
-          readOnly: true
-          type: string
-          description: ID of `/api/procedures` object
-          title: Procedure
-        company_name:
-          readOnly: true
-          type: string
-          description: ''
-          title: Company name
-      x-verbose-required: []
-    CarePlan:
-      required: []
-      type: object
-      properties:
-        code:
-          readOnly: true
-          type: string
-          description: ''
-          title: Code
-        appointment:
-          readOnly: true
-          type: string
-          description: ''
-          title: Appointment
-        description:
-          readOnly: true
-          type: string
-          description: ''
-          title: Description
-        title:
-          readOnly: true
-          type: string
-          description: ''
-          title: Title
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        plan_type:
-          readOnly: true
-          enum:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '6'
-          type: string
-          description: 'Can be one of the following: `1`(Goal), `2`(Patient education), `3`(Patient decision aid), `4`(Patient clinical instruction), `5`(Referral to other doctor), `6`(Health concerns)'
-          title: Plan type
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        scheduled_date:
-          readOnly: true
-          type: string
-          description: ''
-          title: Scheduled date
-        patient:
-          readOnly: true
-          type: string
-          description: ''
-          title: Patient
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        code_system:
-          readOnly: true
-          type: string
-          description: ''
-          title: Code system
-        instructions:
-          readOnly: true
-          type: string
-          description: ''
-          title: Instructions
-      x-verbose-required: []
-    ConsentForm:
-      required:
-      - assign_by_default
-      - doctor
-      - is_mandatory
-      - title
-      - uri
-      type: object
-      properties:
-        archived:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Archived
-        is_mandatory:
-          type: boolean
-          description: If true, consent form must be signed prior to appointment check in
-          title: Is mandatory
-        uri:
-          type: string
-          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
-          title: Uri
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        title:
-          type: string
-          description: ''
-          title: Title
-        assign_by_default:
-          type: boolean
-          description: If true, consent form will always be automatically assigned to appointments
-          title: Assign by default
-        order:
-          readOnly: true
-          type: integer
-          description: The order of consent forms that will show in management screen
-          title: Order
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    PatientCommunication:
-      required:
-      - doctor
-      - patient
-      type: object
-      properties:
-        value_name:
-          readOnly: true
-          type: string
-          description: Description of value
-          title: Value name
-        value_code_system:
-          type: string
-          description: Can be `SNOMEDCT`, `ICD10CM`, `LOINC`
-          title: Value code system
-        code:
-          type: string
-          description: Code from different code system
-          title: Code
-        appointment:
-          readOnly: true
-          type: string
-          description: ''
-          title: Appointment
-        name:
-          readOnly: true
-          type: string
-          description: ''
-          title: Name
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        effective_time:
-          type: string
-          description: ''
-          title: Effective time
-        value_code:
-          type: string
-          description: Code from different code system represent communication value
-          title: Value code
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        code_system:
-          type: string
-          description: Can be `SNOMEDCT`, `LOINC`
-          title: Code system
-      x-verbose-required: []
-    FeeSchedule:
-      required: []
-      type: object
-      properties:
-        ineffective_date:
-          type: string
-          description: End date that this schedule is valid. If null, then it is applied until an end date is set
-          title: Ineffective date
-        assignees:
-          type: array
-          description: Schedule specific to these assignees, if null, then applies as default to all assignees without a more specific fee schedule.
-          title: Assignees
-        items:
-          type: array
-          description: Items that belong to this fee schedule (this field is only available for single requests)
-          title: Items
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        payer_id:
-          type: string
-          description: Fee Schedule pricing specific to this payer, if null, then applies as default to all payers without a more specific fee schedule.
-          title: Payer id
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        assignee_type:
-          enum:
-          - Individual
-          - Speciality
-          type: string
-          description: Type of assignee
-          title: Assignee Type
-        specialities:
-          type: array
-          description: Schedule specific to these specialities, if null, then applies as default to all specialities without a more specific fee schedule.
-          title: Specialities
-        effective_date:
-          type: string
-          description: Start date that this schedule is valid. If null, then since the beginning of time
-          title: Effective date
-        plan_name:
-          type: string
-          description: Name of insurance plan.
-          title: Plan name
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    CustomAppointmentFieldType:
-      required: []
-      type: object
-      properties:
-        archived:
-          readOnly: true
-          type: boolean
-          description: Indicates that the object has been soft-deleted and should not be used
-          title: Archived
-        doctor:
-          readOnly: true
-          type: string
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        order:
-          readOnly: true
-          type: integer
-          description: displayed order in patient's demographic page
-          title: Order
-        field_desc:
-          type: string
-          description: Description of the custom field
-          title: Field desc
-        field_name:
-          type: string
-          description: ''
-          title: Field name
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    PatientDrug:
-      required:
-      - doctor
-      - patient
-      type: object
-      properties:
-        dispense_quantity:
-          type: number
-          description: ''
-          title: Dispense quantity
-        prn:
-          type: boolean
-          description: If `True`, the medication should be taken when necessary
-          title: Prn
-        pharmacy_note:
-          type: string
-          description: ''
-          title: Pharmacy note
-        number_refills:
-          type: integer
-          description: ''
-          title: Number refills
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        dosage_quantity:
-          type: string
-          description: Please note, this used to be an decimal field, you can still pass decimal value to it. Or you can pass in some formatted string if needed.
-          title: Dosage quantity
-        doctor:
-          type: integer
-          description: Prescribing doctor ID
-          title: Doctor
-        date_started_taking:
-          type: string
-          description: ''
-          title: Date started taking
-        dosage_units:
-          type: string
-          description: ''
-          title: Dosage units
-        date_stopped_taking:
-          type: string
-          description: ''
-          title: Date stopped taking
-        order_status:
-          enum:
-          - ''
-          - Administered during visit
-          - Discontinued
-          - Electronic eRx Sent
-          - Faxed to Pharmacy
-          - Ordered
-          - Over the Counter
-          - Paper Rx
-          - Phoned into Pharmacy
-          - Prescribed by other Dr
-          - Prescription Printed
-          type: string
-          description: One of `""`, `"Ordered"`, `"Administered during visit"`, `"Electronic eRx Sent"`, `"Phoned into Pharmacy"`, `"Faxed to Pharmacy"`, `"Paper Rx"`, `"Prescription Printed"`, `"Discontinued"`, `"Prescribed by other Dr"` or `"Over the Counter"`. If omitted in writing, default to `""`
-          title: Order status
-        status:
-          enum:
-          - active
-          - inactive
-          type: string
-          description: If present, one of `"active"` or `"inactive"`. If omitted in writing, default to `"active"`
-          title: Status
-        appointment:
-          type: integer
-          description: Appointment ID corresponding to the initial prescription
-          title: Appointment
-        daw:
-          type: boolean
-          description: If true, the prescription should be dispensed as written and not substituted
-          title: Daw
-        rxnorm:
-          type: string
-          description: RxNorm code for the medication
-          title: Rxnorm
-        date_prescribed:
-          type: string
-          description: ''
-          title: Date prescribed
-        name:
-          type: string
-          description: ''
-          title: Name
-        ndc:
-          type: string
-          description: ''
-          title: Ndc
-        notes:
-          type: string
-          description: Any additional notes from the provider
-          title: Notes
-        frequency:
-          type: string
-          description: Frequency pf administration
-          title: Frequency
-        indication:
-          type: string
-          description: ''
-          title: Indication
-        signature_note:
-          type: string
-          description: ''
-          title: Signature note
-        route:
-          type: string
-          description: Route of administration
-          title: Route
-      x-verbose-required: []
-    PatientProblem:
-      required:
-      - doctor
-      - patient
-      type: object
-      properties:
-        category:
-          readOnly: true
-          type: string
-          description: The category of the problem. Either `problem-list-item` or `health-concern`
-          title: Category
-        icd_code:
-          type: string
-          description: ICD9 or ICD10 code for the problem
-          title: Icd code
-        icd_version:
-          enum:
-          - '9'
-          - '10'
-          type: string
-          description: Either `9` or `10`. If omitted in writing, default to 10.
-          title: Icd version
-        appointment:
-          type: integer
-          description: ''
-          title: Appointment
-        description:
-          type: string
-          description: ''
-          title: Description
-        info_url:
-          readOnly: true
-          type: string
-          description: External URL with more information about the problem, intended for patient education
-          title: Info url
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        notes:
-          type: string
-          description: Any additional notes by the provider
-          title: Notes
-        verification_status:
-          enum:
-          - ''
-          - unconfirmed
-          - provisional
-          - differential
-          - confirmed
-          - refuted
-          - entered-in-error
-          description: 'The verification status of the problem:
-
-            - `unconfirmed`
-
-            - `provisional`
-
-            - `differential`
-
-            - `confirmed`
-
-            - `refuted`
-
-            - `entered-in-error`
-
-            '
-        status:
-          enum:
-          - active
-          - inactive
-          - resolved
-          type: string
-          description: Either `active`, `inactive` or `resolved`. If omitted in writing, default to `active`
-          title: Status
-        snomed_ct_code:
-          type: string
-          description: SnoMED code for the problem
-          title: SnoMED CT code
-        abatement_date:
-          readOnly: true
-          title: Abatement Date
-          type: string
-          description: The problem's resolution date.
-          format: date
-        date_onset:
-          type: string
-          description: ''
-          title: Date onset
-        date_diagnosis:
-          type: string
-          description: ''
-          title: Date diagnosis
-        date_changed:
-          type: string
-          description: ''
-          title: Date changed
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        problem_type:
-          readOnly: true
-          enum:
-          - ''
-          - sdoh
-          - functional status
-          - disability status
-          - cognitive status
-          type: string
-          description: 'The type of problem:
-
-            - `sdoh`: Social Determinants of Health (SDOH).
-
-            - `functional status`: Functional Status.
-
-            - `disability status`: Disability Status.
-
-            - `cognitive status`: Cognitive Status.
-
-            '
-          title: Problem Type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        name:
-          type: string
-          description: Name of the problem
-          title: Name
-      x-verbose-required: []
-    ClinicalNote:
-      required: []
-      type: object
-      properties:
-        patient:
-          readOnly: true
-          type: string
-          description: ''
-          title: Patient
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        clinical_note_sections:
-          items:
-            title: Clinical Note Section
-            type: object
-            description: ''
-            properties:
-              values:
-                items:
-                  title: Value
-                  type: object
-                  description: ''
-                  properties:
-                    clinical_note_field:
-                      type: integer
-                      description: ''
-                      title: Clinical Note Field
-                    id:
-                      type: integer
-                      description: ''
-                      title: Id
-                    value:
-                      type: string
-                      description: ''
-                      title: ''
-                type: array
-                description: ''
-                title: Values
-              clinical_note_template:
-                type: integer
-                description: ''
-                title: Clinical Note Template
-              name:
-                type: string
-                description: ''
-                title: Name
-          type: array
-          description: ''
-          title: Clinical Note Sections
-        appointment:
-          readOnly: true
-          type: string
-          description: ''
-          title: Appointment
-        signee:
-          title: ClinicalNote
-          type: object
-          description: ''
-          properties:
-            locked_by:
-              readOnly: true
-              type: string
-              description: ''
-              title: Locked by
-            supervisor_locked_by:
-              readOnly: true
-              type: string
-              description: ''
-              title: Supervisor locked by
-      x-verbose-required: []
-    SoapNoteLineItemFieldValue:
-      x-verbose-required: []
-      required:
-      - appointment
-      - clinical_note_field
-      - value
-      type: object
-      description: Values entered by doctor when charting a particular appointment
-      properties:
-        clinical_note_field:
-          type: integer
-          description: ID of `/api/clinical_note_field_types` object that indicates type of the value
-          title: Clinical note field
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        value:
-          type: string
-          description: "Value of the field. Interpretation varies by field type.\n`clinical_note_field.data_type` | Value | Description\n------------------------------- | ----- | -----------\n`\"Header\"` | string | \n`\"SubHeader\"` | string |\n`\"String\"` | string | If field is single/multiple select field, make sure value presents in allowed values set.\n`\"TwoStrings\"` | string | String is seperated by `\"/\"`\n`\"NullCheckbox\"` | string | Can be `\"0\"`, `\"1\"`, `\"2\"`, `\"0\"`-`Not selected`, `\"1\"`-`No`, `\"2\"`-`Yes`\n`\"Checkbox\"` | string | Can be `\"True\"`, `\"False\"`\n"
-          title: Value
-        appointment:
-          type: integer
-          description: ID of appointment that the value applies to
-          title: Appointment
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-    PatientRiskAssessment:
-      required:
-      - doctor
-      - patient
-      type: object
-      properties:
-        value_name:
-          readOnly: true
-          type: string
-          description: ''
-          title: Value name
-        value_code_system:
-          type: string
-          description: ''
-          title: Value code system
-        code:
-          type: string
-          description: ''
-          title: Code
-        appointment:
-          readOnly: true
-          type: string
-          description: ''
-          title: Appointment
-        name:
-          readOnly: true
-          type: string
-          description: ''
-          title: Name
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        effective_time:
-          type: string
-          description: ''
-          title: Effective time
-        value_code:
-          type: string
-          description: ''
-          title: Value code
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        code_system:
-          type: string
-          description: ''
-          title: Code system
-      x-verbose-required: []
-    PrescriptionMessage:
-      required: []
-      type: object
-      properties:
-        message_status:
-          readOnly: true
-          type: string
-          description: 'Message status for Incoming and Outgoing values. Success message for message_type are: `NewRx` : `Sent`, `RefillRequest` : `Received`, `RefillResponse` : `Sent`.'
-          title: Message status
-        patient:
-          type: integer
-          description: An optional field which refers to a patient.
-          title: Patient
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        message_type:
-          type: string
-          description: Possible values are `NewRx` for outgoing new prescriptions, `RefillRequest` for incoming refill requests, `RefillResponse` for outgoing refill responses, `Error` for incoming errors, `Status` and `Verify` for incoming status reports from Surescripts.
-          title: Message type
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        parent_message:
-          readOnly: true
-          type: string
-          description: Refers to the parent message, used for refill responses and incoming error/status reports.
-          title: Parent message
-        message_direction:
-          readOnly: true
-          enum:
-          - I
-          - O
-          type: string
-          description: Possible values are `Outgoing` and `Incoming`.
-          title: Message direction
-        pharmacy:
-          type: string
-          description: 'NCPDPID allocated #ID of the Pharmacy'
-          title: Pharmacy
-        json_data:
-          readOnly: true
-          type: string
-          description: Data sent along with `NewRx`, `RefillRequest`, and `RefillResponses` messages. The format varies, but most likely it will contain `BenefitsCoordination` section with insurance info and `MedicationPrescribed` with medication info. `Patient`, `Pharmacy`, and `Prescriber` are also usually present.
-          title: Json data
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    ScannedClinicalDocument:
-      required:
-      - doctor
-      - description
-      - date
+      - lab_order
       - document
-      - patient
+      - type
       type: object
       properties:
-        archived:
-          readOnly: true
-          type: boolean
-          description: '`DELETE` operation will set this field to `true`'
-          title: Archived
-        patient:
-          type: integer
-          description: ID of the patient the document concerns
-          title: Patient
-        description:
+        hl7:
           type: string
-          description: ''
-          title: Description
-        doctor:
-          type: integer
-          description: ID of the doctor who owns the document
-          title: Doctor
-        metatags:
-          type: string
-          description: Array of tags represented as string. This should be quoted--e.g. `'["a", "b"]'`--since this endpoint requires `multipart/form-data` encoding
-          title: Metatags
-        updated_at:
+          description: The HL7 data that the document was generated from
+          title: HL7
+        timestamp:
           readOnly: true
           type: string
-          description: ''
-          title: Updated at
-        date:
-          type: string
-          description: ''
-          title: Date
+          description: Time at which the document was uploaded
+          title: Timestamp
+        lab_order:
+          type: integer
+          description: ID of the order this document is associated with
+          title: Lab order
         document:
           type: string
-          description: When creating, if you receive response as 201, but this field is `null`, please send a `GET` request with the created object's ID to retrieve the updated file URL
+          description: ''
           title: Document
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    ScheduleBlock:
-      example:
-        description: Lunch Break
-        office: 200
-        color: '#FF5733'
-        practice_group: 1
-        start_time: '2024-03-15T12:00:00'
-        exam_room: 1
-        series: null
-        end_time: '2024-03-15T13:00:00'
-        provider: 100
-        id: 12345
-        appointment_break: null
-      required:
-      - provider
-      - office
-      - start_time
-      - end_time
-      type: object
-      description: Schedule blocks are used to block off time on a provider's calendar, preventing appointments from being scheduled during those times. They can be associated with a specific provider, office, and exam room. Common use cases include blocking time for lunch breaks, meetings, administrative tasks, PTO, or other non-appointment activities.
-      properties:
-        description:
-          type: string
-          description: Description or reason for the schedule block (e.g., "Lunch Break", "Staff Meeting", "PTO")
-          title: Description
-        office:
-          type: integer
-          description: ID of the office where the schedule block is applied
-          title: Office
-        color:
-          type: string
-          description: Custom color associated with the schedule block for calendar display
-          title: Color
-        practice_group:
-          type: integer
-          description: ID of the practice group for the associated provider (doctor)
-          title: Practice group
-        start_time:
-          format: date-time
-          type: string
-          description: Start time of the schedule block in ISO 8601 format
-          title: Start time
-        exam_room:
-          type: integer
-          description: ID of the exam room where the schedule block is applied
-          title: Exam room
-        series:
-          type: integer
-          description: Series ID if the schedule block is part of a recurring series
-          title: Series
-        end_time:
-          format: date-time
-          type: string
-          description: End time of the schedule block in ISO 8601 format
-          title: End time
-        provider:
-          type: integer
-          description: ID of the provider or doctor who owns this schedule block
-          title: Provider
-        id:
-          readOnly: true
-          type: integer
-          description: Unique identifier for the schedule block
-          title: ID
-        appointment_break:
-          readOnly: true
-          type: integer
-          description: ID of an associated appointment break, if applicable
-          title: Appointment break
-    PatientVaccineRecord:
-      required:
-      - patient
-      - cvx_code
-      - name
-      type: object
-      properties:
-        lot_number:
-          type: string
-          description: Lot/batch number of the vaccine dose
-        site:
-          type: string
-          description: ''
-          title: Site
-        ordering_doctor:
-          type: integer
-          description: ''
-          title: Ordering doctor
-        doses:
-          items:
-            title: VaccineDose
-            type: object
-            description: Vaccine dose ID
-            properties:
-              min_age_months:
-                type: integer
-                description: ''
-                title: Min age months
-              id:
-                readOnly: true
-                type: integer
-                description: ''
-                title: ID
-              max_age_months:
-                type: integer
-                description: ''
-                title: Max age months
-              title:
-                type: string
-                description: ''
-                title: Title
-          type: array
-          description: Vaccine dose IDs received in consent form signed hook
-          title: Doses
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        next_dose_date:
-          type: string
-          description: Date for next dose of vaccine
-          title: Date for next dose
-        cpt_code:
-          type: string
-          description: Vaccine cpt code
-          title: Cpt code
-        completion_status:
+        type:
           enum:
-          - CP
-          - RE
-          - NA
-          - PA
+          - REQ
+          - ABN
+          - R-A
+          - RES
           type: string
-          description: Vaccination status, can be `CP`(Complete), `RE`(Refused), `NA`(Not administered), `PA`(Partially administered)
-          title: Vaccination Status
-        administered_at:
-          type: integer
-          description: ID of `/api/offices` where the administration happened
-          title: Administered at
-        comments:
-          type: string
-          description: ''
-          title: Comments
-        funding_eligibility:
-          enum:
-          - V01
-          - V02
-          - V03
-          - V04
-          - V05
-          - V07
-          type: string
-          description: The funding program that should pay for a given immunization
-          title: Funding Eligibility
-        units:
-          type: string
-          description: ''
-          title: Units
-        entered_by:
-          readOnly: true
-          type: string
-          description: ID of user who created the record
-          title: Entered by
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        administration_start:
-          type: string
-          description: Datetime when the administration starts
-          title: Administration start
-        record_source:
-          enum:
-          - '00'
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-          - '06'
-          - '07'
-          - 08
-          type: string
-          description: ''
-          title: Record Type
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        consent_form:
-          type: integer
-          description: Consent form related with vaccine record
-          title: Consent form
-        manufacturer:
-          type: string
-          description: Manufacturer of the vaccine
-        administered_by:
-          type: string
-          description: ID of `/api/users` who performs the administration
-          title: Administered by
-        name:
-          type: string
-          description: ''
-          title: Name
-        vis:
-          readOnly: true
-          type: string
-          description: Related vaccine information statement
-          title: Vis
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        observed_immunity:
-          enum:
-          - '398102009'
-          - '409498004'
-          - '397428000'
-          - '18624000'
-          - '91428005'
-          - '271511000'
-          - '240532009'
-          - '6142004'
-          - '52947006'
-          - '14189004'
-          - '23511006'
-          - '36989005'
-          - '27836007'
-          - '16814004'
-          - '14168008'
-          - '36653000'
-          - '76902006'
-          - '66071002'
-          - '4834000'
-          - '111852003'
-          - '38907003'
-          - '40468003'
-          - '16541001'
-          type: string
-          description: ''
-          title: Observed Immunity
-        amount:
-          type: number
-          description: Amount of vaccine administered
-          title: Amount
-        vaccine_inventory:
-          type: integer
-          description: ID of `/api/vaccine_inventories` the vaccine is from
-          title: Vaccine inventory
-        route:
-          type: string
-          description: ''
-          title: Route
-        cvx_code:
-          type: string
-          description: Vaccine cvx code
-          title: Cvx code
-      x-verbose-required: []
-    Insurance:
-      required: []
-      type: object
-      properties:
-        payer_name:
-          type: string
-          description: ''
-          title: payer_name
-        state:
-          type: string
-          description: ''
-          title: state
-        payer_id:
-          type: string
-          description: ''
-          title: payer_id
-    SignedConsentForm:
-      required:
-      - patient
-      - appointment
-      - consent_form
-      type: object
-      properties:
-        date_signed:
-          readOnly: true
-          type: string
-          description: Date when the consent form is signed.  Automatically set when the record is created
-          title: Date signed
-        archived:
-          type: boolean
-          description: Indicates that the consent form has been archived and should not be used
-          title: Archived
-        appointment:
-          type: integer
-          description: ID of the appointment that the consent form is signed for
-          title: Appointment
-        signature_file:
-          format: binary
-          type: string
-          description: File with the signature of the patient
-          title: Signature file
-        updated_at:
-          readOnly: true
-          type: string
-          description: Date and time when the signature was last updated
-          title: Updated at
-        patient:
-          type: integer
-          description: ID of the patient who signed the consent form
-          title: Patient
-        consent_form:
-          type: integer
-          description: ID of the consent form that is signed
-          title: Consent form
-        id:
-          readOnly: true
-          type: integer
-          description: ID consent form signature
-          title: ID
-      x-verbose-required: []
-    PatientLabResultSet:
-      required:
-      - ordering_doctor
-      - patient
-      type: object
-      properties:
-        doctor_signoff:
-          type: boolean
-          description: Check this box when the doctor has reviewed the lab result and taken appropriate action.
-          title: Doctor signoff
-        loinc_code:
-          type: string
-          description: ''
-          title: LOINC code
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        ordering_doctor:
-          type: integer
-          description: ''
-          title: Ordering doctor
-        lab_abnormal_flag:
-          enum:
-          - ''
-          - L
-          - H
-          - LL
-          - HH
-          - <
-          - '>'
-          - N
-          - A
-          - AA
-          - 'null'
-          - U
-          - D
-          - B
-          - W
-          - S
-          - R
-          - I
-          - MS
-          - VS
-          type: string
-          description: HL7 codified abnormal flag for the result.
-          title: Abnormal flag
-        lab_normal_range_units:
-          type: string
-          description: ''
-          title: Normal range units
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        lab_normal_range:
-          type: string
-          description: ''
-          title: Normal range
-        doctor_comments:
-          type: string
-          description: Comment from the doctor on lab result.
-          title: Comments
-        date_test_performed:
-          type: string
-          description: Date of lab test.
-          title: Date test performed
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        lab_result_value:
-          type: string
-          description: ''
-          title: Result value
-        lab_result_value_as_float:
-          type: number
-          description: ''
-          title: Lab result value as float
-        scanned_in_result:
-          readOnly: true
-          type: string
-          description: Scanned in PDF for this lab result (optional).
-          title: Scanned in result
-        title:
-          type: string
-          description: ''
-          title: Title
-        lab_order_status:
-          enum:
-          - ''
-          - Order Entered
-          - Discontinued
-          - In Progress
-          - Results Received
-          - Results Reviewed with Patient
-          - Paper Order
-          type: string
-          description: Status of the lab order.
-          title: Status
-        lab_imported_from_ccr:
-          readOnly: true
-          type: string
-          description: Imported CCR document that contains lab results.
-          title: Lab imported from ccr
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        lab_result_value_units:
-          type: string
-          description: ''
-          title: Result units
-      x-verbose-required: []
-    LabVendorLocation:
-      required:
-      - name
-      - facility_code
-      type: object
-      properties:
-        vendor_name:
-          readOnly: true
-          type: string
-          description: ''
-          title: Vendor name
-        facility_code:
-          type: string
-          description: Used for identifying the lab in orders and results
-          title: Facility code
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        name:
-          type: string
-          description: ''
-          title: Name
-      x-verbose-required: []
-    LabOrder:
-      required:
-      - sublab
-      - doctor
-      - patient
-      type: object
-      properties:
-        status:
-          type: string
-          description: 'Equivalent to HL7''s ORC.5. Defaults to `"N"`.
+          description: '
 
             Value | Notes
 
             ----- | -----
 
-            `"N"` | not sent                                          |
+            `"REQ"` | requisition form                                              |
 
-            `"Q"` | queued for processing                             |
+            `"ABN"` | `ABN (Advance Beneficiary Notice)`                            |
 
-            `"A"` | `ABN (Advance Beneficiary Notice)` required       |
+            `"R-A"` | requisition form and :abbr:`ABN (Advance Beneficiary Notice)` |
 
-            `"S"` | send                                              |
-
-            `"R"` | results received                                  |
-
-            `"E"` | error                                             |
+            `"RES"` | lab results                                                   |
 
             '
-          title: Status
-        documents:
-          items:
-            type: string
-            description: ID of an associated lab document
-            title: ''
-          readOnly: true
-          type: array
-          description: Associated `/lab_documents` objects
-          title: Documents
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        timestamp:
-          readOnly: true
-          type: string
-          description: Time at which the order was submitted. Defaults to now
-          title: Timestamp
-        notes:
-          type: string
-          description: ''
-          title: Notes
-        accession_number:
-          type: string
-          description: For external use only
-          title: Accession number
-        requisition_id:
-          readOnly: true
-          type: string
-          description: The ID printed on the requisition PDF. Generally the same as id.
-          title: Requisition id
-        external_requisition_id:
-          type: string
-          description: Alternative requisition ID field for orders created outside of DrChrono.
-          title: External Requisition ID
-        priority:
-          enum:
-          - N
-          - S
-          type: string
-          description: '`"Normal"` or `"STAT"`. Default `"Normal"`'
-          title: Priority
-        icd10_codes:
-          items:
-            title: ICD10Code
-            type: object
-            description: ''
-            properties:
-              code:
-                type: string
-                description: The numeric ICD-10 code
-                title: Code
-              description:
-                readOnly: true
-                type: string
-                description: Short description  of the ICD-10 code
-                title: Description
-          type: array
-          description: ICD-10 codes of the conditions which the tests concerns.
-          title: Icd10 codes
-        sublab:
-          type: integer
-          description: ''
-          title: Sublab
+          title: Type
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
       x-verbose-required: []
-    TelemedicineAppointment:
-      x-verbose-required: []
-      required:
-      - appointment
-      type: object
-      description: The Telehealth Appointment endpoint is an extension of the existing Appointment endpoint.
-      properties:
-        sent_patient_email:
-          description: Whether a confirmation email was sent to the Patient or not
-        appointment:
-          type: integer
-          description: The Appointment related to the Telehealth Appointment, analagous to the /api/appointments resource id
-          title: Appointment
-        created_at:
-          readOnly: true
-          type: string
-          description: UTC Timestamp for when the Telehealth Appointment was created
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: UTC Timestamp for when the Telehealth Appointment was updated
-          title: Updated at
-        overlapping_duration:
-          type: string
-          description: The duration that counts only if patient and doctor are in the video room
-          title: Overlapping duration
-        duration:
-          readOnly: true
-          type: integer
-          description: Length of an appointment in minutes
-          title: Duration
-        telehealth_url:
-          readOnly: true
-          type: string
-          description: URL used to access Telehealth Appointment
-          title: Telehealth url
-    AsyncResourceError:
-      properties:
-        status:
-          type: string
-          description: Either "Error" or "Failed"
-          title: Status
-        uuid:
-          type: string
-          description: The UUID used to get the data for the asynchronous request
-          title: UUID
-        detail:
-          type: string
-          description: Instructions on what to do next
-          title: Detail
-    AppointmentTemplate:
-      x-verbose-required:
-      - open_slots
-      required:
-      - office
-      - exam_room
-      - scheduled_time
-      - profile
-      type: object
-      description: Appointment templates are blocks of time during which a doctor usually sees appointments with the same profile. These may have a longer duration then the corresponding profile, in which case they may allow multiple appointments to be booked during that period.
-      properties:
-        profile:
-          type: integer
-          description: ID of the appointment profile to default to
-          title: Profile
-        scheduled_time:
-          type: string
-          description: ''
-          title: Scheduled time
-        archived:
-          readOnly: true
-          type: boolean
-          description: Indicats that the object has been soft-deleted and should not be used
-          title: Archived
-        week_days:
-          items:
-            type: integer
-            description: ''
-            title: ''
-          type: array
-          description: Array of integers that indicate week days (`0` = Monday, ..., `6` = Sunday)
-          title: Week days
-        office:
-          type: integer
-          description: ''
-          title: Office
-        open_slots:
-          items:
-            title: Open Slot
-            type: object
-            description: ''
-            properties:
-              start:
-                type: string
-                description: ''
-                title: Start
-              end:
-                type: string
-                description: ''
-                title: End
-          type: array
-          description: Array of time intervals during which the template is available. Only computed if the available and verbose query parameters are passed. Note that only slots long enough to fit an appointment with the corresponding profile are included.
-          title: Open Slots
-        date_end:
-          type: string
-          description: ''
-          title: Date end
-        date_start:
-          type: string
-          description: ''
-          title: Date start
-        exam_room:
-          type: integer
-          description: '**1-based** index for the exam room'
-          title: Exam room
-        duration:
-          type: integer
-          description: Length of an appointment in minutes
-          title: Duration
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
     Appointment:
       required:
       - doctor
@@ -23993,8 +24600,9 @@ components:
           title: Patient
         recurrence_instance_key:
           readOnly: true
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: A stable identifier for a recurring appointment instance, in the format `{rootSeriesId}_{YYYYMMDD}` where `YYYYMMDD` is the original occurrence date, not the current scheduled date. This value remains consistent across materialization, series splits, and rescheduling, so it should be treated as an opaque identifier rather than a source for display dates. Returns null for non-recurring appointments. Only present when the `consistent_recurrence_id` feature flag is enabled.
           title: Recurrence instance key
         cloned_from:
@@ -24220,42 +24828,6 @@ components:
       - clinical_note
       - extended_updated_at
       - status_transitions
-    CustomPatientFieldType:
-      required:
-      - doctor
-      - name
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: Indicates that the object has been soft-deleted, and should not be used
-          title: Archived
-        description:
-          type: string
-          description: ''
-          title: Description
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        template_name:
-          type: string
-          description: Custom Patient Demographics with `template_name` set can be inserted into clinical notes via Form Builder. Only letters (a-z or A-Z), numbers (0-9) or underscore(_) are allowed for template name.
-          title: Template name
-        allowed_values:
-          type: string
-          description: Allowed values if needed. Values must be separated by comma `,`
-          title: Allowed values
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        name:
-          type: string
-          description: ''
-          title: Name
-      x-verbose-required: []
     YellowNotepad:
       required:
       - appointment_id
@@ -24277,111 +24849,52 @@ components:
           type: integer
           description: ID of the associated appointment
           title: Appointment ID
-    ClaimBillingNotes:
-      required:
-      - appointment
-      type: object
-      properties:
-        text:
-          type: string
-          description: ''
-          title: Text
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        appointment:
-          type: integer
-          description: ''
-          title: Appointment
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        created_by:
-          readOnly: true
-          type: string
-          description: ID of `/users` when created the note
-          title: Created by
-      x-verbose-required: []
-    LabOrderDocument:
-      required:
-      - lab_order
-      - document
-      - type
-      type: object
-      properties:
-        hl7:
-          type: string
-          description: The HL7 data that the document was generated from
-          title: HL7
-        timestamp:
-          readOnly: true
-          type: string
-          description: Time at which the document was uploaded
-          title: Timestamp
-        lab_order:
-          type: integer
-          description: ID of the order this document is associated with
-          title: Lab order
-        document:
-          type: string
-          description: ''
-          title: Document
-        type:
-          enum:
-          - REQ
-          - ABN
-          - R-A
-          - RES
-          type: string
-          description: '
-
-            Value | Notes
-
-            ----- | -----
-
-            `"REQ"` | requisition form                                              |
-
-            `"ABN"` | `ABN (Advance Beneficiary Notice)`                            |
-
-            `"R-A"` | requisition form and :abbr:`ABN (Advance Beneficiary Notice)` |
-
-            `"RES"` | lab results                                                   |
-
-            '
-          title: Type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    PatientFlagType:
+    PatientMessage_2:
       required:
       - doctor
-      - name
+      - patient
+      - subject
       type: object
       properties:
-        archived:
-          readOnly: true
-          type: boolean
-          description: Indicates the flag type is soft-deleted and should not be used
-          title: Archived
-        name:
-          type: string
-          description: Name of the patient flag type
-          title: Name
-        doctor:
-          type: integer
-          description: Doctor who owns the flag type
-          title: Doctor
-        color:
+        body:
           type: string
           description: ''
-          title: Color
+          title: Body
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        attachments:
+          items:
+            title: PatientMessageAttachment
+            type: object
+            description: ''
+            properties:
+              updated_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Updated at
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              attachment:
+                type: string
+                description: ''
+                title: Attachment
+              doctor:
+                type: integer
+                description: ''
+                title: Doctor
+          type: array
+          description: ''
+          title: Attachments
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
         created_at:
           readOnly: true
           type: string
@@ -24392,58 +24905,20 @@ components:
           type: string
           description: ''
           title: Updated at
-        priority:
-          type: integer
-          description: Priority of the flag type
-          title: Priority
+        message:
+          readOnly: true
+          type: string
+          description: ''
+          title: Message
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
-      x-verbose-required: []
-    SoapNoteLineItemFieldType:
-      required: []
-      type: object
-      properties:
-        comment:
-          type: string
-          description: Comment
-          title: Comment
-        archived:
-          type: boolean
-          description: Indicates that the field has been soft-deleted by the doctor and will not be used in future notes
-          title: Archived
-        clinical_note_template:
-          readOnly: true
-          type: string
-          description: ID of the `/api/clinical_note_templates` object that the field belongs to
-          title: Clinical note template
-        data_type:
-          type: string
-          description: One of `""`, `"Checkbox"`, `"NullCheckbox"`, `"String"`, `"TwoStrings"`, `"FreeDraw"`, `"Photo"`, `"Header"`, `"Subheader"`
-          title: Data type
-        required:
-          type: boolean
-          description: Indicates that a note should not be locked unless a value is provided for this field
-          title: Required
-        allowed_values:
-          items:
-            type: string
-            description: Value option
-            title: ''
-          type: array
-          description: Value options the field type relies on if applicable, otherwise it will be an empty array
-          title: Allowed values
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        name:
+        subject:
           type: string
           description: ''
-          title: Name
+          title: Subject
       x-verbose-required: []
   securitySchemes:
     drchrono_oauth2:
@@ -24476,3 +24951,6 @@ components:
             clinical:read: View clinical information, such as vitals, clinical notes, medications and diagnoses.
           tokenUrl: https://app.drchrono.com/o/token/
           authorizationUrl: https://app.drchrono.com/o/authorize/
+x-refined-from:
+- drchrono-rest-api-openapi-schema.json
+- drchrono-rest-api-openapi.yml
