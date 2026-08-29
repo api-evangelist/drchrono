@@ -264,6 +264,9 @@ apis:
   - type: AgentSkill
     url: skills/drchrono-fhir-record-retrieval.md
 common:
+  - type: CapabilityMap
+    url: capabilities/drchrono-capability-edges.yml
+    name: drchrono Business Capability Map
   - type: Conventions
     url: conventions/drchrono-conventions.yml
   - type: ErrorCatalog
