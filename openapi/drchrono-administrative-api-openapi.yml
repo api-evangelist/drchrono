@@ -87,6 +87,8 @@ paths:
       - drchrono_oauth2: []
       operationId: user_groups_list
       description: Retrieve or search user groups
+      summary: User groups list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/doctor_options:
@@ -166,6 +168,8 @@ paths:
         - user:write
       operationId: doctor_options_list
       description: Retrieve or search doctor options within practice group
+      summary: Doctor options list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/doctors/{id}:
@@ -221,6 +225,8 @@ paths:
         - user:write
       operationId: doctors_read
       description: Retrieve an existing doctor
+      summary: Doctors read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/users/{id}:
@@ -274,6 +280,8 @@ paths:
       - drchrono_oauth2: []
       operationId: users_read
       description: Retrieve an existing user, `/api/users/current` can be used to identify logged in user, it will redirect to `/api/users/{current_user_id}`
+      summary: Users read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/users:
@@ -351,6 +359,8 @@ paths:
       - drchrono_oauth2: []
       operationId: users_list
       description: Retrieve or search users, `/api/users/current` can be used to identify logged in user, it will redirect to `/api/users/{current_user_id}`
+      summary: Users list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/doctor_options/{id}:
@@ -398,6 +408,8 @@ paths:
         - user:write
       operationId: doctor_options_read
       description: Retrieve existing options for a doctor
+      summary: Doctor options read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/doctors:
@@ -477,6 +489,8 @@ paths:
         - user:write
       operationId: doctors_list
       description: Retrieve or search doctors within practice group
+      summary: Doctors list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/user_groups/{id}:
@@ -530,10 +544,96 @@ paths:
       - drchrono_oauth2: []
       operationId: user_groups_read
       description: Retrieve an existing user group
+      summary: User groups read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
 components:
   schemas:
+    UserProfilesGroup:
+      required: []
+      type: object
+      properties:
+        archived:
+          readOnly: true
+          type: boolean
+          description: Group is archived or not
+          title: Archived
+        name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          readOnly: true
+          type: string
+          description: Practice group this user group belongs to
+          title: Practice group
+        created_at:
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          type: string
+          description: ''
+          title: Updated at
+        members:
+          items:
+            type: string
+            description: ID of `/api/users`
+            title: ''
+          readOnly: true
+          type: array
+          description: Users in this user group.
+          title: Members
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    WorkSchedule:
+      type: object
+      properties:
+        work_days:
+          items:
+            $ref: '#/components/schemas/WorkDay'
+          type: array
+          description: work days of the work schedule
+          title: Work days
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID for the work schedule
+          title: ID
+        office:
+          type: integer
+          description: ID of office for work schedule
+          title: Office
+        doctor:
+          type: integer
+          description: ID of doctor for work schedule
+          title: Office
+    WorkHours:
+      type: object
+      properties:
+        start_time:
+          type: string
+          description: start time of the work hour
+          title: Start time
+        enabled:
+          type: boolean
+          description: whether the work hour is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work hour
+          title: ID
+        end_time:
+          type: string
+          description: end time of the work hour
+          title: End time
     UserProfile:
       required: []
       type: object
@@ -580,70 +680,6 @@ components:
           description: Permissions the user has.
           title: Permissions
       x-verbose-required: []
-    UserProfilesGroup:
-      required: []
-      type: object
-      properties:
-        archived:
-          readOnly: true
-          type: boolean
-          description: Group is archived or not
-          title: Archived
-        name:
-          readOnly: true
-          type: string
-          description: ''
-          title: Name
-        practice_group:
-          readOnly: true
-          type: string
-          description: Practice group this user group belongs to
-          title: Practice group
-        created_at:
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          type: string
-          description: ''
-          title: Updated at
-        members:
-          items:
-            type: string
-            description: ID of `/api/users`
-            title: ''
-          readOnly: true
-          type: array
-          description: Users in this user group.
-          title: Members
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    WorkDay:
-      type: object
-      properties:
-        iso_weekday:
-          type: string
-          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-          title: ISO weekday
-        enabled:
-          type: boolean
-          description: whether the work day is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work day
-          title: ID
-        work_hours:
-          items:
-            $ref: '#/components/schemas/WorkHours'
-          type: array
-          description: work hours of the work day
-          title: Work hours
     Doctor:
       required: []
       type: object
@@ -993,6 +1029,28 @@ components:
           description: ''
           title: Job title
       x-verbose-required: []
+    WorkDay:
+      type: object
+      properties:
+        iso_weekday:
+          type: string
+          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+          title: ISO weekday
+        enabled:
+          type: boolean
+          description: whether the work day is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work day
+          title: ID
+        work_hours:
+          items:
+            $ref: '#/components/schemas/WorkHours'
+          type: array
+          description: work hours of the work day
+          title: Work hours
     DoctorOptions:
       required: []
       type: object
@@ -1057,48 +1115,6 @@ components:
           description: ''
           title: ID
       x-verbose-required: []
-    WorkHours:
-      type: object
-      properties:
-        start_time:
-          type: string
-          description: start time of the work hour
-          title: Start time
-        enabled:
-          type: boolean
-          description: whether the work hour is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work hour
-          title: ID
-        end_time:
-          type: string
-          description: end time of the work hour
-          title: End time
-    WorkSchedule:
-      type: object
-      properties:
-        work_days:
-          items:
-            $ref: '#/components/schemas/WorkDay'
-          type: array
-          description: work days of the work schedule
-          title: Work days
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID for the work schedule
-          title: ID
-        office:
-          type: integer
-          description: ID of office for work schedule
-          title: Office
-        doctor:
-          type: integer
-          description: ID of doctor for work schedule
-          title: Office
     UserProfile_2:
       required: []
       type: object

@@ -130,7 +130,187 @@ paths:
         '500':
           content: {}
           description: Internal Server Error
-      description: "Retrieve availability slots for the given date and office, doctor, or exam room.\n\nIf the `exam_room` parameter is not specified, the response will include availability for all exam rooms in the payload, grouped by exam room.\n\n**Example 1: Get availability for a single date**\n\nRequest:\n\n```http\nGET /api/availability?date=2026-01-29&office=338939&duration=30\n```\n\nResponse:\n\n```json\n{\n  \"duration\": 30,\n  \"date\": \"2026-01-29\",\n  \"open_slots\": [\n    {\n      \"start\": \"09:00\",\n      \"end\": \"17:00\",\n      \"availability\": [\n        { \"start\": \"09:00\", \"end\": \"09:30\" },\n        { \"start\": \"09:30\", \"end\": \"10:00\" },\n        { \"start\": \"10:00\", \"end\": \"10:30\" }\n      ]\n    }\n  ],\n  \"office\": 338939\n}\n```\n\n**Example 2: Get availability for a date range**\n\nRequest:\n\n```http\nGET /api/availability?date_range=2026-01-29/2026-01-30&office=338939&duration=30\n```\n\nResponse:\n\n```json\n{\n  \"date_range\": [\"2026-01-29\", \"2026-01-30\"],\n  \"duration\": 30,\n  \"office\": 338939,\n  \"dates\": [\n    {\n      \"date\": \"2026-01-29\",\n      \"open_slots\": [\n        {\n          \"start\": \"09:00\",\n          \"end\": \"17:00\",\n          \"availability\": [\n            { \"start\": \"09:00\", \"end\": \"09:30\" },\n            { \"start\": \"09:30\", \"end\": \"10:00\" }\n          ]\n        }\n      ]\n    },\n    {\n      \"date\": \"2026-01-30\",\n      \"open_slots\": []\n    }\n  ]\n}\n```\n\n**Example: Get availability for a specific exam room**\n\nRequest:\n\n```http\nGET /api/availability?date=2026-01-29&office=338939&duration=30&exam_room=2\n```\n\nResponse:\n\n```json\n{\n  \"duration\": 30,\n  \"date\": \"2026-01-29\",\n  \"open_slots\": [\n    {\n      \"start\": \"09:00\",\n      \"end\": \"17:00\",\n      \"availability\": [\n        { \"start\": \"09:00\", \"end\": \"09:30\" },\n        { \"start\": \"09:30\", \"end\": \"10:00\" },\n        { \"start\": \"10:00\", \"end\": \"10:30\" }\n      ]\n    }\n  ],\n  \"office\": 338939,\n  \"exam_room\": 2\n}\n```\n"
+      description: 'Retrieve availability slots for the given date and office, doctor, or exam room.
+
+
+        If the `exam_room` parameter is not specified, the response will include availability for all exam rooms in the payload, grouped by exam room.
+
+
+        **Example 1: Get availability for a single date**
+
+
+        Request:
+
+
+        ```http
+
+        GET /api/availability?date=2026-01-29&office=338939&duration=30
+
+        ```
+
+
+        Response:
+
+
+        ```json
+
+        {
+
+        "duration": 30,
+
+        "date": "2026-01-29",
+
+        "open_slots": [
+
+        {
+
+        "start": "09:00",
+
+        "end": "17:00",
+
+        "availability": [
+
+        { "start": "09:00", "end": "09:30" },
+
+        { "start": "09:30", "end": "10:00" },
+
+        { "start": "10:00", "end": "10:30" }
+
+        ]
+
+        }
+
+        ],
+
+        "office": 338939
+
+        }
+
+        ```
+
+
+        **Example 2: Get availability for a date range**
+
+
+        Request:
+
+
+        ```http
+
+        GET /api/availability?date_range=2026-01-29/2026-01-30&office=338939&duration=30
+
+        ```
+
+
+        Response:
+
+
+        ```json
+
+        {
+
+        "date_range": ["2026-01-29", "2026-01-30"],
+
+        "duration": 30,
+
+        "office": 338939,
+
+        "dates": [
+
+        {
+
+        "date": "2026-01-29",
+
+        "open_slots": [
+
+        {
+
+        "start": "09:00",
+
+        "end": "17:00",
+
+        "availability": [
+
+        { "start": "09:00", "end": "09:30" },
+
+        { "start": "09:30", "end": "10:00" }
+
+        ]
+
+        }
+
+        ]
+
+        },
+
+        {
+
+        "date": "2026-01-30",
+
+        "open_slots": []
+
+        }
+
+        ]
+
+        }
+
+        ```
+
+
+        **Example: Get availability for a specific exam room**
+
+
+        Request:
+
+
+        ```http
+
+        GET /api/availability?date=2026-01-29&office=338939&duration=30&exam_room=2
+
+        ```
+
+
+        Response:
+
+
+        ```json
+
+        {
+
+        "duration": 30,
+
+        "date": "2026-01-29",
+
+        "open_slots": [
+
+        {
+
+        "start": "09:00",
+
+        "end": "17:00",
+
+        "availability": [
+
+        { "start": "09:00", "end": "09:30" },
+
+        { "start": "09:30", "end": "10:00" },
+
+        { "start": "10:00", "end": "10:30" }
+
+        ]
+
+        }
+
+        ],
+
+        "office": 338939,
+
+        "exam_room": 2
+
+        }
+
+        ```'
       parameters:
       - schema:
           type: integer
@@ -183,6 +363,8 @@ paths:
       operationId: availability
       tags:
       - Availability
+      summary: Availability
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
 components:

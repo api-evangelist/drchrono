@@ -54,6 +54,8 @@ paths:
         - user:write
       operationId: doctor_work_schedule_update
       description: Update an existing doctor's entire work schedule
+      summary: Doctor work schedule update
+      x-summary-source: derived
     patch:
       responses:
         '204':
@@ -95,6 +97,8 @@ paths:
         - user:write
       operationId: doctor_work_schedule_partial_update
       description: Update an existing doctor's work schedule
+      summary: Doctor work schedule partial update
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -139,6 +143,8 @@ paths:
         - user:write
       operationId: doctor_work_schedule_read
       description: Retrieve a work schedule for the doctor (beta)
+      summary: Doctor work schedule read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/messages:
@@ -236,6 +242,8 @@ paths:
         - messages:write
       operationId: messages_create
       description: Create messages in doctor's message center
+      summary: Messages create
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -361,6 +369,8 @@ paths:
         - messages:write
       operationId: messages_list
       description: Retrieve or search messages in doctor's message center
+      summary: Messages list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/task_categories:
@@ -409,6 +419,8 @@ paths:
         - tasks:write
       operationId: task_categories_create
       description: Create a task category
+      summary: Task categories create
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -485,6 +497,8 @@ paths:
         - tasks:write
       operationId: task_categories_list
       description: Retrieve or search task categories
+      summary: Task categories list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/offices/{id}/add_exam_room:
@@ -540,6 +554,8 @@ paths:
         - user:write
       operationId: offices_add_exam_room
       description: Add an exam room to the office
+      summary: Offices add exam room
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/inventory_vaccines/{id}:
@@ -620,6 +636,8 @@ paths:
         - clinical:write
       operationId: inventory_vaccines_read
       description: Retrieve an existing vaccine inventory
+      summary: Inventory vaccines read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/offices:
@@ -699,6 +717,8 @@ paths:
         - user:write
       operationId: offices_list
       description: Retrieve or search offices
+      summary: Offices list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/task_statuses/{id}:
@@ -751,6 +771,8 @@ paths:
         - tasks:write
       operationId: task_statuses_update
       description: Update an existing task status
+      summary: Task statuses update
+      x-summary-source: derived
     patch:
       responses:
         '204':
@@ -800,6 +822,8 @@ paths:
         - tasks:write
       operationId: task_statuses_partial_update
       description: Update an existing task status
+      summary: Task statuses partial update
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -852,6 +876,8 @@ paths:
         - tasks:write
       operationId: task_statuses_read
       description: Retrieve an existing task status
+      summary: Task statuses read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/office_work_schedule:
@@ -889,6 +915,8 @@ paths:
       - drchrono_oauth2: []
       operationId: office_work_schedule_list
       description: Get the work schedule for the authed doctor's primary office (beta)
+      summary: Office work schedule list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/task_templates:
@@ -969,6 +997,8 @@ paths:
         - tasks:write
       operationId: task_templates_create
       description: Create a task template
+      summary: Task templates create
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -1077,6 +1107,8 @@ paths:
         - tasks:write
       operationId: task_templates_list
       description: Retrieve or search task templates
+      summary: Task templates list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/office_work_schedule/{id}:
@@ -1121,6 +1153,8 @@ paths:
         - user:write
       operationId: office_work_schedule_update
       description: Update an existing office's entire work schedule
+      summary: Office work schedule update
+      x-summary-source: derived
     patch:
       responses:
         '204':
@@ -1162,6 +1196,8 @@ paths:
         - user:write
       operationId: office_work_schedule_partial_update
       description: Update an existing office's work schedule
+      summary: Office work schedule partial update
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -1206,6 +1242,8 @@ paths:
         - user:write
       operationId: office_work_schedule_read
       description: Retrieve a work schedule (beta)
+      summary: Office work schedule read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/inventory_categories/{id}:
@@ -1270,6 +1308,8 @@ paths:
         - clinical:write
       operationId: inventory_categories_read
       description: Retrieve an existing inventory category
+      summary: Inventory categories read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/tasks/{id}:
@@ -1386,6 +1426,8 @@ paths:
         - tasks:write
       operationId: tasks_update
       description: Update an existing task
+      summary: Tasks update
+      x-summary-source: derived
     patch:
       responses:
         '204':
@@ -1499,6 +1541,8 @@ paths:
         - tasks:write
       operationId: tasks_partial_update
       description: Update an existing task
+      summary: Tasks partial update
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -1615,6 +1659,8 @@ paths:
         - tasks:write
       operationId: tasks_read
       description: Retrieve an existing task
+      summary: Tasks read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/doctor_work_schedule:
@@ -1652,6 +1698,8 @@ paths:
       - drchrono_oauth2: []
       operationId: doctor_work_schedule_list
       description: Get the work schedule for the authed doctor's primary office (beta)
+      summary: Doctor work schedule list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/inventory_categories:
@@ -1740,6 +1788,8 @@ paths:
         - clinical:write
       operationId: inventory_categories_list
       description: Retrieve or search inventory categories
+      summary: Inventory categories list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/task_statuses:
@@ -1788,6 +1838,8 @@ paths:
         - tasks:write
       operationId: task_statuses_create
       description: Create a task status
+      summary: Task statuses create
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -1864,6 +1916,8 @@ paths:
         - tasks:write
       operationId: task_statuses_list
       description: Retrieve or search task statuses
+      summary: Task statuses list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/task_templates/{id}:
@@ -1948,6 +2002,8 @@ paths:
         - tasks:write
       operationId: task_templates_update
       description: Update an existing task template
+      summary: Task templates update
+      x-summary-source: derived
     patch:
       responses:
         '204':
@@ -2029,6 +2085,8 @@ paths:
         - tasks:write
       operationId: task_templates_partial_update
       description: Update an existing task template
+      summary: Task templates partial update
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -2113,6 +2171,8 @@ paths:
         - tasks:write
       operationId: task_templates_read
       description: Retrieve an existing task template
+      summary: Task templates read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/message_threads/{id}:
@@ -2436,9 +2496,9 @@ paths:
         - `assigned_groups` (array of integers): Assign user groups to the thread
 
 
-        All other fields are read-only and will be ignored if provided.
-
-        '
+        All other fields are read-only and will be ignored if provided.'
+      summary: Message threads partial update (beta)
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -2671,9 +2731,9 @@ paths:
       description: 'Retrieve a single message thread by ID (beta)
 
 
-        Work to support message threads is currently in development. This is not ready for full use.
-
-        '
+        Work to support message threads is currently in development. This is not ready for full use.'
+      summary: Message threads read (beta)
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/task_notes:
@@ -2730,6 +2790,8 @@ paths:
         - tasks:write
       operationId: task_notes_create
       description: Create a task note
+      summary: Task notes create
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -2814,6 +2876,8 @@ paths:
         - tasks:write
       operationId: task_notes_list
       description: Retrieve or search task notes
+      summary: Task notes list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/tasks:
@@ -2926,6 +2990,8 @@ paths:
         - tasks:write
       operationId: tasks_create
       description: Create a task
+      summary: Tasks create
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -3066,6 +3132,8 @@ paths:
         - tasks:write
       operationId: tasks_list
       description: Retrieve or search tasks
+      summary: Tasks list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/inventory_vaccines:
@@ -3139,6 +3207,8 @@ paths:
         - clinical:write
       operationId: inventory_vaccines_create
       description: Create vaccine inventory
+      summary: Inventory vaccines create
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -3240,6 +3310,8 @@ paths:
         - clinical:write
       operationId: inventory_vaccines_list
       description: Retrieve or search vaccine inventories
+      summary: Inventory vaccines list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/task_categories/{id}:
@@ -3292,6 +3364,8 @@ paths:
         - tasks:write
       operationId: task_categories_update
       description: Update an existing task category
+      summary: Task categories update
+      x-summary-source: derived
     patch:
       responses:
         '204':
@@ -3341,6 +3415,8 @@ paths:
         - tasks:write
       operationId: task_categories_partial_update
       description: Update an existing task category
+      summary: Task categories partial update
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -3393,6 +3469,8 @@ paths:
         - tasks:write
       operationId: task_categories_read
       description: Retrieve an existing task category
+      summary: Task categories read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/task_notes/{id}:
@@ -3453,6 +3531,8 @@ paths:
         - tasks:write
       operationId: task_notes_update
       description: Update an existing task note
+      summary: Task notes update
+      x-summary-source: derived
     patch:
       responses:
         '204':
@@ -3510,6 +3590,8 @@ paths:
         - tasks:write
       operationId: task_notes_partial_update
       description: Update an existing task note
+      summary: Task notes partial update
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -3570,6 +3652,8 @@ paths:
         - tasks:write
       operationId: task_notes_read
       description: Retrieve an existing task note
+      summary: Task notes read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/messages/{id}:
@@ -3671,6 +3755,8 @@ paths:
         - messages:write
       operationId: messages_update
       description: Update an existing message in doctor's message center
+      summary: Messages update
+      x-summary-source: derived
     patch:
       responses:
         '204':
@@ -3769,6 +3855,8 @@ paths:
         - messages:write
       operationId: messages_partial_update
       description: Update an existing message in doctor's message center
+      summary: Messages partial update
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -3870,6 +3958,8 @@ paths:
         - messages:write
       operationId: messages_read
       description: Retrieve an existing message in doctor's message center
+      summary: Messages read
+      x-summary-source: derived
     delete:
       responses:
         '204':
@@ -3968,6 +4058,8 @@ paths:
         - messages:write
       operationId: messages_delete
       description: Delete an existing message in doctor's message center
+      summary: Messages delete
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/offices/{id}:
@@ -4020,6 +4112,8 @@ paths:
         - user:write
       operationId: offices_update
       description: Update an existing office
+      summary: Offices update
+      x-summary-source: derived
     patch:
       responses:
         '204':
@@ -4069,6 +4163,8 @@ paths:
         - user:write
       operationId: offices_partial_update
       description: Update an existing office
+      summary: Offices partial update
+      x-summary-source: derived
     get:
       responses:
         '200':
@@ -4121,6 +4217,8 @@ paths:
         - user:write
       operationId: offices_read
       description: Retrieve an existing office
+      summary: Offices read
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
   /api/message_threads:
@@ -4491,9 +4589,9 @@ paths:
         Use this endpoint to display an inbox-style view of conversations.
 
 
-        Work to support message threads is currently in development. This is not ready for full use.
-
-        '
+        Work to support message threads is currently in development. This is not ready for full use.'
+      summary: Message threads list (beta)
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
 components:
@@ -4568,86 +4666,6 @@ components:
           type: string
           description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
           title: Default priority
-      x-verbose-required: []
-    InventoryCategory:
-      required: []
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: If the category is archived or not
-          title: Archived
-        name:
-          type: string
-          description: Name of the inventory category
-          title: Name
-        doctor:
-          readOnly: true
-          type: string
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        category_type:
-          enum:
-          - vaccine
-          - product
-          - service
-          type: string
-          description: Can be one of `"vaccine"`, `"product"` or `"service"`
-          title: Category type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    TaskCategory:
-      required:
-      - name
-      - practice_group
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        is_global:
-          readOnly: true
-          type: string
-          description: Indicates that the category is a system wide (pre-defined) category
-          title: Is global
-        name:
-          type: string
-          description: ''
-          title: Name
-        practice_group:
-          type: integer
-          description: ''
-          title: Practice group
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
       x-verbose-required: []
     Task:
       required:
@@ -4797,569 +4815,6 @@ components:
       x-verbose-required:
       - notes
       - associated_items
-    DoctorMessage:
-      required:
-      - doctor
-      - title
-      type: object
-      properties:
-        type_description:
-          readOnly: true
-          type: string
-          description: Type Description
-          title: Type description
-        patient_middle_name:
-          readOnly: true
-          type: string
-          description: Patient Middle Name
-          title: Patient middle name
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        owner:
-          type: string
-          description: ID of `/api/users` who owns the message, who may be the doctor themselves or one of their staff members
-          title: Owner
-        responsible_user_first_name:
-          readOnly: true
-          type: string
-          description: Responsible User First Name
-          title: Responsible user first name
-        received_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Received at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        doctor_last_name:
-          readOnly: true
-          type: string
-          description: Doctor Last Name
-          title: Doctor last name
-        owner_first_name:
-          readOnly: true
-          type: string
-          description: Owner First Name
-          title: Owner first name
-        archived:
-          readOnly: true
-          type: boolean
-          description: If true, indicates that the message has been soft-deleted
-          title: Archived
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        owner_last_name:
-          readOnly: true
-          type: string
-          description: Owner Last Name
-          title: Owner last name
-        patient_first_name:
-          readOnly: true
-          type: string
-          description: Patient First Name
-          title: Patient first name
-        attachment:
-          type: string
-          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
-          title: Attachment
-        outgoing_fax_recipient_fax_number:
-          readOnly: true
-          type: string
-          description: Outgoing fax recipient fax number
-          title: Outgoing fax recipient fax number
-        responsible_user_last_name:
-          readOnly: true
-          type: string
-          description: Responsible User Last Name
-          title: Responsible user last name
-        type:
-          enum:
-          - GP
-          - GC
-          - GT
-          - GZ
-          - IF
-          - OF
-          - IL
-          - IR
-          - OR
-          - IE
-          - CE
-          - CH
-          - OA
-          - PO
-          - PI
-          - PM
-          - OO
-          - OD
-          - ID
-          - DL
-          - CN
-          type: string
-          description: '
-
-            Value | Description
-
-            ----- | -----------
-
-            `"GP"` | Generated PDF
-
-            `"GC"` | Generated CSV
-
-            `"GZ"` | Generated ZIP
-
-            `"IF"` | Incoming Fax
-
-            `"OF"` | Outgoing Fax
-
-            `"IL"` | Incoming Labs
-
-            `"IR"` | Inbound Referrals
-
-            `"OR"` | Outbound Referrals
-
-            `"IE"` | Incoming eRx
-
-            `"OA"` | Online Appointments
-
-            `"PO"` | Patient Onboarding
-
-            `"PI"` | Patient Incoming Message
-
-            `"PM"` | Patient Outgoing Message
-
-            `"OO"` | Demo Meeting Message
-
-            `"OD"` | Outbound Direct Message
-
-            `"ID"` | Inbound Direct Message
-
-            '
-          title: Type
-        patient_last_name:
-          readOnly: true
-          type: string
-          description: Patient Last Name
-          title: Patient last name
-        patient:
-          type: integer
-          description: ID of patient that the message concerns, if applicable
-          title: Patient
-        doctor_first_name:
-          readOnly: true
-          type: string
-          description: Doctor First Name
-          title: Doctor first name
-        read:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Read
-        responsible_user:
-          type: string
-          description: ID of `/api/users` who has been assigned to process the message, who may be the doctor themselves or one of their staff members
-          title: Responsible user
-        workflow_step:
-          readOnly: true
-          type: string
-          description: Used by doctors and their staff to keep track of what step of processing the message is in
-          title: Workflow step
-        outgoing_fax_recipient_name:
-          readOnly: true
-          type: string
-          description: Outgoing fax recipient name
-          title: Outgoing fax recipient name
-        doctor_middle_name:
-          readOnly: true
-          type: string
-          description: Doctor Middle Name
-          title: Doctor middle name
-        message_notes:
-          items:
-            title: MessageNote
-            type: object
-            description: Additional note
-            properties:
-              text:
-                type: string
-                description: Content of the note
-                title: Text
-              created_at:
-                readOnly: true
-                type: string
-                description: ''
-                title: Created at
-              created_by:
-                readOnly: true
-                type: string
-                description: ID of `/api/users` who created the note
-                title: Created by
-          type: array
-          description: Array of notes attached to the message
-          title: Message notes
-        title:
-          type: string
-          description: ''
-          title: Title
-        starred:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Starred
-      x-verbose-required: []
-    WorkDay:
-      type: object
-      properties:
-        iso_weekday:
-          type: string
-          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-          title: ISO weekday
-        enabled:
-          type: boolean
-          description: whether the work day is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work day
-          title: ID
-        work_hours:
-          items:
-            $ref: '#/components/schemas/WorkHours'
-          type: array
-          description: work hours of the work day
-          title: Work hours
-    TaskNote:
-      required:
-      - task
-      - text
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: If the task note is archived or not
-          title: Archived
-        task:
-          type: integer
-          description: ID of task this note is related with
-          title: Task
-        text:
-          type: string
-          description: Content of the task note
-          title: Text
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        created_by:
-          readOnly: true
-          type: string
-          description: ID of the `/api/users` who created the note
-          title: Created by
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    InventoryVaccine:
-      required:
-      - doctor
-      - name
-      - manufacturer_code
-      type: object
-      properties:
-        category:
-          type: integer
-          description: ID of `/api/inventory_categories`
-          title: Category
-        lot_number:
-          type: string
-          description: ''
-          title: Lot number
-        manufacturer_code:
-          type: string
-          description: ''
-          title: Manufacturer code
-        name:
-          type: string
-          description: ''
-          title: Name
-        original_quantity:
-          type: integer
-          description: Default to zero
-          title: Original quantity
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        status:
-          enum:
-          - active
-          - inactive
-          - archived
-          - voided
-          type: string
-          description: Status of vaccine, could be one of `active`, `inactive`, `archived`, `voided`, default to `active`
-          title: Status
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        price_with_tax:
-          type: number
-          description: ''
-          title: Price with tax
-        expiry:
-          type: string
-          description: When will the vaccine expire
-          title: Expiry
-        note:
-          type: string
-          description: ''
-          title: Note
-        sales_tax_applicable:
-          type: boolean
-          description: Is sales tax applicable to this service/product? Default to false
-          title: Sales tax applicable
-        cost:
-          type: number
-          description: Base cost for consumables.
-          title: Cost
-        price:
-          type: number
-          description: ''
-          title: Price
-        vaccination_type:
-          type: string
-          description: Default to `"standard vaccine"`
-          title: Vaccination type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        manufacturer:
-          type: string
-          description: ''
-          title: Manufacturer
-        current_quantity:
-          readOnly: true
-          type: integer
-          description: This field can onlyu be changed by creating new patient vaccine record. Current quantity of an inventory vaccine is calculated by subtract number of records pointing to this inventory from the original quantity value.
-          title: Current quantity
-        cvx_code:
-          type: string
-          description: ''
-          title: Cvx code
-      x-verbose-required: []
-    DoctorMessageThread:
-      type: object
-      properties:
-        assigned_groups:
-          items:
-            type: integer
-          type: array
-          description: Array of user group IDs assigned to this thread
-          title: Assigned groups
-        archived:
-          type: boolean
-          description: Whether the thread is archived
-          title: Archived
-        first_message:
-          readOnly: true
-          type: integer
-          description: ID of the first message in the thread
-          title: First message
-        patient:
-          readOnly: true
-          type: integer
-          description: ID of the patient associated with this thread (if patient-facing)
-          title: Patient
-        doctor:
-          readOnly: true
-          type: integer
-          description: ID of the doctor who owns this thread
-          title: Doctor
-        last_message:
-          readOnly: true
-          type: integer
-          description: ID of the most recent message in the thread
-          title: Last message
-        practice_group:
-          readOnly: true
-          type: integer
-          description: ID of the practice group for access control
-          title: Practice group
-        created_at:
-          readOnly: true
-          title: Created at
-          type: string
-          description: Timestamp when the thread was created
-          format: date-time
-        updated_at:
-          readOnly: true
-          title: Updated at
-          type: string
-          description: Timestamp when the thread was last updated
-          format: date-time
-        assigned_user_profiles:
-          items:
-            type: integer
-          type: array
-          description: Array of user profile IDs assigned to this thread
-          title: Assigned user profiles
-        message_count:
-          readOnly: true
-          type: integer
-          description: Total number of messages in this thread
-          title: Message count
-        unread_count:
-          readOnly: true
-          type: integer
-          description: Number of unread messages in this thread
-          title: Unread count
-        last_message_at:
-          readOnly: true
-          title: Last message at
-          type: string
-          description: Timestamp of the last message - used for sorting
-          format: date-time
-        owners:
-          items:
-            type: integer
-          readOnly: true
-          type: array
-          description: Array of user profile IDs who own this thread
-          title: Owners
-        starred:
-          type: boolean
-          description: Whether the thread is starred
-          title: Starred
-        message_type:
-          readOnly: true
-          type: string
-          description: Type of messages in this thread. See `/api/messages` for message type descriptions
-          title: Message type
-        id:
-          readOnly: true
-          type: integer
-          description: Unique identifier for the message thread
-          title: ID
-        subject:
-          readOnly: true
-          type: string
-          description: Thread subject - locked to first message subject
-          title: Subject
-    TaskStatus:
-      required:
-      - name
-      - practice_group
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        name:
-          type: string
-          description: ''
-          title: Name
-        status_category:
-          enum:
-          - O
-          - P
-          - H
-          - C
-          type: string
-          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
-          title: Status category
-        practice_group:
-          type: integer
-          description: ''
-          title: Practice group
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        task_category:
-          type: integer
-          description: ID of `/api/task_categories`
-          title: Task category
-      x-verbose-required: []
-    WorkHours:
-      type: object
-      properties:
-        start_time:
-          type: string
-          description: start time of the work hour
-          title: Start time
-        enabled:
-          type: boolean
-          description: whether the work hour is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work hour
-          title: ID
-        end_time:
-          type: string
-          description: end time of the work hour
-          title: End time
-    WorkSchedule:
-      type: object
-      properties:
-        work_days:
-          items:
-            $ref: '#/components/schemas/WorkDay'
-          type: array
-          description: work days of the work schedule
-          title: Work days
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID for the work schedule
-          title: ID
-        office:
-          type: integer
-          description: ID of office for work schedule
-          title: Office
-        doctor:
-          type: integer
-          description: ID of doctor for work schedule
-          title: Office
     Office:
       required: []
       type: object
@@ -5780,6 +5235,649 @@ components:
           title: Online scheduling
       x-verbose-required:
       - online_timeslots
+    TaskNote:
+      required:
+      - task
+      - text
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: If the task note is archived or not
+          title: Archived
+        task:
+          type: integer
+          description: ID of task this note is related with
+          title: Task
+        text:
+          type: string
+          description: Content of the task note
+          title: Text
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of the `/api/users` who created the note
+          title: Created by
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    TaskStatus:
+      required:
+      - name
+      - practice_group
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        name:
+          type: string
+          description: ''
+          title: Name
+        status_category:
+          enum:
+          - O
+          - P
+          - H
+          - C
+          type: string
+          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
+          title: Status category
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        task_category:
+          type: integer
+          description: ID of `/api/task_categories`
+          title: Task category
+      x-verbose-required: []
+    WorkSchedule:
+      type: object
+      properties:
+        work_days:
+          items:
+            $ref: '#/components/schemas/WorkDay'
+          type: array
+          description: work days of the work schedule
+          title: Work days
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID for the work schedule
+          title: ID
+        office:
+          type: integer
+          description: ID of office for work schedule
+          title: Office
+        doctor:
+          type: integer
+          description: ID of doctor for work schedule
+          title: Office
+    WorkHours:
+      type: object
+      properties:
+        start_time:
+          type: string
+          description: start time of the work hour
+          title: Start time
+        enabled:
+          type: boolean
+          description: whether the work hour is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work hour
+          title: ID
+        end_time:
+          type: string
+          description: end time of the work hour
+          title: End time
+    TaskCategory:
+      required:
+      - name
+      - practice_group
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        is_global:
+          readOnly: true
+          type: string
+          description: Indicates that the category is a system wide (pre-defined) category
+          title: Is global
+        name:
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    InventoryVaccine:
+      required:
+      - doctor
+      - name
+      - manufacturer_code
+      type: object
+      properties:
+        category:
+          type: integer
+          description: ID of `/api/inventory_categories`
+          title: Category
+        lot_number:
+          type: string
+          description: ''
+          title: Lot number
+        manufacturer_code:
+          type: string
+          description: ''
+          title: Manufacturer code
+        name:
+          type: string
+          description: ''
+          title: Name
+        original_quantity:
+          type: integer
+          description: Default to zero
+          title: Original quantity
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        status:
+          enum:
+          - active
+          - inactive
+          - archived
+          - voided
+          type: string
+          description: Status of vaccine, could be one of `active`, `inactive`, `archived`, `voided`, default to `active`
+          title: Status
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        price_with_tax:
+          type: number
+          description: ''
+          title: Price with tax
+        expiry:
+          type: string
+          description: When will the vaccine expire
+          title: Expiry
+        note:
+          type: string
+          description: ''
+          title: Note
+        sales_tax_applicable:
+          type: boolean
+          description: Is sales tax applicable to this service/product? Default to false
+          title: Sales tax applicable
+        cost:
+          type: number
+          description: Base cost for consumables.
+          title: Cost
+        price:
+          type: number
+          description: ''
+          title: Price
+        vaccination_type:
+          type: string
+          description: Default to `"standard vaccine"`
+          title: Vaccination type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        manufacturer:
+          type: string
+          description: ''
+          title: Manufacturer
+        current_quantity:
+          readOnly: true
+          type: integer
+          description: This field can onlyu be changed by creating new patient vaccine record. Current quantity of an inventory vaccine is calculated by subtract number of records pointing to this inventory from the original quantity value.
+          title: Current quantity
+        cvx_code:
+          type: string
+          description: ''
+          title: Cvx code
+      x-verbose-required: []
+    DoctorMessageThread:
+      type: object
+      properties:
+        assigned_groups:
+          items:
+            type: integer
+          type: array
+          description: Array of user group IDs assigned to this thread
+          title: Assigned groups
+        archived:
+          type: boolean
+          description: Whether the thread is archived
+          title: Archived
+        first_message:
+          readOnly: true
+          type: integer
+          description: ID of the first message in the thread
+          title: First message
+        patient:
+          readOnly: true
+          type: integer
+          description: ID of the patient associated with this thread (if patient-facing)
+          title: Patient
+        doctor:
+          readOnly: true
+          type: integer
+          description: ID of the doctor who owns this thread
+          title: Doctor
+        last_message:
+          readOnly: true
+          type: integer
+          description: ID of the most recent message in the thread
+          title: Last message
+        practice_group:
+          readOnly: true
+          type: integer
+          description: ID of the practice group for access control
+          title: Practice group
+        created_at:
+          readOnly: true
+          title: Created at
+          type: string
+          description: Timestamp when the thread was created
+          format: date-time
+        updated_at:
+          readOnly: true
+          title: Updated at
+          type: string
+          description: Timestamp when the thread was last updated
+          format: date-time
+        assigned_user_profiles:
+          items:
+            type: integer
+          type: array
+          description: Array of user profile IDs assigned to this thread
+          title: Assigned user profiles
+        message_count:
+          readOnly: true
+          type: integer
+          description: Total number of messages in this thread
+          title: Message count
+        unread_count:
+          readOnly: true
+          type: integer
+          description: Number of unread messages in this thread
+          title: Unread count
+        last_message_at:
+          readOnly: true
+          title: Last message at
+          type: string
+          description: Timestamp of the last message - used for sorting
+          format: date-time
+        owners:
+          items:
+            type: integer
+          readOnly: true
+          type: array
+          description: Array of user profile IDs who own this thread
+          title: Owners
+        starred:
+          type: boolean
+          description: Whether the thread is starred
+          title: Starred
+        message_type:
+          readOnly: true
+          type: string
+          description: Type of messages in this thread. See `/api/messages` for message type descriptions
+          title: Message type
+        id:
+          readOnly: true
+          type: integer
+          description: Unique identifier for the message thread
+          title: ID
+        subject:
+          readOnly: true
+          type: string
+          description: Thread subject - locked to first message subject
+          title: Subject
+    DoctorMessage:
+      required:
+      - doctor
+      - title
+      type: object
+      properties:
+        type_description:
+          readOnly: true
+          type: string
+          description: Type Description
+          title: Type description
+        patient_middle_name:
+          readOnly: true
+          type: string
+          description: Patient Middle Name
+          title: Patient middle name
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        owner:
+          type: string
+          description: ID of `/api/users` who owns the message, who may be the doctor themselves or one of their staff members
+          title: Owner
+        responsible_user_first_name:
+          readOnly: true
+          type: string
+          description: Responsible User First Name
+          title: Responsible user first name
+        received_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Received at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        doctor_last_name:
+          readOnly: true
+          type: string
+          description: Doctor Last Name
+          title: Doctor last name
+        owner_first_name:
+          readOnly: true
+          type: string
+          description: Owner First Name
+          title: Owner first name
+        archived:
+          readOnly: true
+          type: boolean
+          description: If true, indicates that the message has been soft-deleted
+          title: Archived
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        owner_last_name:
+          readOnly: true
+          type: string
+          description: Owner Last Name
+          title: Owner last name
+        patient_first_name:
+          readOnly: true
+          type: string
+          description: Patient First Name
+          title: Patient first name
+        attachment:
+          type: string
+          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
+          title: Attachment
+        outgoing_fax_recipient_fax_number:
+          readOnly: true
+          type: string
+          description: Outgoing fax recipient fax number
+          title: Outgoing fax recipient fax number
+        responsible_user_last_name:
+          readOnly: true
+          type: string
+          description: Responsible User Last Name
+          title: Responsible user last name
+        type:
+          enum:
+          - GP
+          - GC
+          - GT
+          - GZ
+          - IF
+          - OF
+          - IL
+          - IR
+          - OR
+          - IE
+          - CE
+          - CH
+          - OA
+          - PO
+          - PI
+          - PM
+          - OO
+          - OD
+          - ID
+          - DL
+          - CN
+          type: string
+          description: '
+
+            Value | Description
+
+            ----- | -----------
+
+            `"GP"` | Generated PDF
+
+            `"GC"` | Generated CSV
+
+            `"GZ"` | Generated ZIP
+
+            `"IF"` | Incoming Fax
+
+            `"OF"` | Outgoing Fax
+
+            `"IL"` | Incoming Labs
+
+            `"IR"` | Inbound Referrals
+
+            `"OR"` | Outbound Referrals
+
+            `"IE"` | Incoming eRx
+
+            `"OA"` | Online Appointments
+
+            `"PO"` | Patient Onboarding
+
+            `"PI"` | Patient Incoming Message
+
+            `"PM"` | Patient Outgoing Message
+
+            `"OO"` | Demo Meeting Message
+
+            `"OD"` | Outbound Direct Message
+
+            `"ID"` | Inbound Direct Message
+
+            '
+          title: Type
+        patient_last_name:
+          readOnly: true
+          type: string
+          description: Patient Last Name
+          title: Patient last name
+        patient:
+          type: integer
+          description: ID of patient that the message concerns, if applicable
+          title: Patient
+        doctor_first_name:
+          readOnly: true
+          type: string
+          description: Doctor First Name
+          title: Doctor first name
+        read:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Read
+        responsible_user:
+          type: string
+          description: ID of `/api/users` who has been assigned to process the message, who may be the doctor themselves or one of their staff members
+          title: Responsible user
+        workflow_step:
+          readOnly: true
+          type: string
+          description: Used by doctors and their staff to keep track of what step of processing the message is in
+          title: Workflow step
+        outgoing_fax_recipient_name:
+          readOnly: true
+          type: string
+          description: Outgoing fax recipient name
+          title: Outgoing fax recipient name
+        doctor_middle_name:
+          readOnly: true
+          type: string
+          description: Doctor Middle Name
+          title: Doctor middle name
+        message_notes:
+          items:
+            title: MessageNote
+            type: object
+            description: Additional note
+            properties:
+              text:
+                type: string
+                description: Content of the note
+                title: Text
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              created_by:
+                readOnly: true
+                type: string
+                description: ID of `/api/users` who created the note
+                title: Created by
+          type: array
+          description: Array of notes attached to the message
+          title: Message notes
+        title:
+          type: string
+          description: ''
+          title: Title
+        starred:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Starred
+      x-verbose-required: []
+    WorkDay:
+      type: object
+      properties:
+        iso_weekday:
+          type: string
+          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+          title: ISO weekday
+        enabled:
+          type: boolean
+          description: whether the work day is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work day
+          title: ID
+        work_hours:
+          items:
+            $ref: '#/components/schemas/WorkHours'
+          type: array
+          description: work hours of the work day
+          title: Work hours
+    InventoryCategory:
+      required: []
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: If the category is archived or not
+          title: Archived
+        name:
+          type: string
+          description: Name of the inventory category
+          title: Name
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        category_type:
+          enum:
+          - vaccine
+          - product
+          - service
+          type: string
+          description: Can be one of `"vaccine"`, `"product"` or `"service"`
+          title: Category type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
     Task_2:
       required:
       - title

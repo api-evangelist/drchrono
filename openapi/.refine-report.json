@@ -30,7 +30,8 @@
     "tag 'Availability' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied",
     "tag 'Billing' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied",
     "tag 'Clinical' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied",
-    "tag 'Practice Management' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied"
+    "tag 'Practice Management' spans 2 source specs (drchrono-rest-api-openapi-schema.json, drchrono-rest-api-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "drchrono-administrative-api-openapi.yml: previously refined output, superseded by openapi/_original/",

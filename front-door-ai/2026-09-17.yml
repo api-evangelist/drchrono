@@ -1,0 +1,26 @@
+# Front Door AI Index — drchrono — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: drchrono
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.drchrono.com
+  final_host: www.drchrono.com
+  ownership: own
+  owner: drchrono
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 12
+  host_score: 12
+  density: 8.11
+  words: 1479
+  tiers:
+    agentic: 0
+    core: 12
+    model: 0
+  ambiguous: 2
+  top_terms:
+    AI: 12
+    automation: 2

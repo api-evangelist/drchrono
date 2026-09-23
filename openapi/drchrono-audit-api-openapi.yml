@@ -151,7 +151,11 @@ paths:
       - drchrono_oauth2:
         - billing:read
       operationId: audit_log_list
-      description: "Retrieve or search audit logs.\n<b>Note:</b> Either `since`, `date` or `date_range` parameter must be specified.\n            "
+      description: 'Retrieve or search audit logs.
+
+        Note: Either `since`, `date` or `date_range` parameter must be specified.'
+      summary: Audit log list
+      x-summary-source: derived
     servers:
     - url: https://app.drchrono.com
 components:
