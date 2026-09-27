@@ -3580,129 +3580,6 @@ paths:
     - url: https://app.drchrono.com
 components:
   schemas:
-    AsyncResourceError:
-      properties:
-        status:
-          type: string
-          description: Either "Error" or "Failed"
-          title: Status
-        uuid:
-          type: string
-          description: The UUID used to get the data for the asynchronous request
-          title: UUID
-        detail:
-          type: string
-          description: Instructions on what to do next
-          title: Detail
-    CustomInsurancePlanName:
-      required: []
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        doctor:
-          readOnly: true
-          type: string
-          description: List custom appointment fields defined by the doctor with the given ID
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        insurance_plan_name:
-          type: string
-          description: Custom name
-          title: Insurance plan name
-        user:
-          readOnly: true
-          type: string
-          description: User who created the custom insurance plan name
-          title: User
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    CashPaymentLog:
-      required: []
-      type: object
-      properties:
-        appointment:
-          readOnly: true
-          type: string
-          description: ID of appointment associated with the payment
-          title: Appointment
-        doctor:
-          readOnly: true
-          type: string
-          description: ''
-          title: Doctor
-        payment_method:
-          enum:
-          - DRCP
-          - CASH
-          - CHCK
-          - DBIT
-          - CRDT
-          - AMEX
-          - VISA
-          - MSTR
-          - DISC
-          - SQR1
-          - SQRE
-          - PTPA
-          - ONPT
-          - OTHR
-          type: string
-          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square, "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for Other`'
-          title: Payment method
-        updated_at:
-          type: string
-          description: ''
-          title: Updated at
-        created_by:
-          readOnly: true
-          type: string
-          description: ID of user who created the payment
-          title: Created by
-        source:
-          type: string
-          description: ''
-          title: Source
-        amount:
-          type: number
-          description: ''
-          title: Amount
-        action:
-          enum:
-          - C
-          - U
-          - D
-          - F
-          - A
-          type: string
-          description: '`C`(Create), `U`(Update), `D`(Delete), `F`(Fill), `A`(Autofill)'
-          title: Action
-        patient:
-          readOnly: true
-          type: string
-          description: ''
-          title: Patient
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
     BillingProfile:
       required: []
       type: object
@@ -3941,109 +3818,98 @@ components:
           type: number
           description: Appointment ID of the original billing line item
           title: Appointment ID
-    PatientAuthorization:
+    CashPayment:
       required:
-      - doctor
       - patient
       type: object
       properties:
-        status:
-          type: string
-          description: Status
-          title: Status
-        patient:
-          readOnly: true
-          type: string
-          description: ''
-          title: Patient
-        end_date:
-          readOnly: true
-          type: string
-          description: ''
-          title: End Date
-        doctor:
-          readOnly: true
-          type: string
-          description: ''
-          title: Doctor
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        number_of_visits:
-          readOnly: true
+        line_item:
           type: integer
           description: ''
-          title: Number of visits
+          title: Line item
+        posted_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: Posted date
+        appointment:
+          type: integer
+          description: If this is absent, the apponitment will be inferred from line item
+          title: Appointment
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        payment_method:
+          enum:
+          - DRCP
+          - CASH
+          - CHCK
+          - DBIT
+          - CRDT
+          - AMEX
+          - VISA
+          - MSTR
+          - DISC
+          - SQR1
+          - SQRE
+          - PTPA
+          - ONPT
+          - OTHR
+          type: string
+          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square, "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for Other`'
+          title: Payment method
         created_at:
           readOnly: true
           type: string
           description: ''
           title: Created at
-        specialty:
+        payment_transaction_type:
+          enum:
+          - ''
+          - REF
+          - COR
+          - COPAY
+          - COINSR
+          - OTHR
           type: string
-          description: Specialty
-          title: Specialty
-        auth_number:
-          type: string
-          description: Authorization Number
-          title: Authorization Number
-        start_date:
+          description: '`"" for Credit, "REF" for Refund, "COR" for Correction, "COPAY" for Copay, "COINSR" for Coinsurance, "OTHR" for Other`'
+          title: Payment transaction type
+        created_by:
           readOnly: true
           type: string
           description: ''
-          title: Start Date
-        patient_id:
-          type: integer
-          description: ''
-          title: Patient Id
-        visits_remaining:
+          title: Created by
+        updated_at:
           readOnly: true
-          type: integer
+          type: string
           description: ''
-          title: Visits remainings
+          title: Updated at
+        amount:
+          type: number
+          description: Amount of cash for this payment, cannot be zero
+          title: Amount
         notes:
           type: string
-          description: Notes
+          description: ''
           title: Notes
-        doctor_id:
-          readOnly: true
+        trace_number:
+          type: string
+          description: ''
+          title: Trace number
+        patient:
           type: integer
           description: ''
-          title: Doctor Id
-        procedure_codes:
-          items:
-            title: ''
-            type: object
-            description: Procedure code object
-            properties:
-              price:
-                type: string
-                description: This field is represented in string format
-                title: Price
-              code:
-                type: string
-                description: ''
-                title: Code
-              quantity:
-                type: string
-                description: This field is represented in string format
-                title: Quantity
-          readOnly: true
-          type: array
-          description: Array of procedure code objects
-          title: Procedure codes
-        expired:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Expired authorization
+          title: Patient
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
+        received_date:
+          type: string
+          description: ''
+          title: Received date
       x-verbose-required: []
     LineItemTransaction:
       required: []
@@ -4456,26 +4322,122 @@ components:
           description: ''
           title: Created at
       x-verbose-required: []
-    CashPayment:
+    PatientAuthorization:
       required:
+      - doctor
       - patient
       type: object
       properties:
-        line_item:
-          type: integer
-          description: ''
-          title: Line item
-        posted_date:
+        status:
+          type: string
+          description: Status
+          title: Status
+        patient:
           readOnly: true
           type: string
           description: ''
-          title: Posted date
-        appointment:
+          title: Patient
+        end_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: End Date
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        number_of_visits:
+          readOnly: true
           type: integer
-          description: If this is absent, the apponitment will be inferred from line item
+          description: ''
+          title: Number of visits
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        specialty:
+          type: string
+          description: Specialty
+          title: Specialty
+        auth_number:
+          type: string
+          description: Authorization Number
+          title: Authorization Number
+        start_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: Start Date
+        patient_id:
+          type: integer
+          description: ''
+          title: Patient Id
+        visits_remaining:
+          readOnly: true
+          type: integer
+          description: ''
+          title: Visits remainings
+        notes:
+          type: string
+          description: Notes
+          title: Notes
+        doctor_id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: Doctor Id
+        procedure_codes:
+          items:
+            title: ''
+            type: object
+            description: Procedure code object
+            properties:
+              price:
+                type: string
+                description: This field is represented in string format
+                title: Price
+              code:
+                type: string
+                description: ''
+                title: Code
+              quantity:
+                type: string
+                description: This field is represented in string format
+                title: Quantity
+          readOnly: true
+          type: array
+          description: Array of procedure code objects
+          title: Procedure codes
+        expired:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Expired authorization
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    CashPaymentLog:
+      required: []
+      type: object
+      properties:
+        appointment:
+          readOnly: true
+          type: string
+          description: ID of appointment associated with the payment
           title: Appointment
         doctor:
-          type: integer
+          readOnly: true
+          type: string
           description: ''
           title: Doctor
         payment_method:
@@ -4497,46 +4459,36 @@ components:
           type: string
           description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square, "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for Other`'
           title: Payment method
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        payment_transaction_type:
-          enum:
-          - ''
-          - REF
-          - COR
-          - COPAY
-          - COINSR
-          - OTHR
-          type: string
-          description: '`"" for Credit, "REF" for Refund, "COR" for Correction, "COPAY" for Copay, "COINSR" for Coinsurance, "OTHR" for Other`'
-          title: Payment transaction type
-        created_by:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created by
         updated_at:
-          readOnly: true
           type: string
           description: ''
           title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of user who created the payment
+          title: Created by
+        source:
+          type: string
+          description: ''
+          title: Source
         amount:
           type: number
-          description: Amount of cash for this payment, cannot be zero
+          description: ''
           title: Amount
-        notes:
+        action:
+          enum:
+          - C
+          - U
+          - D
+          - F
+          - A
           type: string
-          description: ''
-          title: Notes
-        trace_number:
-          type: string
-          description: ''
-          title: Trace number
+          description: '`C`(Create), `U`(Update), `D`(Delete), `F`(Fill), `A`(Autofill)'
+          title: Action
         patient:
-          type: integer
+          readOnly: true
+          type: string
           description: ''
           title: Patient
         id:
@@ -4544,10 +4496,6 @@ components:
           type: integer
           description: ''
           title: ID
-        received_date:
-          type: string
-          description: ''
-          title: Received date
       x-verbose-required: []
     BillingLineItem:
       required:
@@ -4740,6 +4688,126 @@ components:
           title: Quantity
       x-verbose-required:
       - description
+    AsyncResourceError:
+      properties:
+        status:
+          type: string
+          description: Either "Error" or "Failed"
+          title: Status
+        uuid:
+          type: string
+          description: The UUID used to get the data for the asynchronous request
+          title: UUID
+        detail:
+          type: string
+          description: Instructions on what to do next
+          title: Detail
+    PhoneCallLog:
+      required:
+      - patient
+      - doctor
+      type: object
+      properties:
+        scheduled_time:
+          type: string
+          description: Date of phone call, if `appointment` is set, this field will be set as the `scheduled_time` of that appointment
+          title: Scheduled time
+        archived:
+          readOnly: true
+          type: boolean
+          description: If this phone call log is archived or not
+          title: Archived
+        appointment:
+          type: integer
+          description: Appointment related with the phone call log
+          title: Appointment
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        title:
+          type: string
+          description: Title of this log
+          title: Title
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        author:
+          readOnly: true
+          type: string
+          description: Author of post.
+          title: Author
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        cash_charged:
+          type: number
+          description: Amount of cash needs to be charged
+          title: Cash charged
+        duration:
+          type: integer
+          description: Duration of the phone call
+          title: Duration
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        message:
+          type: string
+          description: Additional message for the phone call
+          title: Message
+        type:
+          type: string
+          description: Type of phone call log
+          title: Type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    CustomInsurancePlanName:
+      required: []
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        doctor:
+          readOnly: true
+          type: string
+          description: List custom appointment fields defined by the doctor with the given ID
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        insurance_plan_name:
+          type: string
+          description: Custom name
+          title: Insurance plan name
+        user:
+          readOnly: true
+          type: string
+          description: User who created the custom insurance plan name
+          title: User
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
     Coverage:
       required: []
       type: object
@@ -5505,74 +5573,6 @@ components:
           type: integer
           description: ''
           title: ID
-    PhoneCallLog:
-      required:
-      - patient
-      - doctor
-      type: object
-      properties:
-        scheduled_time:
-          type: string
-          description: Date of phone call, if `appointment` is set, this field will be set as the `scheduled_time` of that appointment
-          title: Scheduled time
-        archived:
-          readOnly: true
-          type: boolean
-          description: If this phone call log is archived or not
-          title: Archived
-        appointment:
-          type: integer
-          description: Appointment related with the phone call log
-          title: Appointment
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        title:
-          type: string
-          description: Title of this log
-          title: Title
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        author:
-          readOnly: true
-          type: string
-          description: Author of post.
-          title: Author
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        cash_charged:
-          type: number
-          description: Amount of cash needs to be charged
-          title: Cash charged
-        duration:
-          type: integer
-          description: Duration of the phone call
-          title: Duration
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        message:
-          type: string
-          description: Additional message for the phone call
-          title: Message
-        type:
-          type: string
-          description: Type of phone call log
-          title: Type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
   securitySchemes:
     drchrono_oauth2:
       type: oauth2
