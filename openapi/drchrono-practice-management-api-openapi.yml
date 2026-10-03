@@ -4602,234 +4602,6 @@ paths:
     - url: https://app.drchrono.com
 components:
   schemas:
-    TaskCategory:
-      required:
-      - name
-      - practice_group
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        is_global:
-          readOnly: true
-          type: string
-          description: Indicates that the category is a system wide (pre-defined) category
-          title: Is global
-        name:
-          type: string
-          description: ''
-          title: Name
-        practice_group:
-          type: integer
-          description: ''
-          title: Practice group
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    Task:
-      required:
-      - title
-      - status
-      type: object
-      properties:
-        category:
-          type: integer
-          description: ''
-          title: Category
-        due_date:
-          title: TaskReminder
-          type: object
-          description: When the task is due
-          properties:
-            time:
-              type: string
-              description: Due date time
-              title: Time
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        associated_items:
-          items:
-            title: AssociatedTaskItem
-            type: object
-            description: ''
-            properties:
-              task:
-                type: integer
-                description: ''
-                title: Task
-              type:
-                enum:
-                - Document
-                - Message
-                - Message Thread
-                - Lab result
-                - Lab order
-                - Patient
-                - Appointment
-                - Lab document
-                - Communication
-                type: string
-                description: Can be one of `"Appointment"`, `"Patient"`, `"Message"`, `"Message Thread"`, `"Document"`, `"Lab order"`
-                title: Type
-              value:
-                type: integer
-                description: ID of the specified type object
-                title: Value
-          type: array
-          description: Associated task items
-          title: Associated items
-        assigned_by:
-          readOnly: true
-          type: string
-          description: ID of `/api/users/` who assigned the task
-          title: Assigned by
-        assignee_user:
-          type: string
-          description: Either `assignee_user` or `assignee_group` should be set
-          title: Assignee user
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        assignee_group:
-          type: integer
-          description: Either `assignee_user` or `assignee_group` should be set
-          title: Assignee group
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        created_by:
-          readOnly: true
-          type: string
-          description: ID of `/api/users` who created the task
-          title: Created by
-        priority:
-          enum:
-          - '10'
-          - '20'
-          - '30'
-          - '40'
-          type: string
-          description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
-          title: Priority
-        status:
-          type: integer
-          description: ''
-          title: Status
-        notes:
-          items:
-            title: TaskNote
-            type: object
-            description: Task note object
-            properties:
-              archived:
-                type: boolean
-                description: ''
-                title: Archived
-              task:
-                type: integer
-                description: ID of `/api/tasks`
-                title: Task
-              text:
-                type: string
-                description: ''
-                title: Text
-              created_at:
-                readOnly: true
-                type: string
-                description: ''
-                title: Created at
-              updated_at:
-                readOnly: true
-                type: string
-                description: ''
-                title: Updated at
-              created_by:
-                readOnly: true
-                type: string
-                description: ''
-                title: Created by
-              id:
-                readOnly: true
-                type: integer
-                description: ''
-                title: ID
-          type: array
-          description: Additional notes of the task
-          title: Notes
-        title:
-          type: string
-          description: ''
-          title: Title
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required:
-      - notes
-      - associated_items
-    InventoryCategory:
-      required: []
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: If the category is archived or not
-          title: Archived
-        name:
-          type: string
-          description: Name of the inventory category
-          title: Name
-        doctor:
-          readOnly: true
-          type: string
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        category_type:
-          enum:
-          - vaccine
-          - product
-          - service
-          type: string
-          description: Can be one of `"vaccine"`, `"product"` or `"service"`
-          title: Category type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
     InventoryVaccine:
       required:
       - doctor
@@ -4927,6 +4699,53 @@ components:
           description: ''
           title: Cvx code
       x-verbose-required: []
+    TaskStatus:
+      required:
+      - name
+      - practice_group
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        name:
+          type: string
+          description: ''
+          title: Name
+        status_category:
+          enum:
+          - O
+          - P
+          - H
+          - C
+          type: string
+          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
+          title: Status category
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        task_category:
+          type: integer
+          description: ID of `/api/task_categories`
+          title: Task category
+      x-verbose-required: []
     WorkDay:
       type: object
       properties:
@@ -4949,262 +4768,29 @@ components:
           type: array
           description: work hours of the work day
           title: Work hours
-    WorkHours:
-      type: object
-      properties:
-        start_time:
-          type: string
-          description: start time of the work hour
-          title: Start time
-        enabled:
-          type: boolean
-          description: whether the work hour is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work hour
-          title: ID
-        end_time:
-          type: string
-          description: end time of the work hour
-          title: End time
-    DoctorMessage:
+    TaskCategory:
       required:
-      - doctor
-      - title
-      type: object
-      properties:
-        type_description:
-          readOnly: true
-          type: string
-          description: Type Description
-          title: Type description
-        patient_middle_name:
-          readOnly: true
-          type: string
-          description: Patient Middle Name
-          title: Patient middle name
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        owner:
-          type: string
-          description: ID of `/api/users` who owns the message, who may be the doctor themselves or one of their staff members
-          title: Owner
-        responsible_user_first_name:
-          readOnly: true
-          type: string
-          description: Responsible User First Name
-          title: Responsible user first name
-        received_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Received at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        doctor_last_name:
-          readOnly: true
-          type: string
-          description: Doctor Last Name
-          title: Doctor last name
-        owner_first_name:
-          readOnly: true
-          type: string
-          description: Owner First Name
-          title: Owner first name
-        archived:
-          readOnly: true
-          type: boolean
-          description: If true, indicates that the message has been soft-deleted
-          title: Archived
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        owner_last_name:
-          readOnly: true
-          type: string
-          description: Owner Last Name
-          title: Owner last name
-        patient_first_name:
-          readOnly: true
-          type: string
-          description: Patient First Name
-          title: Patient first name
-        attachment:
-          type: string
-          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
-          title: Attachment
-        outgoing_fax_recipient_fax_number:
-          readOnly: true
-          type: string
-          description: Outgoing fax recipient fax number
-          title: Outgoing fax recipient fax number
-        responsible_user_last_name:
-          readOnly: true
-          type: string
-          description: Responsible User Last Name
-          title: Responsible user last name
-        type:
-          enum:
-          - GP
-          - GC
-          - GT
-          - GZ
-          - IF
-          - OF
-          - IL
-          - IR
-          - OR
-          - IE
-          - CE
-          - CH
-          - OA
-          - PO
-          - PI
-          - PM
-          - OO
-          - OD
-          - ID
-          - DL
-          - CN
-          type: string
-          description: '
-
-            Value | Description
-
-            ----- | -----------
-
-            `"GP"` | Generated PDF
-
-            `"GC"` | Generated CSV
-
-            `"GZ"` | Generated ZIP
-
-            `"IF"` | Incoming Fax
-
-            `"OF"` | Outgoing Fax
-
-            `"IL"` | Incoming Labs
-
-            `"IR"` | Inbound Referrals
-
-            `"OR"` | Outbound Referrals
-
-            `"IE"` | Incoming eRx
-
-            `"OA"` | Online Appointments
-
-            `"PO"` | Patient Onboarding
-
-            `"PI"` | Patient Incoming Message
-
-            `"PM"` | Patient Outgoing Message
-
-            `"OO"` | Demo Meeting Message
-
-            `"OD"` | Outbound Direct Message
-
-            `"ID"` | Inbound Direct Message
-
-            '
-          title: Type
-        patient_last_name:
-          readOnly: true
-          type: string
-          description: Patient Last Name
-          title: Patient last name
-        patient:
-          type: integer
-          description: ID of patient that the message concerns, if applicable
-          title: Patient
-        doctor_first_name:
-          readOnly: true
-          type: string
-          description: Doctor First Name
-          title: Doctor first name
-        read:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Read
-        responsible_user:
-          type: string
-          description: ID of `/api/users` who has been assigned to process the message, who may be the doctor themselves or one of their staff members
-          title: Responsible user
-        workflow_step:
-          readOnly: true
-          type: string
-          description: Used by doctors and their staff to keep track of what step of processing the message is in
-          title: Workflow step
-        outgoing_fax_recipient_name:
-          readOnly: true
-          type: string
-          description: Outgoing fax recipient name
-          title: Outgoing fax recipient name
-        doctor_middle_name:
-          readOnly: true
-          type: string
-          description: Doctor Middle Name
-          title: Doctor middle name
-        message_notes:
-          items:
-            title: MessageNote
-            type: object
-            description: Additional note
-            properties:
-              text:
-                type: string
-                description: Content of the note
-                title: Text
-              created_at:
-                readOnly: true
-                type: string
-                description: ''
-                title: Created at
-              created_by:
-                readOnly: true
-                type: string
-                description: ID of `/api/users` who created the note
-                title: Created by
-          type: array
-          description: Array of notes attached to the message
-          title: Message notes
-        title:
-          type: string
-          description: ''
-          title: Title
-        starred:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Starred
-      x-verbose-required: []
-    TaskNote:
-      required:
-      - task
-      - text
+      - name
+      - practice_group
       type: object
       properties:
         archived:
           type: boolean
-          description: If the task note is archived or not
+          description: ''
           title: Archived
-        task:
-          type: integer
-          description: ID of task this note is related with
-          title: Task
-        text:
+        is_global:
+          readOnly: true
           type: string
-          description: Content of the task note
-          title: Text
+          description: Indicates that the category is a system wide (pre-defined) category
+          title: Is global
+        name:
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
         created_at:
           readOnly: true
           type: string
@@ -5215,16 +4801,123 @@ components:
           type: string
           description: ''
           title: Updated at
-        created_by:
-          readOnly: true
-          type: string
-          description: ID of the `/api/users` who created the note
-          title: Created by
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
+      x-verbose-required: []
+    InventoryCategory:
+      required: []
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: If the category is archived or not
+          title: Archived
+        name:
+          type: string
+          description: Name of the inventory category
+          title: Name
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        category_type:
+          enum:
+          - vaccine
+          - product
+          - service
+          type: string
+          description: Can be one of `"vaccine"`, `"product"` or `"service"`
+          title: Category type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    TaskTemplate:
+      required:
+      - name
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        name:
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          readOnly: true
+          type: string
+          description: ''
+          title: Practice group
+        default_category:
+          type: integer
+          description: ''
+          title: Default category
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        default_title:
+          type: string
+          description: ''
+          title: Default title
+        default_note:
+          type: string
+          description: ''
+          title: Default note
+        default_status:
+          type: integer
+          description: ''
+          title: Default status
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        default_assignee_group:
+          type: integer
+          description: ''
+          title: Default assignee group
+        default_assignee_user:
+          type: string
+          description: ''
+          title: Default assignee user
+        default_due_date_offset:
+          type: string
+          description: Offset due date, format should follow `"[DD] [HH:[MM:]]ss[.uuuuuu]"`
+          title: Default due date offset
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        default_priority:
+          enum:
+          - '10'
+          - '20'
+          - '30'
+          - '40'
+          type: string
+          description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
+          title: Default priority
       x-verbose-required: []
     DoctorMessageThread:
       type: object
@@ -5324,6 +5017,26 @@ components:
           type: string
           description: Thread subject - locked to first message subject
           title: Subject
+    WorkHours:
+      type: object
+      properties:
+        start_time:
+          type: string
+          description: start time of the work hour
+          title: Start time
+        enabled:
+          type: boolean
+          description: whether the work hour is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work hour
+          title: ID
+        end_time:
+          type: string
+          description: end time of the work hour
+          title: End time
     Office:
       required: []
       type: object
@@ -5744,104 +5457,24 @@ components:
           title: Online scheduling
       x-verbose-required:
       - online_timeslots
-    TaskTemplate:
+    TaskNote:
       required:
-      - name
+      - task
+      - text
       type: object
       properties:
         archived:
           type: boolean
-          description: ''
+          description: If the task note is archived or not
           title: Archived
-        name:
-          type: string
-          description: ''
-          title: Name
-        practice_group:
-          readOnly: true
-          type: string
-          description: ''
-          title: Practice group
-        default_category:
+        task:
           type: integer
-          description: ''
-          title: Default category
-        updated_at:
-          readOnly: true
+          description: ID of task this note is related with
+          title: Task
+        text:
           type: string
-          description: ''
-          title: Updated at
-        default_title:
-          type: string
-          description: ''
-          title: Default title
-        default_note:
-          type: string
-          description: ''
-          title: Default note
-        default_status:
-          type: integer
-          description: ''
-          title: Default status
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        default_assignee_group:
-          type: integer
-          description: ''
-          title: Default assignee group
-        default_assignee_user:
-          type: string
-          description: ''
-          title: Default assignee user
-        default_due_date_offset:
-          type: string
-          description: Offset due date, format should follow `"[DD] [HH:[MM:]]ss[.uuuuuu]"`
-          title: Default due date offset
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        default_priority:
-          enum:
-          - '10'
-          - '20'
-          - '30'
-          - '40'
-          type: string
-          description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
-          title: Default priority
-      x-verbose-required: []
-    TaskStatus:
-      required:
-      - name
-      - practice_group
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        name:
-          type: string
-          description: ''
-          title: Name
-        status_category:
-          enum:
-          - O
-          - P
-          - H
-          - C
-          type: string
-          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
-          title: Status category
-        practice_group:
-          type: integer
-          description: ''
-          title: Practice group
+          description: Content of the task note
+          title: Text
         created_at:
           readOnly: true
           type: string
@@ -5852,15 +5485,16 @@ components:
           type: string
           description: ''
           title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of the `/api/users` who created the note
+          title: Created by
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
-        task_category:
-          type: integer
-          description: ID of `/api/task_categories`
-          title: Task category
       x-verbose-required: []
     WorkSchedule:
       type: object
@@ -5884,6 +5518,372 @@ components:
           type: integer
           description: ID of doctor for work schedule
           title: Office
+    Task:
+      required:
+      - title
+      - status
+      type: object
+      properties:
+        category:
+          type: integer
+          description: ''
+          title: Category
+        due_date:
+          title: TaskReminder
+          type: object
+          description: When the task is due
+          properties:
+            time:
+              type: string
+              description: Due date time
+              title: Time
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        associated_items:
+          items:
+            title: AssociatedTaskItem
+            type: object
+            description: ''
+            properties:
+              task:
+                type: integer
+                description: ''
+                title: Task
+              type:
+                enum:
+                - Document
+                - Message
+                - Message Thread
+                - Lab result
+                - Lab order
+                - Patient
+                - Appointment
+                - Lab document
+                - Communication
+                type: string
+                description: Can be one of `"Appointment"`, `"Patient"`, `"Message"`, `"Message Thread"`, `"Document"`, `"Lab order"`
+                title: Type
+              value:
+                type: integer
+                description: ID of the specified type object
+                title: Value
+          type: array
+          description: Associated task items
+          title: Associated items
+        assigned_by:
+          readOnly: true
+          type: string
+          description: ID of `/api/users/` who assigned the task
+          title: Assigned by
+        assignee_user:
+          type: string
+          description: Either `assignee_user` or `assignee_group` should be set
+          title: Assignee user
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        assignee_group:
+          type: integer
+          description: Either `assignee_user` or `assignee_group` should be set
+          title: Assignee group
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of `/api/users` who created the task
+          title: Created by
+        priority:
+          enum:
+          - '10'
+          - '20'
+          - '30'
+          - '40'
+          type: string
+          description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
+          title: Priority
+        status:
+          type: integer
+          description: ''
+          title: Status
+        notes:
+          items:
+            title: TaskNote
+            type: object
+            description: Task note object
+            properties:
+              archived:
+                type: boolean
+                description: ''
+                title: Archived
+              task:
+                type: integer
+                description: ID of `/api/tasks`
+                title: Task
+              text:
+                type: string
+                description: ''
+                title: Text
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              updated_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Updated at
+              created_by:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created by
+              id:
+                readOnly: true
+                type: integer
+                description: ''
+                title: ID
+          type: array
+          description: Additional notes of the task
+          title: Notes
+        title:
+          type: string
+          description: ''
+          title: Title
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required:
+      - notes
+      - associated_items
+    DoctorMessage:
+      required:
+      - doctor
+      - title
+      type: object
+      properties:
+        type_description:
+          readOnly: true
+          type: string
+          description: Type Description
+          title: Type description
+        patient_middle_name:
+          readOnly: true
+          type: string
+          description: Patient Middle Name
+          title: Patient middle name
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        owner:
+          type: string
+          description: ID of `/api/users` who owns the message, who may be the doctor themselves or one of their staff members
+          title: Owner
+        responsible_user_first_name:
+          readOnly: true
+          type: string
+          description: Responsible User First Name
+          title: Responsible user first name
+        received_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Received at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        doctor_last_name:
+          readOnly: true
+          type: string
+          description: Doctor Last Name
+          title: Doctor last name
+        owner_first_name:
+          readOnly: true
+          type: string
+          description: Owner First Name
+          title: Owner first name
+        archived:
+          readOnly: true
+          type: boolean
+          description: If true, indicates that the message has been soft-deleted
+          title: Archived
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        owner_last_name:
+          readOnly: true
+          type: string
+          description: Owner Last Name
+          title: Owner last name
+        patient_first_name:
+          readOnly: true
+          type: string
+          description: Patient First Name
+          title: Patient first name
+        attachment:
+          type: string
+          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
+          title: Attachment
+        outgoing_fax_recipient_fax_number:
+          readOnly: true
+          type: string
+          description: Outgoing fax recipient fax number
+          title: Outgoing fax recipient fax number
+        responsible_user_last_name:
+          readOnly: true
+          type: string
+          description: Responsible User Last Name
+          title: Responsible user last name
+        type:
+          enum:
+          - GP
+          - GC
+          - GT
+          - GZ
+          - IF
+          - OF
+          - IL
+          - IR
+          - OR
+          - IE
+          - CE
+          - CH
+          - OA
+          - PO
+          - PI
+          - PM
+          - OO
+          - OD
+          - ID
+          - DL
+          - CN
+          type: string
+          description: '
+
+            Value | Description
+
+            ----- | -----------
+
+            `"GP"` | Generated PDF
+
+            `"GC"` | Generated CSV
+
+            `"GZ"` | Generated ZIP
+
+            `"IF"` | Incoming Fax
+
+            `"OF"` | Outgoing Fax
+
+            `"IL"` | Incoming Labs
+
+            `"IR"` | Inbound Referrals
+
+            `"OR"` | Outbound Referrals
+
+            `"IE"` | Incoming eRx
+
+            `"OA"` | Online Appointments
+
+            `"PO"` | Patient Onboarding
+
+            `"PI"` | Patient Incoming Message
+
+            `"PM"` | Patient Outgoing Message
+
+            `"OO"` | Demo Meeting Message
+
+            `"OD"` | Outbound Direct Message
+
+            `"ID"` | Inbound Direct Message
+
+            '
+          title: Type
+        patient_last_name:
+          readOnly: true
+          type: string
+          description: Patient Last Name
+          title: Patient last name
+        patient:
+          type: integer
+          description: ID of patient that the message concerns, if applicable
+          title: Patient
+        doctor_first_name:
+          readOnly: true
+          type: string
+          description: Doctor First Name
+          title: Doctor first name
+        read:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Read
+        responsible_user:
+          type: string
+          description: ID of `/api/users` who has been assigned to process the message, who may be the doctor themselves or one of their staff members
+          title: Responsible user
+        workflow_step:
+          readOnly: true
+          type: string
+          description: Used by doctors and their staff to keep track of what step of processing the message is in
+          title: Workflow step
+        outgoing_fax_recipient_name:
+          readOnly: true
+          type: string
+          description: Outgoing fax recipient name
+          title: Outgoing fax recipient name
+        doctor_middle_name:
+          readOnly: true
+          type: string
+          description: Doctor Middle Name
+          title: Doctor middle name
+        message_notes:
+          items:
+            title: MessageNote
+            type: object
+            description: Additional note
+            properties:
+              text:
+                type: string
+                description: Content of the note
+                title: Text
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              created_by:
+                readOnly: true
+                type: string
+                description: ID of `/api/users` who created the note
+                title: Created by
+          type: array
+          description: Array of notes attached to the message
+          title: Message notes
+        title:
+          type: string
+          description: ''
+          title: Title
+        starred:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Starred
+      x-verbose-required: []
     Task_2:
       required:
       - title

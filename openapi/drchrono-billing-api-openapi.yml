@@ -3800,632 +3800,6 @@ components:
           description: ''
           title: ID
       x-verbose-required: []
-    BillingLineItemDeletion:
-      type: object
-      properties:
-        billing_line_item_id:
-          readOnly: true
-          type: number
-          description: The ID of the original billing line item
-          title: Billing Line Item ID
-        created_at:
-          readOnly: true
-          type: string
-          description: Date when the billing line item was deleted
-          title: Created At
-        appointment_id:
-          readOnly: true
-          type: number
-          description: Appointment ID of the original billing line item
-          title: Appointment ID
-    CashPayment:
-      required:
-      - patient
-      type: object
-      properties:
-        line_item:
-          type: integer
-          description: ''
-          title: Line item
-        posted_date:
-          readOnly: true
-          type: string
-          description: ''
-          title: Posted date
-        appointment:
-          type: integer
-          description: If this is absent, the apponitment will be inferred from line item
-          title: Appointment
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        payment_method:
-          enum:
-          - DRCP
-          - CASH
-          - CHCK
-          - DBIT
-          - CRDT
-          - AMEX
-          - VISA
-          - MSTR
-          - DISC
-          - SQR1
-          - SQRE
-          - PTPA
-          - ONPT
-          - OTHR
-          type: string
-          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square, "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for Other`'
-          title: Payment method
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        payment_transaction_type:
-          enum:
-          - ''
-          - REF
-          - COR
-          - COPAY
-          - COINSR
-          - OTHR
-          type: string
-          description: '`"" for Credit, "REF" for Refund, "COR" for Correction, "COPAY" for Copay, "COINSR" for Coinsurance, "OTHR" for Other`'
-          title: Payment transaction type
-        created_by:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created by
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        amount:
-          type: number
-          description: Amount of cash for this payment, cannot be zero
-          title: Amount
-        notes:
-          type: string
-          description: ''
-          title: Notes
-        trace_number:
-          type: string
-          description: ''
-          title: Trace number
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        received_date:
-          type: string
-          description: ''
-          title: Received date
-      x-verbose-required: []
-    LineItemTransaction:
-      required: []
-      type: object
-      properties:
-        insurance:
-          properties:
-            id_number:
-              type: string
-              description: Insurance company ID number
-              title: ID number
-            message:
-              type: string
-              description: Additional information about the insurance
-              title: Message
-            name:
-              type: string
-              description: Insurance company name
-              title: Name
-          type: object
-          description: Information about the insurance associated with the transaction.
-          title: Insurance
-        ins_paid:
-          type: number
-          description: ''
-          title: Ins paid
-        posted_date:
-          readOnly: true
-          type: string
-          description: Date when transaction is created
-          title: Posted date
-        appointment:
-          type: integer
-          description: Appointment ID
-          title: Appointment
-        ins_name:
-          type: integer
-          description: Can be one of the following, `1`(Primary Insurance), `2`(Secondary Insurance)
-          title: Ins name
-        doctor:
-          type: integer
-          description: Doctor ID
-          title: Doctor
-        adjustment_group_code:
-          readOnly: true
-          enum:
-          - ''
-          - CO
-          - OA
-          - PI
-          - PR
-          type: string
-          description: Group code for adjustment
-          title: Adjustment group code
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        line_item:
-          type: integer
-          description: ID of `/api/line_item` object
-          title: Line item
-        claim_status:
-          readOnly: true
-          enum:
-          - ''
-          - '0'
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '10'
-          - '13'
-          - '15'
-          - '16'
-          - '17'
-          - '19'
-          - '20'
-          - '21'
-          - '22'
-          - '23'
-          - '25'
-          - '27'
-          type: string
-          description: Status of claim
-          title: Claim status
-        check_date:
-          readOnly: true
-          type: string
-          description: Date of check
-          title: Check date
-        trace_number:
-          type: string
-          description: Check number
-          title: Trace number
-        adjustment_reason:
-          enum:
-          - '-3'
-          - '-2'
-          - '-4'
-          - '-1'
-          - '0'
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '6'
-          - '7'
-          - '8'
-          - '9'
-          - '10'
-          - '11'
-          - '12'
-          - '13'
-          - '14'
-          - '15'
-          - '16'
-          - '18'
-          - '19'
-          - '20'
-          - '21'
-          - '22'
-          - '23'
-          - '24'
-          - '26'
-          - '27'
-          - '29'
-          - '31'
-          - '32'
-          - '33'
-          - '34'
-          - '35'
-          - '39'
-          - '40'
-          - '44'
-          - '45'
-          - '49'
-          - '50'
-          - '51'
-          - '53'
-          - '54'
-          - '55'
-          - '56'
-          - '58'
-          - '59'
-          - '60'
-          - '61'
-          - '66'
-          - '69'
-          - '70'
-          - '74'
-          - '75'
-          - '76'
-          - '78'
-          - '85'
-          - '87'
-          - '89'
-          - '90'
-          - '91'
-          - '94'
-          - '95'
-          - '96'
-          - '97'
-          - '100'
-          - '101'
-          - '102'
-          - '103'
-          - '104'
-          - '105'
-          - '106'
-          - '107'
-          - '108'
-          - '109'
-          - '110'
-          - '111'
-          - '112'
-          - '114'
-          - '115'
-          - '116'
-          - '117'
-          - '118'
-          - '119'
-          - '121'
-          - '122'
-          - '125'
-          - '128'
-          - '129'
-          - '130'
-          - '131'
-          - '132'
-          - '133'
-          - '134'
-          - '135'
-          - '136'
-          - '137'
-          - '138'
-          - '139'
-          - '140'
-          - '142'
-          - '143'
-          - '144'
-          - '146'
-          - '147'
-          - '148'
-          - '149'
-          - '150'
-          - '151'
-          - '152'
-          - '153'
-          - '154'
-          - '155'
-          - '157'
-          - '158'
-          - '159'
-          - '160'
-          - '161'
-          - '162'
-          - '163'
-          - '164'
-          - '165'
-          - '166'
-          - '167'
-          - '168'
-          - '169'
-          - '170'
-          - '171'
-          - '172'
-          - '173'
-          - '174'
-          - '175'
-          - '176'
-          - '177'
-          - '178'
-          - '179'
-          - '180'
-          - '181'
-          - '182'
-          - '183'
-          - '184'
-          - '185'
-          - '186'
-          - '187'
-          - '188'
-          - '189'
-          - '190'
-          - '191'
-          - '192'
-          - '193'
-          - '194'
-          - '195'
-          - '197'
-          - '198'
-          - '199'
-          - '200'
-          - '201'
-          - '202'
-          - '203'
-          - '204'
-          - '205'
-          - '206'
-          - '207'
-          - '208'
-          - '209'
-          - '210'
-          - '211'
-          - '212'
-          - '213'
-          - '214'
-          - '215'
-          - '216'
-          - '217'
-          - '218'
-          - '219'
-          - '220'
-          - '221'
-          - '222'
-          - '223'
-          - '224'
-          - '225'
-          - '226'
-          - '227'
-          - '228'
-          - '229'
-          - '230'
-          - '231'
-          - '232'
-          - '233'
-          - '234'
-          - '235'
-          - '236'
-          - '237'
-          - '238'
-          - '239'
-          - '240'
-          - '241'
-          - '242'
-          - '243'
-          - '244'
-          - '245'
-          - '246'
-          - '247'
-          - '248'
-          - '249'
-          - '250'
-          - '251'
-          - '252'
-          - '253'
-          - '254'
-          - '256'
-          - '257'
-          - '258'
-          - '259'
-          - '260'
-          - '261'
-          - '262'
-          - '263'
-          - '264'
-          - '265'
-          - '266'
-          - '267'
-          - '268'
-          - '269'
-          - '270'
-          - '271'
-          - '272'
-          - '273'
-          - '274'
-          - '275'
-          - '276'
-          - '277'
-          - '279'
-          - '286'
-          - '287'
-          - '288'
-          - '297'
-          - A0
-          - A1
-          - A5
-          - A6
-          - A7
-          - A8
-          - B1
-          - B4
-          - B5
-          - B7
-          - B8
-          - B9
-          - B10
-          - B11
-          - B12
-          - B13
-          - B14
-          - B15
-          - B16
-          - B20
-          - B22
-          - B23
-          - P1
-          - P2
-          - P3
-          - P4
-          - P5
-          - P6
-          - P7
-          - P8
-          - P9
-          - P10
-          - P11
-          - P12
-          - P13
-          - P14
-          - P15
-          - P16
-          - P17
-          - P18
-          - P19
-          - P20
-          - P21
-          - P22
-          - P23
-          - W1
-          - W2
-          - W3
-          - W4
-          - Y1
-          - Y2
-          - Y3
-          type: string
-          description: Reason for adjustment
-          title: Adjustment reason
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        adjustment:
-          type: number
-          description: Adjustment from total billed
-          title: Adjustment
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-      x-verbose-required: []
-    PatientAuthorization:
-      required:
-      - doctor
-      - patient
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status
-          title: Status
-        patient:
-          readOnly: true
-          type: string
-          description: ''
-          title: Patient
-        end_date:
-          readOnly: true
-          type: string
-          description: ''
-          title: End Date
-        doctor:
-          readOnly: true
-          type: string
-          description: ''
-          title: Doctor
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        number_of_visits:
-          readOnly: true
-          type: integer
-          description: ''
-          title: Number of visits
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        specialty:
-          type: string
-          description: Specialty
-          title: Specialty
-        auth_number:
-          type: string
-          description: Authorization Number
-          title: Authorization Number
-        start_date:
-          readOnly: true
-          type: string
-          description: ''
-          title: Start Date
-        patient_id:
-          type: integer
-          description: ''
-          title: Patient Id
-        visits_remaining:
-          readOnly: true
-          type: integer
-          description: ''
-          title: Visits remainings
-        notes:
-          type: string
-          description: Notes
-          title: Notes
-        doctor_id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: Doctor Id
-        procedure_codes:
-          items:
-            title: ''
-            type: object
-            description: Procedure code object
-            properties:
-              price:
-                type: string
-                description: This field is represented in string format
-                title: Price
-              code:
-                type: string
-                description: ''
-                title: Code
-              quantity:
-                type: string
-                description: This field is represented in string format
-                title: Quantity
-          readOnly: true
-          type: array
-          description: Array of procedure code objects
-          title: Procedure codes
-        expired:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Expired authorization
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
     CashPaymentLog:
       required: []
       type: object
@@ -4497,317 +3871,24 @@ components:
           description: ''
           title: ID
       x-verbose-required: []
-    BillingLineItem:
-      required:
-      - appointment
-      - code
-      - procedure_type
-      - diagnosis_pointers
+    BillingLineItemDeletion:
       type: object
       properties:
-        code:
-          type: string
-          description: ''
-          title: Code
-        ins3_paid:
+        billing_line_item_id:
           readOnly: true
           type: number
-          description: Amount paid by patinet's tertiary insurer
-          title: Ins3 paid
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        posted_date:
-          readOnly: true
-          type: string
-          description: date of line_item creation
-          title: Posted date
-        billing_status:
-          readOnly: true
-          enum:
-          - ''
-          - Incomplete Information
-          - In Process Emdeon
-          - In Process iHCFA
-          - In Process Gateway
-          - In Process Jopari
-          - In Process Waystar
-          - In Process EPS
-          - Rejected Emdeon
-          - Rejected iHCFA
-          - Rejected Gateway
-          - Rejected Jopari
-          - Rejected Waystar
-          - Rejected EPS
-          - In Process Payer
-          - Payer Acknowledged
-          - Rejected Payer
-          - Paid in Full
-          - Partially Paid
-          - Coordination of Benefits
-          - ERA Received
-          - ERA Denied
-          type: string
-          description: One of `""`, `"Incomplete Information"`, `"In Process Emdeon"`, `"In Process iHCFA"`, `"In Process Gateway"`, `"Rejected Emdeon"`, `"Rejected iHCFA"`, `"Rejected Gateway"`, `"In Process Payer"`, `"Payer Acknowledged"`, `"Rejected Payer"`, `"Paid in Full"`,  `"Partially Paid"`,  `"Coordination of Benefits"`,  `"ERA Received"`,  `"ERA Denied"`
-          title: Billing status
-        pt_paid:
-          type: number
-          description: Amount paid by patient
-          title: Pt paid
-        allowed:
-          readOnly: true
-          type: number
-          description: Amount allowed by insurance
-          title: Allowed
-        patient:
-          readOnly: true
-          type: string
-          description: Patient ID
-          title: Patient
-        adjustment:
-          readOnly: true
-          type: number
-          description: Adjustment from total billed
-          title: Adjustment
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        doctor:
-          readOnly: true
-          type: string
-          description: Doctor ID
-          title: Doctor
-        balance_pt:
-          readOnly: true
-          type: number
-          description: Patient balance
-          title: Balance pt
-        units:
-          type: string
-          description: Default to "UN"
-          title: Units
-        balance_ins:
-          type: number
-          description: Insurance balance
-          title: Balance ins
-        paid_total:
-          readOnly: true
-          type: string
-          description: Total amount paid
-          title: Paid total
-        diagnosis_pointers:
-          items:
-            type: string
-            description: String representation of an integer or ICD code
-            title: ''
-          type: array
-          description: List of 4 diagnosis pointers
-          title: Diagnosis pointers
-        appointment:
-          type: integer
-          description: Appointment ID
-          title: Appointment
-        description:
-          readOnly: true
-          type: string
-          description: ''
-          title: Description
-        balance_total:
-          readOnly: true
-          type: string
-          description: Total balance
-          title: Balance total
-        price:
-          type: number
-          description: Price of procedure
-          title: Price
-        expected_reimbursement:
-          readOnly: true
-          type: number
-          description: ''
-          title: Expected reimbursement
-        ins2_paid:
-          readOnly: true
-          type: number
-          description: Amount paid by patient's secondary insurer
-          title: Ins2 paid
-        ins1_paid:
-          readOnly: true
-          type: number
-          description: Amount paid by patient's primary insurer
-          title: Ins1 paid
-        insurance_status:
-          readOnly: true
-          type: string
-          description: This corresponds to the "Status/Adj Type" from billing detail screen
-          title: Insurance status
-        billed:
-          readOnly: true
-          type: number
-          description: Total billed
-          title: Billed
-        modifiers:
-          items:
-            type: string
-            description: String representation of modifier
-            title: ''
-          type: array
-          description: List of 4 code modifiers
-          title: Modifiers
-        denied_flag:
-          readOnly: true
-          type: boolean
-          description: ''
-          title: Denied flag
-        ins_total:
-          readOnly: true
-          type: string
-          description: Total amount paid by patient's insurers
-          title: Ins total
-        procedure_type:
-          enum:
-          - C
-          - H
-          - U
-          - S
-          type: string
-          description: One of `"CPT(C)"`, `"HCPCS(H)"`, `"Custom(U)"`, use 1 character identifier when using `POST`
-          title: Procedure type
-        service_date:
-          readOnly: true
-          type: string
-          description: Date on which the service was rendered
-          title: Service date
-        quantity:
-          type: number
-          description: ''
-          title: Quantity
-      x-verbose-required:
-      - description
-    AsyncResourceError:
-      properties:
-        status:
-          type: string
-          description: Either "Error" or "Failed"
-          title: Status
-        uuid:
-          type: string
-          description: The UUID used to get the data for the asynchronous request
-          title: UUID
-        detail:
-          type: string
-          description: Instructions on what to do next
-          title: Detail
-    PhoneCallLog:
-      required:
-      - patient
-      - doctor
-      type: object
-      properties:
-        scheduled_time:
-          type: string
-          description: Date of phone call, if `appointment` is set, this field will be set as the `scheduled_time` of that appointment
-          title: Scheduled time
-        archived:
-          readOnly: true
-          type: boolean
-          description: If this phone call log is archived or not
-          title: Archived
-        appointment:
-          type: integer
-          description: Appointment related with the phone call log
-          title: Appointment
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        title:
-          type: string
-          description: Title of this log
-          title: Title
+          description: The ID of the original billing line item
+          title: Billing Line Item ID
         created_at:
           readOnly: true
           type: string
-          description: ''
-          title: Created at
-        author:
+          description: Date when the billing line item was deleted
+          title: Created At
+        appointment_id:
           readOnly: true
-          type: string
-          description: Author of post.
-          title: Author
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        cash_charged:
           type: number
-          description: Amount of cash needs to be charged
-          title: Cash charged
-        duration:
-          type: integer
-          description: Duration of the phone call
-          title: Duration
-        patient:
-          type: integer
-          description: ''
-          title: Patient
-        message:
-          type: string
-          description: Additional message for the phone call
-          title: Message
-        type:
-          type: string
-          description: Type of phone call log
-          title: Type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    CustomInsurancePlanName:
-      required: []
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        doctor:
-          readOnly: true
-          type: string
-          description: List custom appointment fields defined by the doctor with the given ID
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        insurance_plan_name:
-          type: string
-          description: Custom name
-          title: Insurance plan name
-        user:
-          readOnly: true
-          type: string
-          description: User who created the custom insurance plan name
-          title: User
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
+          description: Appointment ID of the original billing line item
+          title: Appointment ID
     Coverage:
       required: []
       type: object
@@ -5514,6 +4595,807 @@ components:
           description: 'The level of insurance the eligibility check was run on. Can be one of the following: `Primary Insurance` or `Secondary Insurance`'
           title: Cob level
       x-verbose-required: []
+    CustomInsurancePlanName:
+      required: []
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        doctor:
+          readOnly: true
+          type: string
+          description: List custom appointment fields defined by the doctor with the given ID
+          title: Doctor
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        insurance_plan_name:
+          type: string
+          description: Custom name
+          title: Insurance plan name
+        user:
+          readOnly: true
+          type: string
+          description: User who created the custom insurance plan name
+          title: User
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    CashPayment:
+      required:
+      - patient
+      type: object
+      properties:
+        line_item:
+          type: integer
+          description: ''
+          title: Line item
+        posted_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: Posted date
+        appointment:
+          type: integer
+          description: If this is absent, the apponitment will be inferred from line item
+          title: Appointment
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        payment_method:
+          enum:
+          - DRCP
+          - CASH
+          - CHCK
+          - DBIT
+          - CRDT
+          - AMEX
+          - VISA
+          - MSTR
+          - DISC
+          - SQR1
+          - SQRE
+          - PTPA
+          - ONPT
+          - OTHR
+          type: string
+          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square, "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for Other`'
+          title: Payment method
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        payment_transaction_type:
+          enum:
+          - ''
+          - REF
+          - COR
+          - COPAY
+          - COINSR
+          - OTHR
+          type: string
+          description: '`"" for Credit, "REF" for Refund, "COR" for Correction, "COPAY" for Copay, "COINSR" for Coinsurance, "OTHR" for Other`'
+          title: Payment transaction type
+        created_by:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created by
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        amount:
+          type: number
+          description: Amount of cash for this payment, cannot be zero
+          title: Amount
+        notes:
+          type: string
+          description: ''
+          title: Notes
+        trace_number:
+          type: string
+          description: ''
+          title: Trace number
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        received_date:
+          type: string
+          description: ''
+          title: Received date
+      x-verbose-required: []
+    PhoneCallLog:
+      required:
+      - patient
+      - doctor
+      type: object
+      properties:
+        scheduled_time:
+          type: string
+          description: Date of phone call, if `appointment` is set, this field will be set as the `scheduled_time` of that appointment
+          title: Scheduled time
+        archived:
+          readOnly: true
+          type: boolean
+          description: If this phone call log is archived or not
+          title: Archived
+        appointment:
+          type: integer
+          description: Appointment related with the phone call log
+          title: Appointment
+        doctor:
+          type: integer
+          description: ''
+          title: Doctor
+        title:
+          type: string
+          description: Title of this log
+          title: Title
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        author:
+          readOnly: true
+          type: string
+          description: Author of post.
+          title: Author
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        cash_charged:
+          type: number
+          description: Amount of cash needs to be charged
+          title: Cash charged
+        duration:
+          type: integer
+          description: Duration of the phone call
+          title: Duration
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        message:
+          type: string
+          description: Additional message for the phone call
+          title: Message
+        type:
+          type: string
+          description: Type of phone call log
+          title: Type
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    LineItemTransaction:
+      required: []
+      type: object
+      properties:
+        insurance:
+          properties:
+            id_number:
+              type: string
+              description: Insurance company ID number
+              title: ID number
+            message:
+              type: string
+              description: Additional information about the insurance
+              title: Message
+            name:
+              type: string
+              description: Insurance company name
+              title: Name
+          type: object
+          description: Information about the insurance associated with the transaction.
+          title: Insurance
+        ins_paid:
+          type: number
+          description: ''
+          title: Ins paid
+        posted_date:
+          readOnly: true
+          type: string
+          description: Date when transaction is created
+          title: Posted date
+        appointment:
+          type: integer
+          description: Appointment ID
+          title: Appointment
+        ins_name:
+          type: integer
+          description: Can be one of the following, `1`(Primary Insurance), `2`(Secondary Insurance)
+          title: Ins name
+        doctor:
+          type: integer
+          description: Doctor ID
+          title: Doctor
+        adjustment_group_code:
+          readOnly: true
+          enum:
+          - ''
+          - CO
+          - OA
+          - PI
+          - PR
+          type: string
+          description: Group code for adjustment
+          title: Adjustment group code
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        line_item:
+          type: integer
+          description: ID of `/api/line_item` object
+          title: Line item
+        claim_status:
+          readOnly: true
+          enum:
+          - ''
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '10'
+          - '13'
+          - '15'
+          - '16'
+          - '17'
+          - '19'
+          - '20'
+          - '21'
+          - '22'
+          - '23'
+          - '25'
+          - '27'
+          type: string
+          description: Status of claim
+          title: Claim status
+        check_date:
+          readOnly: true
+          type: string
+          description: Date of check
+          title: Check date
+        trace_number:
+          type: string
+          description: Check number
+          title: Trace number
+        adjustment_reason:
+          enum:
+          - '-3'
+          - '-2'
+          - '-4'
+          - '-1'
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
+          - '11'
+          - '12'
+          - '13'
+          - '14'
+          - '15'
+          - '16'
+          - '18'
+          - '19'
+          - '20'
+          - '21'
+          - '22'
+          - '23'
+          - '24'
+          - '26'
+          - '27'
+          - '29'
+          - '31'
+          - '32'
+          - '33'
+          - '34'
+          - '35'
+          - '39'
+          - '40'
+          - '44'
+          - '45'
+          - '49'
+          - '50'
+          - '51'
+          - '53'
+          - '54'
+          - '55'
+          - '56'
+          - '58'
+          - '59'
+          - '60'
+          - '61'
+          - '66'
+          - '69'
+          - '70'
+          - '74'
+          - '75'
+          - '76'
+          - '78'
+          - '85'
+          - '87'
+          - '89'
+          - '90'
+          - '91'
+          - '94'
+          - '95'
+          - '96'
+          - '97'
+          - '100'
+          - '101'
+          - '102'
+          - '103'
+          - '104'
+          - '105'
+          - '106'
+          - '107'
+          - '108'
+          - '109'
+          - '110'
+          - '111'
+          - '112'
+          - '114'
+          - '115'
+          - '116'
+          - '117'
+          - '118'
+          - '119'
+          - '121'
+          - '122'
+          - '125'
+          - '128'
+          - '129'
+          - '130'
+          - '131'
+          - '132'
+          - '133'
+          - '134'
+          - '135'
+          - '136'
+          - '137'
+          - '138'
+          - '139'
+          - '140'
+          - '142'
+          - '143'
+          - '144'
+          - '146'
+          - '147'
+          - '148'
+          - '149'
+          - '150'
+          - '151'
+          - '152'
+          - '153'
+          - '154'
+          - '155'
+          - '157'
+          - '158'
+          - '159'
+          - '160'
+          - '161'
+          - '162'
+          - '163'
+          - '164'
+          - '165'
+          - '166'
+          - '167'
+          - '168'
+          - '169'
+          - '170'
+          - '171'
+          - '172'
+          - '173'
+          - '174'
+          - '175'
+          - '176'
+          - '177'
+          - '178'
+          - '179'
+          - '180'
+          - '181'
+          - '182'
+          - '183'
+          - '184'
+          - '185'
+          - '186'
+          - '187'
+          - '188'
+          - '189'
+          - '190'
+          - '191'
+          - '192'
+          - '193'
+          - '194'
+          - '195'
+          - '197'
+          - '198'
+          - '199'
+          - '200'
+          - '201'
+          - '202'
+          - '203'
+          - '204'
+          - '205'
+          - '206'
+          - '207'
+          - '208'
+          - '209'
+          - '210'
+          - '211'
+          - '212'
+          - '213'
+          - '214'
+          - '215'
+          - '216'
+          - '217'
+          - '218'
+          - '219'
+          - '220'
+          - '221'
+          - '222'
+          - '223'
+          - '224'
+          - '225'
+          - '226'
+          - '227'
+          - '228'
+          - '229'
+          - '230'
+          - '231'
+          - '232'
+          - '233'
+          - '234'
+          - '235'
+          - '236'
+          - '237'
+          - '238'
+          - '239'
+          - '240'
+          - '241'
+          - '242'
+          - '243'
+          - '244'
+          - '245'
+          - '246'
+          - '247'
+          - '248'
+          - '249'
+          - '250'
+          - '251'
+          - '252'
+          - '253'
+          - '254'
+          - '256'
+          - '257'
+          - '258'
+          - '259'
+          - '260'
+          - '261'
+          - '262'
+          - '263'
+          - '264'
+          - '265'
+          - '266'
+          - '267'
+          - '268'
+          - '269'
+          - '270'
+          - '271'
+          - '272'
+          - '273'
+          - '274'
+          - '275'
+          - '276'
+          - '277'
+          - '279'
+          - '286'
+          - '287'
+          - '288'
+          - '297'
+          - A0
+          - A1
+          - A5
+          - A6
+          - A7
+          - A8
+          - B1
+          - B4
+          - B5
+          - B7
+          - B8
+          - B9
+          - B10
+          - B11
+          - B12
+          - B13
+          - B14
+          - B15
+          - B16
+          - B20
+          - B22
+          - B23
+          - P1
+          - P2
+          - P3
+          - P4
+          - P5
+          - P6
+          - P7
+          - P8
+          - P9
+          - P10
+          - P11
+          - P12
+          - P13
+          - P14
+          - P15
+          - P16
+          - P17
+          - P18
+          - P19
+          - P20
+          - P21
+          - P22
+          - P23
+          - W1
+          - W2
+          - W3
+          - W4
+          - Y1
+          - Y2
+          - Y3
+          type: string
+          description: Reason for adjustment
+          title: Adjustment reason
+        patient:
+          type: integer
+          description: ''
+          title: Patient
+        adjustment:
+          type: number
+          description: Adjustment from total billed
+          title: Adjustment
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+      x-verbose-required: []
+    BillingLineItem:
+      required:
+      - appointment
+      - code
+      - procedure_type
+      - diagnosis_pointers
+      type: object
+      properties:
+        code:
+          type: string
+          description: ''
+          title: Code
+        ins3_paid:
+          readOnly: true
+          type: number
+          description: Amount paid by patinet's tertiary insurer
+          title: Ins3 paid
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        posted_date:
+          readOnly: true
+          type: string
+          description: date of line_item creation
+          title: Posted date
+        billing_status:
+          readOnly: true
+          enum:
+          - ''
+          - Incomplete Information
+          - In Process Emdeon
+          - In Process iHCFA
+          - In Process Gateway
+          - In Process Jopari
+          - In Process Waystar
+          - In Process EPS
+          - Rejected Emdeon
+          - Rejected iHCFA
+          - Rejected Gateway
+          - Rejected Jopari
+          - Rejected Waystar
+          - Rejected EPS
+          - In Process Payer
+          - Payer Acknowledged
+          - Rejected Payer
+          - Paid in Full
+          - Partially Paid
+          - Coordination of Benefits
+          - ERA Received
+          - ERA Denied
+          type: string
+          description: One of `""`, `"Incomplete Information"`, `"In Process Emdeon"`, `"In Process iHCFA"`, `"In Process Gateway"`, `"Rejected Emdeon"`, `"Rejected iHCFA"`, `"Rejected Gateway"`, `"In Process Payer"`, `"Payer Acknowledged"`, `"Rejected Payer"`, `"Paid in Full"`,  `"Partially Paid"`,  `"Coordination of Benefits"`,  `"ERA Received"`,  `"ERA Denied"`
+          title: Billing status
+        pt_paid:
+          type: number
+          description: Amount paid by patient
+          title: Pt paid
+        allowed:
+          readOnly: true
+          type: number
+          description: Amount allowed by insurance
+          title: Allowed
+        patient:
+          readOnly: true
+          type: string
+          description: Patient ID
+          title: Patient
+        adjustment:
+          readOnly: true
+          type: number
+          description: Adjustment from total billed
+          title: Adjustment
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        doctor:
+          readOnly: true
+          type: string
+          description: Doctor ID
+          title: Doctor
+        balance_pt:
+          readOnly: true
+          type: number
+          description: Patient balance
+          title: Balance pt
+        units:
+          type: string
+          description: Default to "UN"
+          title: Units
+        balance_ins:
+          type: number
+          description: Insurance balance
+          title: Balance ins
+        paid_total:
+          readOnly: true
+          type: string
+          description: Total amount paid
+          title: Paid total
+        diagnosis_pointers:
+          items:
+            type: string
+            description: String representation of an integer or ICD code
+            title: ''
+          type: array
+          description: List of 4 diagnosis pointers
+          title: Diagnosis pointers
+        appointment:
+          type: integer
+          description: Appointment ID
+          title: Appointment
+        description:
+          readOnly: true
+          type: string
+          description: ''
+          title: Description
+        balance_total:
+          readOnly: true
+          type: string
+          description: Total balance
+          title: Balance total
+        price:
+          type: number
+          description: Price of procedure
+          title: Price
+        expected_reimbursement:
+          readOnly: true
+          type: number
+          description: ''
+          title: Expected reimbursement
+        ins2_paid:
+          readOnly: true
+          type: number
+          description: Amount paid by patient's secondary insurer
+          title: Ins2 paid
+        ins1_paid:
+          readOnly: true
+          type: number
+          description: Amount paid by patient's primary insurer
+          title: Ins1 paid
+        insurance_status:
+          readOnly: true
+          type: string
+          description: This corresponds to the "Status/Adj Type" from billing detail screen
+          title: Insurance status
+        billed:
+          readOnly: true
+          type: number
+          description: Total billed
+          title: Billed
+        modifiers:
+          items:
+            type: string
+            description: String representation of modifier
+            title: ''
+          type: array
+          description: List of 4 code modifiers
+          title: Modifiers
+        denied_flag:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Denied flag
+        ins_total:
+          readOnly: true
+          type: string
+          description: Total amount paid by patient's insurers
+          title: Ins total
+        procedure_type:
+          enum:
+          - C
+          - H
+          - U
+          - S
+          type: string
+          description: One of `"CPT(C)"`, `"HCPCS(H)"`, `"Custom(U)"`, use 1 character identifier when using `POST`
+          title: Procedure type
+        service_date:
+          readOnly: true
+          type: string
+          description: Date on which the service was rendered
+          title: Service date
+        quantity:
+          type: number
+          description: ''
+          title: Quantity
+      x-verbose-required:
+      - description
     Procedure:
       properties:
         status:
@@ -5573,6 +5455,124 @@ components:
           type: integer
           description: ''
           title: ID
+    AsyncResourceError:
+      properties:
+        status:
+          type: string
+          description: Either "Error" or "Failed"
+          title: Status
+        uuid:
+          type: string
+          description: The UUID used to get the data for the asynchronous request
+          title: UUID
+        detail:
+          type: string
+          description: Instructions on what to do next
+          title: Detail
+    PatientAuthorization:
+      required:
+      - doctor
+      - patient
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status
+          title: Status
+        patient:
+          readOnly: true
+          type: string
+          description: ''
+          title: Patient
+        end_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: End Date
+        doctor:
+          readOnly: true
+          type: string
+          description: ''
+          title: Doctor
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        number_of_visits:
+          readOnly: true
+          type: integer
+          description: ''
+          title: Number of visits
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        specialty:
+          type: string
+          description: Specialty
+          title: Specialty
+        auth_number:
+          type: string
+          description: Authorization Number
+          title: Authorization Number
+        start_date:
+          readOnly: true
+          type: string
+          description: ''
+          title: Start Date
+        patient_id:
+          type: integer
+          description: ''
+          title: Patient Id
+        visits_remaining:
+          readOnly: true
+          type: integer
+          description: ''
+          title: Visits remainings
+        notes:
+          type: string
+          description: Notes
+          title: Notes
+        doctor_id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: Doctor Id
+        procedure_codes:
+          items:
+            title: ''
+            type: object
+            description: Procedure code object
+            properties:
+              price:
+                type: string
+                description: This field is represented in string format
+                title: Price
+              code:
+                type: string
+                description: ''
+                title: Code
+              quantity:
+                type: string
+                description: This field is represented in string format
+                title: Quantity
+          readOnly: true
+          type: array
+          description: Array of procedure code objects
+          title: Procedure codes
+        expired:
+          readOnly: true
+          type: boolean
+          description: ''
+          title: Expired authorization
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
   securitySchemes:
     drchrono_oauth2:
       type: oauth2
