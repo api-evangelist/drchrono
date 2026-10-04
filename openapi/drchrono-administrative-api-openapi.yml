@@ -550,6 +550,90 @@ paths:
     - url: https://app.drchrono.com
 components:
   schemas:
+    WorkHours:
+      type: object
+      properties:
+        start_time:
+          type: string
+          description: start time of the work hour
+          title: Start time
+        enabled:
+          type: boolean
+          description: whether the work hour is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work hour
+          title: ID
+        end_time:
+          type: string
+          description: end time of the work hour
+          title: End time
+    UserProfilesGroup:
+      required: []
+      type: object
+      properties:
+        archived:
+          readOnly: true
+          type: boolean
+          description: Group is archived or not
+          title: Archived
+        name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          readOnly: true
+          type: string
+          description: Practice group this user group belongs to
+          title: Practice group
+        created_at:
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          type: string
+          description: ''
+          title: Updated at
+        members:
+          items:
+            type: string
+            description: ID of `/api/users`
+            title: ''
+          readOnly: true
+          type: array
+          description: Users in this user group.
+          title: Members
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    WorkSchedule:
+      type: object
+      properties:
+        work_days:
+          items:
+            $ref: '#/components/schemas/WorkDay'
+          type: array
+          description: work days of the work schedule
+          title: Work days
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID for the work schedule
+          title: ID
+        office:
+          type: integer
+          description: ID of office for work schedule
+          title: Office
+        doctor:
+          type: integer
+          description: ID of doctor for work schedule
+          title: Office
     DoctorOptions:
       required: []
       type: object
@@ -636,94 +720,6 @@ components:
           type: array
           description: work hours of the work day
           title: Work hours
-    UserProfile:
-      required: []
-      type: object
-      properties:
-        username:
-          type: string
-          description: ''
-          title: Username
-        doctor:
-          readOnly: true
-          type: string
-          description: For staff members, this is their primary physician's ID. For doctors, it is their own ID.
-          title: Doctor
-        practice_group:
-          readOnly: true
-          type: string
-          description: The ID of the practice group this user belongs to. This can be used to identify users in the same practice.
-          title: Practice group
-        is_doctor:
-          readOnly: true
-          type: string
-          description: Mutually exclusive with `is_staff`
-          title: Is doctor
-        is_staff:
-          readOnly: true
-          type: string
-          description: Mutually exclusive with `is_doctor`
-          title: Is staff
-        staff:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-          description: The ID used by /api/staff. This will be null if `is_staff` is false.
-          title: Staff
-        id:
-          readOnly: true
-          type: string
-          description: ''
-          title: Id
-        permissions:
-          readOnly: true
-          type: string
-          description: Permissions the user has.
-          title: Permissions
-      x-verbose-required: []
-    WorkHours:
-      type: object
-      properties:
-        start_time:
-          type: string
-          description: start time of the work hour
-          title: Start time
-        enabled:
-          type: boolean
-          description: whether the work hour is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work hour
-          title: ID
-        end_time:
-          type: string
-          description: end time of the work hour
-          title: End time
-    WorkSchedule:
-      type: object
-      properties:
-        work_days:
-          items:
-            $ref: '#/components/schemas/WorkDay'
-          type: array
-          description: work days of the work schedule
-          title: Work days
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID for the work schedule
-          title: ID
-        office:
-          type: integer
-          description: ID of office for work schedule
-          title: Office
-        doctor:
-          type: integer
-          description: ID of doctor for work schedule
-          title: Office
     Doctor:
       required: []
       type: object
@@ -1073,47 +1069,51 @@ components:
           description: ''
           title: Job title
       x-verbose-required: []
-    UserProfilesGroup:
+    UserProfile:
       required: []
       type: object
       properties:
-        archived:
-          readOnly: true
-          type: boolean
-          description: Group is archived or not
-          title: Archived
-        name:
-          readOnly: true
+        username:
           type: string
           description: ''
-          title: Name
+          title: Username
+        doctor:
+          readOnly: true
+          type: string
+          description: For staff members, this is their primary physician's ID. For doctors, it is their own ID.
+          title: Doctor
         practice_group:
           readOnly: true
           type: string
-          description: Practice group this user group belongs to
+          description: The ID of the practice group this user belongs to. This can be used to identify users in the same practice.
           title: Practice group
-        created_at:
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          type: string
-          description: ''
-          title: Updated at
-        members:
-          items:
-            type: string
-            description: ID of `/api/users`
-            title: ''
+        is_doctor:
           readOnly: true
-          type: array
-          description: Users in this user group.
-          title: Members
+          type: string
+          description: Mutually exclusive with `is_staff`
+          title: Is doctor
+        is_staff:
+          readOnly: true
+          type: string
+          description: Mutually exclusive with `is_doctor`
+          title: Is staff
+        staff:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+          description: The ID used by /api/staff. This will be null if `is_staff` is false.
+          title: Staff
         id:
           readOnly: true
-          type: integer
+          type: string
           description: ''
-          title: ID
+          title: Id
+        permissions:
+          readOnly: true
+          type: string
+          description: Permissions the user has.
+          title: Permissions
       x-verbose-required: []
     UserProfile_2:
       required: []

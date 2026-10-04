@@ -4602,211 +4602,294 @@ paths:
     - url: https://app.drchrono.com
 components:
   schemas:
-    InventoryVaccine:
-      required:
-      - doctor
-      - name
-      - manufacturer_code
+    WorkHours:
       type: object
       properties:
-        category:
-          type: integer
-          description: ID of `/api/inventory_categories`
-          title: Category
-        lot_number:
+        start_time:
           type: string
-          description: ''
-          title: Lot number
-        manufacturer_code:
-          type: string
-          description: ''
-          title: Manufacturer code
-        name:
-          type: string
-          description: ''
-          title: Name
-        original_quantity:
-          type: integer
-          description: Default to zero
-          title: Original quantity
-        doctor:
-          type: integer
-          description: ''
-          title: Doctor
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        status:
-          enum:
-          - active
-          - inactive
-          - archived
-          - voided
-          type: string
-          description: Status of vaccine, could be one of `active`, `inactive`, `archived`, `voided`, default to `active`
-          title: Status
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        price_with_tax:
-          type: number
-          description: ''
-          title: Price with tax
-        expiry:
-          type: string
-          description: When will the vaccine expire
-          title: Expiry
-        note:
-          type: string
-          description: ''
-          title: Note
-        sales_tax_applicable:
-          type: boolean
-          description: Is sales tax applicable to this service/product? Default to false
-          title: Sales tax applicable
-        cost:
-          type: number
-          description: Base cost for consumables.
-          title: Cost
-        price:
-          type: number
-          description: ''
-          title: Price
-        vaccination_type:
-          type: string
-          description: Default to `"standard vaccine"`
-          title: Vaccination type
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        manufacturer:
-          type: string
-          description: ''
-          title: Manufacturer
-        current_quantity:
-          readOnly: true
-          type: integer
-          description: This field can onlyu be changed by creating new patient vaccine record. Current quantity of an inventory vaccine is calculated by subtract number of records pointing to this inventory from the original quantity value.
-          title: Current quantity
-        cvx_code:
-          type: string
-          description: ''
-          title: Cvx code
-      x-verbose-required: []
-    TaskStatus:
-      required:
-      - name
-      - practice_group
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: ''
-          title: Archived
-        name:
-          type: string
-          description: ''
-          title: Name
-        status_category:
-          enum:
-          - O
-          - P
-          - H
-          - C
-          type: string
-          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
-          title: Status category
-        practice_group:
-          type: integer
-          description: ''
-          title: Practice group
-        created_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-        task_category:
-          type: integer
-          description: ID of `/api/task_categories`
-          title: Task category
-      x-verbose-required: []
-    WorkDay:
-      type: object
-      properties:
-        iso_weekday:
-          type: string
-          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-          title: ISO weekday
+          description: start time of the work hour
+          title: Start time
         enabled:
           type: boolean
-          description: whether the work day is enabled
+          description: whether the work hour is enabled
           title: Enabled
         id:
           readOnly: true
           type: integer
-          description: unique ID of the work day
+          description: unique ID of the work hour
           title: ID
-        work_hours:
-          items:
-            $ref: '#/components/schemas/WorkHours'
-          type: array
-          description: work hours of the work day
-          title: Work hours
-    TaskCategory:
-      required:
-      - name
-      - practice_group
+        end_time:
+          type: string
+          description: end time of the work hour
+          title: End time
+    WorkSchedule:
       type: object
       properties:
+        work_days:
+          items:
+            $ref: '#/components/schemas/WorkDay'
+          type: array
+          description: work days of the work schedule
+          title: Work days
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID for the work schedule
+          title: ID
+        office:
+          type: integer
+          description: ID of office for work schedule
+          title: Office
+        doctor:
+          type: integer
+          description: ID of doctor for work schedule
+          title: Office
+    Task:
+      required:
+      - title
+      - status
+      type: object
+      properties:
+        category:
+          type: integer
+          description: ''
+          title: Category
+        due_date:
+          title: TaskReminder
+          type: object
+          description: When the task is due
+          properties:
+            time:
+              type: string
+              description: Due date time
+              title: Time
         archived:
           type: boolean
           description: ''
           title: Archived
-        is_global:
+        associated_items:
+          items:
+            title: AssociatedTaskItem
+            type: object
+            description: ''
+            properties:
+              task:
+                type: integer
+                description: ''
+                title: Task
+              type:
+                enum:
+                - Document
+                - Message
+                - Message Thread
+                - Lab result
+                - Lab order
+                - Patient
+                - Appointment
+                - Lab document
+                - Communication
+                type: string
+                description: Can be one of `"Appointment"`, `"Patient"`, `"Message"`, `"Message Thread"`, `"Document"`, `"Lab order"`
+                title: Type
+              value:
+                type: integer
+                description: ID of the specified type object
+                title: Value
+          type: array
+          description: Associated task items
+          title: Associated items
+        assigned_by:
           readOnly: true
           type: string
-          description: Indicates that the category is a system wide (pre-defined) category
-          title: Is global
-        name:
+          description: ID of `/api/users/` who assigned the task
+          title: Assigned by
+        assignee_user:
           type: string
-          description: ''
-          title: Name
-        practice_group:
-          type: integer
-          description: ''
-          title: Practice group
+          description: Either `assignee_user` or `assignee_group` should be set
+          title: Assignee user
         created_at:
           readOnly: true
           type: string
           description: ''
           title: Created at
+        assignee_group:
+          type: integer
+          description: Either `assignee_user` or `assignee_group` should be set
+          title: Assignee group
         updated_at:
           readOnly: true
           type: string
           description: ''
           title: Updated at
+        created_by:
+          readOnly: true
+          type: string
+          description: ID of `/api/users` who created the task
+          title: Created by
+        priority:
+          enum:
+          - '10'
+          - '20'
+          - '30'
+          - '40'
+          type: string
+          description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
+          title: Priority
+        status:
+          type: integer
+          description: ''
+          title: Status
+        notes:
+          items:
+            title: TaskNote
+            type: object
+            description: Task note object
+            properties:
+              archived:
+                type: boolean
+                description: ''
+                title: Archived
+              task:
+                type: integer
+                description: ID of `/api/tasks`
+                title: Task
+              text:
+                type: string
+                description: ''
+                title: Text
+              created_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created at
+              updated_at:
+                readOnly: true
+                type: string
+                description: ''
+                title: Updated at
+              created_by:
+                readOnly: true
+                type: string
+                description: ''
+                title: Created by
+              id:
+                readOnly: true
+                type: integer
+                description: ''
+                title: ID
+          type: array
+          description: Additional notes of the task
+          title: Notes
+        title:
+          type: string
+          description: ''
+          title: Title
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
-      x-verbose-required: []
+      x-verbose-required:
+      - notes
+      - associated_items
+    DoctorMessageThread:
+      type: object
+      properties:
+        assigned_groups:
+          items:
+            type: integer
+          type: array
+          description: Array of user group IDs assigned to this thread
+          title: Assigned groups
+        archived:
+          type: boolean
+          description: Whether the thread is archived
+          title: Archived
+        first_message:
+          readOnly: true
+          type: integer
+          description: ID of the first message in the thread
+          title: First message
+        patient:
+          readOnly: true
+          type: integer
+          description: ID of the patient associated with this thread (if patient-facing)
+          title: Patient
+        doctor:
+          readOnly: true
+          type: integer
+          description: ID of the doctor who owns this thread
+          title: Doctor
+        last_message:
+          readOnly: true
+          type: integer
+          description: ID of the most recent message in the thread
+          title: Last message
+        practice_group:
+          readOnly: true
+          type: integer
+          description: ID of the practice group for access control
+          title: Practice group
+        created_at:
+          readOnly: true
+          title: Created at
+          type: string
+          description: Timestamp when the thread was created
+          format: date-time
+        updated_at:
+          readOnly: true
+          title: Updated at
+          type: string
+          description: Timestamp when the thread was last updated
+          format: date-time
+        assigned_user_profiles:
+          items:
+            type: integer
+          type: array
+          description: Array of user profile IDs assigned to this thread
+          title: Assigned user profiles
+        message_count:
+          readOnly: true
+          type: integer
+          description: Total number of messages in this thread
+          title: Message count
+        unread_count:
+          readOnly: true
+          type: integer
+          description: Number of unread messages in this thread
+          title: Unread count
+        last_message_at:
+          readOnly: true
+          title: Last message at
+          type: string
+          description: Timestamp of the last message - used for sorting
+          format: date-time
+        owners:
+          items:
+            type: integer
+          readOnly: true
+          type: array
+          description: Array of user profile IDs who own this thread
+          title: Owners
+        starred:
+          type: boolean
+          description: Whether the thread is starred
+          title: Starred
+        message_type:
+          readOnly: true
+          type: string
+          description: Type of messages in this thread. See `/api/messages` for message type descriptions
+          title: Message type
+        id:
+          readOnly: true
+          type: integer
+          description: Unique identifier for the message thread
+          title: ID
+        subject:
+          readOnly: true
+          type: string
+          description: Thread subject - locked to first message subject
+          title: Subject
     InventoryCategory:
       required: []
       type: object
@@ -4919,124 +5002,103 @@ components:
           description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
           title: Default priority
       x-verbose-required: []
-    DoctorMessageThread:
+    InventoryVaccine:
+      required:
+      - doctor
+      - name
+      - manufacturer_code
       type: object
       properties:
-        assigned_groups:
-          items:
-            type: integer
-          type: array
-          description: Array of user group IDs assigned to this thread
-          title: Assigned groups
-        archived:
-          type: boolean
-          description: Whether the thread is archived
-          title: Archived
-        first_message:
-          readOnly: true
+        category:
           type: integer
-          description: ID of the first message in the thread
-          title: First message
-        patient:
-          readOnly: true
+          description: ID of `/api/inventory_categories`
+          title: Category
+        lot_number:
+          type: string
+          description: ''
+          title: Lot number
+        manufacturer_code:
+          type: string
+          description: ''
+          title: Manufacturer code
+        name:
+          type: string
+          description: ''
+          title: Name
+        original_quantity:
           type: integer
-          description: ID of the patient associated with this thread (if patient-facing)
-          title: Patient
+          description: Default to zero
+          title: Original quantity
         doctor:
-          readOnly: true
           type: integer
-          description: ID of the doctor who owns this thread
+          description: ''
           title: Doctor
-        last_message:
-          readOnly: true
-          type: integer
-          description: ID of the most recent message in the thread
-          title: Last message
-        practice_group:
-          readOnly: true
-          type: integer
-          description: ID of the practice group for access control
-          title: Practice group
         created_at:
           readOnly: true
-          title: Created at
           type: string
-          description: Timestamp when the thread was created
-          format: date-time
+          description: ''
+          title: Created at
+        status:
+          enum:
+          - active
+          - inactive
+          - archived
+          - voided
+          type: string
+          description: Status of vaccine, could be one of `active`, `inactive`, `archived`, `voided`, default to `active`
+          title: Status
         updated_at:
           readOnly: true
+          type: string
+          description: ''
           title: Updated at
+        price_with_tax:
+          type: number
+          description: ''
+          title: Price with tax
+        expiry:
           type: string
-          description: Timestamp when the thread was last updated
-          format: date-time
-        assigned_user_profiles:
-          items:
-            type: integer
-          type: array
-          description: Array of user profile IDs assigned to this thread
-          title: Assigned user profiles
-        message_count:
-          readOnly: true
-          type: integer
-          description: Total number of messages in this thread
-          title: Message count
-        unread_count:
-          readOnly: true
-          type: integer
-          description: Number of unread messages in this thread
-          title: Unread count
-        last_message_at:
-          readOnly: true
-          title: Last message at
+          description: When will the vaccine expire
+          title: Expiry
+        note:
           type: string
-          description: Timestamp of the last message - used for sorting
-          format: date-time
-        owners:
-          items:
-            type: integer
-          readOnly: true
-          type: array
-          description: Array of user profile IDs who own this thread
-          title: Owners
-        starred:
+          description: ''
+          title: Note
+        sales_tax_applicable:
           type: boolean
-          description: Whether the thread is starred
-          title: Starred
-        message_type:
-          readOnly: true
+          description: Is sales tax applicable to this service/product? Default to false
+          title: Sales tax applicable
+        cost:
+          type: number
+          description: Base cost for consumables.
+          title: Cost
+        price:
+          type: number
+          description: ''
+          title: Price
+        vaccination_type:
           type: string
-          description: Type of messages in this thread. See `/api/messages` for message type descriptions
-          title: Message type
+          description: Default to `"standard vaccine"`
+          title: Vaccination type
         id:
           readOnly: true
           type: integer
-          description: Unique identifier for the message thread
+          description: ''
           title: ID
-        subject:
-          readOnly: true
+        manufacturer:
           type: string
-          description: Thread subject - locked to first message subject
-          title: Subject
-    WorkHours:
-      type: object
-      properties:
-        start_time:
-          type: string
-          description: start time of the work hour
-          title: Start time
-        enabled:
-          type: boolean
-          description: whether the work hour is enabled
-          title: Enabled
-        id:
+          description: ''
+          title: Manufacturer
+        current_quantity:
           readOnly: true
           type: integer
-          description: unique ID of the work hour
-          title: ID
-        end_time:
+          description: This field can onlyu be changed by creating new patient vaccine record. Current quantity of an inventory vaccine is calculated by subtract number of records pointing to this inventory from the original quantity value.
+          title: Current quantity
+        cvx_code:
           type: string
-          description: end time of the work hour
-          title: End time
+          description: ''
+          title: Cvx code
+      x-verbose-required: []
     Office:
       required: []
       type: object
@@ -5496,176 +5558,67 @@ components:
           description: ''
           title: ID
       x-verbose-required: []
-    WorkSchedule:
+    WorkDay:
       type: object
       properties:
-        work_days:
-          items:
-            $ref: '#/components/schemas/WorkDay'
-          type: array
-          description: work days of the work schedule
-          title: Work days
+        iso_weekday:
+          type: string
+          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+          title: ISO weekday
+        enabled:
+          type: boolean
+          description: whether the work day is enabled
+          title: Enabled
         id:
           readOnly: true
           type: integer
-          description: unique ID for the work schedule
+          description: unique ID of the work day
           title: ID
-        office:
-          type: integer
-          description: ID of office for work schedule
-          title: Office
-        doctor:
-          type: integer
-          description: ID of doctor for work schedule
-          title: Office
-    Task:
+        work_hours:
+          items:
+            $ref: '#/components/schemas/WorkHours'
+          type: array
+          description: work hours of the work day
+          title: Work hours
+    TaskCategory:
       required:
-      - title
-      - status
+      - name
+      - practice_group
       type: object
       properties:
-        category:
-          type: integer
-          description: ''
-          title: Category
-        due_date:
-          title: TaskReminder
-          type: object
-          description: When the task is due
-          properties:
-            time:
-              type: string
-              description: Due date time
-              title: Time
         archived:
           type: boolean
           description: ''
           title: Archived
-        associated_items:
-          items:
-            title: AssociatedTaskItem
-            type: object
-            description: ''
-            properties:
-              task:
-                type: integer
-                description: ''
-                title: Task
-              type:
-                enum:
-                - Document
-                - Message
-                - Message Thread
-                - Lab result
-                - Lab order
-                - Patient
-                - Appointment
-                - Lab document
-                - Communication
-                type: string
-                description: Can be one of `"Appointment"`, `"Patient"`, `"Message"`, `"Message Thread"`, `"Document"`, `"Lab order"`
-                title: Type
-              value:
-                type: integer
-                description: ID of the specified type object
-                title: Value
-          type: array
-          description: Associated task items
-          title: Associated items
-        assigned_by:
+        is_global:
           readOnly: true
           type: string
-          description: ID of `/api/users/` who assigned the task
-          title: Assigned by
-        assignee_user:
+          description: Indicates that the category is a system wide (pre-defined) category
+          title: Is global
+        name:
           type: string
-          description: Either `assignee_user` or `assignee_group` should be set
-          title: Assignee user
+          description: ''
+          title: Name
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
         created_at:
           readOnly: true
           type: string
           description: ''
           title: Created at
-        assignee_group:
-          type: integer
-          description: Either `assignee_user` or `assignee_group` should be set
-          title: Assignee group
         updated_at:
           readOnly: true
           type: string
           description: ''
           title: Updated at
-        created_by:
-          readOnly: true
-          type: string
-          description: ID of `/api/users` who created the task
-          title: Created by
-        priority:
-          enum:
-          - '10'
-          - '20'
-          - '30'
-          - '40'
-          type: string
-          description: Can be one of the following 10(Low), 20(Medium), 30(High), 40(Urgent)
-          title: Priority
-        status:
-          type: integer
-          description: ''
-          title: Status
-        notes:
-          items:
-            title: TaskNote
-            type: object
-            description: Task note object
-            properties:
-              archived:
-                type: boolean
-                description: ''
-                title: Archived
-              task:
-                type: integer
-                description: ID of `/api/tasks`
-                title: Task
-              text:
-                type: string
-                description: ''
-                title: Text
-              created_at:
-                readOnly: true
-                type: string
-                description: ''
-                title: Created at
-              updated_at:
-                readOnly: true
-                type: string
-                description: ''
-                title: Updated at
-              created_by:
-                readOnly: true
-                type: string
-                description: ''
-                title: Created by
-              id:
-                readOnly: true
-                type: integer
-                description: ''
-                title: ID
-          type: array
-          description: Additional notes of the task
-          title: Notes
-        title:
-          type: string
-          description: ''
-          title: Title
         id:
           readOnly: true
           type: integer
           description: ''
           title: ID
-      x-verbose-required:
-      - notes
-      - associated_items
+      x-verbose-required: []
     DoctorMessage:
       required:
       - doctor
@@ -5883,6 +5836,53 @@ components:
           type: boolean
           description: ''
           title: Starred
+      x-verbose-required: []
+    TaskStatus:
+      required:
+      - name
+      - practice_group
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: ''
+          title: Archived
+        name:
+          type: string
+          description: ''
+          title: Name
+        status_category:
+          enum:
+          - O
+          - P
+          - H
+          - C
+          type: string
+          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
+          title: Status category
+        practice_group:
+          type: integer
+          description: ''
+          title: Practice group
+        created_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+        task_category:
+          type: integer
+          description: ID of `/api/task_categories`
+          title: Task category
       x-verbose-required: []
     Task_2:
       required:
