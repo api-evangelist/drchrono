@@ -1,0 +1,12 @@
+{
+ "url": "https://drchrono.com/openapi-schema",
+ "requested_url": "https://drchrono.com/openapi-schema",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 745948,
+ "sha256": "e595797fe80023f9db8bcdab9e495193275155bf502c54988a0176d2de6cb695",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
