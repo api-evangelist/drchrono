@@ -38,7 +38,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/drchrono.png
 url: https://raw.githubusercontent.com/api-evangelist/drchrono/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-08-14'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 tags:
   - EHR
@@ -264,6 +264,10 @@ apis:
   - type: AgentSkill
     url: skills/drchrono-fhir-record-retrieval.md
 common:
+  - url: https://www.drchrono.com/resources/blog/
+    type: Blog
+  - url: https://www.drchrono.com/feed/
+    type: BlogRSS
   - type: CapabilityMap
     url: capabilities/drchrono-capability-edges.yml
     name: drchrono Business Capability Map
