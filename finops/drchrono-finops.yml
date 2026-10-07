@@ -1,3 +1,11 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+# Coverage demoted 2026-10-07 (roadmap#942, PLAN.md Stage A): this file was written by an API Evangelist
+# sweep and names no billing unit, meters or pricing category read from the provider — it restates the
+# FinOps framework. It is `x-coverage: unmeasured`, and the FOCUS alignment it claimed has been removed.
+x-coverage: unmeasured
+method: generated
 name: drchrono FinOps
 description: Financial operations guidance for teams integrating with the drchrono API. drchrono's EHR platform is priced on a quote-based subscription model tied to practice size and tier. API usage itself does not carry a separate per-call cost, but overage charges apply to communication features (text, phone, fax). Teams should monitor API rate limits and plan for potential rate limit increase negotiations when scaling integrations.
 url: https://www.drchrono.com/plans-and-pricing/
