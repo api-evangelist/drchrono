@@ -368,4 +368,19 @@ edges:
   direction: partner-built
   channel: partner-built
   relationship: platform-app
+- partner_name: luma-health
+  partner: luma-health
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: processor-connection
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/luma-health/blob/main/openapi/luma-health-patients-api-openapi.yml
+  contract_reference:
+    repo: luma-health
+    spec_file: luma-health-patients-api-openapi.yml
+    value: drchrono
+    property: schemas.ExternalId.source
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
 templates: []

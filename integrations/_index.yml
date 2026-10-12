@@ -482,3 +482,21 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: drchrono-luma-health
+  label: luma-health
+  partner: luma-health
+  partner_name: luma-health
+  type: contract
+  channel: partner-built
+  evidence: https://github.com/api-evangelist/luma-health/blob/main/openapi/luma-health-patients-api-openapi.yml
+  source: edge
+  relationship: processor-connection
+  contract_reference:
+    repo: luma-health
+    spec_file: luma-health-patients-api-openapi.yml
+    value: drchrono
+    property: schemas.ExternalId.source
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
+  status: not-a-workflow
+  arazzo: null

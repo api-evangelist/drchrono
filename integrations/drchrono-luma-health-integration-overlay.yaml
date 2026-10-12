@@ -1,0 +1,19 @@
+# DERIVED by build-integration-preconfigs.py (roadmap#949). Overlay on the PARTNER's contract:
+# where luma-health's enum names drchrono, and what that value is.
+overlay: 1.0.0
+info:
+  title: drchrono as a processor-connection in luma-health's contract
+  version: 1.0.0
+extends: https://raw.githubusercontent.com/api-evangelist/luma-health/refs/heads/main/openapi/luma-health-patients-api-openapi.yml
+actions:
+- target: $.components.schemas.ExternalId.properties.source
+  update:
+    x-apievangelist-integration:
+      values:
+        drchrono:
+          provider: drchrono
+          relationship: processor-connection
+          evidence: https://github.com/api-evangelist/luma-health/blob/main/openapi/luma-health-patients-api-openapi.yml
+      method: derived
+      generated: '2026-10-12'
+      generator: build-integration-preconfigs.py
