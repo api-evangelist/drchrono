@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/drchrono/main/json-schema/drchrono-user-profiles-group-schema.json",
+  "title": "UserProfilesGroup",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/drchrono-administrative-api-openapi.yml#/components/schemas/UserProfilesGroup",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "archived": {
+      "readOnly": true,
+      "type": "boolean",
+      "description": "Group is archived or not",
+      "title": "Archived"
+    },
+    "name": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Name"
+    },
+    "practice_group": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Practice group this user group belongs to",
+      "title": "Practice group"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "",
+      "title": "Created at"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "",
+      "title": "Updated at"
+    },
+    "members": {
+      "items": {
+        "type": "string",
+        "description": "ID of `/api/users`",
+        "title": ""
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "Users in this user group.",
+      "title": "Members"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "",
+      "title": "ID"
+    }
+  },
+  "x-verbose-required": []
+}

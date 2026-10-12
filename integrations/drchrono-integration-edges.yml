@@ -1,0 +1,371 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://partners.drchrono.com/
+checked:
+- https://composio.dev/toolkits/drchrono
+- https://monid.ai/tools/drchrono
+- https://n8n.io/integrations/drchrono/
+- https://partners.drchrono.com/
+- https://www.drchrono.com/partners/
+- https://zapier.com/apps/drchrono/integrations
+summary: 43 partner-built apps listed on the DrChrono Marketplace (partners.drchrono.com); no Zapier/n8n listing.
+marketplace_apps:
+- marketplace: own
+  name: DrChrono Marketplace
+  url: https://partners.drchrono.com/
+  note: store does not state a total; 50 distinct apps rendered on the home listing 2026-10-12
+  categories:
+  - Acquisition & Engagement
+  - Administrative
+  - Billing
+  - Clinical
+  - Reporting/Analytics
+  - Healthcare AI
+  app: DrChrono Marketplace
+edges:
+- partner_name: Relaymed
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/RWFkoin/relaymed
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: BluByrd
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/ZKo9mS6/blubyrd
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Dock Health
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/3tFo4GP/dock-health
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: PatientCollector
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/Gg3ejcY/patientcollector
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: MolecuLight
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/TaJgkaG/moleculight
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: CredNet
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/3z3mCbY/crednet
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Square
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/Z2QyA4J/square
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: DeepScribe
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/r7NM7Ha/deepscribe
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Fullscript
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/YMd5mWd/fullscript
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Updox
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/R74Sfjp/updox
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: WebMD PracticePro
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/Hzbwazy/webmd-practicepro
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: OutcomeMD
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/46taM6b/outcomemd
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Zocdoc
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/FYR6wvP/zocdoc
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Birdeye
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/BrxxyKL/birdeye
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: M*Modal
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/ZwcjLdM/mmodal
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Genomind
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/sgPvBWf/genomind
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Dash by Relatient
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/qyiQogz/dash-by-relatient
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Solutionreach
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/7wUL3Xo/solutionreach
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: RxPhoto
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/8qtLoRd/rxphoto
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: EHRsynergy
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/nbtBXEt/ehrsynergy
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: MIPS Assist
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/TCs26Th/mips-assist
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: WebMD Care
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/jhQmeKc/webmd-care
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Lifepoint
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/gYDjG7c/lifepoint
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: MyMedLeads
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/4iamw8f/mymedleads
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Officite
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/4XNR372/officite
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: 100Plus
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/KfqHrGB/100plus
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Curogram
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/3apBdFd/curogram
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Solv Health
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/2k4XrzT/solv-health
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: FlexScanMD
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/c4SDgV5/flexscanmd
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: GoodTherapy Continuing Education (Unlimited)
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/GMUcocU/goodtherapy-continuing-education-unlimited
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Demandforce
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/PSvWNQu/demandforce
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Physitrack
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/pmkQYMU/physitrack
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: GoodTherapy
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/dDA47vV/goodtherapy
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Prevounce
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/Fapsr4M/prevounce
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Ambra Health
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/7JafpNA/ambra-health
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Weave
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/QDcmJFk/weave
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Tebra (Previously PatientPop)
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/ioakt3U/tebra-previously-patientpop
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: ThoroughCare Digital Care Coordination Solutions
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/tiZ9QtW/thoroughcare-digital-care-coordination-solutions
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Fortis
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/eKvdNJz/fortis
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: NextPatient
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/ATm2EZr/nextpatient
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: ClearGage
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/rxdYRZg/cleargage
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: MIPSpro powered by Healthmonix Prism
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/knwqg4R/mipspro-powered-by-healthmonix-prism
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+- partner_name: Aloha
+  partner: null
+  type: marketplace
+  evidence: https://partners.drchrono.com/app/HzXhiDe/aloha
+  marketplace: DrChrono Marketplace
+  direction: partner-built
+  channel: partner-built
+  relationship: platform-app
+templates: []

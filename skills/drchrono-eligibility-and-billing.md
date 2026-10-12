@@ -2,28 +2,28 @@
 name: drchrono-eligibility-and-billing
 description: Run the DrChrono revenue cycle from the API — check insurance eligibility, review the day sheet, inspect line items and add a claim billing note — all on Level 2 endpoints that touch money and PHI together.
 api: drchrono
-version: v4 (Hunt Valley)
 base_url: https://app.drchrono.com
 operations:
-  - insurances_list
-  - eligibility_checks_list
-  - eligibility_checks_read
-  - line_items_list
-  - line_items_read
-  - claim_billing_notes_list
-  - claim_billing_notes_create
-  - patient_payments_list
-  - patient_payments_create
-  - transactions_list
+- insurances_list
+- eligibility_checks_list
+- eligibility_checks_read
+- line_items_list
+- line_items_read
+- claim_billing_notes_list
+- claim_billing_notes_create
+- patient_payments_list
+- patient_payments_create
+- transactions_list
 scopes:
-  - billing:read
-  - billing:write
-  - billing:patient-payment:read
-  - billing:patient-payment:write
-  - patients:read
+- billing:read
+- billing:write
+- billing:patient-payment:read
+- billing:patient-payment:write
+- patients:read
 generated: '2026-08-14'
 method: generated
 source: openapi/_original/drchrono-rest-api-openapi-schema.json + https://app.drchrono.com/api-docs/
+api_version: v4 (Hunt Valley)
 ---
 
 # Work a DrChrono claim

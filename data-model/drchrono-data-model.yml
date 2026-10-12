@@ -2,16 +2,11 @@ generated: '2026-08-14'
 method: derived
 source: openapi/_original/drchrono-rest-api-openapi-schema.json (harvested verbatim 2026-08-14 from https://app.drchrono.com/openapi-schema)
 name: drchrono API Data Model
-description: Entity-relationship graph for the DrChrono EHR REST API v4 (Hunt Valley), derived from components.schemas
-  of the OpenAPI DrChrono serves at https://app.drchrono.com/openapi-schema. Patient is the hub of the clinical
-  graph; Doctor and Office anchor practice management; Appointment binds clinical to scheduling; LineItem and Transaction
-  anchor the billing graph. The separate SMART on FHIR R4 surface projects the same data core onto 27 FHIR resource
-  types and does NOT share identifier space with these entities.
+description: Entity-relationship graph for the DrChrono EHR REST API v4 (Hunt Valley), derived from components.schemas of the OpenAPI DrChrono serves at https://app.drchrono.com/openapi-schema. Patient is the hub of the clinical graph; Doctor and Office anchor practice management; Appointment binds clinical to scheduling; LineItem and Transaction anchor the billing graph. The separate SMART on FHIR R4 surface projects the same data core onto 27 FHIR resource types and does NOT share identifier space with these entities.
 id_convention:
   style: integer
   example: /api/patients/12345
-  note: Object ids are plain integers, unique per object type. drchrono uses no typed or prefixed identifiers in
-    the v4 REST API. FHIR R4 resource ids are opaque strings and are not interchangeable with REST ids.
+  note: Object ids are plain integers, unique per object type. drchrono uses no typed or prefixed identifiers in the v4 REST API. FHIR R4 resource ids are opaque strings and are not interchangeable with REST ids.
 pagination:
   style: page
   envelope_documented:
@@ -22,9 +17,7 @@ pagination:
   - previous
   - data
   - next
-  note: The API reference documents the list envelope as previous/results/next, while the OpenAPI DrChrono publishes
-    declares previous/data/next for the same responses. Consumers should tolerate both keys; this divergence is
-    in the provider contract, not in this derivation.
+  note: The API reference documents the list envelope as previous/results/next, while the OpenAPI DrChrono publishes declares previous/data/next for the same responses. Consumers should tolerate both keys; this divergence is in the provider contract, not in this derivation.
   default_page_size: 250
   max_page_size: 250
   exceptions:
@@ -45,6 +38,7 @@ entities:
   - /api/recurring_appointment_instances
   path_count: 5
   operation_count: 8
+  name: Appointment
 - entity: AppointmentProfile
   field_count: 9
   paths:
@@ -52,6 +46,7 @@ entities:
   - /api/appointment_profiles/{id}
   path_count: 2
   operation_count: 3
+  name: AppointmentProfile
 - entity: AppointmentTemplate
   field_count: 11
   paths:
@@ -59,6 +54,7 @@ entities:
   - /api/appointment_templates/{id}
   path_count: 2
   operation_count: 3
+  name: AppointmentTemplate
 - entity: AsyncResourceError
   field_count: 3
   paths:
@@ -70,12 +66,14 @@ entities:
   - /api/patients_list
   path_count: 8
   operation_count: 8
+  name: AsyncResourceError
 - entity: AuditLog
   field_count: 13
   paths:
   - /api/audit_log
   path_count: 1
   operation_count: 1
+  name: AuditLog
 - entity: BillingLineItem
   field_count: 31
   paths:
@@ -84,12 +82,14 @@ entities:
   - /api/line_items_list
   path_count: 3
   operation_count: 4
+  name: BillingLineItem
 - entity: BillingLineItemDeletion
   field_count: 3
   paths:
   - /api/line_item_deletions
   path_count: 1
   operation_count: 1
+  name: BillingLineItemDeletion
 - entity: BillingProfile
   field_count: 11
   paths:
@@ -97,6 +97,7 @@ entities:
   - /api/billing_profiles/{id}
   path_count: 2
   operation_count: 2
+  name: BillingProfile
 - entity: CarePlan
   field_count: 12
   paths:
@@ -104,6 +105,7 @@ entities:
   - /api/care_plans/{id}
   path_count: 2
   operation_count: 2
+  name: CarePlan
 - entity: CareTeamMember
   field_count: 5
   paths:
@@ -111,6 +113,7 @@ entities:
   - /api/care_team_members/{id}
   path_count: 2
   operation_count: 2
+  name: CareTeamMember
 - entity: CashPayment
   field_count: 15
   paths:
@@ -118,6 +121,7 @@ entities:
   - /api/patient_payments/{id}
   path_count: 2
   operation_count: 3
+  name: CashPayment
 - entity: CashPaymentLog
   field_count: 10
   paths:
@@ -125,6 +129,7 @@ entities:
   - /api/patient_payment_log/{id}
   path_count: 2
   operation_count: 2
+  name: CashPaymentLog
 - entity: ClaimBillingNotes
   field_count: 5
   paths:
@@ -132,6 +137,7 @@ entities:
   - /api/claim_billing_notes/{id}
   path_count: 2
   operation_count: 3
+  name: ClaimBillingNotes
 - entity: ClinicalNote
   field_count: 5
   paths:
@@ -140,6 +146,7 @@ entities:
   - /api/clinical_notes_list
   path_count: 3
   operation_count: 3
+  name: ClinicalNote
 - entity: ConsentForm
   field_count: 10
   paths:
@@ -147,6 +154,7 @@ entities:
   - /api/consent_forms/{id}
   path_count: 2
   operation_count: 3
+  name: ConsentForm
 - entity: Coverage
   field_count: 12
   paths:
@@ -155,6 +163,7 @@ entities:
   - /api/eligibility_checks_list
   path_count: 3
   operation_count: 3
+  name: Coverage
 - entity: CustomAppointmentFieldType
   field_count: 8
   paths:
@@ -162,6 +171,7 @@ entities:
   - /api/custom_appointment_fields/{id}
   path_count: 2
   operation_count: 3
+  name: CustomAppointmentFieldType
 - entity: CustomInsurancePlanName
   field_count: 7
   paths:
@@ -169,6 +179,7 @@ entities:
   - /api/custom_insurance_plan_names/{id}
   path_count: 2
   operation_count: 2
+  name: CustomInsurancePlanName
 - entity: CustomPatientFieldType
   field_count: 7
   paths:
@@ -176,6 +187,7 @@ entities:
   - /api/custom_demographics/{id}
   path_count: 2
   operation_count: 3
+  name: CustomPatientFieldType
 - entity: CustomVitalType
   field_count: 10
   paths:
@@ -183,6 +195,7 @@ entities:
   - /api/custom_vitals/{id}
   path_count: 2
   operation_count: 2
+  name: CustomVitalType
 - entity: Doctor
   field_count: 20
   paths:
@@ -190,6 +203,7 @@ entities:
   - /api/doctors/{id}
   path_count: 2
   operation_count: 2
+  name: Doctor
 - entity: DoctorFeeSchedule
   field_count: 24
   paths:
@@ -197,6 +211,7 @@ entities:
   - /api/fee_schedules/{id}
   path_count: 2
   operation_count: 2
+  name: DoctorFeeSchedule
 - entity: DoctorMessage
   field_count: 28
   paths:
@@ -204,6 +219,7 @@ entities:
   - /api/messages/{id}
   path_count: 2
   operation_count: 3
+  name: DoctorMessage
 - entity: DoctorMessageThread
   field_count: 18
   paths:
@@ -211,6 +227,7 @@ entities:
   - /api/message_threads/{id}
   path_count: 2
   operation_count: 3
+  name: DoctorMessageThread
 - entity: DoctorOptions
   field_count: 13
   paths:
@@ -218,6 +235,7 @@ entities:
   - /api/doctor_options/{id}
   path_count: 2
   operation_count: 2
+  name: DoctorOptions
 - entity: EOBObject
   field_count: 12
   paths:
@@ -225,6 +243,7 @@ entities:
   - /api/eobs/{id}
   path_count: 2
   operation_count: 3
+  name: EOBObject
 - entity: FeeSchedule
   field_count: 11
   paths:
@@ -232,11 +251,13 @@ entities:
   - /api/fee_schedules_v2/{id}
   path_count: 2
   operation_count: 2
+  name: FeeSchedule
 - entity: FeeScheduleItem
   field_count: 23
   paths: []
   path_count: 0
   operation_count: 0
+  name: FeeScheduleItem
 - entity: ImplantableDevice
   field_count: 16
   paths:
@@ -244,6 +265,7 @@ entities:
   - /api/implantable_devices/{id}
   path_count: 2
   operation_count: 2
+  name: ImplantableDevice
 - entity: Insurance
   field_count: 3
   paths:
@@ -251,6 +273,7 @@ entities:
   - /api/insurances/{id}
   path_count: 2
   operation_count: 2
+  name: Insurance
 - entity: InventoryCategory
   field_count: 7
   paths:
@@ -258,6 +281,7 @@ entities:
   - /api/inventory_categories/{id}
   path_count: 2
   operation_count: 2
+  name: InventoryCategory
 - entity: InventoryVaccine
   field_count: 20
   paths:
@@ -265,6 +289,7 @@ entities:
   - /api/inventory_vaccines/{id}
   path_count: 2
   operation_count: 3
+  name: InventoryVaccine
 - entity: LabOrder
   field_count: 13
   paths:
@@ -274,6 +299,7 @@ entities:
   - /api/lab_orders_summary/{id}
   path_count: 4
   operation_count: 5
+  name: LabOrder
 - entity: LabOrderDocument
   field_count: 6
   paths:
@@ -281,6 +307,7 @@ entities:
   - /api/lab_documents/{id}
   path_count: 2
   operation_count: 3
+  name: LabOrderDocument
 - entity: LabResult
   field_count: 17
   paths:
@@ -288,6 +315,7 @@ entities:
   - /api/lab_results/{id}
   path_count: 2
   operation_count: 3
+  name: LabResult
 - entity: LabTest
   field_count: 12
   paths:
@@ -295,6 +323,7 @@ entities:
   - /api/lab_tests/{id}
   path_count: 2
   operation_count: 3
+  name: LabTest
 - entity: LabVendorLocation
   field_count: 4
   paths:
@@ -302,6 +331,7 @@ entities:
   - /api/sublabs/{id}
   path_count: 2
   operation_count: 3
+  name: LabVendorLocation
 - entity: LineItemTransaction
   field_count: 17
   paths:
@@ -310,6 +340,7 @@ entities:
   - /api/transactions_list
   path_count: 3
   operation_count: 3
+  name: LineItemTransaction
 - entity: Office
   field_count: 18
   paths:
@@ -318,6 +349,7 @@ entities:
   - /api/offices/{id}/add_exam_room
   path_count: 3
   operation_count: 3
+  name: Office
 - entity: Patient
   field_count: 65
   paths:
@@ -329,6 +361,7 @@ entities:
   - /api/patients_summary/{id}
   path_count: 6
   operation_count: 9
+  name: Patient
 - entity: PatientAllergy
   field_count: 11
   paths:
@@ -336,6 +369,7 @@ entities:
   - /api/allergies/{id}
   path_count: 2
   operation_count: 3
+  name: PatientAllergy
 - entity: PatientAmendment
   field_count: 7
   paths:
@@ -343,12 +377,14 @@ entities:
   - /api/amendments/{id}
   path_count: 2
   operation_count: 3
+  name: PatientAmendment
 - entity: PatientAuthorization
   field_count: 17
   paths:
   - /api/patient_authorizations
   path_count: 1
   operation_count: 1
+  name: PatientAuthorization
 - entity: PatientCommunication
   field_count: 12
   paths:
@@ -356,6 +392,7 @@ entities:
   - /api/patient_communications/{id}
   path_count: 2
   operation_count: 3
+  name: PatientCommunication
 - entity: PatientDrug
   field_count: 24
   paths:
@@ -363,6 +400,7 @@ entities:
   - /api/medications/{id}
   path_count: 2
   operation_count: 3
+  name: PatientDrug
 - entity: PatientFlagType
   field_count: 8
   paths:
@@ -370,6 +408,7 @@ entities:
   - /api/patient_flag_types/{id}
   path_count: 2
   operation_count: 3
+  name: PatientFlagType
 - entity: PatientIntervention
   field_count: 12
   paths:
@@ -377,6 +416,7 @@ entities:
   - /api/patient_interventions/{id}
   path_count: 2
   operation_count: 3
+  name: PatientIntervention
 - entity: PatientLabResultSet
   field_count: 19
   paths:
@@ -384,6 +424,7 @@ entities:
   - /api/patient_lab_results/{id}
   path_count: 2
   operation_count: 3
+  name: PatientLabResultSet
 - entity: PatientMessage
   field_count: 10
   paths:
@@ -391,6 +432,7 @@ entities:
   - /api/patient_messages/{id}
   path_count: 2
   operation_count: 3
+  name: PatientMessage
 - entity: PatientPhysicalExam
   field_count: 12
   paths:
@@ -398,6 +440,7 @@ entities:
   - /api/patient_physical_exams/{id}
   path_count: 2
   operation_count: 3
+  name: PatientPhysicalExam
 - entity: PatientProblem
   field_count: 19
   paths:
@@ -405,6 +448,7 @@ entities:
   - /api/problems/{id}
   path_count: 2
   operation_count: 3
+  name: PatientProblem
 - entity: PatientRiskAssessment
   field_count: 12
   paths:
@@ -412,6 +456,7 @@ entities:
   - /api/patient_risk_assessments/{id}
   path_count: 2
   operation_count: 3
+  name: PatientRiskAssessment
 - entity: PatientVaccineRecord
   field_count: 28
   paths:
@@ -419,6 +464,7 @@ entities:
   - /api/patient_vaccine_records/{id}
   path_count: 2
   operation_count: 3
+  name: PatientVaccineRecord
 - entity: PhoneCallLog
   field_count: 14
   paths:
@@ -426,6 +472,7 @@ entities:
   - /api/comm_logs/{id}
   path_count: 2
   operation_count: 3
+  name: PhoneCallLog
 - entity: PrescriptionMessage
   field_count: 10
   paths:
@@ -434,6 +481,7 @@ entities:
   - /api/prescription_messages_list
   path_count: 3
   operation_count: 3
+  name: PrescriptionMessage
 - entity: Procedure
   field_count: 11
   paths:
@@ -441,6 +489,7 @@ entities:
   - /api/procedures/{id}
   path_count: 2
   operation_count: 2
+  name: Procedure
 - entity: ReminderProfile
   field_count: 4
   paths:
@@ -448,6 +497,7 @@ entities:
   - /api/reminder_profiles/{id}
   path_count: 2
   operation_count: 3
+  name: ReminderProfile
 - entity: ScannedClinicalDocument
   field_count: 9
   paths:
@@ -455,6 +505,7 @@ entities:
   - /api/documents/{id}
   path_count: 2
   operation_count: 3
+  name: ScannedClinicalDocument
 - entity: ScheduleBlock
   field_count: 11
   paths:
@@ -462,6 +513,7 @@ entities:
   - /api/schedule_blocks/{id}
   path_count: 2
   operation_count: 5
+  name: ScheduleBlock
 - entity: SignedConsentForm
   field_count: 8
   paths:
@@ -469,12 +521,14 @@ entities:
   - /api/signed_consent_forms/{id}
   path_count: 2
   operation_count: 3
+  name: SignedConsentForm
 - entity: SignedConsentFormUpdate
   field_count: 5
   paths:
   - /api/signed_consent_forms
   path_count: 1
   operation_count: 1
+  name: SignedConsentFormUpdate
 - entity: SoapNoteCustomReport
   field_count: 10
   paths:
@@ -482,6 +536,7 @@ entities:
   - /api/clinical_note_templates/{id}
   path_count: 2
   operation_count: 2
+  name: SoapNoteCustomReport
 - entity: SoapNoteLineItemFieldType
   field_count: 8
   paths:
@@ -489,6 +544,7 @@ entities:
   - /api/clinical_note_field_types/{id}
   path_count: 2
   operation_count: 2
+  name: SoapNoteLineItemFieldType
 - entity: SoapNoteLineItemFieldValue
   field_count: 6
   paths:
@@ -497,6 +553,7 @@ entities:
   - /api/clinical_note_field_values_list
   path_count: 3
   operation_count: 4
+  name: SoapNoteLineItemFieldValue
 - entity: Staff
   field_count: 12
   paths:
@@ -504,6 +561,7 @@ entities:
   - /api/staff/{id}
   path_count: 2
   operation_count: 2
+  name: Staff
 - entity: Task
   field_count: 15
   paths:
@@ -511,6 +569,7 @@ entities:
   - /api/tasks/{id}
   path_count: 2
   operation_count: 3
+  name: Task
 - entity: TaskCategory
   field_count: 7
   paths:
@@ -518,6 +577,7 @@ entities:
   - /api/task_categories/{id}
   path_count: 2
   operation_count: 3
+  name: TaskCategory
 - entity: TaskNote
   field_count: 7
   paths:
@@ -525,6 +585,7 @@ entities:
   - /api/task_notes/{id}
   path_count: 2
   operation_count: 3
+  name: TaskNote
 - entity: TaskStatus
   field_count: 8
   paths:
@@ -532,6 +593,7 @@ entities:
   - /api/task_statuses/{id}
   path_count: 2
   operation_count: 3
+  name: TaskStatus
 - entity: TaskTemplate
   field_count: 14
   paths:
@@ -539,6 +601,7 @@ entities:
   - /api/task_templates/{id}
   path_count: 2
   operation_count: 3
+  name: TaskTemplate
 - entity: TelemedicineAppointment
   field_count: 7
   paths:
@@ -546,6 +609,7 @@ entities:
   - /api/telehealth_appointments/{id}
   path_count: 2
   operation_count: 3
+  name: TelemedicineAppointment
 - entity: TelemedicineAppointmentEventLog
   field_count: 3
   paths:
@@ -553,6 +617,7 @@ entities:
   - /api/telehealth_appointment_history/{id}
   path_count: 2
   operation_count: 3
+  name: TelemedicineAppointmentEventLog
 - entity: UserProfile
   field_count: 8
   paths:
@@ -560,6 +625,7 @@ entities:
   - /api/users/{id}
   path_count: 2
   operation_count: 2
+  name: UserProfile
 - entity: UserProfilesGroup
   field_count: 7
   paths:
@@ -567,16 +633,19 @@ entities:
   - /api/user_groups/{id}
   path_count: 2
   operation_count: 2
+  name: UserProfilesGroup
 - entity: WorkDay
   field_count: 4
   paths: []
   path_count: 0
   operation_count: 0
+  name: WorkDay
 - entity: WorkHours
   field_count: 4
   paths: []
   path_count: 0
   operation_count: 0
+  name: WorkHours
 - entity: WorkSchedule
   field_count: 4
   paths:
@@ -586,6 +655,7 @@ entities:
   - /api/office_work_schedule/{id}
   path_count: 4
   operation_count: 4
+  name: WorkSchedule
 relationships:
 - from: Appointment
   to: ClinicalNote

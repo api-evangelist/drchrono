@@ -1,15 +1,13 @@
 name: drchrono
-description: >-
-  drchrono, part of EverCommerce's EverHealth portfolio, is an all-in-one EHR, practice management
-  and medical billing platform for independent US medical practices. It publishes two distinct
-  machine-readable API surfaces. The proprietary REST v4 API (codename Hunt Valley) is an OAuth
-  2.0-secured contract of 170 paths and 329 operations covering patients, scheduling, clinical
-  documentation, e-prescribing, labs, tasks, messaging and the full revenue cycle, published as a
-  live OpenAPI 3.0 at https://app.drchrono.com/openapi-schema and complemented by a 27-event webhook
-  surface. Alongside it drchrono runs a read-only, ONC-certified SMART on FHIR R4 server exposing 27
-  US Core resource types for USCDI interoperability, with SMART App Launch and OpenID Connect
-  discovery, FHIR Bulk Data Export, and a public service base directory covering 105 practices. The
-  two estates share no tokens, no scopes and no identifier space.
+
+description: drchrono, part of EverCommerce's EverHealth portfolio, is an all-in-one EHR, practice management and medical billing platform for
+  independent US medical practices. It publishes two distinct machine-readable API surfaces. The proprietary REST v4 API (codename Hunt Valley)
+  is an OAuth 2.0-secured contract of 170 paths and 329 operations covering patients, scheduling, clinical documentation, e-prescribing, labs,
+  tasks, messaging and the full revenue cycle, published as a live OpenAPI 3.0 at https://app.drchrono.com/openapi-schema and complemented by
+  a 27-event webhook surface. Alongside it drchrono runs a read-only, ONC-certified SMART on FHIR R4 server exposing 27 US Core resource types
+  for USCDI interoperability, with SMART App Launch and OpenID Connect discovery, FHIR Bulk Data Export, and a public service base directory covering
+  105 practices. The two estates share no tokens, no scopes and no identifier space.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -22,6 +20,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -35,53 +34,201 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/drchrono.png
+
 url: https://raw.githubusercontent.com/api-evangelist/drchrono/refs/heads/main/apis.yml
+
 created: '2026-06-13'
+
 modified: '2026-10-06'
+
 specificationVersion: '0.23'
+
 tags:
-  - EHR
-  - Electronic Health Records
-  - Healthcare
-  - Medical Records
-  - Practice Management
-  - HIPAA
-  - Appointments
-  - Billing
-  - Prescriptions
-  - Lab Integration
-  - FHIR
-  - SMART on FHIR
-  - USCDI
-  - Interoperability
-  - Webhook
-  - Authentication
-  - ONC Certified
-  - Telehealth
-  - Revenue Cycle Management
+- EHR
+- Electronic Health Records
+- Healthcare
+- Medical Records
+- Practice Management
+- HIPAA
+- Appointments
+- Billing
+- Prescriptions
+- Lab Integration
+- FHIR
+- SMART on FHIR
+- USCDI
+- Interoperability
+- Webhook
+- Authentication
+- ONC Certified
+- Telehealth
+- Revenue Cycle Management
+
 tags_raw:
-  - EHR
-  - Electronic Health Records
-  - Healthcare
-  - Medical Records
-  - Practice Management
-  - HIPAA
-  - Appointments
-  - Billing
-  - Prescriptions
-  - Lab Integration
-  - FHIR
-  - SMART on FHIR
-  - USCDI
-  - Interoperability
-  - Webhooks
-  - OAuth 2.0
-  - ONC Certified
-  - Telehealth
-  - Revenue Cycle Management
+- EHR
+- Electronic Health Records
+- Healthcare
+- Medical Records
+- Practice Management
+- HIPAA
+- Appointments
+- Billing
+- Prescriptions
+- Lab Integration
+- FHIR
+- SMART on FHIR
+- USCDI
+- Interoperability
+- Webhooks
+- OAuth 2.0
+- ONC Certified
+- Telehealth
+- Revenue Cycle Management
+
 aid: drchrono
+
 type: Index
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: Spectral
+  url: rules/drchrono-rules.yml
+- type: Spectral
+  url: rules/drchrono-jsonschema-spectral-rules.yml
+- type: JSONLD
+  url: json-ld/drchrono-context.jsonld
+- type: Vocabulary
+  url: vocabulary/drchrono-vocabulary.yml
+- type: Hosts
+  url: hosts/drchrono-hosts.yml
+- type: IntegrationEdges
+  url: integrations/drchrono-integration-edges.yml
+- type: Vendors
+  url: vendors/drchrono-vendors.yml
+- url: https://www.drchrono.com/resources/blog/
+  type: Blog
+- url: https://www.drchrono.com/feed/
+  type: BlogRSS
+- type: CapabilityMap
+  url: capabilities/drchrono-capability-edges.yml
+  name: drchrono Business Capability Map
+- type: Conventions
+  url: conventions/drchrono-conventions.yml
+- type: ErrorCatalog
+  url: errors/drchrono-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/drchrono-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/drchrono-lifecycle.yml
+- type: ChangeLog
+  url: changelog/drchrono-changelog.yml
+- type: Conformance
+  url: conformance/drchrono-conformance.yml
+- type: Compliance
+  url: conformance/drchrono-conformance.yml
+- type: DataModel
+  url: data-model/drchrono-data-model.yml
+- type: WellKnown
+  url: well-known/drchrono-well-known.yml
+- type: LLMsTxt
+  url: llms/drchrono-llms.txt
+- type: AsyncAPI
+  url: asyncapi/drchrono-webhooks-asyncapi.yml
+- type: Webhooks
+  url: asyncapi/drchrono-webhooks-asyncapi.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/drchrono-sandbox.yml
+- type: Security
+  url: security/drchrono-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/drchrono-vulnerability-disclosure.yml
+- type: MCPCandidate
+  url: mcp/drchrono-mcp.yml
+- type: CapabilityStatement
+  url: fhir/drchrono-fhir-r4-capabilitystatement.json
+- type: FHIR
+  url: fhir/drchrono-fhir.yml
+- type: DeveloperPortal
+  url: https://app.drchrono.com/api-docs/
+- type: APIReference
+  url: https://app.drchrono.com/api-docs/
+- type: GettingStarted
+  url: https://app.drchrono.com/api-docs/tutorial/
+- type: Support
+  url: https://support.drchrono.com/home/api
+- type: SignUp
+  url: https://www.drchrono.com/sign-up/
+- type: PrivacyPolicy
+  url: https://www.drchrono.com/privacy-policy/
+- type: SecurityPolicy
+  url: https://www.drchrono.com/security-policy/
+- type: BugBounty
+  url: https://hackerone.com/drchrono
+- type: AgenticAccess
+  url: agentic-access/drchrono-agentic-access.yml
+- type: DomainSecurity
+  url: security/drchrono-domain-security.yml
+- type: Authentication
+  url: authentication/drchrono-authentication.yml
+- type: OAuthScopes
+  url: scopes/drchrono-scopes.yml
+- type: OAuthScopes
+  url: scopes/drchrono-fhir-smart-scopes.yml
+- type: Website
+  url: https://www.drchrono.com
+- type: Documentation
+  url: https://app.drchrono.com/api-docs/tutorial/
+- type: GitHubOrg
+  url: https://github.com/drchrono
+- type: LinkedIn
+  url: https://www.linkedin.com/company/drchrono
+- type: Blog
+  url: https://blog.drchrono.com/
+- type: Pricing
+  url: https://www.drchrono.com/plans-and-pricing/
+- type: StatusPage
+  url: https://status.drchrono.com/
+- type: X
+  url: https://twitter.com/drchrono
+- type: Plans
+  url: plans/drchrono-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/drchrono-rate-limits.yml
+- type: FinOps
+  url: finops/drchrono-finops.yml
+- type: Partners
+  url: https://www.drchrono.com/partners/
+- type: TermsOfService
+  url: https://app.drchrono.com/api-terms/
+- type: APITerms
+  url: https://www.drchrono.com/api-development-terms-conditions/
+- type: SupportPortal
+  url: https://support.drchrono.com/home/api
+- type: ArazzoWorkflows
+  workflows:
+  - url: arazzo/drchrono-appointment-scheduling-workflow.yml
+    name: drChrono Appointment Scheduling
+    summary: Read a patient record, book an appointment, then read the appointment back to confirm it was created.
+  - url: arazzo/drchrono-chart-export-workflow.yml
+    name: drChrono Chart Export
+    summary: Pull a patient chart by reading the patient, listing problems and medications, and exporting a C-CDA document.
+  - url: arazzo/drchrono-clinical-documentation-workflow.yml
+    name: drChrono Clinical Documentation
+    summary: Document a patient visit by recording a problem, a medication, and a clinical note.
+  - url: arazzo/drchrono-eligibility-and-billing-workflow.yml
+    name: drChrono Eligibility and Billing
+    summary: Run the revenue cycle by checking insurance eligibility, reviewing day sheet charges, and adding a claim billing note.
+  - url: arazzo/drchrono-patient-registration-workflow.yml
+    name: drChrono Patient Registration (Upsert)
+    summary: Search for an existing patient by name and update it if found, otherwise create a new patient record.
+
 apis:
 - aid: drchrono:drchrono-administrative-api
   name: drchrono Administrative API
@@ -107,6 +254,14 @@ apis:
     url: https://app.drchrono.com/o/authorize/
   - type: Webhooks
     url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+  - type: JSONSchema
+    url: json-schema/drchrono-doctor-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-doctor-options-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-user-profile-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-user-profiles-group-schema.json
 - aid: drchrono:drchrono-audit-api
   name: drchrono Audit API
   description: Search Audit Logs
@@ -131,6 +286,8 @@ apis:
     url: https://app.drchrono.com/o/authorize/
   - type: Webhooks
     url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+  - type: JSONSchema
+    url: json-schema/drchrono-audit-log-schema.json
 - aid: drchrono:drchrono-availability-api
   name: drchrono Availability API
   description: The Availability API from drchrono — 1 operation(s) for availability.
@@ -179,6 +336,18 @@ apis:
     url: https://app.drchrono.com/o/authorize/
   - type: Webhooks
     url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+  - type: JSONSchema
+    url: json-schema/drchrono-coverage-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-billing-profile-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-billing-line-item-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-line-item-transaction-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-patient-authorization-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-cash-payment-schema.json
 - aid: drchrono:drchrono-clinical-api
   name: drchrono Clinical API
   description: Create and manage clinical resources
@@ -203,6 +372,18 @@ apis:
     url: https://app.drchrono.com/o/authorize/
   - type: Webhooks
     url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+  - type: JSONSchema
+    url: json-schema/drchrono-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-doctor-fee-schedule-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-patient-vaccine-record-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-patient-drug-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-soap-note-custom-report-schema.json
 - aid: drchrono:drchrono-practice-management-api
   name: drchrono Practice Management API
   description: Create and manage practice management resources
@@ -227,15 +408,24 @@ apis:
     url: https://app.drchrono.com/o/authorize/
   - type: Webhooks
     url: https://support.drchrono.com/home/drchrono-lab-api-and-webhook
+  - type: JSONSchema
+    url: json-schema/drchrono-doctor-message-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-office-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-task-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-doctor-message-thread-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-inventory-vaccine-schema.json
+  - type: JSONSchema
+    url: json-schema/drchrono-task-template-schema.json
 - aid: drchrono:drchrono-fhir-r4-api
   name: drchrono SMART on FHIR R4 API
-  description: >-
-    The ONC-certified SMART on FHIR R4 interoperability API for the DrChrono EHR. Read-only, 27 US
-    Core resource types, FHIR 4.0.1, with a live CapabilityStatement, SMART App Launch discovery,
-    OpenID Connect discovery, FHIR Bulk Data Export, and a public service base directory covering
-    105 practices. Served on DrChrono's EverHealth parent-brand host; the CapabilityStatement
-    identifies itself as the "DrChrono FHIR Server" and DrChrono's own documentation publishes these
-    base URLs.
+  description: The ONC-certified SMART on FHIR R4 interoperability API for the DrChrono EHR. Read-only, 27 US Core resource types, FHIR 4.0.1,
+    with a live CapabilityStatement, SMART App Launch discovery, OpenID Connect discovery, FHIR Bulk Data Export, and a public service base directory
+    covering 105 practices. Served on DrChrono's EverHealth parent-brand host; the CapabilityStatement identifies itself as the "DrChrono FHIR
+    Server" and DrChrono's own documentation publishes these base URLs.
   humanURL: https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
   baseURL: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/498711/r4
   tags:
@@ -263,133 +453,8 @@ apis:
     url: well-known/drchrono-fhir-smart-configuration.json
   - type: AgentSkill
     url: skills/drchrono-fhir-record-retrieval.md
-common:
-  - url: https://www.drchrono.com/resources/blog/
-    type: Blog
-  - url: https://www.drchrono.com/feed/
-    type: BlogRSS
-  - type: CapabilityMap
-    url: capabilities/drchrono-capability-edges.yml
-    name: drchrono Business Capability Map
-  - type: Conventions
-    url: conventions/drchrono-conventions.yml
-  - type: ErrorCatalog
-    url: errors/drchrono-problem-types.yml
-  - type: Lifecycle
-    url: lifecycle/drchrono-lifecycle.yml
-  - type: Deprecation
-    url: lifecycle/drchrono-lifecycle.yml
-  - type: ChangeLog
-    url: changelog/drchrono-changelog.yml
-  - type: Conformance
-    url: conformance/drchrono-conformance.yml
-  - type: Compliance
-    url: conformance/drchrono-conformance.yml
-  - type: DataModel
-    url: data-model/drchrono-data-model.yml
-  - type: Packages
-    url: packages/drchrono-packages.yml
-  - type: WellKnown
-    url: well-known/drchrono-well-known.yml
-  - type: LLMsTxt
-    url: llms/drchrono-llms.txt
-  - type: AsyncAPI
-    url: asyncapi/drchrono-webhooks-asyncapi.yml
-  - type: Webhooks
-    url: asyncapi/drchrono-webhooks-asyncapi.yml
-  - type: AgentSkill
-    url: skills/_index.yml
-  - type: Sandbox
-    url: sandbox/drchrono-sandbox.yml
-  - type: Security
-    url: security/drchrono-vulnerability-disclosure.yml
-  - type: VulnerabilityDisclosure
-    url: security/drchrono-vulnerability-disclosure.yml
-  - type: MCPCandidate
-    url: mcp/drchrono-mcp.yml
-  - type: CapabilityStatement
-    url: fhir/drchrono-fhir-r4-capabilitystatement.json
-  - type: FHIR
-    url: fhir/drchrono-fhir.yml
-  - type: DeveloperPortal
-    url: https://app.drchrono.com/api-docs/
-  - type: APIReference
-    url: https://app.drchrono.com/api-docs/
-  - type: GettingStarted
-    url: https://app.drchrono.com/api-docs/tutorial/
-  - type: Support
-    url: https://support.drchrono.com/home/api
-  - type: SignUp
-    url: https://www.drchrono.com/sign-up/
-  - type: PrivacyPolicy
-    url: https://www.drchrono.com/privacy-policy/
-  - type: SecurityPolicy
-    url: https://www.drchrono.com/security-policy/
-  - type: BugBounty
-    url: https://hackerone.com/drchrono
-  - type: AgenticAccess
-    url: agentic-access/drchrono-agentic-access.yml
-  - type: DomainSecurity
-    url: security/drchrono-domain-security.yml
-  - type: Authentication
-    url: authentication/drchrono-authentication.yml
-  - type: OAuthScopes
-    url: scopes/drchrono-scopes.yml
-  - type: OAuthScopes
-    url: scopes/drchrono-fhir-smart-scopes.yml
-  - type: Website
-    url: https://www.drchrono.com
-  - type: Documentation
-    url: https://app.drchrono.com/api-docs/tutorial/
-  - type: GitHubOrg
-    url: https://github.com/drchrono
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/drchrono
-  - type: Blog
-    url: https://blog.drchrono.com/
-  - type: Pricing
-    url: https://www.drchrono.com/plans-and-pricing/
-  - type: StatusPage
-    url: https://status.drchrono.com/
-  - type: X
-    url: https://twitter.com/drchrono
-  - type: Plans
-    url: plans/drchrono-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/drchrono-rate-limits.yml
-  - type: FinOps
-    url: finops/drchrono-finops.yml
-  - type: Partners
-    url: https://www.drchrono.com/partners/
-  - type: TermsOfService
-    url: https://app.drchrono.com/api-terms/
-  - type: APITerms
-    url: https://www.drchrono.com/api-development-terms-conditions/
-  - type: SupportPortal
-    url: https://support.drchrono.com/home/api
-  - type: ArazzoWorkflows
-    workflows:
-    - url: arazzo/drchrono-appointment-scheduling-workflow.yml
-      name: drChrono Appointment Scheduling
-      summary: "Read a patient record, book an appointment, then read the appointment back to confirm it was created."
-    - url: arazzo/drchrono-chart-export-workflow.yml
-      name: drChrono Chart Export
-      summary: "Pull a patient chart by reading the patient, listing problems and medications, and exporting a C-CDA document."
-    - url: arazzo/drchrono-clinical-documentation-workflow.yml
-      name: drChrono Clinical Documentation
-      summary: "Document a patient visit by recording a problem, a medication, and a clinical note."
-    - url: arazzo/drchrono-eligibility-and-billing-workflow.yml
-      name: drChrono Eligibility and Billing
-      summary: "Run the revenue cycle by checking insurance eligibility, reviewing day sheet charges, and adding a claim billing note."
-    - url: arazzo/drchrono-patient-registration-workflow.yml
-      name: drChrono Patient Registration (Upsert)
-      summary: "Search for an existing patient by name and update it if found, otherwise create a new patient record."
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
-
 x-enrichment:
-  date: '2026-08-14'
+  date: '2026-10-12'
   status: enriched
-  artifacts_added: 26
-  pass: local-v1
+  artifacts_added: 1
+  pass: local-v5

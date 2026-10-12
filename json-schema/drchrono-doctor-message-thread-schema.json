@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/drchrono/main/json-schema/drchrono-doctor-message-thread-schema.json",
+  "title": "DoctorMessageThread",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/drchrono-practice-management-api-openapi.yml#/components/schemas/DoctorMessageThread",
+  "type": "object",
+  "properties": {
+    "assigned_groups": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array",
+      "description": "Array of user group IDs assigned to this thread",
+      "title": "Assigned groups"
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the thread is archived",
+      "title": "Archived"
+    },
+    "first_message": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "ID of the first message in the thread",
+      "title": "First message"
+    },
+    "patient": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "ID of the patient associated with this thread (if patient-facing)",
+      "title": "Patient"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "ID of the doctor who owns this thread",
+      "title": "Doctor"
+    },
+    "last_message": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "ID of the most recent message in the thread",
+      "title": "Last message"
+    },
+    "practice_group": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "ID of the practice group for access control",
+      "title": "Practice group"
+    },
+    "created_at": {
+      "readOnly": true,
+      "title": "Created at",
+      "type": "string",
+      "description": "Timestamp when the thread was created",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "title": "Updated at",
+      "type": "string",
+      "description": "Timestamp when the thread was last updated",
+      "format": "date-time"
+    },
+    "assigned_user_profiles": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array",
+      "description": "Array of user profile IDs assigned to this thread",
+      "title": "Assigned user profiles"
+    },
+    "message_count": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "Total number of messages in this thread",
+      "title": "Message count"
+    },
+    "unread_count": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "Number of unread messages in this thread",
+      "title": "Unread count"
+    },
+    "last_message_at": {
+      "readOnly": true,
+      "title": "Last message at",
+      "type": "string",
+      "description": "Timestamp of the last message - used for sorting",
+      "format": "date-time"
+    },
+    "owners": {
+      "items": {
+        "type": "integer"
+      },
+      "readOnly": true,
+      "type": "array",
+      "description": "Array of user profile IDs who own this thread",
+      "title": "Owners"
+    },
+    "starred": {
+      "type": "boolean",
+      "description": "Whether the thread is starred",
+      "title": "Starred"
+    },
+    "message_type": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Type of messages in this thread. See `/api/messages` for message type descriptions",
+      "title": "Message type"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "description": "Unique identifier for the message thread",
+      "title": "ID"
+    },
+    "subject": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Thread subject - locked to first message subject",
+      "title": "Subject"
+    }
+  }
+}

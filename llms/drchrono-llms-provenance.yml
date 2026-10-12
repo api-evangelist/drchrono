@@ -1,0 +1,6 @@
+generated: '2026-10-12'
+method: probed
+generator: harvest-llms.py
+source: https://www.drchrono.com/llms.txt
+bytes: 56619
+note: saved verbatim; the provider's own document

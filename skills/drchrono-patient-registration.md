@@ -2,22 +2,22 @@
 name: drchrono-patient-registration
 description: Find an existing DrChrono patient before creating one, then create or update the record — the upsert every DrChrono integration needs first, and the one most likely to create duplicate charts if done wrong.
 api: drchrono
-version: v4 (Hunt Valley)
 base_url: https://app.drchrono.com
 operations:
-  - patients_summary_list
-  - patients_list
-  - patients_create
-  - patients_partial_update
-  - patients_read
+- patients_summary_list
+- patients_list
+- patients_create
+- patients_partial_update
+- patients_read
 scopes:
-  - patients:summary:read
-  - patients:summary:write
-  - patients:read
-  - patients:write
+- patients:summary:read
+- patients:summary:write
+- patients:read
+- patients:write
 generated: '2026-08-14'
 method: generated
 source: openapi/_original/drchrono-rest-api-openapi-schema.json + https://app.drchrono.com/api-docs/
+api_version: v4 (Hunt Valley)
 ---
 
 # Register or update a DrChrono patient

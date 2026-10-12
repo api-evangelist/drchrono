@@ -2,13 +2,12 @@ overlay: 1.0.0
 info:
   title: API Evangelist enrichment overlay for DrChrono EHR REST Administrative Availability API
   version: 1.0.0
-extends: drchrono-availability-api-openapi.yml
+extends: openapi/drchrono-availability-api-openapi.yml
 x-provenance:
   generated: '2026-08-14'
   method: generated
   source: openapi/drchrono-availability-api-openapi.yml + https://app.drchrono.com/api-docs/
-  note: Captures API Evangelist enrichments only. The original OpenAPI is never mutated; apply this overlay to produce
-    the enriched view.
+  note: Captures API Evangelist enrichments only. The original OpenAPI is never mutated; apply this overlay to produce the enriched view.
 actions:
 - target: $.info
   description: Attach machine-readable contact and licensing that the published DrChrono spec omits.
@@ -48,8 +47,7 @@ actions:
       increase: api@drchrono.com
       source: https://app.drchrono.com/api-docs/
 - target: $.info
-  description: Record the documented pagination contract, including the envelope divergence between the reference
-    and the spec.
+  description: Record the documented pagination contract, including the envelope divergence between the reference and the spec.
   update:
     x-pagination:
       style: page
@@ -74,12 +72,10 @@ actions:
   update:
     x-idempotency:
       supported: false
-      note: No idempotency key or replay window is published. Retrying a POST creates a second object. The only
-        guard is api_prevent_patient_duplicate on POST /api/patients, which returns 409 on a first-name/last-name/DOB/gender
-        match.
+      note: No idempotency key or replay window is published. Retrying a POST creates a second object. The only guard is api_prevent_patient_duplicate
+        on POST /api/patients, which returns 409 on a first-name/last-name/DOB/gender match.
 - target: $.paths.*.*[?(@.deprecated != true)]
-  description: 'No-op marker: DrChrono marks no operation deprecated in this contract, and field-level deprecation
-    (Patient.default_pharmacy) is announced only in prose. Recorded so consumers know deprecation is not machine-readable
-    here.'
+  description: 'No-op marker: DrChrono marks no operation deprecated in this contract, and field-level deprecation (Patient.default_pharmacy)
+    is announced only in prose. Recorded so consumers know deprecation is not machine-readable here.'
   update:
     x-deprecation-signal: prose-only

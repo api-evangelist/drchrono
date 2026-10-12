@@ -2,32 +2,30 @@
 name: drchrono-fhir-record-retrieval
 description: Read a patient's USCDI record from DrChrono's SMART on FHIR R4 server — the ONC-certified, read-only interoperability surface that is a completely separate contract from the REST v4 API, with its own authorization server, scopes and identifiers.
 api: drchrono-fhir
-version: R4 (4.0.1)
 base_url: https://drchrono-fhirpresentation.everhealthsoftware.com/fhir/drchrono/{practice_id}/r4
-operations:
-  - Patient.search
-  - Patient.read
-  - Condition.search
-  - MedicationRequest.search
-  - AllergyIntolerance.search
-  - Observation.search
-  - DiagnosticReport.search
-  - DocumentReference.search
-  - Immunization.search
-  - Patient.$export
 scopes:
-  - openid
-  - fhirUser
-  - offline_access
-  - patient/*.read
-  - user/*.read
-  - system/*.read
+- openid
+- fhirUser
+- offline_access
+- patient/*.read
+- user/*.read
+- system/*.read
 generated: '2026-08-14'
 method: generated
-source: >-
-  fhir/drchrono-fhir-r4-capabilitystatement.json,
-  well-known/drchrono-fhir-smart-configuration.json,
-  https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+source: fhir/drchrono-fhir-r4-capabilitystatement.json, well-known/drchrono-fhir-smart-configuration.json, https://drchrono-fhirpresentation.everhealthsoftware.com/drchrono/498711/r4/Home/ApiDocumentation
+api_version: R4 (4.0.1)
+fhir_interactions:
+- Patient.search
+- Patient.read
+- Condition.search
+- MedicationRequest.search
+- AllergyIntolerance.search
+- Observation.search
+- DiagnosticReport.search
+- DocumentReference.search
+- Immunization.search
+- Patient.$export
+operations: []
 ---
 
 # Read a patient record from DrChrono over FHIR

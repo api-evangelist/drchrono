@@ -2,27 +2,27 @@
 name: drchrono-clinical-documentation
 description: Document a DrChrono visit — record a problem, a medication and a clinical note against the right patient and appointment, respecting the clinical-note lock lifecycle that governs whether a note can still be edited.
 api: drchrono
-version: v4 (Hunt Valley)
 base_url: https://app.drchrono.com
 operations:
-  - patients_read
-  - appointments_read
-  - problems_list
-  - problems_create
-  - medications_list
-  - medications_create
-  - clinical_notes_list
-  - clinical_notes_read
-  - allergies_list
-  - allergies_create
+- patients_read
+- appointments_read
+- problems_list
+- problems_create
+- medications_list
+- medications_create
+- clinical_notes_list
+- clinical_notes_read
+- allergies_list
+- allergies_create
 scopes:
-  - clinical:read
-  - clinical:write
-  - patients:read
-  - calendar:read
+- clinical:read
+- clinical:write
+- patients:read
+- calendar:read
 generated: '2026-08-14'
 method: generated
 source: openapi/_original/drchrono-rest-api-openapi-schema.json + https://app.drchrono.com/api-docs/
+api_version: v4 (Hunt Valley)
 ---
 
 # Document a DrChrono clinical encounter

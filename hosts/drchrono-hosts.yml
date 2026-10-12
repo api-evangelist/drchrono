@@ -1,0 +1,128 @@
+generated: '2026-10-12'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 10
+  own: 5
+  other_domain: 2
+  platform: 3
+  roles:
+  - marketing
+  - other
+  - portal
+  - status
+  - support
+  - website
+hosts:
+- host: app.drchrono.com
+  found_by:
+  - pointer
+  - apis[]
+  - vendor-detect
+  types:
+  - DeveloperPortal
+  - APIReference
+  - GettingStarted
+  - Documentation
+  - TermsOfService
+  serves:
+  - api
+  - docs
+  - cdn
+  - hosting
+  vendor: cloudflare
+  registrable_domain: drchrono.com
+  role: portal
+  relation: own
+- host: blog.drchrono.com
+  found_by:
+  - pointer
+  types:
+  - Blog
+  serves: []
+  registrable_domain: drchrono.com
+  role: marketing
+  relation: own
+- host: drchrono-fhirpresentation.everhealthsoftware.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  - docs
+  registrable_domain: everhealthsoftware.com
+  role: other
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrg
+  serves: []
+  registrable_domain: github.com
+  role: other
+  relation: platform
+- host: hackerone.com
+  found_by:
+  - pointer
+  types:
+  - BugBounty
+  serves: []
+  registrable_domain: hackerone.com
+  role: other
+  relation: other-domain
+- host: status.drchrono.com
+  found_by:
+  - pointer
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: drchrono.com
+  role: status
+  relation: own
+- host: support.drchrono.com
+  found_by:
+  - pointer
+  types:
+  - Support
+  - SupportPortal
+  serves: []
+  registrable_domain: drchrono.com
+  role: support
+  relation: own
+- host: twitter.com
+  found_by:
+  - pointer
+  types:
+  - X
+  serves: []
+  registrable_domain: twitter.com
+  role: other
+  relation: platform
+- host: www.drchrono.com
+  found_by:
+  - pointer
+  types:
+  - Blog
+  - BlogRSS
+  - SignUp
+  - PrivacyPolicy
+  - SecurityPolicy
+  - Website
+  - Pricing
+  - Partners
+  - APITerms
+  serves: []
+  registrable_domain: drchrono.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

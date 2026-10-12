@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/drchrono/main/json-schema/drchrono-user-profile-schema.json",
+  "title": "UserProfile",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/drchrono-administrative-api-openapi.yml#/components/schemas/UserProfile",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "description": "",
+      "title": "Username"
+    },
+    "doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "For staff members, this is their primary physician's ID. For doctors, it is their own ID.",
+      "title": "Doctor"
+    },
+    "practice_group": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The ID of the practice group this user belongs to. This can be used to identify users in the same practice.",
+      "title": "Practice group"
+    },
+    "is_doctor": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Mutually exclusive with `is_staff`",
+      "title": "Is doctor"
+    },
+    "is_staff": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Mutually exclusive with `is_doctor`",
+      "title": "Is staff"
+    },
+    "staff": {
+      "readOnly": true,
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "The ID used by /api/staff. This will be null if `is_staff` is false.",
+      "title": "Staff"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "string",
+      "description": "",
+      "title": "Id"
+    },
+    "permissions": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Permissions the user has.",
+      "title": "Permissions"
+    }
+  },
+  "x-verbose-required": []
+}

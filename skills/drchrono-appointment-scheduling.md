@@ -2,25 +2,25 @@
 name: drchrono-appointment-scheduling
 description: Book a DrChrono appointment safely — read availability and the appointment profile, create the appointment, then read it back to confirm, working within the 20-record page cap that only this endpoint carries.
 api: drchrono
-version: v4 (Hunt Valley)
 base_url: https://app.drchrono.com
 operations:
-  - availability
-  - offices_list
-  - doctors_list
-  - appointment_profiles_list
-  - appointments_list
-  - appointments_create
-  - appointments_read
-  - appointments_partial_update
+- availability
+- offices_list
+- doctors_list
+- appointment_profiles_list
+- appointments_list
+- appointments_create
+- appointments_read
+- appointments_partial_update
 scopes:
-  - calendar:read
-  - calendar:write
-  - patients:summary:read
-  - user:read
+- calendar:read
+- calendar:write
+- patients:summary:read
+- user:read
 generated: '2026-08-14'
 method: generated
 source: openapi/_original/drchrono-rest-api-openapi-schema.json + https://app.drchrono.com/api-docs/
+api_version: v4 (Hunt Valley)
 ---
 
 # Schedule a DrChrono appointment
