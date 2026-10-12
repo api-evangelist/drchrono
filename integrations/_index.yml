@@ -71,7 +71,6 @@
   arazzo: null
 - slug: drchrono-square
   label: Square
-  partner: square
   partner_name: Square
   type: marketplace
   marketplace: DrChrono Marketplace
@@ -105,7 +104,6 @@
   arazzo: null
 - slug: drchrono-updox
   label: Updox
-  partner: updox
   partner_name: Updox
   type: marketplace
   marketplace: DrChrono Marketplace
@@ -139,7 +137,6 @@
   arazzo: null
 - slug: drchrono-zocdoc
   label: Zocdoc
-  partner: zocdoc
   partner_name: Zocdoc
   type: marketplace
   marketplace: DrChrono Marketplace
@@ -151,7 +148,6 @@
   arazzo: null
 - slug: drchrono-birdeye
   label: Birdeye
-  partner: birdeye
   partner_name: Birdeye
   type: marketplace
   marketplace: DrChrono Marketplace
@@ -383,7 +379,6 @@
   arazzo: null
 - slug: drchrono-ambra-health
   label: Ambra Health
-  partner: ambra-health
   partner_name: Ambra Health
   type: marketplace
   marketplace: DrChrono Marketplace
@@ -395,7 +390,6 @@
   arazzo: null
 - slug: drchrono-weave
   label: Weave
-  partner: weave
   partner_name: Weave
   type: marketplace
   marketplace: DrChrono Marketplace
