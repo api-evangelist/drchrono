@@ -550,68 +550,6 @@ paths:
     - url: https://app.drchrono.com
 components:
   schemas:
-    WorkHours:
-      type: object
-      properties:
-        start_time:
-          type: string
-          description: start time of the work hour
-          title: Start time
-        enabled:
-          type: boolean
-          description: whether the work hour is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work hour
-          title: ID
-        end_time:
-          type: string
-          description: end time of the work hour
-          title: End time
-    UserProfilesGroup:
-      required: []
-      type: object
-      properties:
-        archived:
-          readOnly: true
-          type: boolean
-          description: Group is archived or not
-          title: Archived
-        name:
-          readOnly: true
-          type: string
-          description: ''
-          title: Name
-        practice_group:
-          readOnly: true
-          type: string
-          description: Practice group this user group belongs to
-          title: Practice group
-        created_at:
-          type: string
-          description: ''
-          title: Created at
-        updated_at:
-          type: string
-          description: ''
-          title: Updated at
-        members:
-          items:
-            type: string
-            description: ID of `/api/users`
-            title: ''
-          readOnly: true
-          type: array
-          description: Users in this user group.
-          title: Members
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
     WorkSchedule:
       type: object
       properties:
@@ -634,92 +572,6 @@ components:
           type: integer
           description: ID of doctor for work schedule
           title: Office
-    DoctorOptions:
-      required: []
-      type: object
-      properties:
-        default_supervising_provider:
-          type: integer
-          description: ID of an `/api/doctors` instance.
-          title: Supervising provider
-        doctor:
-          type: integer
-          description: ID of an `/api/doctors` instance.
-          title: Doctor
-        updated_at:
-          readOnly: true
-          type: string
-          description: ''
-          title: Updated at
-        patient_statement_office:
-          type: integer
-          description: ID of an `/api/offices` instance.
-          title: Patient statement office
-        allowed_payment_methods:
-          type: array
-          description: ''
-          title: Allowed Payment Methods
-        default_report:
-          type: integer
-          description: ID of an `/api/clinical_note_templates` instance.
-          title: Default Report
-        default_billing_provider:
-          type: integer
-          description: ID of an `/api/doctors` instance.
-          title: Billing provider
-        default_reminder_profile:
-          type: integer
-          description: ID of an `/api/reminder_profiles` instance.
-          title: Default Reminder profile
-        enable_everhealth_scribe:
-          readOnly: true
-          type: boolean
-          description: Whether the EverHealth Scribe feature is enabled for this doctor.
-          title: Enable EverHealth Scribe
-        office_for_lab_results:
-          type: integer
-          description: ID of an `/api/offices` instance.
-          title: Office for lab results
-        erx_supervising_providers:
-          items:
-            type: integer
-          type: array
-          description: Array or IDs of `/api/doctors` instances.
-          title: Supervising providers
-        iframe_apps:
-          items:
-            type: string
-          type: array
-          description: Integrated applications
-          title: Integrated applications
-        id:
-          readOnly: true
-          type: integer
-          description: ''
-          title: ID
-      x-verbose-required: []
-    WorkDay:
-      type: object
-      properties:
-        iso_weekday:
-          type: string
-          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-          title: ISO weekday
-        enabled:
-          type: boolean
-          description: whether the work day is enabled
-          title: Enabled
-        id:
-          readOnly: true
-          type: integer
-          description: unique ID of the work day
-          title: ID
-        work_hours:
-          items:
-            $ref: '#/components/schemas/WorkHours'
-          type: array
-          description: work hours of the work day
-          title: Work hours
     Doctor:
       required: []
       type: object
@@ -1069,6 +921,134 @@ components:
           description: ''
           title: Job title
       x-verbose-required: []
+    WorkDay:
+      type: object
+      properties:
+        iso_weekday:
+          type: string
+          description: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+          title: ISO weekday
+        enabled:
+          type: boolean
+          description: whether the work day is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work day
+          title: ID
+        work_hours:
+          items:
+            $ref: '#/components/schemas/WorkHours'
+          type: array
+          description: work hours of the work day
+          title: Work hours
+    UserProfilesGroup:
+      required: []
+      type: object
+      properties:
+        archived:
+          readOnly: true
+          type: boolean
+          description: Group is archived or not
+          title: Archived
+        name:
+          readOnly: true
+          type: string
+          description: ''
+          title: Name
+        practice_group:
+          readOnly: true
+          type: string
+          description: Practice group this user group belongs to
+          title: Practice group
+        created_at:
+          type: string
+          description: ''
+          title: Created at
+        updated_at:
+          type: string
+          description: ''
+          title: Updated at
+        members:
+          items:
+            type: string
+            description: ID of `/api/users`
+            title: ''
+          readOnly: true
+          type: array
+          description: Users in this user group.
+          title: Members
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
+    DoctorOptions:
+      required: []
+      type: object
+      properties:
+        default_supervising_provider:
+          type: integer
+          description: ID of an `/api/doctors` instance.
+          title: Supervising provider
+        doctor:
+          type: integer
+          description: ID of an `/api/doctors` instance.
+          title: Doctor
+        updated_at:
+          readOnly: true
+          type: string
+          description: ''
+          title: Updated at
+        patient_statement_office:
+          type: integer
+          description: ID of an `/api/offices` instance.
+          title: Patient statement office
+        allowed_payment_methods:
+          type: array
+          description: ''
+          title: Allowed Payment Methods
+        default_report:
+          type: integer
+          description: ID of an `/api/clinical_note_templates` instance.
+          title: Default Report
+        default_billing_provider:
+          type: integer
+          description: ID of an `/api/doctors` instance.
+          title: Billing provider
+        default_reminder_profile:
+          type: integer
+          description: ID of an `/api/reminder_profiles` instance.
+          title: Default Reminder profile
+        enable_everhealth_scribe:
+          readOnly: true
+          type: boolean
+          description: Whether the EverHealth Scribe feature is enabled for this doctor.
+          title: Enable EverHealth Scribe
+        office_for_lab_results:
+          type: integer
+          description: ID of an `/api/offices` instance.
+          title: Office for lab results
+        erx_supervising_providers:
+          items:
+            type: integer
+          type: array
+          description: Array or IDs of `/api/doctors` instances.
+          title: Supervising providers
+        iframe_apps:
+          items:
+            type: string
+          type: array
+          description: Integrated applications
+          title: Integrated applications
+        id:
+          readOnly: true
+          type: integer
+          description: ''
+          title: ID
+      x-verbose-required: []
     UserProfile:
       required: []
       type: object
@@ -1115,6 +1095,26 @@ components:
           description: Permissions the user has.
           title: Permissions
       x-verbose-required: []
+    WorkHours:
+      type: object
+      properties:
+        start_time:
+          type: string
+          description: start time of the work hour
+          title: Start time
+        enabled:
+          type: boolean
+          description: whether the work hour is enabled
+          title: Enabled
+        id:
+          readOnly: true
+          type: integer
+          description: unique ID of the work hour
+          title: ID
+        end_time:
+          type: string
+          description: end time of the work hour
+          title: End time
     UserProfile_2:
       required: []
       type: object
