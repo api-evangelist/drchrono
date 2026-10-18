@@ -494,3 +494,35 @@
     detected: '2026-10-12'
   status: not-a-workflow
   arazzo: null
+- slug: drchrono-onc-certified-health-it-g-10-fhir-api
+  label: ONC Certified Health IT ((g)(10) FHIR API)
+  partner_name: ONC Certified Health IT ((g)(10) FHIR API)
+  category: ONC certified health IT (FHIR API)
+  type: contract
+  channel: regulator-register
+  evidence: https://lantern.healthit.gov/api/daily/download
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: ONC Lantern FHIR endpoint monitor (lantern.healthit.gov daily download, source CHPL)
+    standard: ONC Health IT Certification 170.315(g)(10)
+    spec_file: null
+    role: onc-g10-certified-developer
+    registered_name: drchrono Inc.
+    register_id: drchrono Inc.
+    matched_domain: drchrono.com
+    matched_by: domain
+    domain_source: wikidata P856
+    list_hosts:
+    - drchrono-fhirpresentation.everhealthsoftware.com
+    fhir_versions:
+    - 4.0.1
+    signal_note: 'participation only: Lantern lists developers publishing the service-base-URL list a (g)(10) certification
+      requires, but not the CHPL listing status, so no certified_products / lapsed are claimed; endpoint counts
+      are the developer''s customers, context only, never counted'
+    detected_by: sweep-medtech.py
+    detected: '2026-10-18'
+    identity: wikidata Q5306192 'drchrono' P856 http://www.drchrono.com
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+  status: not-a-workflow
+  arazzo: null
