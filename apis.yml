@@ -46,6 +46,25 @@ modified: '2026-10-06'
 specificationVersion: '0.23'
 
 tags:
+- Electronic Health Records
+- Healthcare
+- Medical Records
+- Practice Management
+- HIPAA
+- Appointments
+- Billing
+- Prescriptions
+- Lab Integration
+- FHIR
+- SMART on FHIR
+- USCDI
+- Interoperability
+- Webhook
+- Authentication
+- ONC Certified
+- Telehealth
+- Revenue Cycle Management
+tags_raw:
 - EHR
 - Electronic Health Records
 - Healthcare
