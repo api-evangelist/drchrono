@@ -526,3 +526,38 @@
     identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
   status: not-a-workflow
   arazzo: null
+- slug: drchrono-drummond-group-dea-epcs-certification
+  label: Drummond Group (DEA EPCS certification)
+  partner_name: Drummond Group (DEA EPCS certification)
+  category: DEA EPCS certified application
+  type: register
+  channel: standard-directory
+  evidence: https://www.drummondgroup.com/certified-products/epcs/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Drummond Group DEA EPCS certified products (drummondgroup.com/certified-products/epcs)
+    spec_file: null
+    standard: DEA EPCS (21 CFR Part 1311) third-party certification
+    role: epcs-certified
+    registered_name: DrChrono
+    matched_domain: drchrono.com
+    matched_by: domain
+    identity: wikidata Q5306192 'drchrono' P856 http://www.drchrono.com
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    listing_kinds:
+    - prescriber
+    products_sample:
+    - DrChrono EHR 11
+    certified_products:
+    - product: DEA EPCS prescriber application (Drummond certified)
+      lapsed: false
+      latest_certified: '2026-05-10'
+    signal_note: certified_products = one entry per EPCS application TYPE (prescriber / pharmacy) the company built
+      and had audited; integration audits (a purchased EPCS module) are participation only; lapsed when the newest
+      certification of that type is over two years old (DEA re-audit cycle); product and version counts are context,
+      never counted
+    detected_by: sweep-e-prescribing.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null

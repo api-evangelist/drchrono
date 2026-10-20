@@ -11,6 +11,9 @@ checked:
 - https://www.drchrono.com/partners/
 - https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices
 - https://zapier.com/apps/drchrono/integrations
+- https://accreditation.directtrust.org/accredited-organizations
+- https://www.drummondgroup.com/certified-products/epcs/
+- https://www.ncpdp.org/Members
 summary: 43 partner-built apps listed on the DrChrono Marketplace (partners.drchrono.com); no Zapier/n8n listing.
 marketplace_apps:
 - marketplace: own
@@ -417,4 +420,39 @@ edges:
     identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
   detected_by: sweep-medtech.py
   first_seen: '2026-10-18'
+- partner_name: Drummond Group (DEA EPCS certification)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.drummondgroup.com/certified-products/epcs/
+  category: DEA EPCS certified application
+  contract_reference:
+    register: Drummond Group DEA EPCS certified products (drummondgroup.com/certified-products/epcs)
+    spec_file: null
+    standard: DEA EPCS (21 CFR Part 1311) third-party certification
+    role: epcs-certified
+    registered_name: DrChrono
+    matched_domain: drchrono.com
+    matched_by: domain
+    identity: wikidata Q5306192 'drchrono' P856 http://www.drchrono.com
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    listing_kinds:
+    - prescriber
+    products_sample:
+    - DrChrono EHR 11
+    certified_products:
+    - product: DEA EPCS prescriber application (Drummond certified)
+      lapsed: false
+      latest_certified: '2026-05-10'
+    signal_note: certified_products = one entry per EPCS application TYPE (prescriber / pharmacy) the company built
+      and had audited; integration audits (a purchased EPCS module) are participation only; lapsed when the newest
+      certification of that type is over two years old (DEA re-audit cycle); product and version counts are context,
+      never counted
+    detected_by: sweep-e-prescribing.py
+    detected: '2026-10-20'
+  detected_by: sweep-e-prescribing.py
+  first_seen: '2026-10-20'
 templates: []
