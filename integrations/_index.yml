@@ -561,3 +561,61 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
+- slug: drchrono-y-combinator
+  label: Y Combinator
+  partner: y-combinator
+  partner_name: Y Combinator
+  category: accelerator portfolio participation
+  type: register
+  channel: standard-directory
+  evidence: https://www.ycombinator.com/companies/drchrono
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Y Combinator company directory (ycombinator.com/companies/<slug>)
+    standard: null
+    spec_file: null
+    role: accelerator-portfolio-company
+    registered_name: DrChrono
+    register_id: https://www.ycombinator.com/companies/drchrono
+    register_country: US
+    register_website: https://www.drchrono.com
+    matched_domain: drchrono.com
+    matched_by: domain
+    signal_note: 'participation only: the accelerator''s own portfolio register lists the company (cohort / investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-accelerator-portfolios.py
+    detected: '2026-10-21'
+    batch: Winter 2011
+    year: '2009'
+    status: Acquired
+  status: not-a-workflow
+  arazzo: null
+- slug: drchrono-500-global
+  label: 500 Global
+  partner: 500-global
+  partner_name: 500 Global
+  category: accelerator portfolio participation
+  type: register
+  channel: standard-directory
+  evidence: https://500.co/companies
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: 500 Global portfolio (500.co/companies; the page's own JSON 500.co/api/startups)
+    standard: null
+    spec_file: null
+    role: accelerator-portfolio-company
+    registered_name: drchrono Inc.
+    register_id: https://500.co/companies
+    register_country: United States
+    register_website: drchrono.com
+    matched_domain: drchrono.com
+    matched_by: domain
+    signal_note: 'participation only: the accelerator''s own portfolio register lists the company (cohort / investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-accelerator-portfolios.py
+    detected: '2026-10-21'
+    year: '2011'
+  status: not-a-workflow
+  arazzo: null
