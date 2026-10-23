@@ -6065,3 +6065,9 @@ components:
 x-refined-from:
 - drchrono-rest-api-openapi-schema.json
 - drchrono-rest-api-openapi.yml
+x-provenance:
+  method: harvested
+  publisher: drchrono
+  source: https://drchrono.com/openapi-schema
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
