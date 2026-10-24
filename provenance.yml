@@ -7,20 +7,20 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   arazzo/drchrono-appointment-scheduling-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/drchrono-chart-export-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/drchrono-clinical-documentation-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/drchrono-eligibility-and-billing-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/drchrono-patient-registration-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   asyncapi/drchrono-webhooks-asyncapi.yml:
     method: unknown
     evidence: no authorship recorded
@@ -298,11 +298,23 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   finops/drchrono-finops.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: generated
+    evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/drchrono-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/drchrono-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
+  integrations/drchrono-luma-health-integration-overlay.yaml:
+    method: derived
+    evidence: declared in the artifact
   json-ld/drchrono-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -376,6 +388,75 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   json-schema/doctoroptions.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-appointment-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-audit-log-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-billing-line-item-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-billing-profile-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-cash-payment-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-coverage-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-doctor-fee-schedule-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-doctor-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-doctor-message-thread-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-doctor-options-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-doctor-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-inventory-vaccine-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-line-item-transaction-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-office-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-patient-authorization-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-patient-drug-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-patient-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-patient-vaccine-record-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-soap-note-custom-report-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-task-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-task-template-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-user-profile-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/drchrono-user-profiles-group-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/eobobject.json:
@@ -537,127 +618,7 @@ artifacts:
   json-schema/yellownotepad.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -741,9 +702,27 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/drchrono-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
+  llms/drchrono-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
   llms/drchrono-llms-published.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
@@ -755,12 +734,11 @@ artifacts:
     evidence: declared in the artifact
   openapi/_original/drchrono-rest-api-openapi-schema.json:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: byte-identical to https://drchrono.com/openapi-schema (sha256 e595797fe800, fetched 2026-10-04)
   openapi/_original/drchrono-rest-api-openapi.yml:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: the same operations as https://drchrono.com/openapi-schema (sha256 e595797fe800, fetched
+      2026-10-04)
   openapi/drchrono-administrative-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
@@ -782,24 +760,42 @@ artifacts:
   overlays/drchrono-administrative-api-overlay.yaml:
     method: generated
     evidence: declared in the artifact
+  overlays/drchrono-administrative-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
   overlays/drchrono-audit-api-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/drchrono-audit-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/drchrono-availability-api-overlay.yaml:
     method: generated
     evidence: declared in the artifact
+  overlays/drchrono-availability-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
   overlays/drchrono-billing-api-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/drchrono-billing-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/drchrono-clinical-api-overlay.yaml:
     method: generated
     evidence: declared in the artifact
+  overlays/drchrono-clinical-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
   overlays/drchrono-practice-management-api-overlay.yaml:
     method: generated
     evidence: declared in the artifact
-  packages/drchrono-packages.yml:
-    method: searched
+  overlays/drchrono-practice-management-api-phrasing-overlay.yaml:
+    method: generated
     evidence: declared in the artifact
+  packages/drchrono-packages.yml:
+    method: unknown
+    evidence: no authorship recorded
   plans/drchrono-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
@@ -807,6 +803,9 @@ artifacts:
     method: searched
     evidence: declared in the artifact
   rules/drchrono-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/drchrono-rules.yml:
     method: generated
     evidence: declared in the artifact
   sandbox/drchrono-sandbox.yml:
@@ -842,9 +841,12 @@ artifacts:
   skills/drchrono-patient-registration.md:
     method: generated
     evidence: declared in the artifact
-  vocabulary/drchrono-vocabulary.yml:
+  vendors/drchrono-vendors.yml:
     method: unknown
     evidence: no authorship recorded
+  vocabulary/drchrono-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
   well-known/drchrono-fhir-openid-configuration.json:
     method: unknown
     evidence: no authorship recorded
